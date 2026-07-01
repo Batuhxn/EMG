@@ -157,6 +157,12 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Small power/reference schematic block may be considered only after review, not automatically approved.
 - Full board schematic remains **NO**.
 - Analog EMG chain schematic remains **NO**.
+- Power/reference schematic block proposal documented in `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
+- Proposal defines maximum scope for a future small schematic-only power/reference block.
+- Proposal does not implement KiCad schematic.
+- Proposal does not approve full board schematic, analog EMG chain schematic, PCB layout, or DSTK22807 external 3.3 V powering.
+- Small power/reference schematic block proposal is **READY_FOR_REVIEW**.
+- Small power/reference schematic block implementation is not automatically approved.
 
 ## 8. Open Blockers Before Schematic Implementation
 
@@ -188,6 +194,16 @@ The following blockers must be closed before full schematic implementation:
 - BAT_MON divider values accepted.
 - Unused ADC bias values accepted.
 - Human-test safety procedure accepted.
+- Review and accept `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
+- Explicitly decide whether small schematic-only power/reference block implementation is allowed.
+- Verify exact KiCad symbols/footprints for regulator/op-amp/connector/test points.
+- Verify analog VREF buffer stability at 3.3 V.
+- Accept ADC_REF decoupling strategy.
+- Accept BAT_MON divider candidate.
+- Accept ADC input R/C/source impedance strategy.
+- Decide unused ADC bias approach.
+- Keep DSTK22807 power path unresolved unless separately tested.
+- Human-test safety procedure remains required.
 
 ## 9. Should schematic implementation proceed?
 
@@ -195,9 +211,13 @@ Full board schematic: **NO**.
 
 Analog EMG chain schematic: **NO**.
 
-Small power/reference schematic block: **MAYBE AFTER REVIEW**.
+PCB layout: **NO**.
 
-If allowed later, the next implementation must be limited to a small schematic-only power/reference block proposal, not PCB layout and not full EMG chain.
+Small power/reference schematic block proposal: **READY_FOR_REVIEW**.
+
+Small power/reference schematic block implementation: **NOT AUTOMATICALLY APPROVED**.
+
+If allowed later, implementation must be limited to a small schematic-only power/reference block.
 
 3V3 external powering of DSTK22807: **NOT APPROVED YET**.
 
@@ -208,21 +228,17 @@ USB-powered human EMG testing: **FORBIDDEN**.
 ## 10. Recommended Next Action
 
 - Review and commit this `DECISIONS_V5.md` update.
-- Then decide explicitly whether to allow a small schematic-only power/reference block proposal.
+- Then explicitly decide whether to allow the first limited KiCad schematic edit.
+- If allowed, the next Codex task must name:
+  - allowed schematic file(s),
+  - allowed sheet/section,
+  - allowed symbols,
+  - allowed net names,
+  - allowed component groups,
+  - forbidden files.
 - Do not begin PCB layout.
 - Do not begin full board schematic.
 - Do not begin analog EMG chain schematic.
-- If the small schematic block is allowed later, scope must be limited to:
-  - battery input placeholder,
-  - 3.3 V regulator,
-  - 3V3 / 3V3_ADC / ADC_REF decoupling,
-  - MCP3208 VDD/VREF decoupling,
-  - analog VREF divider + buffer,
-  - VREF_MON,
-  - BAT_MON divider placeholder/value candidate,
-  - unused ADC bias,
-  - test points,
-  - safety notes.
 
 ## Source Documents Used
 
@@ -237,8 +253,10 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
 - `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`
 - `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`
+- `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`
 
-Final decision: **DECISIONS_VALUE_LEVEL_REVIEW_UPDATE_READY_FOR_REVIEW**
+Final decision: **DECISIONS_SCHEMATIC_BLOCK_PROPOSAL_UPDATE_READY_FOR_REVIEW**
+
 
 
 
