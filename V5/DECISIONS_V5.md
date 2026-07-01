@@ -151,6 +151,12 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Analog headroom/gain at 3.3 V is unresolved.
 - ADC input range protection must ensure CH0-CH7 never exceed VSS to VREF in single-ended MCP3208 use.
 - Proper MCP3208 `VDD` decoupling, `VREF` decoupling, and AGND/DGND handling are required in the later schematic/layout.
+- Power/reference value-level design review documented in `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`.
+- Value-level candidates exist for regulator, analog VREF divider/buffer, ADC_REF decoupling, ADC input protection, BAT_MON divider, unused ADC bias, and test points.
+- These candidates are not final schematic implementation and not final BOM lock.
+- Small power/reference schematic block may be considered only after review, not automatically approved.
+- Full board schematic remains **NO**.
+- Analog EMG chain schematic remains **NO**.
 
 ## 8. Open Blockers Before Schematic Implementation
 
@@ -171,13 +177,27 @@ The following blockers must be closed before full schematic implementation:
 - MCP3208 ADC input protection and source impedance/acquisition requirements.
 - `BAT_MON` divider/scaling.
 - `AGND` / `DGND` grounding strategy.
-- Human-test safety procedure.
+- Battery choice narrowed enough for regulator and BAT_MON.
+- Exact regulator candidate/suffix/package chosen.
+- Current budget for analog/ADC estimated.
+- Decision whether DSTK22807 is excluded from first power block or included later.
+- DSTK22807 external 3.3 V powering test result if Option B is considered.
+- analog VREF buffer candidate verified at 3.3 V.
+- ADC_REF decoupling/filter values accepted.
+- ADC input source impedance/acquisition calculation accepted.
+- BAT_MON divider values accepted.
+- Unused ADC bias values accepted.
+- Human-test safety procedure accepted.
 
 ## 9. Should schematic implementation proceed?
 
-Full schematic implementation: **NO**.
+Full board schematic: **NO**.
 
-Documentation/planning: **YES**.
+Analog EMG chain schematic: **NO**.
+
+Small power/reference schematic block: **MAYBE AFTER REVIEW**.
+
+If allowed later, the next implementation must be limited to a small schematic-only power/reference block proposal, not PCB layout and not full EMG chain.
 
 3V3 external powering of DSTK22807: **NOT APPROVED YET**.
 
@@ -185,19 +205,24 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 5V pin as analog/ADC supply: **NOT APPROVED**.
 
-The next small step should be battery/regulator architecture planning and DSTK22807 power-path verification, not schematic capture.
-
 ## 10. Recommended Next Action
 
-The component-level power/reference candidate review has already been documented in `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`.
-
-Next recommended action:
-
-- Plan the battery/regulator architecture and DSTK22807 power-path verification.
-- Keep external 3.3 V powering of DSTK22807 as **NOT APPROVED YET**.
-- Do not connect USB Type-C and external 3.3 V at the same time unless power-path safety is proven.
-- Do not start schematic power implementation yet.
-- Continue with documentation/planning only until power-path, regulator, analog headroom, ADC protection, BAT_MON, grounding, and human-safety blockers are closed.
+- Review and commit this `DECISIONS_V5.md` update.
+- Then decide explicitly whether to allow a small schematic-only power/reference block proposal.
+- Do not begin PCB layout.
+- Do not begin full board schematic.
+- Do not begin analog EMG chain schematic.
+- If the small schematic block is allowed later, scope must be limited to:
+  - battery input placeholder,
+  - 3.3 V regulator,
+  - 3V3 / 3V3_ADC / ADC_REF decoupling,
+  - MCP3208 VDD/VREF decoupling,
+  - analog VREF divider + buffer,
+  - VREF_MON,
+  - BAT_MON divider placeholder/value candidate,
+  - unused ADC bias,
+  - test points,
+  - safety notes.
 
 ## Source Documents Used
 
@@ -211,8 +236,10 @@ Next recommended action:
 - `V5/DSTK22807_PHOTO_PIN_NOTES.md`
 - `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
 - `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`
+- `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`
 
-Final decision: **DECISIONS_POWER_MEASUREMENT_UPDATE_READY_FOR_REVIEW**
+Final decision: **DECISIONS_VALUE_LEVEL_REVIEW_UPDATE_READY_FOR_REVIEW**
+
 
 
 
