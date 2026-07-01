@@ -92,6 +92,13 @@ These names must stay distinct in schematic review and implementation:
   - Bottom-right footprint pad 18 must be `GPIO9`.
 - Footprint pads remain numeric-only; signal labels should not be embedded into the geometry-only footprint.
 - Do not connect the DSTK22807 footprint to schematic nets until physical pinout is confirmed again.
+- DSTK22807 power pin measurement is documented in `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`.
+- USB powered measurement observed 5V = 5.126 V and 3V3 = 3.291 V.
+- Unpowered measurement observed 5V = 0 V and 3V3 rail discharge over time: 0.590 V after 10 s, 0.400 V after 30 s, and 0.250 V after 60 s.
+- The 3V3 decay is consistent with residual capacitor discharge / leakage path.
+- 3V3 external powering remains **NOT APPROVED YET**.
+- USB plus external 3.3 V simultaneous connection remains **NOT APPROVED**.
+- 5V pin as analog/ADC supply remains **NOT APPROVED**.
 
 Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 
@@ -131,8 +138,12 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 
 - Battery-powered first prototype is preferred.
 - External low-noise 3.3 V regulator is preferred.
+- External 3.3 V regulator remains preferred for analog/ADC.
 - Do not assume DSTK22807 `3V3` pin can power the whole analog/ADC system.
+- DSTK22807 3V3 power direction remains unresolved.
 - Do not back-feed DSTK22807 until board behavior is verified.
+- Do not back-feed DSTK22807 3V3 until power path is verified.
+- For human-connected EMG testing, USB Type-C must be disconnected and the system must be battery-powered/isolated.
 - `ADC_REF` and `analog VREF` are separate.
 - `analog VREF` buffer is required or strongly preferred.
 - `BAT_MON` is unresolved.
@@ -149,6 +160,10 @@ The following blockers must be closed before full schematic implementation:
 - Right-row reversal confirmation.
 - USB side and antenna side confirmation.
 - DSTK22807 `3V3` / `5V` power behavior verification.
+- DSTK22807 3V3 external input safety.
+- DSTK22807 3V3 current capability.
+- USB and external 3.3 V coexistence / backfeed behavior.
+- Battery regulator architecture.
 - Battery chemistry and maximum voltage.
 - 3.3 V regulator part/current/noise selection.
 - INA333/op-amp headroom at 3.3 V.
@@ -164,18 +179,25 @@ Full schematic implementation: **NO**.
 
 Documentation/planning: **YES**.
 
-The next small step should be component-level power/reference block selection, not full schematic capture.
+3V3 external powering of DSTK22807: **NOT APPROVED YET**.
+
+USB-powered human EMG testing: **FORBIDDEN**.
+
+5V pin as analog/ADC supply: **NOT APPROVED**.
+
+The next small step should be battery/regulator architecture planning and DSTK22807 power-path verification, not schematic capture.
 
 ## 10. Recommended Next Action
 
-Create a component-level power/reference candidate review covering:
+The component-level power/reference candidate review has already been documented in `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`.
 
-- 3.3 V regulator candidate.
-- `analog VREF` buffer candidate.
-- Power and reference decoupling.
-- MCP3208 ADC input protection.
-- `BAT_MON` strategy.
-- Safe unused ADC channel biasing.
+Next recommended action:
+
+- Plan the battery/regulator architecture and DSTK22807 power-path verification.
+- Keep external 3.3 V powering of DSTK22807 as **NOT APPROVED YET**.
+- Do not connect USB Type-C and external 3.3 V at the same time unless power-path safety is proven.
+- Do not start schematic power implementation yet.
+- Continue with documentation/planning only until power-path, regulator, analog headroom, ADC protection, BAT_MON, grounding, and human-safety blockers are closed.
 
 ## Source Documents Used
 
@@ -187,5 +209,12 @@ Create a component-level power/reference candidate review covering:
 - `V5/STATUS_V5.md`
 - `V5/DSTK22807_MEASUREMENT_CHECKLIST.md`
 - `V5/DSTK22807_PHOTO_PIN_NOTES.md`
+- `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
+- `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`
 
-Final decision: **DECISIONS_V5_READY_FOR_REVIEW**
+Final decision: **DECISIONS_POWER_MEASUREMENT_UPDATE_READY_FOR_REVIEW**
+
+
+
+
+
