@@ -1,0 +1,133 @@
+{
+  "analyzer_type": "cross_analysis",
+  "schema_version": "1.3.0",
+  "elapsed_s": 0.009,
+  "summary": {
+    "total_findings": 1,
+    "by_severity": {
+      "error": 0,
+      "warning": 1,
+      "info": 0
+    }
+  },
+  "findings": [
+    {
+      "detector": "check_diff_pair_quality",
+      "rule_id": "DP-005",
+      "category": "differential_pair",
+      "summary": "Diff pair /IN+//IN-: length mismatch 7.6mm (90%)",
+      "description": "Differential pair /IN+//IN- has routing issues: length mismatch 7.6mm (90%).",
+      "components": [],
+      "nets": [
+        "/IN+",
+        "/IN-"
+      ],
+      "pins": [],
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Match via counts, layer transitions, and trace lengths between P and N.",
+      "report_context": {
+        "section": "Differential Pair",
+        "impact": "Degraded signal integrity and increased common-mode EMI",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ],
+      "in_active_stage": false
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 1,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 1,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 1,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "stage_filter": {
+    "active_stage": "pre_fab",
+    "included_count": 0,
+    "excluded_count": 1
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 1,
+      "by_severity": {
+        "error": 0,
+        "warning": 1,
+        "info": 0
+      },
+      "by_category": {
+        "differential_pair": 1
+      },
+      "top_issues": [
+        {
+          "detector": "check_diff_pair_quality",
+          "rule_id": "DP-005",
+          "category": "differential_pair",
+          "summary": "Diff pair /IN+//IN-: length mismatch 7.6mm (90%)",
+          "description": "Differential pair /IN+//IN- has routing issues: length mismatch 7.6mm (90%).",
+          "components": [],
+          "nets": [
+            "/IN+",
+            "/IN-"
+          ],
+          "pins": [],
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "recommendation": "Match via counts, layer transitions, and trace lengths between P and N.",
+          "report_context": {
+            "section": "Differential Pair",
+            "impact": "Degraded signal integrity and increased common-mode EMI",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout"
+          ],
+          "in_active_stage": false
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 1,
+      "by_category": {
+        "differential_pair": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "DP-005",
+          "severity": "warning",
+          "summary": "Diff pair /IN+//IN-: length mismatch 7.6mm (90%)",
+          "recommendation": "Match via counts, layer transitions, and trace lengths between P and N.",
+          "category": "differential_pair"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "low",
+      "blocker_count": 0,
+      "warning_count": 1,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "needs_review",
+        "pre_fab": "pass",
+        "bring_up": "pass"
+      },
+      "one_liner": "1 warning across 1 category."
+    }
+  }
+}

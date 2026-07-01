@@ -1,0 +1,10 @@
+(fp_lib_table
+	(version 7)
+	(lib
+		(name "EMG_V5")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/EMG_V5.pretty")
+		(options "")
+		(descr "EMG V5 project-local footprints")
+	)
+)

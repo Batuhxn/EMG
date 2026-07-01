@@ -1,0 +1,2716 @@
+{
+  "analyzer_type": "pcb",
+  "schema_version": "1.3.0",
+  "file": "C:\\Users\\bkara\\Desktop\\EMG-sensor\\EMG_v4_gelistirilmis_paket\\EMG_v4.kicad_pcb",
+  "kicad_version": "10.0",
+  "file_version": "20260206",
+  "statistics": {
+    "footprint_count": 20,
+    "front_side": 20,
+    "back_side": 0,
+    "smd_count": 1,
+    "tht_count": 19,
+    "copper_layers_used": 2,
+    "copper_layer_names": [
+      "B.Cu",
+      "F.Cu"
+    ],
+    "track_segments": 96,
+    "via_count": 6,
+    "zone_count": 1,
+    "total_track_length_mm": 317.99,
+    "board_width_mm": 68.5,
+    "board_height_mm": 29.0,
+    "board_area_mm2": 1986.5,
+    "net_count": 16,
+    "routing_complete": true,
+    "unrouted_net_count": 0
+  },
+  "layers": [
+    {
+      "number": 0,
+      "name": "F.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 2,
+      "name": "B.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 9,
+      "name": "F.Adhes",
+      "type": "user",
+      "alias": "F.Adhesive"
+    },
+    {
+      "number": 11,
+      "name": "B.Adhes",
+      "type": "user",
+      "alias": "B.Adhesive"
+    },
+    {
+      "number": 13,
+      "name": "F.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 15,
+      "name": "B.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 5,
+      "name": "F.SilkS",
+      "type": "user",
+      "alias": "F.Silkscreen"
+    },
+    {
+      "number": 7,
+      "name": "B.SilkS",
+      "type": "user",
+      "alias": "B.Silkscreen"
+    },
+    {
+      "number": 1,
+      "name": "F.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 3,
+      "name": "B.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 17,
+      "name": "Dwgs.User",
+      "type": "user",
+      "alias": "User.Drawings"
+    },
+    {
+      "number": 19,
+      "name": "Cmts.User",
+      "type": "user",
+      "alias": "User.Comments"
+    },
+    {
+      "number": 21,
+      "name": "Eco1.User",
+      "type": "user",
+      "alias": "User.Eco1"
+    },
+    {
+      "number": 23,
+      "name": "Eco2.User",
+      "type": "user",
+      "alias": "User.Eco2"
+    },
+    {
+      "number": 25,
+      "name": "Edge.Cuts",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 27,
+      "name": "Margin",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 31,
+      "name": "F.CrtYd",
+      "type": "user",
+      "alias": "F.Courtyard"
+    },
+    {
+      "number": 29,
+      "name": "B.CrtYd",
+      "type": "user",
+      "alias": "B.Courtyard"
+    },
+    {
+      "number": 35,
+      "name": "F.Fab",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 33,
+      "name": "B.Fab",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 39,
+      "name": "User.1",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 41,
+      "name": "User.2",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 43,
+      "name": "User.3",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 45,
+      "name": "User.4",
+      "type": "user",
+      "alias": null
+    }
+  ],
+  "setup": {
+    "board_thickness_mm": 1.6,
+    "stackup": [
+      {
+        "name": "F.SilkS",
+        "type": "Top Silk Screen"
+      },
+      {
+        "name": "F.Paste",
+        "type": "Top Solder Paste"
+      },
+      {
+        "name": "F.Mask",
+        "type": "Top Solder Mask",
+        "thickness": 0.01
+      },
+      {
+        "name": "F.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "dielectric 1",
+        "type": "core",
+        "thickness": 1.51,
+        "material": "FR4",
+        "epsilon_r": 4.5,
+        "loss_tangent": 0.02
+      },
+      {
+        "name": "B.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "B.Mask",
+        "type": "Bottom Solder Mask",
+        "thickness": 0.01
+      },
+      {
+        "name": "B.Paste",
+        "type": "Bottom Solder Paste"
+      },
+      {
+        "name": "B.SilkS",
+        "type": "Bottom Silk Screen"
+      }
+    ],
+    "pad_to_mask_clearance": 0.0,
+    "copper_finish": "None",
+    "dielectric_constraints": "no",
+    "legacy_teardrops": "no",
+    "allow_soldermask_bridges": "no"
+  },
+  "nets": {
+    "1": "/BODY_REF",
+    "2": "/HPF_Out",
+    "3": "/IN+",
+    "4": "/IN-",
+    "5": "/INA_OUT",
+    "6": "/RAW_Out",
+    "7": "/VREF",
+    "8": "GND",
+    "9": "Net-(R8-Pad1)",
+    "10": "Net-(Rg_HPF1-Pad1)",
+    "11": "Net-(Rg_HPF1-Pad2)",
+    "12": "Net-(U1-+)",
+    "13": "Net-(U1--)",
+    "14": "Net-(U2A--)",
+    "15": "Net-(U2B--)",
+    "16": "VCC"
+  },
+  "net_name_to_id": {
+    "/BODY_REF": 1,
+    "/HPF_Out": 2,
+    "/IN+": 3,
+    "/IN-": 4,
+    "/INA_OUT": 5,
+    "/RAW_Out": 6,
+    "/VREF": 7,
+    "GND": 8,
+    "Net-(R8-Pad1)": 9,
+    "Net-(Rg_HPF1-Pad1)": 10,
+    "Net-(Rg_HPF1-Pad2)": 11,
+    "Net-(U1-+)": 12,
+    "Net-(U1--)": 13,
+    "Net-(U2A--)": 14,
+    "Net-(U2B--)": 15,
+    "VCC": 16
+  },
+  "board_outline": {
+    "edge_count": 1,
+    "edges": [
+      {
+        "type": "rect",
+        "start": [
+          18.5,
+          16.0
+        ],
+        "end": [
+          87.0,
+          45.0
+        ]
+      }
+    ],
+    "bounding_box": {
+      "min_x": 18.5,
+      "min_y": 16.0,
+      "max_x": 87.0,
+      "max_y": 45.0,
+      "width": 68.5,
+      "height": 29.0
+    }
+  },
+  "component_groups": {
+    "C": {
+      "count": 5,
+      "references": [
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ]
+    },
+    "Cf": {
+      "count": 1,
+      "references": [
+        "Cf2"
+      ]
+    },
+    "J": {
+      "count": 2,
+      "references": [
+        "J1",
+        "J2"
+      ]
+    },
+    "R": {
+      "count": 7,
+      "references": [
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ]
+    },
+    "Rf": {
+      "count": 1,
+      "references": [
+        "Rf1"
+      ]
+    },
+    "Rg": {
+      "count": 2,
+      "references": [
+        "Rg1",
+        "Rg_HPF1"
+      ]
+    },
+    "U": {
+      "count": 2,
+      "references": [
+        "U1",
+        "U2"
+      ]
+    }
+  },
+  "footprints": [
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R3",
+      "value": "10k",
+      "mpn": "",
+      "x": 65.88,
+      "y": 35.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/4e1f5379-146e-4855-940a-ed7cf6dfdad7",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 64.83,
+        "min_y": 34.0,
+        "max_x": 74.55,
+        "max_y": 37.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "/VREF"
+        }
+      },
+      "connected_nets": [
+        "/VREF",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R8",
+      "value": "1k",
+      "mpn": "",
+      "x": 65.38,
+      "y": 19.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/3ff78f21-1f12-460b-86e1-d53f3be3b332",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 64.33,
+        "min_y": 17.5,
+        "max_x": 74.05,
+        "max_y": 20.5
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(R8-Pad1)"
+        },
+        "2": {
+          "net": "/RAW_Out"
+        }
+      },
+      "connected_nets": [
+        "/RAW_Out",
+        "Net-(R8-Pad1)"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "reference": "C5",
+      "value": "100nF",
+      "mpn": "",
+      "x": 68.5,
+      "y": 40.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/c0d231bb-2775-4e8a-98fb-1801e1d5244c",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
+      ],
+      "courtyard": {
+        "min_x": 67.45,
+        "min_y": 38.5,
+        "max_x": 74.55,
+        "max_y": 41.5
+      },
+      "footprint": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "VCC"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VCC"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "reference": "Cf2",
+      "value": "330nF",
+      "mpn": "",
+      "x": 82.5,
+      "y": 19.0,
+      "angle": 180.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/aee0b8e3-9f87-4a87-a595-bc473fc501b2",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
+      ],
+      "courtyard": {
+        "min_x": 76.45,
+        "min_y": 17.5,
+        "max_x": 83.55,
+        "max_y": 20.5
+      },
+      "footprint": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "/RAW_Out"
+        }
+      },
+      "connected_nets": [
+        "/RAW_Out",
+        "GND"
+      ]
+    },
+    {
+      "library": "Package_DIP:DIP-8_W7.62mm",
+      "reference": "U2",
+      "value": "MCP6002-xP",
+      "mpn": "",
+      "x": 65.88,
+      "y": 23.46,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 8,
+      "sch_path": "/bd888d46-8c22-48e8-a6d3-b63375c06ab6",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "1MHz, Low-Power Op Amp, DIP-8",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-8_W7.62mm.step"
+      ],
+      "courtyard": {
+        "min_x": 64.82,
+        "min_y": 21.94,
+        "max_x": 74.55,
+        "max_y": 32.6
+      },
+      "footprint": "Package_DIP:DIP-8_W7.62mm",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(R8-Pad1)"
+        },
+        "2": {
+          "net": "Net-(U2A--)",
+          "pin": "-_2"
+        },
+        "3": {
+          "net": "/HPF_Out",
+          "pin": "+_3"
+        },
+        "4": {
+          "net": "GND",
+          "pin": "V-_4"
+        },
+        "5": {
+          "net": "/VREF",
+          "pin": "+_5"
+        },
+        "6": {
+          "net": "Net-(U2B--)",
+          "pin": "-_6"
+        },
+        "7": {
+          "net": "Net-(U2B--)"
+        },
+        "8": {
+          "net": "VCC",
+          "pin": "V+_8"
+        }
+      },
+      "connected_nets": [
+        "/HPF_Out",
+        "/VREF",
+        "GND",
+        "Net-(R8-Pad1)",
+        "Net-(U2A--)",
+        "Net-(U2B--)",
+        "VCC"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R5",
+      "value": "2.2k",
+      "mpn": "",
+      "x": 29.38,
+      "y": 28.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/1e3885b5-d66a-4913-a0f2-ff043d97d8f2",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 28.33,
+        "min_y": 27.0,
+        "max_x": 38.05,
+        "max_y": 30.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/IN-"
+        },
+        "2": {
+          "net": "Net-(U1--)"
+        }
+      },
+      "connected_nets": [
+        "/IN-",
+        "Net-(U1--)"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R4",
+      "value": "2.2k",
+      "mpn": "",
+      "x": 29.38,
+      "y": 33.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/8303e9a5-0263-4671-94df-fb979e5c4dad",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 28.33,
+        "min_y": 31.5,
+        "max_x": 38.05,
+        "max_y": 34.5
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/IN+"
+        },
+        "2": {
+          "net": "Net-(U1-+)"
+        }
+      },
+      "connected_nets": [
+        "/IN+",
+        "Net-(U1-+)"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "Rf1",
+      "value": "100k",
+      "mpn": "",
+      "x": 63.31,
+      "y": 22.5,
+      "angle": 180.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/83b96c41-3058-4820-937d-a7616bc9e23c",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 54.64,
+        "min_y": 21.0,
+        "max_x": 64.36,
+        "max_y": 24.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/RAW_Out"
+        },
+        "2": {
+          "net": "Net-(U2A--)"
+        }
+      },
+      "connected_nets": [
+        "/RAW_Out",
+        "Net-(U2A--)"
+      ]
+    },
+    {
+      "library": "Package_SO:VSSOP-8_3x3mm_P0.65mm",
+      "reference": "U1",
+      "value": "INA333xxDGK",
+      "mpn": "",
+      "x": 42.5,
+      "y": 29.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 8,
+      "sch_path": "/d98973cd-55a2-4885-96ea-d28ed99d60c6",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Zero Drift, Micropower Instrumentation Amplifier G = 1 + 100kOhm/Rg, VSSOP-8",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Package_SO.3dshapes/VSSOP-8_3x3mm_P0.65mm.step"
+      ],
+      "courtyard": {
+        "min_x": 39.32,
+        "min_y": 27.25,
+        "max_x": 45.68,
+        "max_y": 30.75
+      },
+      "footprint": "Package_SO:VSSOP-8_3x3mm_P0.65mm",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(Rg_HPF1-Pad1)",
+          "pin": "Rg_1"
+        },
+        "2": {
+          "net": "Net-(U1--)",
+          "pin": "-_2"
+        },
+        "3": {
+          "net": "Net-(U1-+)",
+          "pin": "+_3"
+        },
+        "4": {
+          "net": "GND",
+          "pin": "V-_4"
+        },
+        "5": {
+          "net": "/VREF",
+          "pin": "Ref_5"
+        },
+        "6": {
+          "net": "/INA_OUT"
+        },
+        "7": {
+          "net": "VCC",
+          "pin": "V+_7"
+        },
+        "8": {
+          "net": "Net-(Rg_HPF1-Pad2)",
+          "pin": "Rg_8"
+        }
+      },
+      "connected_nets": [
+        "/INA_OUT",
+        "/VREF",
+        "GND",
+        "Net-(Rg_HPF1-Pad1)",
+        "Net-(Rg_HPF1-Pad2)",
+        "Net-(U1-+)",
+        "Net-(U1--)",
+        "VCC"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R6",
+      "value": "4.7k",
+      "mpn": "",
+      "x": 55.38,
+      "y": 32.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/10d9e509-62db-4fa6-bdb5-f965ddcf6a1d",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 54.33,
+        "min_y": 30.5,
+        "max_x": 64.05,
+        "max_y": 33.5
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/VREF"
+        },
+        "2": {
+          "net": "/HPF_Out"
+        }
+      },
+      "connected_nets": [
+        "/HPF_Out",
+        "/VREF"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R7",
+      "value": "1M",
+      "mpn": "",
+      "x": 29.38,
+      "y": 37.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/5005c402-7373-443a-b93a-20c7b636a4f7",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 28.33,
+        "min_y": 36.0,
+        "max_x": 38.05,
+        "max_y": 39.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/BODY_REF"
+        },
+        "2": {
+          "net": "/VREF"
+        }
+      },
+      "connected_nets": [
+        "/BODY_REF",
+        "/VREF"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "reference": "C4",
+      "value": "2.2uF",
+      "mpn": "",
+      "x": 47.5,
+      "y": 29.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/bfa2dfb0-3163-459c-861c-ad9405b07a89",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
+      ],
+      "courtyard": {
+        "min_x": 46.45,
+        "min_y": 27.5,
+        "max_x": 53.55,
+        "max_y": 30.5
+      },
+      "footprint": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "pad_nets": {
+        "1": {
+          "net": "/INA_OUT"
+        },
+        "2": {
+          "net": "/HPF_Out"
+        }
+      },
+      "connected_nets": [
+        "/HPF_Out",
+        "/INA_OUT"
+      ]
+    },
+    {
+      "library": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+      "reference": "J2",
+      "value": "Output",
+      "mpn": "",
+      "x": 80.0,
+      "y": 22.88,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 4,
+      "sch_path": "/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Output connector for VCC, RAW_Out, VREF, GND",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x04_P2.54mm_Vertical.step"
+      ],
+      "courtyard": {
+        "min_x": 78.23,
+        "min_y": 21.11,
+        "max_x": 81.77,
+        "max_y": 32.27
+      },
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+      "pad_nets": {
+        "1": {
+          "net": "VCC",
+          "pin": "Pin_1_1"
+        },
+        "2": {
+          "net": "/RAW_Out",
+          "pin": "Pin_2_2"
+        },
+        "3": {
+          "net": "/VREF",
+          "pin": "Pin_3_3"
+        },
+        "4": {
+          "net": "GND",
+          "pin": "Pin_4_4"
+        }
+      },
+      "connected_nets": [
+        "/RAW_Out",
+        "/VREF",
+        "GND",
+        "VCC"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "Rg1",
+      "value": "10k",
+      "mpn": "",
+      "x": 55.38,
+      "y": 36.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/3e6afb98-d885-455b-af0f-8207a34fa418",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 54.33,
+        "min_y": 35.0,
+        "max_x": 64.05,
+        "max_y": 38.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/VREF"
+        },
+        "2": {
+          "net": "Net-(U2A--)"
+        }
+      },
+      "connected_nets": [
+        "/VREF",
+        "Net-(U2A--)"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "reference": "C2",
+      "value": "100nF",
+      "mpn": "",
+      "x": 76.5,
+      "y": 40.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/3fef1dbd-43c7-4efa-adc7-fcdadf2afd1e",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
+      ],
+      "courtyard": {
+        "min_x": 75.45,
+        "min_y": 38.5,
+        "max_x": 82.55,
+        "max_y": 41.5
+      },
+      "footprint": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "pad_nets": {
+        "1": {
+          "net": "/VREF"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "/VREF",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "R2",
+      "value": "10k",
+      "mpn": "",
+      "x": 55.0,
+      "y": 27.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/64dbbfc4-12a4-4f97-9dd4-770648761f61",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 53.95,
+        "min_y": 26.0,
+        "max_x": 63.67,
+        "max_y": 29.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "/VREF"
+        },
+        "2": {
+          "net": "VCC"
+        }
+      },
+      "connected_nets": [
+        "/VREF",
+        "VCC"
+      ]
+    },
+    {
+      "library": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "reference": "Rg_HPF1",
+      "value": "10k",
+      "mpn": "",
+      "x": 38.69,
+      "y": 24.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/e2810e75-e126-40d1-beb6-ceed73281d4a",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal.step"
+      ],
+      "courtyard": {
+        "min_x": 37.64,
+        "min_y": 23.0,
+        "max_x": 47.36,
+        "max_y": 26.0
+      },
+      "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(Rg_HPF1-Pad1)"
+        },
+        "2": {
+          "net": "Net-(Rg_HPF1-Pad2)"
+        }
+      },
+      "connected_nets": [
+        "Net-(Rg_HPF1-Pad1)",
+        "Net-(Rg_HPF1-Pad2)"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm",
+      "reference": "C3",
+      "value": "10uF",
+      "mpn": "",
+      "x": 76.5,
+      "y": 35.5,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/a65f89eb-9406-438a-8562-eeb184ede6cf",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+      ],
+      "courtyard": {
+        "min_x": 77.75,
+        "min_y": 35.5,
+        "max_x": 80.5,
+        "max_y": 35.5
+      },
+      "footprint": "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm",
+      "pad_nets": {
+        "1": {
+          "net": "/VREF"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "/VREF",
+        "GND"
+      ]
+    },
+    {
+      "library": "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
+      "reference": "J1",
+      "value": "Conn_01x03_Pin",
+      "mpn": "",
+      "x": 26.0,
+      "y": 29.96,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 3,
+      "sch_path": "/a197f8e1-a21b-4804-89fa-0b99be67d3b6",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Generic connector, single row, 01x03, script generated",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.step"
+      ],
+      "courtyard": {
+        "min_x": 24.23,
+        "min_y": 28.19,
+        "max_x": 27.77,
+        "max_y": 36.81
+      },
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
+      "pad_nets": {
+        "1": {
+          "net": "/IN+",
+          "pin": "Pin_1_1"
+        },
+        "2": {
+          "net": "/IN-",
+          "pin": "Pin_2_2"
+        },
+        "3": {
+          "net": "/BODY_REF",
+          "pin": "Pin_3_3"
+        }
+      },
+      "connected_nets": [
+        "/BODY_REF",
+        "/IN+",
+        "/IN-"
+      ]
+    },
+    {
+      "library": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "reference": "C6",
+      "value": "100nF",
+      "mpn": "",
+      "x": 76.5,
+      "y": 28.5,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 2,
+      "sch_path": "/82de5f56-64fd-4c40-9896-709a515be517",
+      "sheetname": "/",
+      "sheetfile": "EMG_v4.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D5.0mm_W2.5mm_P5.00mm.step"
+      ],
+      "courtyard": {
+        "min_x": 75.0,
+        "min_y": 22.45,
+        "max_x": 78.0,
+        "max_y": 29.55
+      },
+      "footprint": "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "VCC"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VCC"
+      ]
+    }
+  ],
+  "tracks": {
+    "segment_count": 96,
+    "arc_count": 0,
+    "width_distribution": {
+      "0.2": 96
+    },
+    "layer_distribution": {
+      "F.Cu": 71,
+      "B.Cu": 25
+    }
+  },
+  "vias": {
+    "count": 6,
+    "size_distribution": {
+      "0.6/0.3": 6
+    },
+    "via_analysis": {
+      "type_breakdown": {
+        "through": {
+          "count": 6,
+          "size_distribution": {
+            "0.6/0.3": 6
+          }
+        }
+      },
+      "annular_ring": {
+        "min_mm": 0.15,
+        "max_mm": 0.15,
+        "distribution": {
+          "0.15": 6
+        }
+      },
+      "current_capacity": {
+        "drill_size_distribution": {
+          "0.3": 6
+        },
+        "min_drill_mm": 0.3,
+        "max_drill_mm": 0.3,
+        "total_vias": 6,
+        "ratings": [
+          {
+            "drill_mm": 0.3,
+            "count": 6,
+            "plating_area_mm2": 0.0236,
+            "approx_current_A": 7.9
+          }
+        ]
+      }
+    }
+  },
+  "zones": [
+    {
+      "net": 8,
+      "net_name": "GND",
+      "layers": [
+        "B.Cu"
+      ],
+      "clearance": 0.5,
+      "min_thickness": 0.25,
+      "thermal_gap": 0.5,
+      "thermal_bridge_width": 0.5,
+      "outline_points": 4,
+      "outline_area_mm2": 1890.0,
+      "is_filled": true,
+      "outline_bbox": [
+        19.0,
+        16.5,
+        86.5,
+        44.5
+      ],
+      "filled_area_mm2": 1555.97,
+      "fill_region_count": 1,
+      "filled_bbox": [
+        19.0,
+        16.5,
+        86.499,
+        44.499
+      ],
+      "fill_ratio": 0.823
+    }
+  ],
+  "keepout_zones": [],
+  "connectivity": {
+    "total_nets_with_pads": 16,
+    "routed_nets": 16,
+    "unrouted_count": 0,
+    "routing_complete": true
+  },
+  "net_lengths": [
+    {
+      "net": "/VREF",
+      "net_number": 7,
+      "total_length_mm": 80.534,
+      "segment_count": 19,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 80.534,
+          "segments": 19
+        }
+      }
+    },
+    {
+      "net": "VCC",
+      "net_number": 16,
+      "total_length_mm": 78.676,
+      "segment_count": 18,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 50.943,
+          "segments": 9
+        },
+        "F.Cu": {
+          "length_mm": 27.733,
+          "segments": 9
+        }
+      }
+    },
+    {
+      "net": "GND",
+      "net_number": 8,
+      "total_length_mm": 43.098,
+      "segment_count": 9,
+      "via_count": 2,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 10.577,
+          "segments": 3
+        },
+        "F.Cu": {
+          "length_mm": 32.521,
+          "segments": 6
+        }
+      }
+    },
+    {
+      "net": "/RAW_Out",
+      "net_number": 6,
+      "total_length_mm": 25.021,
+      "segment_count": 12,
+      "via_count": 2,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.0,
+          "segments": 1
+        },
+        "F.Cu": {
+          "length_mm": 23.021,
+          "segments": 11
+        }
+      }
+    },
+    {
+      "net": "Net-(U2A--)",
+      "net_number": 14,
+      "total_length_mm": 24.03,
+      "segment_count": 7,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 24.03,
+          "segments": 7
+        }
+      }
+    },
+    {
+      "net": "/HPF_Out",
+      "net_number": 2,
+      "total_length_mm": 17.567,
+      "segment_count": 5,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 12.914,
+          "segments": 3
+        },
+        "F.Cu": {
+          "length_mm": 4.653,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/IN-",
+      "net_number": 4,
+      "total_length_mm": 12.208,
+      "segment_count": 6,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 12.208,
+          "segments": 6
+        }
+      }
+    },
+    {
+      "net": "Net-(U1-+)",
+      "net_number": 12,
+      "total_length_mm": 5.572,
+      "segment_count": 3,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 5.572,
+          "segments": 3
+        }
+      }
+    },
+    {
+      "net": "Net-(R8-Pad1)",
+      "net_number": 9,
+      "total_length_mm": 4.767,
+      "segment_count": 4,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 3.257,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 1.51,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/IN+",
+      "net_number": 3,
+      "total_length_mm": 4.639,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 4.639,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/BODY_REF",
+      "net_number": 1,
+      "total_length_mm": 4.399,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 4.399,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "Net-(Rg_HPF1-Pad1)",
+      "net_number": 10,
+      "total_length_mm": 4.228,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 4.228,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "Net-(Rg_HPF1-Pad2)",
+      "net_number": 11,
+      "total_length_mm": 4.228,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 4.228,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "Net-(U1--)",
+      "net_number": 13,
+      "total_length_mm": 3.46,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 3.46,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/INA_OUT",
+      "net_number": 5,
+      "total_length_mm": 3.022,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 3.022,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "Net-(U2B--)",
+      "net_number": 15,
+      "total_length_mm": 2.54,
+      "segment_count": 1,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 2.54,
+          "segments": 1
+        }
+      }
+    }
+  ],
+  "power_net_routing": [
+    {
+      "net": "GND",
+      "track_count": 9,
+      "total_length_mm": 43.1,
+      "min_width_mm": 0.2,
+      "max_width_mm": 0.2,
+      "widths_used": [
+        0.2
+      ]
+    },
+    {
+      "net": "VCC",
+      "track_count": 18,
+      "total_length_mm": 78.68,
+      "min_width_mm": 0.2,
+      "max_width_mm": 0.2,
+      "widths_used": [
+        0.2
+      ]
+    }
+  ],
+  "decoupling_placement": [
+    {
+      "ic": "U2",
+      "value": "MCP6002-xP",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C6",
+          "value": "100nF",
+          "distance_mm": 3.0,
+          "shared_nets": [
+            "GND",
+            "VCC"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C5",
+          "value": "100nF",
+          "distance_mm": 9.3,
+          "shared_nets": [
+            "GND",
+            "VCC"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 3.0
+    },
+    {
+      "ic": "U1",
+      "value": "INA333xxDGK",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C4",
+          "value": "2.2uF",
+          "distance_mm": 2.91,
+          "shared_nets": [
+            "/INA_OUT"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 2.91
+    }
+  ],
+  "decoupling_proximity": [
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C6",
+      "distance_mm": 3.0,
+      "cap_value": "100nF",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VCC"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C5",
+      "distance_mm": 9.3,
+      "cap_value": "100nF",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VCC"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C4",
+      "distance_mm": 2.91,
+      "cap_value": "2.2uF",
+      "same_side": true,
+      "shared_nets": [
+        "/INA_OUT"
+      ]
+    }
+  ],
+  "ground_domains": {
+    "domain_count": 1,
+    "domains": [
+      {
+        "net": "GND",
+        "net_number": 8,
+        "component_count": 9,
+        "components": [
+          "C2",
+          "C3",
+          "C5",
+          "C6",
+          "Cf2",
+          "J2",
+          "R3",
+          "U1",
+          "U2"
+        ],
+        "has_zone": true,
+        "zone_layers": [
+          "B.Cu"
+        ]
+      }
+    ],
+    "multi_domain_components": []
+  },
+  "layer_transitions": [
+    {
+      "net": "/RAW_Out",
+      "net_number": 6,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 2,
+      "via_positions": [
+        {
+          "x": 78.0,
+          "y": 22.5,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        },
+        {
+          "x": 78.0,
+          "y": 24.5,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "Net-(R8-Pad1)",
+      "net_number": 9,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 66.0,
+          "y": 22.0,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/HPF_Out",
+      "net_number": 2,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 0
+    }
+  ],
+  "silkscreen": {
+    "board_text_count": 7,
+    "refs_visible_on_silk": 20,
+    "refs_hidden_on_silk": 0,
+    "board_texts": [
+      {
+        "text": "Body Ref\n",
+        "layer": "F.SilkS",
+        "x": 20.5,
+        "y": 35.5
+      },
+      {
+        "text": "IN+\n",
+        "layer": "F.SilkS",
+        "x": 22.0,
+        "y": 30.5
+      },
+      {
+        "text": "IN-\n",
+        "layer": "F.SilkS",
+        "x": 22.0,
+        "y": 32.5
+      },
+      {
+        "text": "+VCC\n",
+        "layer": "F.SilkS",
+        "x": 83.5,
+        "y": 23.0
+      },
+      {
+        "text": "OUT",
+        "layer": "F.SilkS",
+        "x": 83.5,
+        "y": 25.5
+      },
+      {
+        "text": "VRef",
+        "layer": "F.SilkS",
+        "x": 83.5,
+        "y": 28.0
+      },
+      {
+        "text": "GND",
+        "layer": "F.SilkS",
+        "x": 83.5,
+        "y": 31.0
+      }
+    ],
+    "values_visible_on_silk": [
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "Cf2",
+      "J1",
+      "J2",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "Rf1",
+      "Rg1",
+      "Rg_HPF1",
+      "U1",
+      "U2"
+    ],
+    "user_silk_texts": [
+      {
+        "footprint": "Rf1",
+        "text": "Rf1"
+      },
+      {
+        "footprint": "C6",
+        "text": "100nF"
+      }
+    ],
+    "documentation_warnings": [
+      {
+        "type": "missing_revision",
+        "severity": "warning",
+        "message": "No revision marking found in silkscreen. Add a revision label (e.g., 'Rev A', 'V1.0') to track board versions."
+      },
+      {
+        "type": "missing_connector_labels",
+        "severity": "suggestion",
+        "components": [
+          "J2",
+          "J1"
+        ],
+        "message": "Connectors (3+ pins) without silkscreen labels: ['J2', 'J1']. Consider adding pin names, signal names, or connector function labels."
+      }
+    ],
+    "fab_notes_completeness": {
+      "checks": {
+        "ipc_class": false,
+        "surface_finish": false,
+        "board_thickness": false,
+        "copper_weight": false,
+        "solder_mask": false,
+        "material": false
+      },
+      "missing": [
+        "ipc class",
+        "surface finish",
+        "board thickness",
+        "copper weight",
+        "solder mask",
+        "material"
+      ],
+      "completeness_pct": 0,
+      "status": "warning"
+    },
+    "silkscreen_completeness": {
+      "checks": {
+        "revision_marking": false,
+        "board_name": true,
+        "ref_designators_visible": true,
+        "connector_labels": false,
+        "polarity_markers": true
+      },
+      "missing": [
+        "revision marking",
+        "connector labels"
+      ],
+      "completeness_pct": 60,
+      "status": "warning"
+    }
+  },
+  "board_metadata": {
+    "paper": "A4"
+  },
+  "net_classes": [
+    {
+      "name": "Default",
+      "clearance": 0.15,
+      "track_width": 0.2,
+      "via_diameter": 0.6,
+      "via_drill": 0.3,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    }
+  ],
+  "project_settings": {
+    "source": "EMG_v4.kicad_pro",
+    "net_classes": [
+      {
+        "name": "Default",
+        "clearance": 0.15,
+        "track_width": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      }
+    ],
+    "design_rules": {
+      "min_clearance": 0.0,
+      "min_connection": 0.0,
+      "min_copper_edge_clearance": 0.5,
+      "min_groove_width": 0.0,
+      "min_hole_clearance": 0.25,
+      "min_hole_to_hole": 0.25,
+      "min_microvia_diameter": 0.2,
+      "min_microvia_drill": 0.1,
+      "min_resolved_spokes": 2,
+      "min_silk_clearance": 0.0,
+      "min_text_height": 0.5,
+      "min_text_thickness": 0.05,
+      "min_through_hole_diameter": 0.3,
+      "min_track_width": 0.2,
+      "min_via_annular_width": 0.1,
+      "min_via_diameter": 0.5
+    }
+  },
+  "design_rule_compliance": {
+    "compliant": true,
+    "rules_checked": 3,
+    "rules_source": "EMG_v4.kicad_pro"
+  },
+  "dfm_summary": {
+    "dfm_tier": "standard",
+    "metrics": {
+      "min_track_width_mm": 0.2,
+      "approx_min_spacing_mm": 0.45,
+      "min_drill_mm": 0.3,
+      "min_annular_ring_mm": 0.15,
+      "board_width_mm": 68.5,
+      "board_height_mm": 29.0
+    },
+    "violation_count": 0
+  },
+  "placement_density": {
+    "board_area_cm2": 19.86,
+    "front_density_per_cm2": 1.0
+  },
+  "board_thickness_mm": 1.6,
+  "copper_presence_summary": [
+    {
+      "opposite_layer_nets": "GND",
+      "component_count": 1,
+      "components": [
+        "U1"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "net": "GND",
+      "net_number": 8,
+      "min_track_width_mm": 0.2,
+      "max_track_width_mm": 0.2,
+      "track_widths_used": [
+        0.2
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 9,
+      "via_count": 2,
+      "via_drill_sizes_mm": [
+        0.3
+      ],
+      "zones": [
+        {
+          "layers": [
+            "B.Cu"
+          ],
+          "filled_area_mm2": 1555.97,
+          "min_thickness": 0.25
+        }
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-DET",
+      "category": "current_capacity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Power net GND: 0.2mm min trace",
+      "description": "Power/ground net GND: min trace 0.2mm, max 0.2mm, 9 segments.",
+      "components": [],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Power delivery",
+        "standard_ref": "IPC-2221"
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "VCC",
+      "net_number": 16,
+      "min_track_width_mm": 0.2,
+      "max_track_width_mm": 0.2,
+      "track_widths_used": [
+        0.2
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 18,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.3
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-DET",
+      "category": "current_capacity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Power net VCC: 0.2mm min trace",
+      "description": "Power/ground net VCC: min trace 0.2mm, max 0.2mm, 18 segments.",
+      "components": [],
+      "nets": [
+        "VCC"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Power delivery",
+        "standard_ref": "IPC-2221"
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "component": "C2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C2",
+      "description": "Component C2 has no copper zone on the opposite layer.",
+      "components": [
+        "C2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C3",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C3",
+      "description": "Component C3 has no copper zone on the opposite layer.",
+      "components": [
+        "C3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C4",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C4",
+      "description": "Component C4 has no copper zone on the opposite layer.",
+      "components": [
+        "C4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C5",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C5",
+      "description": "Component C5 has no copper zone on the opposite layer.",
+      "components": [
+        "C5"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C6",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C6",
+      "description": "Component C6 has no copper zone on the opposite layer.",
+      "components": [
+        "C6"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "Cf2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under Cf2",
+      "description": "Component Cf2 has no copper zone on the opposite layer.",
+      "components": [
+        "Cf2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J1",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J1",
+      "description": "Component J1 has no copper zone on the opposite layer.",
+      "components": [
+        "J1"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J2",
+      "description": "Component J2 has no copper zone on the opposite layer.",
+      "components": [
+        "J2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R2",
+      "description": "Component R2 has no copper zone on the opposite layer.",
+      "components": [
+        "R2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R3",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R3",
+      "description": "Component R3 has no copper zone on the opposite layer.",
+      "components": [
+        "R3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R4",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R4",
+      "description": "Component R4 has no copper zone on the opposite layer.",
+      "components": [
+        "R4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R5",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R5",
+      "description": "Component R5 has no copper zone on the opposite layer.",
+      "components": [
+        "R5"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R6",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R6",
+      "description": "Component R6 has no copper zone on the opposite layer.",
+      "components": [
+        "R6"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R7",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R7",
+      "description": "Component R7 has no copper zone on the opposite layer.",
+      "components": [
+        "R7"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R8",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under R8",
+      "description": "Component R8 has no copper zone on the opposite layer.",
+      "components": [
+        "R8"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "Rf1",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under Rf1",
+      "description": "Component Rf1 has no copper zone on the opposite layer.",
+      "components": [
+        "Rf1"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "Rg1",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under Rg1",
+      "description": "Component Rg1 has no copper zone on the opposite layer.",
+      "components": [
+        "Rg1"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "Rg_HPF1",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under Rg_HPF1",
+      "description": "Component Rg_HPF1 has no copper zone on the opposite layer.",
+      "components": [
+        "Rg_HPF1"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "U2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under U2",
+      "description": "Component U2 has no copper zone on the opposite layer.",
+      "components": [
+        "U2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "side": "F.Cu",
+      "fiducial_count": 0,
+      "fiducial_refs": [],
+      "smd_component_count": 1,
+      "finest_smd_pad_dim_mm": 0.5,
+      "detector": "analyze_fiducials",
+      "rule_id": "FD-001",
+      "category": "assembly",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "No fiducials on F.Cu (1 SMD components) (finest pad dim 0.50mm \u2014 medium-pitch part present)",
+      "description": "F.Cu has 0 fiducial(s) but 1 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+      "report_context": {
+        "section": "Assembly",
+        "impact": "Pick-and-place alignment",
+        "standard_ref": "IPC-7351"
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "total_signal_nets": 14,
+      "nets_with_test_points": 0,
+      "coverage_pct": 0.0,
+      "test_point_count": 0,
+      "detector": "analyze_test_point_coverage",
+      "rule_id": "TE-001",
+      "category": "testability",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Test point coverage: 0/14 nets (0%)",
+      "description": "0 of 14 signal nets have test points (0% coverage).",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add test points to improve ICT/flying probe coverage.",
+      "report_context": {
+        "section": "Testability",
+        "impact": "ICT accessibility",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "GND",
+      "zone_layers": [
+        "B.Cu"
+      ],
+      "zone_area_mm2": 1890.0,
+      "via_count": 2,
+      "via_density_per_cm2": 0.1,
+      "drill_sizes_mm": [
+        0.3
+      ],
+      "detector": "analyze_thermal_vias",
+      "rule_id": "TS-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Zone stitching: GND 2 vias",
+      "description": "Zone stitching on net GND: 2 vias across layers ['B.Cu'].",
+      "components": [],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal/ground plane connectivity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 24,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 24,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 5,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 19,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "summary": {
+    "total_findings": 24,
+    "by_severity": {
+      "error": 0,
+      "warning": 2,
+      "info": 22
+    }
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "hobby",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0603",
+    "test_coverage_target": 0.85,
+    "approved_manufacturers": [],
+    "confidence": 0.3,
+    "detection_signals": [],
+    "source": {
+      "ipc_class": "auto",
+      "product_class": "auto",
+      "target_market": "auto",
+      "expected_lifetime_years": "auto",
+      "operating_temp_range": "auto",
+      "preferred_passive_size": "auto",
+      "test_coverage_target": "auto",
+      "approved_manufacturers": "auto"
+    }
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 24,
+      "by_severity": {
+        "error": 0,
+        "warning": 2,
+        "info": 22
+      },
+      "by_category": {
+        "current_capacity": 2,
+        "copper_integrity": 19,
+        "assembly": 1,
+        "testability": 1,
+        "thermal": 1
+      },
+      "top_issues": [
+        {
+          "side": "F.Cu",
+          "fiducial_count": 0,
+          "fiducial_refs": [],
+          "smd_component_count": 1,
+          "finest_smd_pad_dim_mm": 0.5,
+          "detector": "analyze_fiducials",
+          "rule_id": "FD-001",
+          "category": "assembly",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "No fiducials on F.Cu (1 SMD components) (finest pad dim 0.50mm \u2014 medium-pitch part present)",
+          "description": "F.Cu has 0 fiducial(s) but 1 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "report_context": {
+            "section": "Assembly",
+            "impact": "Pick-and-place alignment",
+            "standard_ref": "IPC-7351"
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "total_signal_nets": 14,
+          "nets_with_test_points": 0,
+          "coverage_pct": 0.0,
+          "test_point_count": 0,
+          "detector": "analyze_test_point_coverage",
+          "rule_id": "TE-001",
+          "category": "testability",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Test point coverage: 0/14 nets (0%)",
+          "description": "0 of 14 signal nets have test points (0% coverage).",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Add test points to improve ICT/flying probe coverage.",
+          "report_context": {
+            "section": "Testability",
+            "impact": "ICT accessibility",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 2,
+      "by_category": {
+        "assembly": 1,
+        "testability": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "FD-001",
+          "severity": "warning",
+          "summary": "No fiducials on F.Cu (1 SMD components) (finest pad dim 0.50mm \u2014 medium-pitch part present)",
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "category": "assembly"
+        },
+        {
+          "rule_id": "TE-001",
+          "severity": "warning",
+          "summary": "Test point coverage: 0/14 nets (0%)",
+          "recommendation": "Add test points to improve ICT/flying probe coverage.",
+          "category": "testability"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "low",
+      "blocker_count": 0,
+      "warning_count": 2,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "pass",
+        "pre_fab": "needs_review",
+        "bring_up": "pass"
+      },
+      "one_liner": "2 warnings across 2 categories."
+    }
+  }
+}

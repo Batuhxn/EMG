@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-05-09T16:00:58",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/2c477672-822a-487d-bb83-204f5f41dbd8",
+            "violations": [
+                {
+                    "description": "Symbol 'Conn_01x04_Pin' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol J2 [Conn_01x04_Pin]",
+                            "pos": {
+                                "x": 2.0066,
+                                "y": 0.6096
+                            },
+                            "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                }
+            ]
+        }
+    ],
+    "source": "EMG_v4.kicad_sch"
+}
