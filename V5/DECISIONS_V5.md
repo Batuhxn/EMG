@@ -139,14 +139,25 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Battery-powered first prototype is preferred.
 - First schematic power-source strategy documented in `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
 - First schematic power-source strategy is **SELECTABLE / JUMPER SOURCE OPTION**.
+- Limited power/reference schematic block added in commit `1f759a6`.
+- Root schematic `V5/EMG_v5.kicad_sch` now includes hierarchical sheet `POWER_REFERENCE_BLOCK`.
+- Child schematic file added: `V5/POWER_REFERENCE_BLOCK.kicad_sch`.
+- Project metadata updated in `V5/EMG_v5.kicad_pro`.
+- This is the first limited KiCad schematic edit for power/reference support.
+- This schematic block is review/prototype planning support, not final production schematic.
+- This is not full board schematic completion.
+- This is not PCB layout.
+- This is not analog EMG chain schematic.
 - Candidate source A: `DSTK_3V3_CANDIDATE`.
 - Candidate source B: `LDO_3V3_FALLBACK`.
 - Selected analog/ADC rail: `3V3_ADC`.
+- Power-source strategy uses selectable / jumper source option.
 - `DSTK_3V3_CANDIDATE` and `LDO_3V3_FALLBACK` must be mutually exclusive.
 - Do not populate/close both source paths at the same time.
 - Do not directly tie the two source outputs together.
 - Do not backfeed DSTK `3V3`.
 - Do not power DSTK22807 from the external LDO in the first schematic block.
+- Do not connect the DSTK22807 power path to the external LDO in this block.
 - Do not use `5V` as analog/ADC supply.
 - External analog/ADC 3.3 V regulator is now a conservative fallback candidate, not a mandatory preferred requirement.
 - DSTK22807 onboard `3V3` rail is a new candidate source for analog/ADC power, pending current budget and load/noise test.
@@ -162,9 +173,15 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - MCP3208 `VDD` should be powered from selected `3V3_ADC`.
 - MCP3208 `VREF` remains `ADC_REF`.
 - `ADC_REF` and `analog VREF` are separate.
+- MCP3208 powered at 3.3 V is preferred.
+- If MCP3208 is powered at 5 V later, `DOUT` level shifting is required.
 - If DSTK `3V3` is used for MCP3208 `VDD` / `ADC_REF`, local decoupling/filtering and ADC_REF quality review remain required.
-- `analog VREF` buffer is required or strongly preferred.
-- `BAT_MON` is unresolved.
+- `analog VREF` candidate remains 47k/47k divider plus buffer.
+- `VREF_MON` and `BAT_MON` are represented in the child schematic.
+- ADC CH0-CH5 placeholders remain only placeholders.
+- SPI labels are present but are not connected to DSTK22807 in this task.
+- Safety notes are present in the child schematic.
+- `BAT_MON` is represented, but final divider/scaling remains review item.
 - ADC input protection is unresolved.
 - Analog headroom/gain at 3.3 V is unresolved.
 - ADC input range protection must ensure CH0-CH7 never exceed VSS to VREF in single-ended MCP3208 use.
@@ -172,22 +189,21 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Power/reference value-level design review documented in `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`.
 - Value-level candidates exist for regulator, analog VREF divider/buffer, ADC_REF decoupling, ADC input protection, BAT_MON divider, unused ADC bias, and test points.
 - These candidates are not final schematic implementation and not final BOM lock.
-- Small power/reference schematic block may be considered only after review, power-source strategy update, and explicit approval; it is not automatically approved.
-- Future schematic block must use the selectable/jumper source strategy unless a later decision changes it.
+- Small power/reference schematic block is **ADDED / NEEDS REVIEW**.
+- Further changes to this block require review.
 - Full board schematic remains **NO**.
 - Analog EMG chain schematic remains **NO**.
 - Power/reference schematic block proposal documented in `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
 - Proposal defines maximum scope for a future small schematic-only power/reference block.
-- Proposal does not implement KiCad schematic.
+- Proposal has now been followed by the limited implementation in commit `1f759a6`.
 - Proposal does not approve full board schematic, analog EMG chain schematic, PCB layout, or DSTK22807 external 3.3 V powering.
-- Small power/reference schematic block proposal is **READY_FOR_REVIEW**.
-- Small power/reference schematic block implementation is not approved in this task.
-- This update does not approve KiCad schematic implementation.
+- Small power/reference schematic block proposal was **READY_FOR_REVIEW**.
+- Limited power/reference schematic block implementation is **ADDED FOR REVIEW**.
 
 
-## 8. Open Blockers Before Schematic Implementation
+## 8. Open Blockers Before Further Schematic/PCB Work
 
-The following blockers must be closed before full schematic implementation:
+The following blockers must be closed before further schematic or PCB work:
 
 - Physical DSTK22807 pinout second confirmation.
 - Right-row reversal confirmation.
@@ -206,10 +222,13 @@ The following blockers must be closed before full schematic implementation:
 - Check ESP reset/stability behavior under load.
 - Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
 - Review and accept `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
-- Revise the next KiCad schematic prompt to include selectable/jumper source option.
+- Review `V5/POWER_REFERENCE_BLOCK.kicad_sch` visually and electrically.
+- Run KiCad ERC later after symbols/flags are cleaned enough.
 - Verify source selection is mutually exclusive in schematic.
+- Confirm source selection mutual exclusion.
 - Ensure `DSTK_3V3_CANDIDATE` is only a candidate input, not final approval.
 - Ensure `LDO_3V3_FALLBACK` does not backfeed DSTK `3V3`.
+- Confirm no backfeed path from LDO to DSTK `3V3`.
 - Decide default population state for source jumpers/solder bridges.
 - Mark source population as TBD until DSTK 3V3 load/noise testing.
 - Battery regulator architecture.
@@ -228,13 +247,15 @@ The following blockers must be closed before full schematic implementation:
 - DSTK22807 external 3.3 V powering test result if Option C is considered.
 - analog VREF buffer candidate verified at 3.3 V.
 - ADC_REF decoupling/filter values accepted.
+- Confirm `ADC_REF` and analog `VREF` are separate.
 - ADC input source impedance/acquisition calculation accepted.
 - BAT_MON divider values accepted.
 - Unused ADC bias values accepted.
 - Human-test safety procedure accepted.
 - Review and accept `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
-- Review and update power/reference schematic block prompt before KiCad edit.
-- Explicitly decide whether small schematic-only power/reference block implementation is allowed.
+- Confirm MCP3208 channel labels match locked CH0-CH7 mapping.
+- Confirm DSTK pinout before connecting SPI/power to DSTK symbol.
+- Confirm DSTK 3V3 current/load/noise tests before choosing population path.
 - Verify exact KiCad symbols/footprints for regulator/op-amp/connector/test points.
 - Verify analog VREF buffer stability at 3.3 V.
 - Accept ADC_REF decoupling strategy.
@@ -258,7 +279,11 @@ PCB layout: **NO**.
 
 Small power/reference schematic block proposal: **READY_FOR_REVIEW**.
 
-Small power/reference schematic block implementation: **MAYBE AFTER THIS DECISIONS UPDATE**, but only with selectable/jumper power-source strategy.
+Small power/reference schematic block: **ADDED FOR REVIEW**.
+
+Further changes to this block require review.
+
+Small power/reference schematic block implementation: **ADDED FOR REVIEW** with selectable/jumper power-source strategy.
 
 First schematic power-source strategy: **SELECTABLE / JUMPER SOURCE OPTION**.
 
@@ -277,21 +302,10 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 10. Recommended Next Action
 
-- Review and commit this `DECISIONS_V5.md` update.
-- Then revise the limited KiCad schematic edit prompt.
-- The next KiCad schematic edit, if allowed, must:
-  - edit only `V5/EMG_v5.kicad_sch`,
-  - create only `V5/POWER_REFERENCE_BLOCK.kicad_sch`,
-  - include selectable/jumper source option,
-  - use `DSTK_3V3_CANDIDATE` and `LDO_3V3_FALLBACK` as mutually exclusive source candidates,
-  - output selected rail as `3V3_ADC`,
-  - keep MCP3208 VDD on `3V3_ADC`,
-  - keep MCP3208 VREF as `ADC_REF`,
-  - keep `ADC_REF` separate from analog `VREF`,
-  - avoid any DSTK external 3.3 V powering implementation,
-  - avoid any USB simultaneous power implementation,
-  - avoid PCB layout,
-  - avoid full analog EMG chain.
+- Review and commit this documentation update.
+- Then perform KiCad review of `POWER_REFERENCE_BLOCK`.
+- Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
+- Next schematic work should be limited to review fixes only unless explicitly approved.
 - Do not begin PCB layout.
 - Do not begin full board schematic.
 - Do not begin analog EMG chain schematic.
@@ -314,8 +328,11 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`
 - `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
 - `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
+- `V5/POWER_REFERENCE_BLOCK.kicad_sch`
+- `V5/EMG_v5.kicad_sch`
+- `V5/EMG_v5.kicad_pro`
 
-Final decision: **DECISIONS_FIRST_POWER_SOURCE_STRATEGY_UPDATE_READY_FOR_REVIEW**
+Final decision: **DOCS_SYNC_POWER_REFERENCE_SCHEMATIC_BLOCK_READY_FOR_REVIEW**
 
 
 
