@@ -137,6 +137,17 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 ## 7. Power / Reference Status
 
 - Battery-powered first prototype is preferred.
+- First schematic power-source strategy documented in `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
+- First schematic power-source strategy is **SELECTABLE / JUMPER SOURCE OPTION**.
+- Candidate source A: `DSTK_3V3_CANDIDATE`.
+- Candidate source B: `LDO_3V3_FALLBACK`.
+- Selected analog/ADC rail: `3V3_ADC`.
+- `DSTK_3V3_CANDIDATE` and `LDO_3V3_FALLBACK` must be mutually exclusive.
+- Do not populate/close both source paths at the same time.
+- Do not directly tie the two source outputs together.
+- Do not backfeed DSTK `3V3`.
+- Do not power DSTK22807 from the external LDO in the first schematic block.
+- Do not use `5V` as analog/ADC supply.
 - External analog/ADC 3.3 V regulator is now a conservative fallback candidate, not a mandatory preferred requirement.
 - DSTK22807 onboard `3V3` rail is a new candidate source for analog/ADC power, pending current budget and load/noise test.
 - External LDO remains a fallback if DSTK `3V3` current, noise, thermal margin, or ADC stability is unacceptable.
@@ -148,6 +159,8 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Do not back-feed DSTK22807 until board behavior is verified.
 - Do not back-feed DSTK22807 3V3 until power path is verified.
 - For human-connected EMG testing, USB Type-C must be disconnected and the system must be battery-powered/isolated.
+- MCP3208 `VDD` should be powered from selected `3V3_ADC`.
+- MCP3208 `VREF` remains `ADC_REF`.
 - `ADC_REF` and `analog VREF` are separate.
 - If DSTK `3V3` is used for MCP3208 `VDD` / `ADC_REF`, local decoupling/filtering and ADC_REF quality review remain required.
 - `analog VREF` buffer is required or strongly preferred.
@@ -160,16 +173,15 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Value-level candidates exist for regulator, analog VREF divider/buffer, ADC_REF decoupling, ADC input protection, BAT_MON divider, unused ADC bias, and test points.
 - These candidates are not final schematic implementation and not final BOM lock.
 - Small power/reference schematic block may be considered only after review, power-source strategy update, and explicit approval; it is not automatically approved.
-- Future schematic block should not assume separate LDO as mandatory until the power-source decision is updated.
-- Future schematic block may need one of these strategies: DSTK `3V3` source candidate, separate LDO fallback, or selectable/jumper source option.
+- Future schematic block must use the selectable/jumper source strategy unless a later decision changes it.
 - Full board schematic remains **NO**.
 - Analog EMG chain schematic remains **NO**.
 - Power/reference schematic block proposal documented in `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
 - Proposal defines maximum scope for a future small schematic-only power/reference block.
 - Proposal does not implement KiCad schematic.
 - Proposal does not approve full board schematic, analog EMG chain schematic, PCB layout, or DSTK22807 external 3.3 V powering.
-- Small power/reference schematic block proposal is **READY_FOR_REVIEW** but needs power-source revision after current budget review.
-- Small power/reference schematic block implementation is on **HOLD** until power-source strategy is explicitly chosen.
+- Small power/reference schematic block proposal is **READY_FOR_REVIEW**.
+- Small power/reference schematic block implementation is not approved in this task.
 - This update does not approve KiCad schematic implementation.
 
 
@@ -193,13 +205,17 @@ The following blockers must be closed before full schematic implementation:
 - Check regulator temperature under load.
 - Check ESP reset/stability behavior under load.
 - Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
+- Review and accept `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
+- Revise the next KiCad schematic prompt to include selectable/jumper source option.
+- Verify source selection is mutually exclusive in schematic.
+- Ensure `DSTK_3V3_CANDIDATE` is only a candidate input, not final approval.
+- Ensure `LDO_3V3_FALLBACK` does not backfeed DSTK `3V3`.
+- Decide default population state for source jumpers/solder bridges.
+- Mark source population as TBD until DSTK 3V3 load/noise testing.
 - Battery regulator architecture.
 - Battery chemistry and maximum voltage.
 - 3.3 V regulator part/current/noise selection, if separate LDO fallback is selected.
-- Decide whether the first schematic block should use:
-  - DSTK `3V3` source,
-  - separate LDO fallback,
-  - selectable/jumper source option.
+- Decide whether the first schematic block should use the selectable/jumper source option with `DSTK_3V3_CANDIDATE`, `LDO_3V3_FALLBACK`, and selected `3V3_ADC`.
 - INA333/op-amp headroom at 3.3 V.
 - `analog VREF` buffer topology/part.
 - MCP3208 ADC input protection and source impedance/acquisition requirements.
@@ -226,6 +242,9 @@ The following blockers must be closed before full schematic implementation:
 - Accept ADC input R/C/source impedance strategy.
 - Decide unused ADC bias approach.
 - Keep DSTK22807 power path unresolved unless separately tested.
+- Keep DSTK 3V3 current/load/noise test blocker.
+- Keep human-test safety procedure blocker.
+- Keep ADC_REF/analog VREF separation blocker.
 - Human-test safety procedure remains required.
 
 
@@ -237,13 +256,17 @@ Analog EMG chain schematic: **NO**.
 
 PCB layout: **NO**.
 
-Small power/reference schematic block proposal: **READY_FOR_REVIEW**, but needs power-source revision after current budget review.
+Small power/reference schematic block proposal: **READY_FOR_REVIEW**.
 
-Small power/reference schematic block implementation: **HOLD** until power-source strategy is explicitly chosen.
+Small power/reference schematic block implementation: **MAYBE AFTER THIS DECISIONS UPDATE**, but only with selectable/jumper power-source strategy.
+
+First schematic power-source strategy: **SELECTABLE / JUMPER SOURCE OPTION**.
 
 DSTK onboard `3V3` as analog/ADC source: **CANDIDATE ONLY**, pending current budget and load/noise test.
 
 External analog/ADC LDO: **CONSERVATIVE FALLBACK CANDIDATE**.
+
+`3V3_ADC` source selection: **MUTUALLY EXCLUSIVE**.
 
 DSTK22807 external 3.3 V powering: **NOT APPROVED YET**.
 
@@ -255,15 +278,23 @@ USB-powered human EMG testing: **FORBIDDEN**.
 ## 10. Recommended Next Action
 
 - Review and commit this `DECISIONS_V5.md` update.
-- Then decide the first schematic block power-source strategy:
-  1. DSTK `3V3` source candidate.
-  2. Separate LDO fallback.
-  3. Jumper/selectable source option.
-- Before KiCad edit, revise the schematic block prompt to reflect this updated power-source decision.
+- Then revise the limited KiCad schematic edit prompt.
+- The next KiCad schematic edit, if allowed, must:
+  - edit only `V5/EMG_v5.kicad_sch`,
+  - create only `V5/POWER_REFERENCE_BLOCK.kicad_sch`,
+  - include selectable/jumper source option,
+  - use `DSTK_3V3_CANDIDATE` and `LDO_3V3_FALLBACK` as mutually exclusive source candidates,
+  - output selected rail as `3V3_ADC`,
+  - keep MCP3208 VDD on `3V3_ADC`,
+  - keep MCP3208 VREF as `ADC_REF`,
+  - keep `ADC_REF` separate from analog `VREF`,
+  - avoid any DSTK external 3.3 V powering implementation,
+  - avoid any USB simultaneous power implementation,
+  - avoid PCB layout,
+  - avoid full analog EMG chain.
 - Do not begin PCB layout.
 - Do not begin full board schematic.
 - Do not begin analog EMG chain schematic.
-- Do not implement DSTK external 3.3 V powering.
 - Do not use 5V as analog/ADC supply.
 
 
@@ -282,8 +313,9 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`
 - `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`
 - `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
+- `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
 
-Final decision: **DECISIONS_DSTK_3V3_CURRENT_BUDGET_UPDATE_READY_FOR_REVIEW**
+Final decision: **DECISIONS_FIRST_POWER_SOURCE_STRATEGY_UPDATE_READY_FOR_REVIEW**
 
 
 
