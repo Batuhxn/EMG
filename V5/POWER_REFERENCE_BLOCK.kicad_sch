@@ -1239,6 +1239,121 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:PWR_FLAG"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "SOURCE SELECT - MUTUALLY EXCLUSIVE"
 		(exclude_from_sim no)
@@ -1546,6 +1661,50 @@
 		)
 		(uuid "7d41d45d-add3-4b50-8343-fc31438b9c96")
 	)
+	(text "ADC_REF feed/filter candidate from selected 3V3_ADC"
+		(exclude_from_sim no)
+		(at 241.3 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-000000000001")
+	)
+	(text "ERC/source declaration only; actual source selected by JP201/JP202 population"
+		(exclude_from_sim no)
+		(at 76.2 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-000000000002")
+	)
+	(text "ERC/source declaration only; ADC_REF is fed from 3V3_ADC through R206"
+		(exclude_from_sim no)
+		(at 289.56 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60000000-0000-4000-8000-000000000001")
+	)
+	(text "ERC/source declaration only for local planning block GND"
+		(exclude_from_sim no)
+		(at 203.2 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60000000-0000-4000-8000-000000000002")
+	)
 	(junction
 		(at 49.53 93.98)
 		(diameter 0)
@@ -1641,6 +1800,16 @@
 			(type default)
 		)
 		(uuid "10000000-0000-4000-8000-000000000011")
+	)
+	(wire
+		(pts
+			(xy 73.66 31.75) (xy 88.9 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000003")
 	)
 	(wire
 		(pts
@@ -1771,6 +1940,46 @@
 			(type default)
 		)
 		(uuid "30000000-0000-4000-8000-000000000016")
+	)
+	(wire
+		(pts
+			(xy 241.3 63.5) (xy 255.27 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000004")
+	)
+	(wire
+		(pts
+			(xy 262.89 63.5) (xy 276.86 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000005")
+	)
+	(wire
+		(pts
+			(xy 276.86 63.5) (xy 292.1 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60000000-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts
+			(xy 226.06 50.8) (xy 241.3 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60000000-0000-4000-8000-000000000004")
 	)
 	(wire
 		(pts
@@ -2172,6 +2381,46 @@
 		)
 		(uuid "f618f1d2-5803-49e9-9e1e-512c4847916c")
 	)
+	(wire
+		(pts
+			(xy 109.22 163.83) (xy 119.38 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000006")
+	)
+	(wire
+		(pts
+			(xy 109.22 179.07) (xy 119.38 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000007")
+	)
+	(wire
+		(pts
+			(xy 134.62 167.64) (xy 142.24 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000008")
+	)
+	(wire
+		(pts
+			(xy 134.62 175.26) (xy 142.24 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50000000-0000-4000-8000-000000000009")
+	)
 	(label "DSTK_3V3_CANDIDATE"
 		(at 17.78 27.94 0)
 		(effects
@@ -2201,16 +2450,6 @@
 			(justify left bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000005")
-	)
-	(label "GND"
-		(at 17.78 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000006")
 	)
 	(label "BAT+"
 		(at 16.51 80.01 0)
@@ -2552,6 +2791,66 @@
 		)
 		(uuid "20000000-0000-4000-8000-000000000061")
 	)
+	(label "3V3_ADC"
+		(at 241.3 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000a")
+	)
+	(label "ADC_REF"
+		(at 276.86 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000b")
+	)
+	(label "3V3_ADC"
+		(at 109.22 163.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000c")
+	)
+	(label "GND"
+		(at 109.22 179.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000d")
+	)
+	(label "3V3_ADC"
+		(at 134.62 167.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000e")
+	)
+	(label "GND"
+		(at 134.62 175.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50000000-0000-4000-8000-00000000000f")
+	)
 	(symbol
 		(lib_id "Jumper:SolderJumper_2_Open")
 		(at 50.8 27.94 0)
@@ -2563,7 +2862,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000001")
-		(property "Reference" "JP1"
+		(property "Reference" "JP201"
 			(at 50.8 25.4 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2622,13 +2921,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP1")
+					(reference "JP201")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP1")
+					(reference "JP201")
 					(unit 1)
 				)
 			)
@@ -2645,7 +2944,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000004")
-		(property "Reference" "JP2"
+		(property "Reference" "JP202"
 			(at 50.8 33.02 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2704,13 +3003,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP2")
+					(reference "JP202")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP2")
+					(reference "JP202")
 					(unit 1)
 				)
 			)
@@ -2727,7 +3026,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000007")
-		(property "Reference" "C1"
+		(property "Reference" "C201"
 			(at 49.53 76.2 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2786,13 +3085,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C1")
+					(reference "C201")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C1")
+					(reference "C201")
 					(unit 1)
 				)
 			)
@@ -2809,7 +3108,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000010")
-		(property "Reference" "C2"
+		(property "Reference" "C202"
 			(at 49.53 90.17 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2868,13 +3167,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C2")
+					(reference "C202")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C2")
+					(reference "C202")
 					(unit 1)
 				)
 			)
@@ -2891,7 +3190,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000013")
-		(property "Reference" "U1"
+		(property "Reference" "U201"
 			(at 131.318 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2993,13 +3292,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U1")
+					(reference "U201")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U1")
+					(reference "U201")
 					(unit 1)
 				)
 			)
@@ -3016,7 +3315,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000030")
-		(property "Reference" "C3"
+		(property "Reference" "C203"
 			(at 269.24 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3075,13 +3374,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C3")
+					(reference "C203")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C3")
+					(reference "C203")
 					(unit 1)
 				)
 			)
@@ -3098,7 +3397,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000033")
-		(property "Reference" "C4"
+		(property "Reference" "C204"
 			(at 307.34 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3157,13 +3456,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C4")
+					(reference "C204")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C4")
+					(reference "C204")
 					(unit 1)
 				)
 			)
@@ -3180,7 +3479,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000036")
-		(property "Reference" "C5"
+		(property "Reference" "C205"
 			(at 269.24 44.45 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3239,13 +3538,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C5")
+					(reference "C205")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C5")
+					(reference "C205")
 					(unit 1)
 				)
 			)
@@ -3262,7 +3561,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000039")
-		(property "Reference" "C6"
+		(property "Reference" "C206"
 			(at 307.34 44.45 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3321,13 +3620,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C6")
+					(reference "C206")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C6")
+					(reference "C206")
 					(unit 1)
 				)
 			)
@@ -3344,7 +3643,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000042")
-		(property "Reference" "R1"
+		(property "Reference" "R201"
 			(at 45.72 161.29 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3403,13 +3702,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R1")
+					(reference "R201")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R1")
+					(reference "R201")
 					(unit 1)
 				)
 			)
@@ -3426,7 +3725,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000045")
-		(property "Reference" "R2"
+		(property "Reference" "R202"
 			(at 45.72 176.53 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3485,13 +3784,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R2")
+					(reference "R202")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R2")
+					(reference "R202")
 					(unit 1)
 				)
 			)
@@ -3508,7 +3807,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000048")
-		(property "Reference" "U2"
+		(property "Reference" "U202"
 			(at 76.2 163.83 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3518,7 +3817,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6002/MCP6004-class RRIO"
+		(property "Value" "MCP6002-xP"
 			(at 76.2 166.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3585,13 +3884,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U2")
+					(reference "U202")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U2")
+					(reference "U202")
 					(unit 1)
 				)
 			)
@@ -3608,7 +3907,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000054")
-		(property "Reference" "R3"
+		(property "Reference" "R203"
 			(at 82.55 175.26 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3667,13 +3966,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R3")
+					(reference "R203")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R3")
+					(reference "R203")
 					(unit 1)
 				)
 			)
@@ -3690,7 +3989,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000057")
-		(property "Reference" "C7"
+		(property "Reference" "C207"
 			(at 102.616 181.61 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3749,13 +4048,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C7")
+					(reference "C207")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C7")
+					(reference "C207")
 					(unit 1)
 				)
 			)
@@ -3772,7 +4071,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000062")
-		(property "Reference" "R4"
+		(property "Reference" "R204"
 			(at 271.78 104.14 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3831,13 +4130,13 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R4")
+					(reference "R204")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R4")
+					(reference "R204")
 					(unit 1)
 				)
 			)
@@ -3854,7 +4153,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000065")
-		(property "Reference" "R5"
+		(property "Reference" "R205"
 			(at 271.78 119.38 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3913,13 +4212,523 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R5")
+					(reference "R205")
 					(unit 1)
 				)
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R5")
+					(reference "R205")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 259.08 63.5 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "50000000-0000-4000-8000-000000000010")
+		(property "Reference" "R206"
+			(at 259.08 60.96 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R/10R candidate"
+			(at 259.08 66.04 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 259.08 65.278 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 259.08 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "50000000-0000-4000-8000-000000000011")
+		)
+		(pin "2"
+			(uuid "50000000-0000-4000-8000-000000000012")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R206")
+					(unit 1)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R206")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:MCP6002-xP")
+		(at 121.92 171.45 0)
+		(unit 3)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "50000000-0000-4000-8000-000000000013")
+		(property "Reference" "U202"
+			(at 121.92 161.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MCP6002-xP"
+			(at 121.92 181.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 121.92 171.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.92 171.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 121.92 171.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "4"
+			(uuid "50000000-0000-4000-8000-000000000014")
+		)
+		(pin "8"
+			(uuid "50000000-0000-4000-8000-000000000015")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 3)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 142.24 171.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "50000000-0000-4000-8000-000000000016")
+		(property "Reference" "C208"
+			(at 144.78 170.1801 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF U202 local decoupling candidate"
+			(at 144.78 172.7201 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.2052 175.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 142.24 171.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 142.24 171.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "50000000-0000-4000-8000-000000000017")
+		)
+		(pin "2"
+			(uuid "50000000-0000-4000-8000-000000000018")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C208")
+					(unit 1)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C208")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 88.9 31.75 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50000000-0000-4000-8000-000000000019")
+		(property "Reference" "#FLG203"
+			(at 86.995 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 85.09 31.7499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.9 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 88.9 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "50000000-0000-4000-8000-00000000001a")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG203")
+					(unit 1)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 292.1 63.5 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "60000000-0000-4000-8000-000000000005")
+		(property "Reference" "#FLG204"
+			(at 290.195 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 288.29 63.4999 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 292.1 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 292.1 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 292.1 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "60000000-0000-4000-8000-000000000006")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG204")
+					(unit 1)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 226.06 50.8 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "60000000-0000-4000-8000-000000000007")
+		(property "Reference" "#FLG205"
+			(at 224.155 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 222.25 50.7999 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 226.06 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "60000000-0000-4000-8000-000000000008")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG205")
+					(unit 1)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG205")
 					(unit 1)
 				)
 			)
