@@ -137,14 +137,19 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 ## 7. Power / Reference Status
 
 - Battery-powered first prototype is preferred.
-- External low-noise 3.3 V regulator is preferred.
-- External 3.3 V regulator remains preferred for analog/ADC.
-- Do not assume DSTK22807 `3V3` pin can power the whole analog/ADC system.
+- External analog/ADC 3.3 V regulator is now a conservative fallback candidate, not a mandatory preferred requirement.
+- DSTK22807 onboard `3V3` rail is a new candidate source for analog/ADC power, pending current budget and load/noise test.
+- External LDO remains a fallback if DSTK `3V3` current, noise, thermal margin, or ADC stability is unacceptable.
+- DSTK22807 3V3 rail current budget review documented in `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`.
+- DSTK22807 onboard regulator / power path exact model remains UNKNOWN.
+- DSTK22807 onboard 3V3 current capability remains unverified.
 - DSTK22807 3V3 power direction remains unresolved.
+- Do not assume DSTK22807 `3V3` pin can power the whole analog/ADC system until current and noise testing pass.
 - Do not back-feed DSTK22807 until board behavior is verified.
 - Do not back-feed DSTK22807 3V3 until power path is verified.
 - For human-connected EMG testing, USB Type-C must be disconnected and the system must be battery-powered/isolated.
 - `ADC_REF` and `analog VREF` are separate.
+- If DSTK `3V3` is used for MCP3208 `VDD` / `ADC_REF`, local decoupling/filtering and ADC_REF quality review remain required.
 - `analog VREF` buffer is required or strongly preferred.
 - `BAT_MON` is unresolved.
 - ADC input protection is unresolved.
@@ -154,15 +159,19 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Power/reference value-level design review documented in `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`.
 - Value-level candidates exist for regulator, analog VREF divider/buffer, ADC_REF decoupling, ADC input protection, BAT_MON divider, unused ADC bias, and test points.
 - These candidates are not final schematic implementation and not final BOM lock.
-- Small power/reference schematic block may be considered only after review, not automatically approved.
+- Small power/reference schematic block may be considered only after review, power-source strategy update, and explicit approval; it is not automatically approved.
+- Future schematic block should not assume separate LDO as mandatory until the power-source decision is updated.
+- Future schematic block may need one of these strategies: DSTK `3V3` source candidate, separate LDO fallback, or selectable/jumper source option.
 - Full board schematic remains **NO**.
 - Analog EMG chain schematic remains **NO**.
 - Power/reference schematic block proposal documented in `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
 - Proposal defines maximum scope for a future small schematic-only power/reference block.
 - Proposal does not implement KiCad schematic.
 - Proposal does not approve full board schematic, analog EMG chain schematic, PCB layout, or DSTK22807 external 3.3 V powering.
-- Small power/reference schematic block proposal is **READY_FOR_REVIEW**.
-- Small power/reference schematic block implementation is not automatically approved.
+- Small power/reference schematic block proposal is **READY_FOR_REVIEW** but needs power-source revision after current budget review.
+- Small power/reference schematic block implementation is on **HOLD** until power-source strategy is explicitly chosen.
+- This update does not approve KiCad schematic implementation.
+
 
 ## 8. Open Blockers Before Schematic Implementation
 
@@ -175,19 +184,32 @@ The following blockers must be closed before full schematic implementation:
 - DSTK22807 3V3 external input safety.
 - DSTK22807 3V3 current capability.
 - USB and external 3.3 V coexistence / backfeed behavior.
+- Identify DSTK22807 onboard regulator / power path.
+- Estimate or measure ESP32-H2 board current under expected firmware/BLE activity.
+- Estimate minimal analog/ADC current.
+- Estimate later full 2-channel EMG analog/ADC current.
+- Perform DSTK `3V3` dummy-load test.
+- Check `3V3` rail voltage under load.
+- Check regulator temperature under load.
+- Check ESP reset/stability behavior under load.
+- Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
 - Battery regulator architecture.
 - Battery chemistry and maximum voltage.
-- 3.3 V regulator part/current/noise selection.
+- 3.3 V regulator part/current/noise selection, if separate LDO fallback is selected.
+- Decide whether the first schematic block should use:
+  - DSTK `3V3` source,
+  - separate LDO fallback,
+  - selectable/jumper source option.
 - INA333/op-amp headroom at 3.3 V.
 - `analog VREF` buffer topology/part.
 - MCP3208 ADC input protection and source impedance/acquisition requirements.
 - `BAT_MON` divider/scaling.
 - `AGND` / `DGND` grounding strategy.
 - Battery choice narrowed enough for regulator and BAT_MON.
-- Exact regulator candidate/suffix/package chosen.
+- Exact regulator candidate/suffix/package chosen if separate LDO fallback is selected.
 - Current budget for analog/ADC estimated.
 - Decision whether DSTK22807 is excluded from first power block or included later.
-- DSTK22807 external 3.3 V powering test result if Option B is considered.
+- DSTK22807 external 3.3 V powering test result if Option C is considered.
 - analog VREF buffer candidate verified at 3.3 V.
 - ADC_REF decoupling/filter values accepted.
 - ADC input source impedance/acquisition calculation accepted.
@@ -195,6 +217,7 @@ The following blockers must be closed before full schematic implementation:
 - Unused ADC bias values accepted.
 - Human-test safety procedure accepted.
 - Review and accept `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
+- Review and update power/reference schematic block prompt before KiCad edit.
 - Explicitly decide whether small schematic-only power/reference block implementation is allowed.
 - Verify exact KiCad symbols/footprints for regulator/op-amp/connector/test points.
 - Verify analog VREF buffer stability at 3.3 V.
@@ -205,6 +228,7 @@ The following blockers must be closed before full schematic implementation:
 - Keep DSTK22807 power path unresolved unless separately tested.
 - Human-test safety procedure remains required.
 
+
 ## 9. Should schematic implementation proceed?
 
 Full board schematic: **NO**.
@@ -213,32 +237,35 @@ Analog EMG chain schematic: **NO**.
 
 PCB layout: **NO**.
 
-Small power/reference schematic block proposal: **READY_FOR_REVIEW**.
+Small power/reference schematic block proposal: **READY_FOR_REVIEW**, but needs power-source revision after current budget review.
 
-Small power/reference schematic block implementation: **NOT AUTOMATICALLY APPROVED**.
+Small power/reference schematic block implementation: **HOLD** until power-source strategy is explicitly chosen.
 
-If allowed later, implementation must be limited to a small schematic-only power/reference block.
+DSTK onboard `3V3` as analog/ADC source: **CANDIDATE ONLY**, pending current budget and load/noise test.
 
-3V3 external powering of DSTK22807: **NOT APPROVED YET**.
+External analog/ADC LDO: **CONSERVATIVE FALLBACK CANDIDATE**.
+
+DSTK22807 external 3.3 V powering: **NOT APPROVED YET**.
 
 USB-powered human EMG testing: **FORBIDDEN**.
 
 5V pin as analog/ADC supply: **NOT APPROVED**.
 
+
 ## 10. Recommended Next Action
 
 - Review and commit this `DECISIONS_V5.md` update.
-- Then explicitly decide whether to allow the first limited KiCad schematic edit.
-- If allowed, the next Codex task must name:
-  - allowed schematic file(s),
-  - allowed sheet/section,
-  - allowed symbols,
-  - allowed net names,
-  - allowed component groups,
-  - forbidden files.
+- Then decide the first schematic block power-source strategy:
+  1. DSTK `3V3` source candidate.
+  2. Separate LDO fallback.
+  3. Jumper/selectable source option.
+- Before KiCad edit, revise the schematic block prompt to reflect this updated power-source decision.
 - Do not begin PCB layout.
 - Do not begin full board schematic.
 - Do not begin analog EMG chain schematic.
+- Do not implement DSTK external 3.3 V powering.
+- Do not use 5V as analog/ADC supply.
+
 
 ## Source Documents Used
 
@@ -254,8 +281,9 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`
 - `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`
 - `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`
+- `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
 
-Final decision: **DECISIONS_SCHEMATIC_BLOCK_PROPOSAL_UPDATE_READY_FOR_REVIEW**
+Final decision: **DECISIONS_DSTK_3V3_CURRENT_BUDGET_UPDATE_READY_FOR_REVIEW**
 
 
 
