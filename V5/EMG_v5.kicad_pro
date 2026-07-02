@@ -667,7 +667,11 @@
   "sheets": [
     [
       "2c477672-822a-487d-bb83-204f5f41dbd8",
-      "EMG_v4"
+      "EMG_v5"
+    ],
+    [
+      "4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101",
+      "POWER_REFERENCE_BLOCK"
     ]
   ],
   "text_variables": {},
