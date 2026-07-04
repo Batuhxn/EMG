@@ -1,4 +1,4 @@
-﻿# V5 Decisions Log
+# V5 Decisions Log
 
 ## 1. Purpose
 
@@ -239,6 +239,35 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Required next review item: select and review a valid analog rectifier / absolute-value topology around `analog VREF`.
 - Target behavior remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
 
+Channel 1 RECT LTspice simulation status:
+
+- Simulation planning/prototype files now exist:
+  - `V5/sim/rectifier/RECTIFIER_LTSPICE_PLAN.md`
+  - `V5/sim/rectifier/emg_vref_abs_rectifier_candidate.cir`
+  - `V5/sim/rectifier/emg_vref_abs_rectifier_real_topology_candidate.cir`
+- Behavioral target/load simulation was created first.
+- Behavioral simulation validates the intended behavior: `RECT_OUT = VREF + abs(RAW_IN - VREF)`.
+- Behavioral `RECT_OUT` tracks `IDEAL_RECT` and `ERR` is near 0.
+- `EMG1_RECT_ADC` follows `RECT_OUT` through the 470R/1nF load path.
+- `EMG1_ENV_DRV` gives plausible smoothing.
+- This behavioral result is target/load validation only, not a real op-amp/diode implementation.
+- A real-component LTspice candidate was added.
+- The real topology candidate uses explicit op-amp stages, explicit Schottky diode approximations, and explicit resistor networks.
+- `abs()` is used only for `IDEAL_RECT` comparison, not inside the rectifier core.
+- Initial LTspice review showed the nominal 0.10 V amplitude case tracks `IDEAL_RECT` closely.
+- Initial LTspice review showed the 0.50 V amplitude case remains close with only small crossover/spike error.
+- Initial LTspice review showed the 1.00 V amplitude stress case reaches about 2.65 V and does not clip at 3.3 V.
+- `ERR` is generally small, with mV-level crossover spikes in stress cases.
+- The real topology candidate is **REVIEWABLE**, not automatically KiCad-approved.
+- Exact MCP6004/MCP6002 LTspice model was not used.
+- Exact BAS70/BAT54 LTspice model was not used.
+- Generic RRIO op-amp and generic Schottky approximations were used.
+- Because of these model limitations, KiCad implementation still requires manual schematic/topology review.
+- KiCad schematic has **NOT** been updated with the rectifier topology.
+- `EMG1_RECT_DRV` in KiCad remains placeholder-biased to `analog VREF` through `1M R_RECT_PLACEHOLDER`.
+- `EMG1_RECT` and `EMG1_ENV` are still not functional in the KiCad schematic.
+
+
 ## 9. Open Blockers Before Further Schematic/PCB Work
 
 The following blockers must be closed before further schematic or PCB work:
@@ -345,16 +374,16 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Select and review a valid analog rectifier / absolute-value topology around `analog VREF`.
-- Target behavior remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
-- After RECT is selected, update Channel 1, review again, then consider Channel 2 duplication.
+- Review the real topology LTspice `.cir` manually.
+- Confirm diode orientation, resistor ratios, op-amp stage behavior, output range, and crossover behavior.
+- Only after review should a KiCad edit prompt be considered.
+- Do not start Channel 2.
+- Do not start PCB.
+- Do not treat the LTspice candidate as final hardware approval.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
-- Next schematic work should be limited to review fixes only unless explicitly approved.
-- Do not begin PCB layout.
+- Next schematic work should be limited to reviewed RECT fixes only unless explicitly approved.
 - Do not begin full board schematic.
-- Do not begin Channel 2.
 - Do not use 5V as analog/ADC supply.
-
 
 ## Source Documents Used
 
@@ -373,15 +402,11 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
 - `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
 - `V5/POWER_REFERENCE_BLOCK.kicad_sch`
+- `V5/sim/rectifier/RECTIFIER_LTSPICE_PLAN.md`
+- `V5/sim/rectifier/emg_vref_abs_rectifier_candidate.cir`
+- `V5/sim/rectifier/emg_vref_abs_rectifier_real_topology_candidate.cir`
 - `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **DOCS_SYNC_CHANNEL_1_ANALOG_CHECKPOINT_READY_FOR_REVIEW**
-
-
-
-
-
-
-
+Final decision: **DOCS_SYNC_RECTIFIER_SIMULATION_CANDIDATE_READY_FOR_REVIEW**
