@@ -1,0 +1,86 @@
+* V5 EMG Channel 1 VREF-centered absolute rectifier candidate
+* File: V5/sim/rectifier/emg_vref_abs_rectifier_candidate.cir
+*
+* Purpose:
+*   First-pass LTspice behavioral target/load simulation for:
+*   RECT_OUT = VREF + abs(RAW_IN - VREF)
+*
+* Important limitation:
+*   Exact MCP6004/MCP6002 and BAS70/BAT54 LTspice models were not found locally.
+*   This netlist uses a behavioral rectifier core to validate target waveforms,
+*   output range, ADC RC loading, and ENV LPF loading. It is NOT a final
+*   op-amp/diode implementation netlist.
+*
+* Clear nodes requested:
+*   V3V3, GND, VREF, RAW_IN, RECT_OUT, RECT_INT_A, RECT_INT_B
+
+.param VCC=3.3
+.param VREFDC=1.65
+.param AMPL=0.02
+.param FREQ=100
+.param VCM=1.65
+
+V3V3 V3V3 GND {VCC}
+VVREF VREF GND {VREFDC}
+VRAW RAW_IN GND SINE({VCM} {AMPL} {FREQ})
+
+* Generic Schottky placeholder for future explicit diode-feedback version.
+* Not used by the behavioral core below.
+.model D_SCHOTTKY_APPROX D(Is=1n Rs=2 N=1.08 Cjo=2p Bv=30 Ibv=10u)
+
+* Behavioral equivalent of Stage A:
+* RECT_INT_A represents max(VREF - RAW_IN, 0), i.e. the negative half-wave
+* magnitude around analog VREF. A real circuit should implement this with
+* one RRIO op-amp and Schottky feedback diodes.
+B_STAGE_A RECT_INT_A GND V=if(V(VREF)>V(RAW_IN), V(VREF)-V(RAW_IN), 0)
+
+* Behavioral equivalent of Stage B:
+* RECT_INT_B reconstructs RAW_IN + 2*RECT_INT_A.
+* If RAW_IN >= VREF: RECT_INT_B = RAW_IN.
+* If RAW_IN <  VREF: RECT_INT_B = 2*VREF - RAW_IN.
+B_STAGE_B RECT_INT_B GND V=V(RAW_IN)+2*V(RECT_INT_A)
+
+* RRIO output clamp approximation. Real MCP6004/MCP6002 output swing must be
+* checked later with an actual or more conservative op-amp macromodel.
+B_RECT_CORE RECT_SRC GND V=if(V(RECT_INT_B)<0, 0, if(V(RECT_INT_B)>V(V3V3), V(V3V3), V(RECT_INT_B)))
+
+* Small output resistance placeholder for a buffered op-amp output.
+R_OUT RECT_SRC RECT_OUT 10
+
+* Existing / planned load path from Channel 1 analog sheet.
+* EMG1_RECT_DRV -> R331 470R -> EMG1_RECT, C331 1nF to GND.
+R331 RECT_OUT EMG1_RECT_ADC 470
+C331 EMG1_RECT_ADC GND 1n
+R_ADC_LEAK EMG1_RECT_ADC GND 10Meg
+
+* ENV LPF load path candidate: 33k + 1uF.
+R_ENV RECT_OUT EMG1_ENV_DRV 33k
+C_ENV EMG1_ENV_DRV GND 1u
+R_ENV_LEAK EMG1_ENV_DRV GND 10Meg
+
+* Ideal target and error monitor.
+B_IDEAL IDEAL_RECT GND V=V(VREF)+abs(V(RAW_IN)-V(VREF))
+B_ERR ERR GND V=V(RECT_OUT)-V(IDEAL_RECT)
+
+* Required simulation cases.
+.step param AMPL list 0.02 0.10 0.50 1.00
+.step param FREQ list 20 100 500
+.step param VCM list 1.60 1.65 1.70
+
+.tran 0 80m 0 20u
+
+* Measurements over the settled region.
+.meas tran OUT_MIN MIN V(RECT_OUT) FROM 20m TO 80m
+.meas tran OUT_MAX MAX V(RECT_OUT) FROM 20m TO 80m
+.meas tran ERR_MIN MIN V(ERR) FROM 20m TO 80m
+.meas tran ERR_MAX MAX V(ERR) FROM 20m TO 80m
+.meas tran ADC_MIN MIN V(EMG1_RECT_ADC) FROM 20m TO 80m
+.meas tran ADC_MAX MAX V(EMG1_RECT_ADC) FROM 20m TO 80m
+.meas tran ENV_MIN MIN V(EMG1_ENV_DRV) FROM 20m TO 80m
+.meas tran ENV_MAX MAX V(EMG1_ENV_DRV) FROM 20m TO 80m
+
+* Suggested plots in LTspice:
+*   V(RAW_IN), V(VREF), V(RECT_OUT), V(IDEAL_RECT), V(ERR)
+*   V(EMG1_RECT_ADC), V(EMG1_ENV_DRV)
+
+.end
