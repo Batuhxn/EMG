@@ -205,8 +205,9 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 ## 8. Channel 1 Analog Status
 
 - Checkpoint `8428e5e add channel 1 analog schematic candidate` adds `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
-- Checkpoint `adea50a fix channel 1 analog polarity and block rectifier placeholder` fixes Channel 1 analog polarity/topology issues and blocks the unfinished RECT topology.
-- Root schematic `V5/EMG_v5.kicad_sch` now includes hierarchical sheet `EMG_CHANNEL_1_ANALOG`.
+- Checkpoint `adea50a fix channel 1 analog polarity and block rectifier placeholder` fixed Channel 1 analog polarity/topology issues and blocked the unfinished RECT topology.
+- Checkpoint `3ecdacb implement channel 1 rectifier candidate` implements the reviewable Channel 1 VREF-centered absolute-value rectifier candidate.
+- Root schematic `V5/EMG_v5.kicad_sch` includes hierarchical sheet `EMG_CHANNEL_1_ANALOG`.
 - Channel 1 analog schematic candidate exists and uses real KiCad symbols, not placeholder boxes.
 - `EMG1_RAW`, `EMG1_RECT`, and `EMG1_ENV` are connected to MCP3208 CH0, CH1, and CH2 through `POWER_REFERENCE_BLOCK`.
 - `ADC_REF` is not used inside the analog child sheet.
@@ -216,28 +217,30 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - J301 TRS mapping is fixed: Tip/T = `EMG1_IN_P`, Ring/R = `EMG1_IN_N`, Sleeve/S = `EMG1_REF_ELECTRODE`.
 - U301 INA polarity is fixed: IN+ = `EMG1_IN_P_PROT`, IN- = `EMG1_IN_N_PROT`.
 - U302A RAW gain topology is corrected to non-inverting feedback.
-- U302D ENV buffer topology is corrected.
-- U302B and U302C are safe reserved followers.
-- RECT topology is **NOT IMPLEMENTED**.
-- The previous questionable RECT active topology was removed.
-- `EMG1_RECT_DRV` is temporarily biased to `analog VREF` through `1M R_RECT_PLACEHOLDER`.
-- This is an ERC-safe placeholder only; `EMG1_RECT` is not a functional rectified output yet.
-- `EMG1_ENV` is not a functional envelope output yet because it depends on future RECT implementation.
-- Do not duplicate this placeholder to Channel 2 as a real rectifier.
-- Do not proceed to PCB until RECT topology is selected and reviewed.
-- Root ERC after the `adea50a` Channel 1 polarity/RECT-placeholder fix pass has 6 remaining expected placeholder errors:
-  - `U201` CH3 input not driven.
-  - `U201` CH4 input not driven.
-  - `U201` CH5 input not driven.
-  - `U201` CLK input not driven.
-  - `U201` Din input not driven.
-  - `U201` `~CS/SHDN` input not driven.
-- These placeholder errors are intentional for now because Channel 2 and DSTK SPI are not connected yet.
-- Real ERC errors after the `adea50a` fix pass: 0.
-- Do not add No ERC markers for these placeholders yet.
-- Channel 1 must receive RECT topology selection and another analog review pass before Channel 2 or PCB work.
-- Required next review item: select and review a valid analog rectifier / absolute-value topology around `analog VREF`.
-- Target behavior remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
+- U302B and U302C were repurposed from reserved followers into the two-op-amp RECT candidate.
+- U302D remains the ENV buffer.
+- RECT topology is no longer only a blocked placeholder in the KiCad schematic.
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWABLE / NOT FINAL HARDWARE APPROVAL**.
+- R332 / `R_RECT_PLACEHOLDER` was removed from the active path / marked DNP removed.
+- `EMG1_RECT_DRV` is no longer passively biased to `analog VREF` through the old 1M placeholder as the active implementation.
+- D331/D332 Schottky candidate diodes were added.
+- R333-R338 were added for the 10k/20k rectifier resistor network.
+- New internal nets include `EMG1_RECT_SUM1`, `EMG1_RECT_A1_OUT`, `EMG1_RECT_U302B_DRV`, and `EMG1_RECT_SUM2`.
+- Output remains `EMG1_RECT_DRV -> R331 470R -> EMG1_RECT`, with `C331 1nF` to GND.
+- ENV path follows `EMG1_RECT_DRV` through `R341 33k`, `C341 1uF` to `analog VREF`, U302D buffer, and `EMG1_ENV_DRV`.
+- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need review/validation before Channel 2 or PCB.
+- No No ERC markers were added.
+- No 5V analog/ADC use was introduced.
+- KiCad GUI ERC after diode pin fixes returned to 6 expected placeholder errors only from U201 CH3/CH4/CH5/CLK/Din/`~CS/SHDN`.
+- The temporary D331/D332 pin-not-connected errors were fixed.
+- Real new ERC errors after RECT implementation: 0.
+- Warnings remain, including symbol/library mismatch and existing placeholder/single-pin label warnings; these do not approve hardware and can be reviewed separately.
+- Channel 2 remains **NOT STARTED**.
+- PCB remains **NOT STARTED**.
+- DSTK SPI/power remains **NOT CONNECTED**.
+- Exact MCP600x vendor model and exact diode model limitations still remain.
+- Do not duplicate to Channel 2 until Channel 1 RECT candidate review is accepted.
+- Do not start PCB.
 
 Channel 1 RECT LTspice simulation status:
 
@@ -265,9 +268,9 @@ Channel 1 RECT LTspice simulation status:
 - Exact BAS70/BAT54 LTspice model was not used.
 - Generic RRIO op-amp and generic Schottky approximations were used.
 - Because of these model limitations, KiCad implementation still requires manual schematic/topology review.
-- KiCad schematic has **NOT** been updated with the rectifier topology.
-- `EMG1_RECT_DRV` in KiCad remains placeholder-biased to `analog VREF` through `1M R_RECT_PLACEHOLDER`.
-- `EMG1_RECT` and `EMG1_ENV` are still not functional in the KiCad schematic.
+- KiCad schematic has now been updated with the Channel 1 RECT candidate at checkpoint `3ecdacb`.
+- `EMG1_RECT_DRV` in KiCad is no longer placeholder-biased to `analog VREF` through the old active `1M R_RECT_PLACEHOLDER`.
+- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need review/validation before Channel 2 or PCB.
 - Model confirmation pass added `V5/sim/rectifier/RECTIFIER_MODEL_CONFIRMATION.md`.
 - A conservative RRIO simulation candidate was added: `V5/sim/rectifier/emg_vref_abs_rectifier_conservative_rrio_candidate.cir`.
 - Exact MCP6001/MCP6002/MCP6004/MCP600x local LTspice vendor models were not found.
@@ -289,8 +292,8 @@ Channel 1 RECT LTspice simulation status:
 - Exact MCP600x vendor model is still not available locally.
 - Exact BAS70/BAT54 vendor model is still not included in the repo.
 - Final rectifier simulation/model status: **RECTIFIER_SIMULATION_MODEL_CONFIRMATION_REVIEWABLE_NOT_KICAD_APPROVED**.
-- KiCad implementation still requires manual topology-to-schematic review.
-- If a KiCad edit prompt is created later, it must be limited to replacing the RECT placeholder in Channel 1 only.
+- KiCad implementation now exists and still requires visual/electrical review before Channel 2 or PCB.
+- Any next schematic prompt should be limited to reviewed Channel 1 RECT fixes only.
 - Do not start Channel 2.
 - Do not start PCB.
 - Do not treat LTspice candidates as final hardware approval.
@@ -318,8 +321,8 @@ The following blockers must be closed before further schematic or PCB work:
 - Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
 - Review and accept `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
 - Review `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` visually and electrically.
-- Select and review a valid Channel 1 RECT topology before Channel 2 or PCB.
-- Complete Channel 1 analog review after RECT is selected.
+- Review and accept the implemented Channel 1 RECT candidate before Channel 2 or PCB.
+- Complete Channel 1 analog review after RECT implementation.
 - Verify source selection is mutually exclusive in schematic.
 - Confirm source selection mutual exclusion.
 - Ensure `DSTK_3V3_CANDIDATE` is only a candidate input, not final approval.
@@ -372,7 +375,7 @@ Full board schematic: **NO**.
 
 Full two-channel analog EMG chain schematic: **NO / NOT COMPLETE**.
 
-Channel 1 analog schematic candidate: **POLARITY FIXED / RECT BLOCKED PLACEHOLDER**.
+Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWABLE / NOT FINAL HARDWARE APPROVAL**.
 
 Channel 2 analog schematic: **NO / NOT STARTED**.
 
@@ -402,14 +405,14 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Review the real and conservative LTspice `.cir` files manually.
-- Confirm diode orientation, resistor ratios, op-amp stage behavior, output range, crossover behavior, and model limitations.
-- Only after review should a KiCad edit prompt be considered.
-- Do not start Channel 2.
+- Review the implemented Channel 1 RECT schematic visually/electrically.
+- Review symbol/footprint/BOM choices for D331/D332 and MCP6004.
+- Confirm resistor matching/tolerance plan for the 10k/20k rectifier network.
+- Confirm ENV behavior after RECT implementation.
+- Do not duplicate to Channel 2 until Channel 1 RECT candidate review is accepted.
 - Do not start PCB.
-- Do not treat the LTspice candidate as final hardware approval.
+- Do not treat the KiCad/LTspice RECT candidates as final hardware approval.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
-- Next schematic work should be limited to reviewed RECT fixes only unless explicitly approved.
 - Do not begin full board schematic.
 - Do not use 5V as analog/ADC supply.
 
@@ -439,4 +442,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **RECTIFIER_SIMULATION_MODEL_CONFIRMATION_REVIEWABLE_NOT_KICAD_APPROVED**
+Final decision: **CHANNEL_1_RECT_KICAD_CANDIDATE_IMPLEMENTED_REVIEWABLE_NOT_HARDWARE_APPROVED**
