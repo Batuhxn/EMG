@@ -62,6 +62,8 @@ Simulation planning/prototype files now exist for Channel 1 RECT review:
 - `V5/sim/rectifier/RECTIFIER_LTSPICE_PLAN.md`
 - `V5/sim/rectifier/emg_vref_abs_rectifier_candidate.cir`
 - `V5/sim/rectifier/emg_vref_abs_rectifier_real_topology_candidate.cir`
+- `V5/sim/rectifier/RECTIFIER_MODEL_CONFIRMATION.md`
+- `V5/sim/rectifier/emg_vref_abs_rectifier_conservative_rrio_candidate.cir`
 
 Behavioral target/load simulation status:
 
@@ -91,6 +93,31 @@ Model limitations:
 - Generic RRIO op-amp and generic Schottky approximations were used.
 - Because of these limitations, KiCad implementation still requires manual schematic/topology review.
 
+Model confirmation status:
+
+- `V5/sim/rectifier/RECTIFIER_MODEL_CONFIRMATION.md` was added.
+- A conservative RRIO simulation candidate was added: `V5/sim/rectifier/emg_vref_abs_rectifier_conservative_rrio_candidate.cir`.
+- Exact MCP6001/MCP6002/MCP6004/MCP600x local LTspice vendor models were not found.
+- Exact BAS70 model was not found.
+- Local LTspice Toshiba TBAT54 encrypted models were found under LTspice Contrib, but were not copied into the repo.
+- The conservative candidate uses finite gain, finite bandwidth, limited output swing generic RRIO behavior and a generic Schottky approximation.
+- Initial conservative RRIO candidate failed because the op-amp macromodel transconductance source polarity was reversed.
+- Broken form: `GIN INT 0 ...`.
+- Corrected form: `GIN 0 INT ...`.
+- This was a macromodel polarity bug, not a topology change.
+- Rectifier core, resistor network, diode orientation, VREF references, RAW input, `IDEAL_RECT`, `ERR`, and load path were preserved.
+- After the fix, the conservative nominal case tracks `IDEAL_RECT`.
+- The conservative 1.00 V stress case reaches about 2.65 V and does not clip at 3.3 V.
+- `ERR` is no longer volt-level and remains near 0 visually, with remaining exact error still model-dependent.
+- `EMG1_RECT_ADC` follows `RECT_OUT`.
+- `EMG1_ENV_DRV` gives plausible smoothing.
+- Conservative RRIO simulation is now **PASS / REVIEWABLE**.
+- Exact MCP600x vendor model is still not available locally.
+- Exact BAS70/BAT54 vendor model is still not included in the repo.
+- Therefore this remains **REVIEWABLE**, not final hardware approval or KiCad approval.
+
+Final rectifier simulation/model status: **RECTIFIER_SIMULATION_MODEL_CONFIRMATION_REVIEWABLE_NOT_KICAD_APPROVED**.
+
 KiCad status remains unchanged:
 
 - Channel 1 analog schematic remains **POLARITY FIXED / RECT BLOCKED PLACEHOLDER**.
@@ -117,10 +144,11 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Review the real topology LTspice `.cir` manually before any KiCad edit.
+- Review the real and conservative LTspice `.cir` files manually before any KiCad edit.
 - Target remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
-- Confirm diode orientation, resistor ratios, op-amp stage behavior, output range, and crossover behavior before considering a KiCad edit prompt.
+- Confirm diode orientation, resistor ratios, op-amp stage behavior, output range, crossover behavior, and model limitations before considering a KiCad edit prompt.
 - Do not start PCB layout yet.
+- If a KiCad edit prompt is created later, it must be limited to replacing the RECT placeholder in Channel 1 only.
 - Do not start Channel 2 yet.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Do not treat the LTspice candidate as final hardware approval; do not proceed to PCB until RECT topology and Channel 1 schematic review are complete.
