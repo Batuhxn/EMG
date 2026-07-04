@@ -1506,7 +1506,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000031a")
 	)
-	(label "EMG1_IN_P"
+	(label "EMG1_REF_ELECTRODE"
 		(at 48.26 71.12 0)
 		(effects
 			(font
@@ -1546,7 +1546,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000031e")
 	)
-	(label "EMG1_REF_ELECTRODE"
+	(label "EMG1_IN_P"
 		(at 48.26 76.2 0)
 		(effects
 			(font
@@ -1996,7 +1996,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000372")
 	)
-	(label "EMG1_IN_P_PROT"
+	(label "EMG1_IN_N_PROT"
 		(at 190.5 78.74 180)
 		(effects
 			(font
@@ -2016,7 +2016,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000374")
 	)
-	(label "EMG1_IN_N_PROT"
+	(label "EMG1_IN_P_PROT"
 		(at 190.5 68.58 180)
 		(effects
 			(font
@@ -2326,7 +2326,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003a4")
 	)
-	(label "RAW_HPF_NODE"
+	(label "RAW_GAIN_FB"
 		(at 304.8 76.2 180)
 		(effects
 			(font
@@ -2346,7 +2346,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003a6")
 	)
-	(label "RAW_GAIN_FB"
+	(label "RAW_HPF_NODE"
 		(at 304.8 71.12 180)
 		(effects
 			(font
@@ -2546,7 +2546,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003c6")
 	)
-	(text "4) RECT CANDIDATE"
+	(text "4) RECT BLOCKED PLACEHOLDER"
 		(at 266.7 130.81 0)
 		(effects
 			(font
@@ -2558,86 +2558,6 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 149.86) (xy 265.43 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003cb")
-	)
-	(label "EMG1_RAW_DRV"
-		(at 265.43 149.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003cc")
-	)
-	(wire
-		(pts
-			(xy 280.67 149.86) (xy 288.29 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003cd")
-	)
-	(label "RECT_ABS_IN"
-		(at 288.29 149.86 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003ce")
-	)
-	(wire
-		(pts
-			(xy 273.05 165.1) (xy 265.43 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003d2")
-	)
-	(label "analog VREF"
-		(at 265.43 165.1 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003d3")
-	)
-	(wire
-		(pts
-			(xy 280.67 165.1) (xy 288.29 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003d4")
-	)
-	(label "RECT_ABS_IN"
-		(at 288.29 165.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003d5")
-	)
-	(wire
-		(pts
 			(xy 330.2 160.02) (xy 320.04 160.02)
 		)
 		(stroke
@@ -2646,7 +2566,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003da")
 	)
-	(label "RECT_ABS_IN"
+	(label "U302B_RESERVED"
 		(at 320.04 160.02 180)
 		(effects
 			(font
@@ -2666,7 +2586,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003dc")
 	)
-	(label "RECT_FB"
+	(label "analog VREF"
 		(at 320.04 154.94 180)
 		(effects
 			(font
@@ -2686,7 +2606,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003de")
 	)
-	(label "EMG1_RECT_DRV"
+	(label "U302B_RESERVED"
 		(at 355.6 157.48 0)
 		(effects
 			(font
@@ -2706,7 +2626,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003e3")
 	)
-	(label "RECT_ABS_IN"
+	(label "analog VREF"
 		(at 300.99 149.86 180)
 		(effects
 			(font
@@ -2726,7 +2646,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003e5")
 	)
-	(label "RECT_FB"
+	(label "EMG1_RECT_DRV"
 		(at 318.77 149.86 0)
 		(effects
 			(font
@@ -2736,47 +2656,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003e6")
 	)
-	(wire
-		(pts
-			(xy 334.01 137.16) (xy 328.93 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003ea")
-	)
-	(label "RECT_FB"
-		(at 328.93 137.16 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003eb")
-	)
-	(wire
-		(pts
-			(xy 341.63 137.16) (xy 346.71 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003ec")
-	)
-	(label "EMG1_RECT_DRV"
-		(at 346.71 137.16 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c1300000-0000-4000-8000-0000000003ed")
-	)
-	(text "EMG1_RECT candidate = analog VREF + abs(EMG1_RAW - analog VREF)."
+	(text "RECT topology blocked: EMG1_RECT_DRV temporarily biased to analog VREF via R332 (1M)."
 		(at 266.7 187.96 0)
 		(effects
 			(font
@@ -2786,7 +2666,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003ee")
 	)
-	(text "Topology candidate; bench validation required."
+	(text "Not a functional rectifier. Do not duplicate to Channel 2 or PCB until topology is selected."
 		(at 266.7 191.77 0)
 		(effects
 			(font
@@ -2896,7 +2776,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000403")
 	)
-	(label "ENV_LPF_NODE"
+	(label "EMG1_ENV_DRV"
 		(at 320.04 232.41 180)
 		(effects
 			(font
@@ -2916,7 +2796,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000405")
 	)
-	(label "EMG1_ENV_DRV"
+	(label "ENV_LPF_NODE"
 		(at 320.04 227.33 180)
 		(effects
 			(font
@@ -2946,7 +2826,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000408")
 	)
-	(text "Envelope LPF candidate: R341 = 33k, C341 = 1uF to analog VREF."
+	(text "ENV placeholder follows EMG1_RECT_DRV; ENV is not functional until RECT is implemented."
 		(at 266.7 261.62 0)
 		(effects
 			(font
@@ -2966,7 +2846,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000040e")
 	)
-	(label "analog VREF"
+	(label "U302C_RESERVED"
 		(at 320.04 294.64 180)
 		(effects
 			(font
@@ -2986,7 +2866,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000410")
 	)
-	(label "U302C_RESERVED"
+	(label "analog VREF"
 		(at 320.04 289.56 180)
 		(effects
 			(font
@@ -4832,142 +4712,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D_Schottky")
-		(at 276.86 149.86 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c1300000-0000-4000-8000-0000000003c8")
-		(property "Reference" "D301"
-			(at 276.86 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAS70/BAT54"
-			(at 266.7 157.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 276.86 149.86 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 276.86 149.86 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c1300000-0000-4000-8000-0000000003c9")
-		)
-		(pin "2"
-			(uuid "c1300000-0000-4000-8000-0000000003ca")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
-					(reference "D301")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D_Schottky")
-		(at 276.86 165.1 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c1300000-0000-4000-8000-0000000003cf")
-		(property "Reference" "D302"
-			(at 276.86 172.72 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAS70/BAT54"
-			(at 266.7 180.34 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 276.86 165.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 276.86 165.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c1300000-0000-4000-8000-0000000003d0")
-		)
-		(pin "2"
-			(uuid "c1300000-0000-4000-8000-0000000003d1")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
-					(reference "D302")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Amplifier_Operational:MCP6004")
 		(at 337.82 157.48 0)
 		(unit 2)
@@ -5059,7 +4803,7 @@
 				)
 			)
 		)
-		(property "Value" "10k matched"
+		(property "Value" "1M R_RECT_PLACEHOLDER"
 			(at 309.88 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5101,74 +4845,6 @@
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
 					(reference "R332")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 337.82 137.16 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c1300000-0000-4000-8000-0000000003e7")
-		(property "Reference" "R333"
-			(at 337.82 129.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k matched"
-			(at 337.82 144.78 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 337.82 137.16 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 337.82 137.16 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c1300000-0000-4000-8000-0000000003e8")
-		)
-		(pin "2"
-			(uuid "c1300000-0000-4000-8000-0000000003e9")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
-					(reference "R333")
 					(unit 1)
 				)
 			)
