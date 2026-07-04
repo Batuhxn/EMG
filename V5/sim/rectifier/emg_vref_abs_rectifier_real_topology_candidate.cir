@@ -1,0 +1,163 @@
+﻿* V5 EMG Channel 1 VREF-centered real-component absolute rectifier candidate
+* File: V5/sim/rectifier/emg_vref_abs_rectifier_real_topology_candidate.cir
+*
+* Goal:
+*   RECT_OUT = VREF + abs(RAW_IN - VREF)
+*
+* This is an explicit topology candidate, not a behavioral abs() rectifier core.
+* The only behavioral expressions are inside the generic RRIO op-amp macromodel
+* and in IDEAL_RECT / ERR comparison monitors.
+*
+* Constraints:
+*   Single supply = 3.3 V
+*   VREF = 1.65 V analog midbias
+*   ADC_REF is not used as analog bias and is not present in this analog testbench
+*   RAW_IN is centered around VREF
+*
+* Topology:
+*   U1 = precision inverting half-wave rectifier around VREF.
+*        For RAW_IN > VREF, A1_OUT ~= VREF - (RAW_IN - VREF).
+*        For RAW_IN < VREF, A1_OUT ~= VREF.
+*   U2 = VREF-referenced inverting summer.
+*        RECT_OUT - VREF = -1*(RAW_IN - VREF) - 2*(A1_OUT - VREF)
+*        Therefore:
+*        If RAW_IN > VREF: RECT_OUT - VREF = +abs(RAW_IN - VREF)
+*        If RAW_IN < VREF: RECT_OUT - VREF = +abs(RAW_IN - VREF)
+*
+* Model limitations:
+*   Exact MCP6004/MCP6002 LTspice model was not found locally.
+*   XU1/XU2 use a generic limited-output RRIO voltage-controlled op-amp model.
+*   Exact BAS70/BAT54 model was not found locally.
+*   D1/D2 use a generic Schottky approximation.
+*
+* Required traces:
+*   RAW_IN VREF RECT_OUT IDEAL_RECT ERR EMG1_RECT_ADC EMG1_ENV_DRV
+*   U1_DRV A1_OUT SUM1 SUM2 RECT_INT_A RECT_INT_B D_CLAMP_NODE D_FB_NODE
+
+.param VCC=3.3
+.param VREFDC=1.65
+.param AMPL=0.02
+.param FREQ=100
+.param VCM=1.65
+
+* Supplies and input stimulus
+V3V3 V3V3 GND {VCC}
+VVREF VREF GND {VREFDC}
+VRAW RAW_IN GND SINE({VCM} {AMPL} {FREQ})
+
+* Generic Schottky diode approximation for BAS70/BAT54-class planning.
+.model D_SCHOTTKY_APPROX D(Is=1n Rs=2 N=1.08 Cjo=2p Bv=30 Ibv=10u Eg=0.69)
+
+* Generic MCP6004/MCP6002-class RRIO-ish op-amp approximation.
+* This is intentionally conservative-ish but not vendor accurate.
+* Pins: INP INN OUT VDD VSS
+.subckt RRIO_OPAMP_APPROX INP INN OUT VDD VSS
+.param AOL=1e5
+.param ROUT=50
+.param VHEAD=0.03
+BOPERR OP_INT 0 V=limit({AOL}*(V(INP)-V(INN)), V(VSS)+{VHEAD}, V(VDD)-{VHEAD})
+ROUT1 OP_INT OUT {ROUT}
+COUT OUT VSS 5p
+.ends RRIO_OPAMP_APPROX
+
+* -----------------------------------------------------------------------------
+* U1: precision inverting half-wave rectifier around analog VREF
+* -----------------------------------------------------------------------------
+* SUM1 is the inverting summing node, held near VREF when U1 is in feedback.
+* RIN1/RF1 are matched 10k/10k for unity inverting half-wave behavior.
+* D1 orientation: anode at A1_OUT, cathode at U1_DRV.
+*   When RAW_IN > VREF, U1_DRV goes below VREF, D1 conducts, and A1_OUT is
+*   pulled below VREF through the precision feedback loop.
+* D2 orientation: anode at U1_DRV, cathode at SUM1.
+*   When RAW_IN < VREF, U1_DRV goes above VREF, D2 conducts to keep SUM1
+*   controlled while A1_OUT is released back to VREF.
+
+RIN1 RAW_IN SUM1 10k
+RF1 A1_OUT SUM1 10k
+XU1 VREF SUM1 U1_DRV V3V3 GND RRIO_OPAMP_APPROX
+
+D1 A1_OUT U1_DRV D_SCHOTTKY_APPROX
+D2 U1_DRV SUM1 D_SCHOTTKY_APPROX
+
+* Defines A1_OUT near VREF when U1 half-wave output is off.
+R_A1_BIAS A1_OUT VREF 1Meg
+
+* Named aliases/probes for requested internal nodes.
+R_ALIAS_A A1_OUT RECT_INT_A 1m
+R_ALIAS_D1 A1_OUT D_FB_NODE 1m
+R_ALIAS_D2 SUM1 D_CLAMP_NODE 1m
+
+* -----------------------------------------------------------------------------
+* U2: VREF-referenced inverting summer / reconstruction amplifier
+* -----------------------------------------------------------------------------
+* RECT_OUT - VREF = -Rf/RRAW*(RAW_IN - VREF) - Rf/RA1*(A1_OUT - VREF)
+* RRAW2 = 20k, RA12 = 10k, RF2 = 20k -> coefficients -1 and -2.
+* This matched 10k/20k style network is the proposed ratio family.
+
+RRAW2 RAW_IN SUM2 20k
+RA12 A1_OUT SUM2 10k
+RF2 RECT_OUT SUM2 20k
+XU2 VREF SUM2 RECT_INT_B V3V3 GND RRIO_OPAMP_APPROX
+
+* Small output isolation from U2 internal output to external RECT_OUT node.
+RISO2 RECT_INT_B RECT_OUT 47
+
+* Light clamp protection for simulation visibility; should not conduct in normal pass cases.
+DOUT_H RECT_OUT V3V3 D_SCHOTTKY_APPROX
+DOUT_L GND RECT_OUT D_SCHOTTKY_APPROX
+
+* -----------------------------------------------------------------------------
+* Existing / planned load path
+* -----------------------------------------------------------------------------
+* EMG1_RECT_DRV -> R331 470R -> EMG1_RECT, C331 1nF to GND.
+R331 RECT_OUT EMG1_RECT_ADC 470
+C331 EMG1_RECT_ADC GND 1n
+R_ADC_LEAK EMG1_RECT_ADC GND 10Meg
+
+* ENV LPF load: choose capacitor to VREF, not GND, for this candidate.
+* Reason: the rectifier output has a DC baseline at analog VREF; referencing the
+* envelope storage capacitor to VREF makes the envelope node represent rectified
+* magnitude above the same analog midbias and reduces unnecessary DC charge from
+* VREF-to-ground. If the existing KiCad placeholder uses GND, compare both in
+* a follow-up simulation before final schematic edit.
+R_ENV RECT_OUT EMG1_ENV_DRV 33k
+C_ENV EMG1_ENV_DRV VREF 1u
+R_ENV_LEAK EMG1_ENV_DRV VREF 10Meg
+
+* -----------------------------------------------------------------------------
+* Comparison monitors only; not part of rectifier core.
+* IDEAL_RECT may use abs() because it is only a reference trace.
+* ERR is only a comparison signal.
+B_IDEAL IDEAL_RECT GND V=V(VREF)+abs(V(RAW_IN)-V(VREF))
+B_ERR ERR GND V=V(RECT_OUT)-V(IDEAL_RECT)
+
+* Required stepped cases
+.step param AMPL list 0.02 0.10 0.50 1.00
+.step param FREQ list 20 100 500
+.step param VCM list 1.60 1.65 1.70
+
+.tran 0 120m 20m 20u
+
+* Measurements over the retained simulation window.
+.meas tran OUT_MIN MIN V(RECT_OUT)
+.meas tran OUT_MAX MAX V(RECT_OUT)
+.meas tran IDEAL_MIN MIN V(IDEAL_RECT)
+.meas tran IDEAL_MAX MAX V(IDEAL_RECT)
+.meas tran ERR_MIN MIN V(ERR)
+.meas tran ERR_MAX MAX V(ERR)
+.meas tran ADC_MIN MIN V(EMG1_RECT_ADC)
+.meas tran ADC_MAX MAX V(EMG1_RECT_ADC)
+.meas tran ENV_MIN MIN V(EMG1_ENV_DRV)
+.meas tran ENV_MAX MAX V(EMG1_ENV_DRV)
+.meas tran U1_MIN MIN V(U1_DRV)
+.meas tran U1_MAX MAX V(U1_DRV)
+.meas tran U2_MIN MIN V(RECT_INT_B)
+.meas tran U2_MAX MAX V(RECT_INT_B)
+
+* Suggested LTspice plots:
+*   V(RAW_IN), V(VREF), V(A1_OUT), V(RECT_OUT), V(IDEAL_RECT), V(ERR)
+*   V(EMG1_RECT_ADC), V(EMG1_ENV_DRV)
+*   V(U1_DRV), V(SUM1), V(SUM2), V(RECT_INT_B)
+
+.end
+
