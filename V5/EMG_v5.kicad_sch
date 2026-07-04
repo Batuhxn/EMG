@@ -5232,10 +5232,236 @@
 				(justify left top)
 			)
 		)
+		(pin "EMG1_RAW" input
+			(at 146.05 104.14 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000001")
+		)
+		(pin "EMG1_RECT" input
+			(at 146.05 106.68 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000002")
+		)
+		(pin "EMG1_ENV" input
+			(at 146.05 109.22 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000003")
+		)
+		(pin "3V3_ADC" output
+			(at 146.05 114.3 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000004")
+		)
+		(pin "analog VREF" output
+			(at 146.05 116.84 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000005")
+		)
+		(pin "GND" passive
+			(at 146.05 119.38 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70000000-0000-4000-8000-000000000006")
+		)
 		(instances
 			(project "EMG_v5"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(page "2")
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 119.38 104.14) (xy 146.05 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000007")
+	)
+	(wire
+		(pts
+			(xy 119.38 106.68) (xy 146.05 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000008")
+	)
+	(wire
+		(pts
+			(xy 119.38 109.22) (xy 146.05 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000009")
+	)
+	(wire
+		(pts
+			(xy 119.38 114.3) (xy 146.05 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-00000000000a")
+	)
+	(wire
+		(pts
+			(xy 119.38 116.84) (xy 146.05 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-00000000000b")
+	)
+	(wire
+		(pts
+			(xy 119.38 119.38) (xy 146.05 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-00000000000c")
+	)
+	(sheet
+		(at 50.8 101.6)
+		(size 68.58 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6a4b9db0-8b5f-4b75-9f44-83fd05e7b301")
+		(property "Sheetname" "EMG_CHANNEL_1_ANALOG"
+			(at 50.8 100.8888 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "EMG_CHANNEL_1_ANALOG.kicad_sch"
+			(at 50.8 127.6096 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EMG1_RAW" output
+			(at 119.38 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-00000000000d")
+		)
+		(pin "EMG1_RECT" output
+			(at 119.38 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-00000000000e")
+		)
+		(pin "EMG1_ENV" output
+			(at 119.38 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-00000000000f")
+		)
+		(pin "3V3_ADC" input
+			(at 119.38 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-000000000010")
+		)
+		(pin "analog VREF" input
+			(at 119.38 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-000000000011")
+		)
+		(pin "GND" passive
+			(at 119.38 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "70000000-0000-4000-8000-000000000012")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
+					(page "3")
 				)
 			)
 		)

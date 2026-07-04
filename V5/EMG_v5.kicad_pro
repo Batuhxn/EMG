@@ -672,6 +672,10 @@
     [
       "4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101",
       "POWER_REFERENCE_BLOCK"
+    ],
+    [
+      "6a4b9db0-8b5f-4b75-9f44-83fd05e7b301",
+      "EMG_CHANNEL_1_ANALOG"
     ]
   ],
   "text_variables": {},
