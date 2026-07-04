@@ -1,0 +1,135 @@
+* V5 EMG Channel 1 VREF-centered conservative RRIO absolute rectifier candidate
+* File: V5/sim/rectifier/emg_vref_abs_rectifier_conservative_rrio_candidate.cir
+*
+* Goal:
+*   RECT_OUT = VREF + abs(RAW_IN - VREF)
+*
+* This keeps the same real-component topology as:
+*   emg_vref_abs_rectifier_real_topology_candidate.cir
+*
+* No behavioral abs() is used inside the rectifier core.
+* IDEAL_RECT and ERR are comparison monitors only.
+*
+* Conservative model purpose:
+*   Exact MCP6002/MCP6004 local LTspice model was not found.
+*   This file uses a finite-gain, finite-bandwidth, slew-current-limited,
+*   limited-output-swing RRIO approximation to stress the topology more than
+*   the first generic model.
+*
+* Local model note:
+*   LTspice local Toshiba TBAT54 encrypted models were found, but this portable
+*   candidate still uses an explicit generic Schottky model. A follow-up local
+*   LTspice-only variant may replace D_SCHOTTKY_CONSERVATIVE with TBAT54.
+
+.param VCC=3.3
+.param VREFDC=1.65
+.param AMPL=0.02
+.param FREQ=100
+.param VCM=1.65
+
+V3V3 V3V3 GND {VCC}
+VVREF VREF GND {VREFDC}
+VRAW RAW_IN GND SINE({VCM} {AMPL} {FREQ})
+
+* Conservative Schottky approximation for BAT54/BAS70-class review.
+* This is not an exact vendor model.
+.model D_SCHOTTKY_CONSERVATIVE D(Is=500p Rs=6 N=1.15 Cjo=8p M=0.33 Eg=0.69 Bv=30 Ibv=10u Tt=5n)
+
+* Conservative MCP600x-class RRIO-ish op-amp approximation.
+* Pins: INP INN OUT VDD VSS
+* DC gain: about 100 dB via Gm*RDOM = 1m*100Meg = 1e5
+* Dominant pole: about 10 Hz, giving about 1 MHz unity-gain bandwidth.
+* Slew-current limit: Cdom ~= 159 pF, Imax ~= 63.6 uA -> about 0.4 V/us.
+* Output swing: limited to 80 mV from either rail before output resistance.
+* Output resistance: 100 ohm, intentionally more conservative than the first file.
+.subckt RRIO_OPAMP_CONSERVATIVE INP INN OUT VDD VSS
+.param GM=1m
+.param RDOM=100Meg
+.param CDOM=159p
+.param ILIM=63.6u
+.param VHEAD=0.08
+.param ROUT=100
+* Positive INP-INN must charge INT upward. Previous debug found the source direction reversed, which forced output toward the low rail.
+GIN 0 INT VALUE={limit({GM}*(V(INP)-V(INN)), -{ILIM}, {ILIM})}
+RDOM1 INT 0 {RDOM}
+CDOM1 INT 0 {CDOM}
+BOUT PREOUT 0 V=limit(V(INT), V(VSS)+{VHEAD}, V(VDD)-{VHEAD})
+ROUT1 PREOUT OUT {ROUT}
+COUT OUT VSS 10p
+RINP INP VSS 1T
+RINN INN VSS 1T
+.ends RRIO_OPAMP_CONSERVATIVE
+
+* -----------------------------------------------------------------------------
+* U1: precision inverting half-wave rectifier around analog VREF
+* -----------------------------------------------------------------------------
+RIN1 RAW_IN SUM1 10k
+RF1 A1_OUT SUM1 10k
+XU1 VREF SUM1 U1_DRV V3V3 GND RRIO_OPAMP_CONSERVATIVE
+
+* D1 conducts when RAW_IN > VREF; U1_DRV pulls low and A1_OUT is driven below VREF.
+* D2 conducts when RAW_IN < VREF; U1_DRV pulls high and SUM1 is controlled while
+* A1_OUT returns near VREF through R_A1_BIAS.
+D1 A1_OUT U1_DRV D_SCHOTTKY_CONSERVATIVE
+D2 U1_DRV SUM1 D_SCHOTTKY_CONSERVATIVE
+R_A1_BIAS A1_OUT VREF 1Meg
+
+R_ALIAS_A A1_OUT RECT_INT_A 1m
+R_ALIAS_D1 A1_OUT D_FB_NODE 1m
+R_ALIAS_D2 SUM1 D_CLAMP_NODE 1m
+
+* -----------------------------------------------------------------------------
+* U2: VREF-referenced inverting summer / reconstruction amplifier
+* -----------------------------------------------------------------------------
+* RECT_OUT - VREF = -1*(RAW_IN - VREF) - 2*(A1_OUT - VREF)
+RRAW2 RAW_IN SUM2 20k
+RA12 A1_OUT SUM2 10k
+RF2 RECT_OUT SUM2 20k
+XU2 VREF SUM2 RECT_INT_B V3V3 GND RRIO_OPAMP_CONSERVATIVE
+RISO2 RECT_INT_B RECT_OUT 47
+
+* Rail clamp visibility only; should not conduct in valid cases.
+DOUT_H RECT_OUT V3V3 D_SCHOTTKY_CONSERVATIVE
+DOUT_L GND RECT_OUT D_SCHOTTKY_CONSERVATIVE
+
+* Existing / planned load path
+R331 RECT_OUT EMG1_RECT_ADC 470
+C331 EMG1_RECT_ADC GND 1n
+R_ADC_LEAK EMG1_RECT_ADC GND 10Meg
+
+* ENV LPF remains referenced to VREF because RECT_OUT baseline is analog VREF.
+R_ENV RECT_OUT EMG1_ENV_DRV 33k
+C_ENV EMG1_ENV_DRV VREF 1u
+R_ENV_LEAK EMG1_ENV_DRV VREF 10Meg
+
+* Comparison monitors only.
+B_IDEAL IDEAL_RECT GND V=V(VREF)+abs(V(RAW_IN)-V(VREF))
+B_ERR ERR GND V=V(RECT_OUT)-V(IDEAL_RECT)
+
+.step param AMPL list 0.02 0.10 0.50 1.00
+.step param FREQ list 20 100 500
+.step param VCM list 1.60 1.65 1.70
+
+.tran 0 120m 20m 20u
+
+.meas tran OUT_MIN MIN V(RECT_OUT)
+.meas tran OUT_MAX MAX V(RECT_OUT)
+.meas tran IDEAL_MIN MIN V(IDEAL_RECT)
+.meas tran IDEAL_MAX MAX V(IDEAL_RECT)
+.meas tran ERR_MIN MIN V(ERR)
+.meas tran ERR_MAX MAX V(ERR)
+.meas tran ADC_MIN MIN V(EMG1_RECT_ADC)
+.meas tran ADC_MAX MAX V(EMG1_RECT_ADC)
+.meas tran ENV_MIN MIN V(EMG1_ENV_DRV)
+.meas tran ENV_MAX MAX V(EMG1_ENV_DRV)
+.meas tran U1_MIN MIN V(U1_DRV)
+.meas tran U1_MAX MAX V(U1_DRV)
+.meas tran U2_MIN MIN V(RECT_INT_B)
+.meas tran U2_MAX MAX V(RECT_INT_B)
+
+* Suggested LTspice plots:
+*   V(RAW_IN), V(VREF), V(A1_OUT), V(RECT_OUT), V(IDEAL_RECT), V(ERR)
+*   V(EMG1_RECT_ADC), V(EMG1_ENV_DRV)
+*   V(U1_DRV), V(SUM1), V(SUM2), V(RECT_INT_B)
+
+.end
