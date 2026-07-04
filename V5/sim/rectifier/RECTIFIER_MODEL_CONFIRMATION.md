@@ -115,6 +115,21 @@ The strongest remaining uncertainty is the MCP600x op-amp model. The rectifier d
 
 A local BAT54-family encrypted model is available in LTspice, but exact BAS70 is not. If BAT54 is selected for the schematic, a local-only LTspice variant can be made later that explicitly uses `TBAT54`. If BAS70 is selected, a local BAS70 model or datasheet-based conservative approximation is still needed.
 
+## Conservative RRIO Rerun Result
+
+Latest conservative RRIO rerun result:
+
+- Initial conservative candidate failed because the op-amp macromodel transconductance source polarity was reversed.
+- The model bug was fixed by changing `GIN INT 0 ...` to `GIN 0 INT ...`.
+- This was a macromodel polarity bug, not a topology change.
+- After rerun, the conservative nominal case tracks `IDEAL_RECT`.
+- The conservative 1.00 V stress case reaches about 2.65 V and does not clip at 3.3 V.
+- `ERR` is no longer volt-level and remains near 0 visually, with remaining exact error still model-dependent.
+- `EMG1_RECT_ADC` follows `RECT_OUT`.
+- `EMG1_ENV_DRV` gives plausible smoothing.
+- Exact MCP600x vendor model is still not available locally.
+- Exact BAS70/BAT54 vendor model is still not copied into the repo.
+- Therefore this is **REVIEWABLE**, not KiCad-approved.
 ## Final Verdict
 
 MODEL_CONFIRMATION_PASS_BUT_NEEDS_EXACT_VENDOR_MODEL
