@@ -205,6 +205,7 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 ## 8. Channel 1 Analog Status
 
 - Checkpoint `8428e5e add channel 1 analog schematic candidate` adds `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
+- Checkpoint `adea50a fix channel 1 analog polarity and block rectifier placeholder` fixes Channel 1 analog polarity/topology issues and blocks the unfinished RECT topology.
 - Root schematic `V5/EMG_v5.kicad_sch` now includes hierarchical sheet `EMG_CHANNEL_1_ANALOG`.
 - Channel 1 analog schematic candidate exists and uses real KiCad symbols, not placeholder boxes.
 - `EMG1_RAW`, `EMG1_RECT`, and `EMG1_ENV` are connected to MCP3208 CH0, CH1, and CH2 through `POWER_REFERENCE_BLOCK`.
@@ -212,7 +213,19 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - `analog VREF` remains the 1.65 V midbias reference.
 - `ADC_REF` and `analog VREF` remain separate.
 - `EMG1_REF_ELECTRODE` / sleeve is not tied to GND.
-- Root ERC after Channel 1 child-sheet PWR_FLAG cleanup has 6 remaining expected placeholder errors:
+- J301 TRS mapping is fixed: Tip/T = `EMG1_IN_P`, Ring/R = `EMG1_IN_N`, Sleeve/S = `EMG1_REF_ELECTRODE`.
+- U301 INA polarity is fixed: IN+ = `EMG1_IN_P_PROT`, IN- = `EMG1_IN_N_PROT`.
+- U302A RAW gain topology is corrected to non-inverting feedback.
+- U302D ENV buffer topology is corrected.
+- U302B and U302C are safe reserved followers.
+- RECT topology is **NOT IMPLEMENTED**.
+- The previous questionable RECT active topology was removed.
+- `EMG1_RECT_DRV` is temporarily biased to `analog VREF` through `1M R_RECT_PLACEHOLDER`.
+- This is an ERC-safe placeholder only; `EMG1_RECT` is not a functional rectified output yet.
+- `EMG1_ENV` is not a functional envelope output yet because it depends on future RECT implementation.
+- Do not duplicate this placeholder to Channel 2 as a real rectifier.
+- Do not proceed to PCB until RECT topology is selected and reviewed.
+- Root ERC after the `adea50a` Channel 1 polarity/RECT-placeholder fix pass has 6 remaining expected placeholder errors:
   - `U201` CH3 input not driven.
   - `U201` CH4 input not driven.
   - `U201` CH5 input not driven.
@@ -220,9 +233,11 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
   - `U201` Din input not driven.
   - `U201` `~CS/SHDN` input not driven.
 - These placeholder errors are intentional for now because Channel 2 and DSTK SPI are not connected yet.
+- Real ERC errors after the `adea50a` fix pass: 0.
 - Do not add No ERC markers for these placeholders yet.
-- Channel 1 must receive an analog review pass before Channel 2 or PCB work.
-- Review items: INA333 pinout, MCP6004 unit usage, rectifier topology, biasing, ADC output ranges, and saturation risk.
+- Channel 1 must receive RECT topology selection and another analog review pass before Channel 2 or PCB work.
+- Required next review item: select and review a valid analog rectifier / absolute-value topology around `analog VREF`.
+- Target behavior remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
 
 ## 9. Open Blockers Before Further Schematic/PCB Work
 
@@ -246,7 +261,8 @@ The following blockers must be closed before further schematic or PCB work:
 - Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
 - Review and accept `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
 - Review `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` visually and electrically.
-- Complete Channel 1 analog review before Channel 2 or PCB.
+- Select and review a valid Channel 1 RECT topology before Channel 2 or PCB.
+- Complete Channel 1 analog review after RECT is selected.
 - Verify source selection is mutually exclusive in schematic.
 - Confirm source selection mutual exclusion.
 - Ensure `DSTK_3V3_CANDIDATE` is only a candidate input, not final approval.
@@ -299,7 +315,7 @@ Full board schematic: **NO**.
 
 Full two-channel analog EMG chain schematic: **NO / NOT COMPLETE**.
 
-Channel 1 analog schematic candidate: **ADDED FOR REVIEW**.
+Channel 1 analog schematic candidate: **POLARITY FIXED / RECT BLOCKED PLACEHOLDER**.
 
 Channel 2 analog schematic: **NO / NOT STARTED**.
 
@@ -329,8 +345,9 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Review Channel 1 analog schematic candidate before Channel 2 or PCB.
-- Review INA333 pinout, MCP6004 unit usage, rectifier topology, biasing, ADC output ranges, and saturation risk.
+- Select and review a valid analog rectifier / absolute-value topology around `analog VREF`.
+- Target behavior remains `EMG1_RECT = analog VREF + abs(EMG1_RAW_DRV - analog VREF)`.
+- After RECT is selected, update Channel 1, review again, then consider Channel 2 duplication.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Next schematic work should be limited to review fixes only unless explicitly approved.
 - Do not begin PCB layout.
