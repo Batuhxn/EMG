@@ -142,6 +142,7 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Limited power/reference schematic block added in commit `1f759a6`.
 - Root schematic `V5/EMG_v5.kicad_sch` now includes hierarchical sheet `POWER_REFERENCE_BLOCK`.
 - Child schematic file added: `V5/POWER_REFERENCE_BLOCK.kicad_sch`.
+- `POWER_REFERENCE_BLOCK` now receives `EMG1_RAW`, `EMG1_RECT`, and `EMG1_ENV` as hierarchical inputs from the Channel 1 analog sheet.
 - Project metadata updated in `V5/EMG_v5.kicad_pro`.
 - This is the first limited KiCad schematic edit for power/reference support.
 - This schematic block is review/prototype planning support, not final production schematic.
@@ -201,7 +202,29 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Limited power/reference schematic block implementation is **ADDED FOR REVIEW**.
 
 
-## 8. Open Blockers Before Further Schematic/PCB Work
+## 8. Channel 1 Analog Status
+
+- Checkpoint `8428e5e add channel 1 analog schematic candidate` adds `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
+- Root schematic `V5/EMG_v5.kicad_sch` now includes hierarchical sheet `EMG_CHANNEL_1_ANALOG`.
+- Channel 1 analog schematic candidate exists and uses real KiCad symbols, not placeholder boxes.
+- `EMG1_RAW`, `EMG1_RECT`, and `EMG1_ENV` are connected to MCP3208 CH0, CH1, and CH2 through `POWER_REFERENCE_BLOCK`.
+- `ADC_REF` is not used inside the analog child sheet.
+- `analog VREF` remains the 1.65 V midbias reference.
+- `ADC_REF` and `analog VREF` remain separate.
+- `EMG1_REF_ELECTRODE` / sleeve is not tied to GND.
+- Root ERC after Channel 1 child-sheet PWR_FLAG cleanup has 6 remaining expected placeholder errors:
+  - `U201` CH3 input not driven.
+  - `U201` CH4 input not driven.
+  - `U201` CH5 input not driven.
+  - `U201` CLK input not driven.
+  - `U201` Din input not driven.
+  - `U201` `~CS/SHDN` input not driven.
+- These placeholder errors are intentional for now because Channel 2 and DSTK SPI are not connected yet.
+- Do not add No ERC markers for these placeholders yet.
+- Channel 1 must receive an analog review pass before Channel 2 or PCB work.
+- Review items: INA333 pinout, MCP6004 unit usage, rectifier topology, biasing, ADC output ranges, and saturation risk.
+
+## 9. Open Blockers Before Further Schematic/PCB Work
 
 The following blockers must be closed before further schematic or PCB work:
 
@@ -222,8 +245,8 @@ The following blockers must be closed before further schematic or PCB work:
 - Check ESP reset/stability behavior under load.
 - Check ADC stability/noise under BLE/radio activity if wireless sampling is used.
 - Review and accept `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`.
-- Review `V5/POWER_REFERENCE_BLOCK.kicad_sch` visually and electrically.
-- Run KiCad ERC later after symbols/flags are cleaned enough.
+- Review `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` visually and electrically.
+- Complete Channel 1 analog review before Channel 2 or PCB.
 - Verify source selection is mutually exclusive in schematic.
 - Confirm source selection mutual exclusion.
 - Ensure `DSTK_3V3_CANDIDATE` is only a candidate input, not final approval.
@@ -255,6 +278,7 @@ The following blockers must be closed before further schematic or PCB work:
 - Review and accept `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`.
 - Confirm MCP3208 channel labels match locked CH0-CH7 mapping.
 - Confirm DSTK pinout before connecting SPI/power to DSTK symbol.
+- Keep DSTK SPI disconnected until pinout and power behavior are verified.
 - Confirm DSTK 3V3 current/load/noise tests before choosing population path.
 - Verify exact KiCad symbols/footprints for regulator/op-amp/connector/test points.
 - Verify analog VREF buffer stability at 3.3 V.
@@ -269,11 +293,15 @@ The following blockers must be closed before further schematic or PCB work:
 - Human-test safety procedure remains required.
 
 
-## 9. Should schematic implementation proceed?
+## 10. Should schematic implementation proceed?
 
 Full board schematic: **NO**.
 
-Analog EMG chain schematic: **NO**.
+Full two-channel analog EMG chain schematic: **NO / NOT COMPLETE**.
+
+Channel 1 analog schematic candidate: **ADDED FOR REVIEW**.
+
+Channel 2 analog schematic: **NO / NOT STARTED**.
 
 PCB layout: **NO**.
 
@@ -299,16 +327,15 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 5V pin as analog/ADC supply: **NOT APPROVED**.
 
+## 11. Recommended Next Action
 
-## 10. Recommended Next Action
-
-- Review and commit this documentation update.
-- Then perform KiCad review of `POWER_REFERENCE_BLOCK`.
+- Review Channel 1 analog schematic candidate before Channel 2 or PCB.
+- Review INA333 pinout, MCP6004 unit usage, rectifier topology, biasing, ADC output ranges, and saturation risk.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Next schematic work should be limited to review fixes only unless explicitly approved.
 - Do not begin PCB layout.
 - Do not begin full board schematic.
-- Do not begin analog EMG chain schematic.
+- Do not begin Channel 2.
 - Do not use 5V as analog/ADC supply.
 
 
@@ -329,10 +356,11 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
 - `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
 - `V5/POWER_REFERENCE_BLOCK.kicad_sch`
+- `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **DOCS_SYNC_POWER_REFERENCE_SCHEMATIC_BLOCK_READY_FOR_REVIEW**
+Final decision: **DOCS_SYNC_CHANNEL_1_ANALOG_CHECKPOINT_READY_FOR_REVIEW**
 
 
 
