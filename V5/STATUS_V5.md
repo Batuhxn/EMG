@@ -8,7 +8,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 
 Current schematic checkpoint:
 
-- `eca2cc3 assign channel 1 rectifier footprints`
+- `8f2bf9e clarify channel 1 rectifier diode values`
 - Root schematic: `V5/EMG_v5.kicad_sch`
 - Power/reference child sheet: `V5/POWER_REFERENCE_BLOCK.kicad_sch`
 - Channel 1 analog child sheet: `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
@@ -18,7 +18,7 @@ Current schematic checkpoint:
 Current schematic status:
 
 - Power/reference schematic block: **ADDED / REVIEWED ENOUGH FOR CURRENT PLANNING**
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / NOT FINAL HARDWARE APPROVAL**
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / DIODE VALUES CLARIFIED / NOT FINAL HARDWARE APPROVAL**
 - Channel 2 analog schematic: **NOT STARTED / NO**
 - PCB layout: **NOT STARTED / NO**
 - Full two-channel analog EMG chain: **NOT COMPLETE**
@@ -27,18 +27,21 @@ Current schematic status:
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
 
-Channel 1 analog / RECT implementation status at checkpoint `eca2cc3`:
+Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 
 - Channel 1 analog schematic remains polarity fixed.
 - `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` now includes a reviewable Channel 1 VREF-centered absolute-value rectifier candidate.
 - RECT is no longer only a blocked placeholder in the KiCad schematic.
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / NOT FINAL HARDWARE APPROVAL**.
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / DIODE VALUES CLARIFIED / NOT FINAL HARDWARE APPROVAL**.
 - Checkpoint `3825181 cleanup channel 1 rectifier schematic readability` applied the Channel 1 RECT schematic readability cleanup.
 - Checkpoint `eca2cc3 assign channel 1 rectifier footprints` assigned Channel 1 RECT/ENV-related schematic footprint fields.
+- Checkpoint `8f2bf9e clarify channel 1 rectifier diode values` clarified the visible D331/D332 value text.
 - Cleanup target was `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
 - Footprint assignment edit target was also `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
+- Diode value-text clarification target was also `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
 - RECT block readability was improved without intentional topology/function change.
 - Footprint assignment diff was limited to footprint property fields; no value, net, or topology changes were intended.
+- Diode value-text clarification changed D331/D332 visible value properties only; no net, topology, symbol, footprint, or orientation change was made.
 - R332 / the old RECT placeholder marker was fully removed.
 - `EMG1_RECT_PLACEHOLDER_REMOVED` is no longer present.
 - Stale/forbidden strings were checked and absent from the cleaned child sheet: `ADC_REF`, `No ERC`, `R_RECT_PLACEHOLDER`, `EMG1_RECT_PLACEHOLDER_REMOVED`, `RECT BLOCKED PLACEHOLDER`, `ENV placeholder`, `not functional until RECT`, and `TP_analog_VREF`.
@@ -84,7 +87,12 @@ Cleanup/checks before Channel 2 or PCB:
 - Channel 1 RECT remains reviewable, not final hardware approval.
 - D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
 - D331/D332 diode MPN/footprint direction is recorded for first-prototype planning, and schematic footprint fields were assigned at checkpoint `eca2cc3`.
+- D331/D332 visible schematic value text was clarified at checkpoint `8f2bf9e`.
+- D331 value is now `BAS70ZFILM`.
+- D332 value is now `BAS70ZFILM`.
+- The previous visible `BAT54/BAS70` ambiguity is removed from the Channel 1 analog schematic.
 - D331/D332 KiCad symbol convention: `Device:D_Schottky` uses pin 1 = K / cathode and pin 2 = A / anode.
+- D331/D332 still use KiCad symbol `Device:D_Schottky` and footprint `Diode_SMD:D_SOD-123`.
 - Current D331/D332 orientation matches the previous Channel 1 RECT review: D331 K -> `EMG1_RECT_U302B_DRV`, D331 A -> `EMG1_RECT_A1_OUT`; D332 K -> `EMG1_RECT_SUM1`, D332 A -> `EMG1_RECT_U302B_DRV`.
 - Do not use `BAS70FILM` with a plain 2-pin `Device:D_Schottky` symbol plus generic 3-pad SOT-23 footprint for the first prototype.
 - `BAS70FILM` is deferred because the ST SOT-23 single diode uses two active package pins plus a third unused/NC-style pad and needs explicit custom mapping or a project-local 3-pin symbol/footprint review.
@@ -155,14 +163,16 @@ Cleanup/checks before Channel 2 or PCB:
 - The 6 errors are still the expected U201 placeholder input errors: CH3, CH4, CH5, CLK, Din, and `~CS/SHDN`.
 - No new D331/D332 pin-not-connected errors appeared after footprint assignment.
 - No new real RECT/ENV ERC errors appeared after footprint assignment.
-- D331/D332 schematic value still says `BAT54/BAS70`; actual first-prototype MPN direction remains `BAS70ZFILM`.
+- D331/D332 schematic value text now says `BAS70ZFILM`; the previous visible `BAT54/BAS70` ambiguity is removed.
+- D331/D332 still use symbol `Device:D_Schottky` and footprint `Diode_SMD:D_SOD-123`.
+- No net, topology, footprint, symbol, or diode orientation change was made by the value-text clarification.
 - Exact ordering MPNs for passives are not locked yet.
 - D331/D332 cathode-band footprint orientation must be visually checked before PCB.
 - MCP6004 symbol/library mismatch warning still needs review.
 - Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
 - Do not start PCB.
 
-Final Channel 1 RECT status: **CHANNEL_1_RECT_FOOTPRINT_FIELDS_ASSIGNED_NOT_FINAL_HW_APPROVAL**.
+Final Channel 1 RECT status: **CHANNEL_1_RECT_DIODE_VALUES_CLARIFIED_NOT_FINAL_HW_APPROVAL**.
 
 D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
@@ -173,6 +183,8 @@ Channel 1 RECT resistor matching decision status: **CHANNEL_1_RECT_RESISTOR_MATC
 Channel 1 RAW/RECT/ENV capacitor decision status: **CHANNEL_1_RECT_ENV_CAPACITOR_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Channel 1 RECT/ENV footprint field assignment status: **CHANNEL_1_RECT_FOOTPRINT_FIELDS_ASSIGNED_NOT_FINAL_HW_APPROVAL**.
+
+Channel 1 RECT diode value-text status: **CHANNEL_1_RECT_DIODE_VALUES_CLARIFIED_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT/ENV footprint field assignment:
 
