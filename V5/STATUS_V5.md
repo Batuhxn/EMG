@@ -1,6 +1,6 @@
 # EMG V5 Status
 
-Date: 2026-07-04
+Date: 2026-07-06
 
 ## Current State
 
@@ -8,25 +8,58 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 
 Current schematic checkpoint:
 
-- `76745f7 sync docs with channel 1 pre duplication review`
-- `8f2bf9e clarify channel 1 rectifier diode values`
+- `080eef1 remove legacy root emg schematic block`
+- `60d5881 implement channel 2 analog schematic`
 - Root schematic: `V5/EMG_v5.kicad_sch`
 - Power/reference child sheet: `V5/POWER_REFERENCE_BLOCK.kicad_sch`
 - Channel 1 analog child sheet: `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
-- Root schematic now includes the `EMG_CHANNEL_1_ANALOG` hierarchical sheet.
-- `POWER_REFERENCE_BLOCK` now receives `EMG1_RAW`, `EMG1_RECT`, and `EMG1_ENV` as hierarchical inputs.
+- Channel 2 analog child sheet: `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`
+- Root schematic now keeps the hierarchical `EMG_CHANNEL_1_ANALOG`, `EMG_CHANNEL_2_ANALOG`, and `POWER_REFERENCE_BLOCK` structure.
+- `POWER_REFERENCE_BLOCK` now receives `EMG1_RAW`, `EMG1_RECT`, `EMG1_ENV`, `EMG2_RAW`, `EMG2_RECT`, and `EMG2_ENV` as hierarchical inputs.
 
 Current schematic status:
 
 - Power/reference schematic block: **ADDED / REVIEWED ENOUGH FOR CURRENT PLANNING**
-- Channel 1 RECT KiCad candidate: **READY FOR CHANNEL 2 DUPLICATION / NOT FINAL HARDWARE APPROVAL**
-- Channel 2 analog schematic: **DUPLICATION PLAN READY / NOT IMPLEMENTED**
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / NOT FINAL HARDWARE APPROVAL**
+- Channel 2 analog schematic: **IMPLEMENTED / NOT FINAL HARDWARE APPROVAL**
 - PCB layout: **NOT STARTED / NO**
-- Full two-channel analog EMG chain: **NOT COMPLETE**
+- Full two-channel analog EMG chain schematic: **CANDIDATES IMPLEMENTED / NOT FINAL HARDWARE APPROVAL**
 - DSTK external 3.3 V powering: **NOT APPROVED YET**
 - USB plus external 3.3 V simultaneous connection: **NOT APPROVED**
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
+
+Channel 2 and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_REMOVED_NOT_FINAL_HW_APPROVAL**.
+
+- Commit `60d5881 implement channel 2 analog schematic` created `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`.
+- Commit `60d5881` also updated `V5/EMG_v5.kicad_sch` and `V5/POWER_REFERENCE_BLOCK.kicad_sch`.
+- Channel 2 was created as a controlled copy/adaptation of Channel 1.
+- Channel 2 uses +100 refdes mapping: J401, U401, U402, R4xx, C4xx, and D431/D432.
+- Channel 2 uses `EMG2_*` nets.
+- Shared rails remain `3V3_ADC`, `analog VREF`, and GND.
+- `ADC_REF` was not introduced into the Channel 2 analog sheet.
+- `EMG2_REF_ELECTRODE` remains isolated from GND/chassis/USB.
+- No No ERC markers were added.
+- PCB was not started.
+- DSTK SPI/power was not connected.
+- EMG2 outputs are integrated with MCP3208 U201: `EMG2_RAW -> CH3`, `EMG2_RECT -> CH4`, and `EMG2_ENV -> CH5`.
+- Previous U201 CH3/CH4/CH5 placeholder input errors disappeared.
+- Channel 2 inherited the Channel 1 BOM/footprint strategy: D431/D432 use `BAS70ZFILM`, `Device:D_Schottky`, and `Diode_SMD:D_SOD-123`; U402 uses MCP6004 and `Package_DIP:DIP-14_W7.62mm`; Channel 2 RECT resistors inherit the 0805 resistor footprint strategy; relevant capacitors inherit the 0805 capacitor footprint strategy.
+- Commit `080eef1 remove legacy root emg schematic block` removed the old standalone/legacy root EMG schematic block from `V5/EMG_v5.kicad_sch`.
+- The removed legacy flat block included the old J1/U1/U2/J2-style EMG circuit.
+- Root now keeps the hierarchical Channel 1, Channel 2, and `POWER_REFERENCE_BLOCK` structure.
+- Root GND PWR_FLAG/source declaration was restored cleanly after legacy block deletion.
+- The old legacy block was not restored.
+- GUI/ERC target after Channel 2 implementation and legacy cleanup reached 3 remaining errors.
+- Remaining errors are expected SPI placeholders only: U201 CLK input not driven, U201 Din input not driven, and U201 `~CS/SHDN` input not driven.
+- U201 CH3/CH4/CH5 errors are gone.
+- U201 DGND error was fixed.
+- GND label-not-connected error was fixed.
+- #FLG power-output conflict was fixed.
+- `3V3_ADC` / `analog VREF` label-not-connected errors were fixed.
+- No D431/D432 pin-not-connected errors appeared.
+- No new real Channel 1/Channel 2 errors remain.
+- Remaining caveats: this is not final hardware approval; D431/D432 cathode-band orientation must be visually reviewed before PCB; U302/U402 MCP6004 symbol/library mismatch warnings remain; D331/D332/D431/D432 D_Schottky symbol/library mismatch warnings remain; exact passive ordering MPNs remain unlocked; DSTK SPI/power remains disconnected; PCB remains not started.
 
 Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 
@@ -59,8 +92,7 @@ Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 - No No ERC markers were added.
 - No 5V analog/ADC use was introduced.
 - `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
-- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
-- Channel 2 remains **NOT STARTED** in the repository at this checkpoint.
+- Channel 2 was later implemented as a controlled schematic duplicate/adaptation of Channel 1 at checkpoint `60d5881`.
 - PCB remains **NOT STARTED**.
 - DSTK SPI/power remains **NOT CONNECTED**.
 - Exact MCP600x vendor model and exact diode model limitations still remain.
@@ -205,51 +237,48 @@ Channel 1 RECT diode value-text status: **CHANNEL_1_RECT_DIODE_VALUES_CLARIFIED_
 
 Channel 1 pre-duplication review status: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**.
 
-Channel 2 duplication/adaptation plan status: **CHANNEL_2_DUPLICATION_PLAN_READY_NOT_IMPLEMENTED**.
+Channel 2 implementation and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_REMOVED_NOT_FINAL_HW_APPROVAL**.
 
-Channel 2 implementation plan:
+- Checkpoint `60d5881 implement channel 2 analog schematic` created `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`.
+- Root sheet `V5/EMG_v5.kicad_sch` was updated.
+- `V5/POWER_REFERENCE_BLOCK.kicad_sch` was updated.
+- Channel 2 was created as a controlled copy/adaptation of Channel 1.
+- Channel 2 uses +100 refdes mapping: J401, U401, U402, R4xx, C4xx, and D431/D432.
+- Channel 2 uses `EMG2_*` nets and shared rails `3V3_ADC`, `analog VREF`, and GND.
+- `ADC_REF` was not introduced.
+- `EMG2_REF_ELECTRODE` remains isolated from GND/chassis/USB.
+- No No ERC markers were added.
+- PCB was not started.
+- DSTK SPI/power was not connected.
+- D431/D432 inherited the Channel 1 diode decision: `BAS70ZFILM`, `Device:D_Schottky`, `Diode_SMD:D_SOD-123`.
+- U402 inherited the Channel 1 op-amp package direction: MCP6004, `Package_DIP:DIP-14_W7.62mm`.
+- Channel 2 RECT resistors inherit the 0805 resistor footprint strategy.
+- Channel 2 relevant capacitors inherit the 0805 capacitor footprint strategy.
+- `EMG2_RAW` is connected to U201 CH3.
+- `EMG2_RECT` is connected to U201 CH4.
+- `EMG2_ENV` is connected to U201 CH5.
+- Previous U201 CH3/CH4/CH5 placeholder errors disappeared.
+- Checkpoint `080eef1 remove legacy root emg schematic block` removed the old standalone/legacy root EMG schematic block from `V5/EMG_v5.kicad_sch`.
+- The removed legacy flat block used the old J1/U1/U2/J2-style EMG circuit.
+- Root now keeps only the hierarchical `EMG_CHANNEL_1_ANALOG`, `EMG_CHANNEL_2_ANALOG`, and `POWER_REFERENCE_BLOCK` structure.
+- Root GND PWR_FLAG/source declaration was restored cleanly after legacy block deletion.
+- The old legacy block was not restored.
 
-- Planning verdict: **CHANNEL_2_PLAN_READY**.
-- Future file/sheet strategy: create separate child sheet `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`.
-- Use controlled copy/adaptation from `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
-- Channel 1 remains unchanged unless absolutely required.
-- Required future implementation edit scope is expected to touch only `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`, `V5/EMG_v5.kicad_sch`, and `V5/POWER_REFERENCE_BLOCK.kicad_sch`.
-- No docs, PCB, firmware, LTspice, project/library changes are expected in that implementation edit unless explicitly approved.
-- Reference strategy: use +100 mapping from Channel 1: `J301 -> J401`, `U301 -> U401`, `U302 -> U402`, `R3xx -> R4xx`, `C3xx -> C4xx`, and `D331/D332 -> D431/D432`.
-- `U402` must be a separate MCP6004 package because Channel 1 already uses U302 units A/B/C/D plus power.
-- Net strategy: map EMG1 nets to EMG2 equivalents, including `EMG1_IN_P -> EMG2_IN_P`, `EMG1_IN_N -> EMG2_IN_N`, `EMG1_REF_ELECTRODE -> EMG2_REF_ELECTRODE`, `EMG1_RAW_DRV -> EMG2_RAW_DRV`, `EMG1_RAW -> EMG2_RAW`, `EMG1_RECT_DRV -> EMG2_RECT_DRV`, `EMG1_RECT -> EMG2_RECT`, `EMG1_ENV_DRV -> EMG2_ENV_DRV`, and `EMG1_ENV -> EMG2_ENV`.
-- RECT internal nets should also become EMG2 equivalents, including `EMG1_RECT_A1_OUT -> EMG2_RECT_A1_OUT`, `EMG1_RECT_U302B_DRV -> EMG2_RECT_U402B_DRV`, `EMG1_RECT_SUM1 -> EMG2_RECT_SUM1`, and `EMG1_RECT_SUM2 -> EMG2_RECT_SUM2`.
-- Shared rails remain shared: `3V3_ADC`, `analog VREF`, and GND.
-- Do not introduce `ADC_REF` in the Channel 2 analog sheet.
-- Root/U201 plan: add root sheet instance for `EMG_CHANNEL_2_ANALOG`, add/connect `EMG2_RAW`, `EMG2_RECT`, and `EMG2_ENV`, then connect `EMG2_RAW -> U201 CH3`, `EMG2_RECT -> U201 CH4`, and `EMG2_ENV -> U201 CH5` through `POWER_REFERENCE_BLOCK`.
-- Preserve SPI placeholders: CLK, Din, and `~CS/SHDN` remain expected until DSTK SPI is connected.
-- Channel 2 inherits Channel 1 BOM/footprint decisions: `BAS70ZFILM` / `Device:D_Schottky` / `Diode_SMD:D_SOD-123` for D431/D432, MCP6004 / `Package_DIP:DIP-14_W7.62mm` for U402, `R_0805_2012Metric` for RECT ratio resistors, and `C_0805_2012Metric` for relevant capacitors.
-- Expected ERC after implementation: U201 CH3/CH4/CH5 input-not-driven errors should disappear; U201 CLK/Din/`~CS/SHDN` placeholder errors may remain.
-- No D431/D432 pin-not-connected errors, no `ADC_REF`, no No ERC markers, and no new real Channel 1/Channel 2 errors should be introduced.
-- Risks before edit: copied UUIDs must be regenerated or safely unique, `EMG2_REF_ELECTRODE` must remain isolated from GND/chassis/USB, generic internal labels such as `RAW_HPF_NODE`, `RAW_GAIN_FB`, and `ENV_LPF_NODE` should become EMG2-prefixed for readability, D431/D432 orientation must be rechecked after copy, and Channel 1 must not be functionally changed.
+Current root ERC status after Channel 2 implementation and legacy root cleanup:
 
-Current root ERC status after the Channel 1 RECT/ENV footprint field assignment:
-
-- Remaining ERC errors: 6 expected placeholder errors.
-- Remaining ERC warnings: 21.
-- Real new ERC errors after RECT implementation: 0.
-- `U201` CH3 input not driven.
-- `U201` CH4 input not driven.
-- `U201` CH5 input not driven.
-- `U201` CLK input not driven.
-- `U201` Din input not driven.
-- `U201` `~CS/SHDN` input not driven.
-- These are intentional for now because Channel 2 and DSTK SPI are not connected yet.
-- After Channel 2 implementation, CH3/CH4/CH5 placeholder errors should disappear if `EMG2_RAW`, `EMG2_RECT`, and `EMG2_ENV` are connected to U201.
-- SPI placeholder errors may remain expected until DSTK SPI is connected.
-- GUI ERC after footprint assignment showed 6 errors and 21 warnings.
-- The 6 errors are the expected U201 placeholder input errors: CH3, CH4, CH5, CLK, Din, and `~CS/SHDN`.
-- The temporary D331/D332 pin-not-connected errors were fixed.
-- No new D331/D332 pin-not-connected errors appeared after footprint assignment.
-- No new real RECT/ENV ERC errors appeared after footprint assignment.
-- Warnings remain, including symbol/library mismatch and existing placeholder/single-pin label warnings.
-- These warnings do not approve hardware and can be reviewed separately.
-- Do not add No ERC markers for these placeholders yet.
+- GUI/ERC target reached: 3 errors remain.
+- Remaining errors are expected SPI placeholders only:
+  - U201 CLK input not driven
+  - U201 Din input not driven
+  - U201 `~CS/SHDN` input not driven
+- U201 CH3/CH4/CH5 errors are gone.
+- U201 DGND error was fixed.
+- GND label-not-connected error was fixed.
+- #FLG power-output conflict was fixed.
+- `3V3_ADC` / `analog VREF` label-not-connected errors were fixed.
+- No D431/D432 pin-not-connected errors appeared.
+- No new real Channel 1/Channel 2 errors remain.
+- Remaining ERC errors are expected only until DSTK SPI is connected.
 
 ## Rectifier LTspice Simulation Status
 
@@ -321,8 +350,7 @@ KiCad RECT implementation status:
 - Checkpoint `3825181` applied readability cleanup only to `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
 - `EMG1_RECT_DRV` is no longer placeholder-biased to `analog VREF` through the old active 1M placeholder.
 - `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
-- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
-- Channel 2 remains **NOT STARTED** in the repository at this checkpoint.
+- Channel 2 has since been implemented as a controlled schematic duplicate/adaptation of Channel 1 at checkpoint `60d5881`.
 - PCB remains **NOT STARTED**.
 - DSTK SPI/power remains **NOT CONNECTED**.
 - This is not final hardware approval and not production ready.
@@ -331,11 +359,8 @@ KiCad RECT implementation status:
 
 This is not a finished V5 fabrication layout yet.
 
-The V5 schematic and PCB still need the planned hardware expansion:
+The V5 schematic and PCB still need these planned follow-up items:
 
-- second EMG channel
-- Channel 2 controlled schematic duplication/adaptation from Channel 1
-- RAW/RECT/ENV analog stages for Channel 2
 - DSTK22807 carrier footprint
 - power/regulator/BAT_MON details
 - V5 test points and silkscreen safety warnings
@@ -344,13 +369,16 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Start Channel 2 schematic implementation only from the approved duplication/adaptation plan.
+- Perform Channel 2 post-implementation review.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
+- Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
+- Review the U402 `MCP6004` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
-- After Channel 2 is implemented, rerun root ERC; CH3/CH4/CH5 placeholder errors should disappear if EMG2 RAW/RECT/ENV are connected to U201, while SPI placeholder errors may remain expected until DSTK SPI is connected.
+- Plan DSTK SPI/power connection after Channel 2 post-implementation review.
+- Current root ERC target is 3 expected SPI placeholder errors only; do not add No ERC markers for them yet.
 - Do not start PCB layout yet.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval or production readiness.
