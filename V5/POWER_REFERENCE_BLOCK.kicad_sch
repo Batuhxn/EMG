@@ -1548,7 +1548,7 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000060")
 	)
-	(text "ADC CH0-CH5 PLACEHOLDERS"
+	(text "ADC CH0-CH5 CHANNEL INPUTS"
 		(exclude_from_sim no)
 		(at 241.3 160.782 0)
 		(effects
@@ -1693,17 +1693,6 @@
 			(justify left bottom)
 		)
 		(uuid "60000000-0000-4000-8000-000000000001")
-	)
-	(text "ERC/source declaration only for local planning block GND"
-		(exclude_from_sim no)
-		(at 203.2 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60000000-0000-4000-8000-000000000002")
 	)
 	(junction
 		(at 49.53 93.98)
@@ -1970,16 +1959,6 @@
 			(type default)
 		)
 		(uuid "60000000-0000-4000-8000-000000000003")
-	)
-	(wire
-		(pts
-			(xy 226.06 50.8) (xy 241.3 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "60000000-0000-4000-8000-000000000004")
 	)
 	(wire
 		(pts
@@ -2545,7 +2524,8 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000026")
 	)
-	(label "EMG2_RAW"
+	(hierarchical_label "EMG2_RAW"
+		(shape input)
 		(at 114.3 90.17 180)
 		(effects
 			(font
@@ -2555,7 +2535,8 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000027")
 	)
-	(label "EMG2_RECT"
+	(hierarchical_label "EMG2_RECT"
+		(shape input)
 		(at 114.3 92.71 180)
 		(effects
 			(font
@@ -2565,7 +2546,8 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000028")
 	)
-	(label "EMG2_ENV"
+	(hierarchical_label "EMG2_ENV"
+		(shape input)
 		(at 114.3 95.25 180)
 		(effects
 			(font
@@ -4650,91 +4632,6 @@
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(reference "#FLG204")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 226.06 50.8 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "60000000-0000-4000-8000-000000000007")
-		(property "Reference" "#FLG205"
-			(at 224.155 50.8 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 222.25 50.7999 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 226.06 50.8 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 226.06 50.8 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 226.06 50.8 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "60000000-0000-4000-8000-000000000008")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "#FLG205")
-					(unit 1)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "#FLG205")
 					(unit 1)
 				)
 			)

@@ -5196,7 +5196,7 @@
 	)
 	(sheet
 		(at 146.05 101.6)
-		(size 45.72 25.4)
+		(size 45.72 58.42)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -5261,6 +5261,36 @@
 				(justify left)
 			)
 			(uuid "70000000-0000-4000-8000-000000000003")
+		)
+		(pin "EMG2_RAW" input
+			(at 146.05 134.62 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "9d2d40b5-b439-4860-a3da-dd07f63b7e24")
+		)
+		(pin "EMG2_RECT" input
+			(at 146.05 137.16 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "70ac4c7d-048a-4528-bc41-5df941dbbd19")
+		)
+		(pin "EMG2_ENV" input
+			(at 146.05 139.7 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "53df456f-7dac-48ea-a298-cf294b6781eb")
 		)
 		(pin "3V3_ADC" output
 			(at 146.05 114.3 180)
@@ -5462,6 +5492,230 @@
 			(project "EMG_v5"
 				(path "/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301"
 					(page "3")
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 119.38 134.62) (xy 146.05 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "468a608e-274f-4ddc-a01e-7532b22b9a48")
+	)
+	(wire
+		(pts
+			(xy 119.38 137.16) (xy 146.05 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d42d9839-8d11-4fe8-a5c1-49ac19ba7764")
+	)
+	(wire
+		(pts
+			(xy 119.38 139.7) (xy 146.05 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1fed102a-a31b-43e9-b23a-cd328fb57fab")
+	)
+	(wire
+		(pts
+			(xy 119.38 144.78) (xy 121.92 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000001")
+	)
+	(wire
+		(pts
+			(xy 121.92 144.78) (xy 121.92 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 119.38 147.32) (xy 124.46 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts
+			(xy 124.46 147.32) (xy 124.46 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000004")
+	)
+	(wire
+		(pts
+			(xy 119.38 149.86) (xy 127 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000005")
+	)
+	(wire
+		(pts
+			(xy 127 149.86) (xy 127 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80000000-0000-4000-8000-000000000006")
+	)
+	(junction
+		(at 121.92 114.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80000000-0000-4000-8000-000000000007")
+	)
+	(junction
+		(at 124.46 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80000000-0000-4000-8000-000000000008")
+	)
+	(junction
+		(at 127 119.38)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80000000-0000-4000-8000-000000000009")
+	)
+	(label "GND"
+		(at 127 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		(uuid "80000000-0000-4000-8000-00000000000a")
+	)
+	(sheet
+		(at 50.8 132.08)
+		(size 68.58 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "daafd134-eb58-4fde-8e0b-ae901f016f45")
+		(property "Sheetname" "EMG_CHANNEL_2_ANALOG"
+			(at 50.8 131.3688 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "EMG_CHANNEL_2_ANALOG.kicad_sch"
+			(at 50.8 158.0896 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EMG2_RAW" output
+			(at 119.38 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8f416547-6a1a-4ac7-8b7f-b85d7be61ca3")
+		)
+		(pin "EMG2_RECT" output
+			(at 119.38 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3315f1d8-3aec-42f4-a8b5-0d0f3022c81a")
+		)
+		(pin "EMG2_ENV" output
+			(at 119.38 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0b1d1c03-7960-4973-931d-3cf97907236d")
+		)
+		(pin "3V3_ADC" input
+			(at 119.38 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2f883fbb-008f-4b53-8a5d-7b511ecfeedc")
+		)
+		(pin "analog VREF" input
+			(at 119.38 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "bd60b458-0216-4ed1-9ac3-be8afd70c9a4")
+		)
+		(pin "GND" passive
+			(at 119.38 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "28eeba3e-b312-4bde-9358-0e14510437ad")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(page "4")
 				)
 			)
 		)
