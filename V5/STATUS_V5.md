@@ -18,8 +18,8 @@ Current schematic checkpoint:
 Current schematic status:
 
 - Power/reference schematic block: **ADDED / REVIEWED ENOUGH FOR CURRENT PLANNING**
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / DIODE VALUES CLARIFIED / NOT FINAL HARDWARE APPROVAL**
-- Channel 2 analog schematic: **NOT STARTED / NO**
+- Channel 1 RECT KiCad candidate: **READY FOR CHANNEL 2 DUPLICATION / NOT FINAL HARDWARE APPROVAL**
+- Channel 2 analog schematic: **MAY START AS CONTROLLED DUPLICATION / NOT STARTED**
 - PCB layout: **NOT STARTED / NO**
 - Full two-channel analog EMG chain: **NOT COMPLETE**
 - DSTK external 3.3 V powering: **NOT APPROVED YET**
@@ -57,8 +57,9 @@ Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 - `EMG1_REF_ELECTRODE` remains isolated from GND.
 - No No ERC markers were added.
 - No 5V analog/ADC use was introduced.
-- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need review/validation before Channel 2 or PCB.
-- Channel 2 remains **NOT STARTED**.
+- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
+- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
+- Channel 2 remains **NOT STARTED** in the repository at this checkpoint.
 - PCB remains **NOT STARTED**.
 - DSTK SPI/power remains **NOT CONNECTED**.
 - Exact MCP600x vendor model and exact diode model limitations still remain.
@@ -85,6 +86,21 @@ Cleanup/checks before Channel 2 or PCB:
 
 - RECT block readability cleanup was applied at checkpoint `3825181`.
 - Channel 1 RECT remains reviewable, not final hardware approval.
+- Final pre-duplication review verdict: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION**.
+- Channel 1 ready status: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**.
+- Issues requiring fix before Channel 2: none found in the reviewed gates.
+- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
+- This is still not PCB approval and not final hardware approval.
+- Confirmed pass item: RAW path still reaches `EMG1_RAW_DRV`, then `R321 -> EMG1_RAW` with `C321` to GND.
+- Confirmed pass item: RECT path is present around U302B/U302C, D331/D332, and R333-R338.
+- Confirmed pass item: D331/D332 values are `BAS70ZFILM`, symbol `Device:D_Schottky`, footprint `Diode_SMD:D_SOD-123`.
+- Confirmed pass item: ENV path remains `EMG1_RECT_DRV -> R341 -> ENV_LPF_NODE`, `C341` to `analog VREF`, U302D -> `EMG1_ENV_DRV`.
+- Confirmed pass item: output paths remain `EMG1_RECT_DRV -> R331 -> EMG1_RECT` and `EMG1_ENV_DRV -> R351 -> EMG1_ENV`.
+- Confirmed pass item: `ADC_REF` is absent from the child sheet.
+- Confirmed pass item: no No ERC markers were added.
+- Confirmed pass item: old RECT placeholders and `BAT54/BAS70` text are absent.
+- Confirmed pass item: `EMG1_REF_ELECTRODE` remains isolated from GND.
+- Confirmed pass item: docs match schematic fields for D331/D332, U302, R333-R338, and C321/C331/C351/C341/C360.
 - D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
 - D331/D332 diode MPN/footprint direction is recorded for first-prototype planning, and schematic footprint fields were assigned at checkpoint `eca2cc3`.
 - D331/D332 visible schematic value text was clarified at checkpoint `8f2bf9e`.
@@ -169,10 +185,10 @@ Cleanup/checks before Channel 2 or PCB:
 - Exact ordering MPNs for passives are not locked yet.
 - D331/D332 cathode-band footprint orientation must be visually checked before PCB.
 - MCP6004 symbol/library mismatch warning still needs review.
-- Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
+- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
 - Do not start PCB.
 
-Final Channel 1 RECT status: **CHANNEL_1_RECT_DIODE_VALUES_CLARIFIED_NOT_FINAL_HW_APPROVAL**.
+Final Channel 1 RECT status: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**.
 
 D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
@@ -186,6 +202,8 @@ Channel 1 RECT/ENV footprint field assignment status: **CHANNEL_1_RECT_FOOTPRINT
 
 Channel 1 RECT diode value-text status: **CHANNEL_1_RECT_DIODE_VALUES_CLARIFIED_NOT_FINAL_HW_APPROVAL**.
 
+Channel 1 pre-duplication review status: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**.
+
 Current root ERC status after the Channel 1 RECT/ENV footprint field assignment:
 
 - Remaining ERC errors: 6 expected placeholder errors.
@@ -198,6 +216,8 @@ Current root ERC status after the Channel 1 RECT/ENV footprint field assignment:
 - `U201` Din input not driven.
 - `U201` `~CS/SHDN` input not driven.
 - These are intentional for now because Channel 2 and DSTK SPI are not connected yet.
+- After Channel 2 implementation, CH3/CH4/CH5 placeholder errors should disappear if `EMG2_RAW`, `EMG2_RECT`, and `EMG2_ENV` are connected to U201.
+- SPI placeholder errors may remain expected until DSTK SPI is connected.
 - GUI ERC after footprint assignment showed 6 errors and 21 warnings.
 - The 6 errors are the expected U201 placeholder input errors: CH3, CH4, CH5, CLK, Din, and `~CS/SHDN`.
 - The temporary D331/D332 pin-not-connected errors were fixed.
@@ -272,12 +292,13 @@ Final rectifier simulation/model status: **RECTIFIER_SIMULATION_MODEL_CONFIRMATI
 
 KiCad RECT implementation status:
 
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**.
+- Channel 1 RECT KiCad candidate: **READY FOR CHANNEL 2 DUPLICATION / NOT FINAL HARDWARE APPROVAL**.
 - KiCad schematic has been updated with the Channel 1 RECT candidate in `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
 - Checkpoint `3825181` applied readability cleanup only to `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
 - `EMG1_RECT_DRV` is no longer placeholder-biased to `analog VREF` through the old active 1M placeholder.
-- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need review and validation before Channel 2 or PCB.
-- Channel 2 remains **NOT STARTED**.
+- `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
+- Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
+- Channel 2 remains **NOT STARTED** in the repository at this checkpoint.
 - PCB remains **NOT STARTED**.
 - DSTK SPI/power remains **NOT CONNECTED**.
 - This is not final hardware approval and not production ready.
@@ -289,7 +310,7 @@ This is not a finished V5 fabrication layout yet.
 The V5 schematic and PCB still need the planned hardware expansion:
 
 - second EMG channel
-- cleaned Channel 1 RECT review acceptance
+- Channel 2 controlled schematic duplication/adaptation from Channel 1
 - RAW/RECT/ENV analog stages for Channel 2
 - DSTK22807 carrier footprint
 - power/regulator/BAT_MON details
@@ -299,13 +320,13 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Review and accept the cleaned Channel 1 RECT schematic with the newly assigned footprint fields.
+- Start Channel 2 schematic duplication/adaptation planning only.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
-- Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
+- After Channel 2 is implemented, rerun root ERC; CH3/CH4/CH5 placeholder errors should disappear if EMG2 RAW/RECT/ENV are connected to U201, while SPI placeholder errors may remain expected until DSTK SPI is connected.
 - Do not start PCB layout yet.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval or production readiness.
