@@ -2720,7 +2720,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-000000000313")
 	)
-	(label "EMG1_REF_ELECTRODE"
+	(label "EMG1_IN_P"
 		(at 38.1 66.04 0)
 		(effects
 			(font
@@ -2740,7 +2740,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000031d")
 	)
-	(label "EMG1_IN_P"
+	(label "EMG1_REF_ELECTRODE"
 		(at 38.1 71.12 0)
 		(effects
 			(font
@@ -3100,7 +3100,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000039f")
 	)
-	(label "RAW_GAIN_FB"
+	(label "RAW_HPF_NODE"
 		(at 304.8 76.2 180)
 		(effects
 			(font
@@ -3110,7 +3110,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003a5")
 	)
-	(label "RAW_HPF_NODE"
+	(label "RAW_GAIN_FB"
 		(at 304.8 71.12 180)
 		(effects
 			(font
