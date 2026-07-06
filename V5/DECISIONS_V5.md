@@ -388,6 +388,47 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - Channel 2 may start as a controlled schematic duplicate/adaptation of Channel 1.
 - Do not start PCB.
 
+Channel 2 duplication/adaptation plan status:
+
+- Planning verdict: **CHANNEL_2_PLAN_READY**.
+- Channel 2 status: **CHANNEL_2_DUPLICATION_PLAN_READY_NOT_IMPLEMENTED**.
+- Create separate child sheet `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`.
+- Use controlled copy/adaptation from `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
+- Channel 1 remains unchanged unless absolutely required.
+- PCB remains not started.
+- DSTK SPI/power remains not connected.
+- Required future implementation edit scope is expected to touch only `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`, `V5/EMG_v5.kicad_sch`, and `V5/POWER_REFERENCE_BLOCK.kicad_sch`.
+- No docs, PCB, firmware, LTspice, project file, or library changes should be included in the implementation edit unless explicitly approved.
+- Reference designator strategy is +100 from Channel 1: `J301 -> J401`, `U301 -> U401`, `U302 -> U402`, `R3xx -> R4xx`, `C3xx -> C4xx`, and `D331/D332 -> D431/D432`.
+- `U402` must be a separate MCP6004 package because U302 is fully used by Channel 1.
+- Net mapping strategy:
+  - `EMG1_IN_P -> EMG2_IN_P`
+  - `EMG1_IN_N -> EMG2_IN_N`
+  - `EMG1_REF_ELECTRODE -> EMG2_REF_ELECTRODE`
+  - `EMG1_IN_P_PROT -> EMG2_IN_P_PROT`
+  - `EMG1_IN_N_PROT -> EMG2_IN_N_PROT`
+  - `EMG1_REF_BIAS -> EMG2_REF_BIAS`
+  - `EMG1_IA_OUT -> EMG2_IA_OUT`
+  - `EMG1_RAW_GAIN -> EMG2_RAW_GAIN`
+  - `EMG1_RAW_DRV -> EMG2_RAW_DRV`
+  - `EMG1_RAW -> EMG2_RAW`
+  - `EMG1_RECT_A1_OUT -> EMG2_RECT_A1_OUT`
+  - `EMG1_RECT_U302B_DRV -> EMG2_RECT_U402B_DRV`
+  - `EMG1_RECT_SUM1 -> EMG2_RECT_SUM1`
+  - `EMG1_RECT_SUM2 -> EMG2_RECT_SUM2`
+  - `EMG1_RECT_DRV -> EMG2_RECT_DRV`
+  - `EMG1_RECT -> EMG2_RECT`
+  - `EMG1_ENV_DRV -> EMG2_ENV_DRV`
+  - `EMG1_ENV -> EMG2_ENV`
+- Shared rails remain shared: `3V3_ADC`, `analog VREF`, and GND.
+- Do not introduce `ADC_REF` in the Channel 2 analog child sheet.
+- Root/U201 connection plan: add root sheet instance for `EMG_CHANNEL_2_ANALOG`, add/connect Channel 2 outputs `EMG2_RAW`, `EMG2_RECT`, and `EMG2_ENV`, then connect `EMG2_RAW -> U201 CH3`, `EMG2_RECT -> U201 CH4`, and `EMG2_ENV -> U201 CH5`.
+- Preserve SPI placeholders CLK, Din, and `~CS/SHDN` until DSTK SPI is connected.
+- Channel 2 BOM/footprint inheritance: D431/D432 use `BAS70ZFILM`, `Device:D_Schottky`, and `Diode_SMD:D_SOD-123`; U402 uses `MCP6004` and `Package_DIP:DIP-14_W7.62mm`; RECT ratio resistors use `R_0805_2012Metric` with 0.1% thin-film direction; relevant capacitors use `C_0805_2012Metric`.
+- Expected ERC after Channel 2 implementation: U201 CH3/CH4/CH5 input-not-driven errors should disappear; U201 CLK/Din/`~CS/SHDN` placeholder errors may remain.
+- No D431/D432 pin-not-connected errors, no `ADC_REF`, no No ERC markers, and no new real Channel 1/Channel 2 errors should be introduced.
+- Risks before edit: copied UUIDs must be regenerated or safely unique, `EMG2_REF_ELECTRODE` must remain isolated from GND/chassis/USB, generic internal labels such as `RAW_HPF_NODE`, `RAW_GAIN_FB`, and `ENV_LPF_NODE` should become EMG2-prefixed for readability, D431/D432 cathode/anode orientation must be rechecked after copy, and Channel 1 must not be functionally changed.
+
 Channel 1 RECT LTspice simulation status:
 
 - Simulation planning/prototype files now exist:
@@ -526,7 +567,7 @@ Full two-channel analog EMG chain schematic: **NO / NOT COMPLETE**.
 
 Channel 1 RECT KiCad candidate: **READY FOR CHANNEL 2 DUPLICATION / NOT FINAL HARDWARE APPROVAL**.
 
-Channel 2 analog schematic: **MAY START AS CONTROLLED DUPLICATION / NOT STARTED**.
+Channel 2 analog schematic: **DUPLICATION PLAN READY / NOT IMPLEMENTED**.
 
 PCB layout: **NO**.
 
@@ -554,7 +595,7 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Start Channel 2 schematic duplication/adaptation planning only.
+- Start Channel 2 schematic implementation only from the approved duplication/adaptation plan.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
@@ -593,4 +634,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**
+Final decision: **CHANNEL_2_DUPLICATION_PLAN_READY_NOT_IMPLEMENTED**
