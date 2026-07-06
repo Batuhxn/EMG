@@ -8,7 +8,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 
 Current schematic checkpoint:
 
-- `3ecdacb implement channel 1 rectifier candidate`
+- `3825181 cleanup channel 1 rectifier schematic readability`
 - Root schematic: `V5/EMG_v5.kicad_sch`
 - Power/reference child sheet: `V5/POWER_REFERENCE_BLOCK.kicad_sch`
 - Channel 1 analog child sheet: `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
@@ -18,7 +18,7 @@ Current schematic checkpoint:
 Current schematic status:
 
 - Power/reference schematic block: **ADDED / REVIEWED ENOUGH FOR CURRENT PLANNING**
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWABLE / CLEANUP RECOMMENDED / NOT FINAL HARDWARE APPROVAL**
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**
 - Channel 2 analog schematic: **NOT STARTED / NO**
 - PCB layout: **NOT STARTED / NO**
 - Full two-channel analog EMG chain: **NOT COMPLETE**
@@ -27,13 +27,18 @@ Current schematic status:
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
 
-Channel 1 analog / RECT implementation status at checkpoint `3ecdacb`:
+Channel 1 analog / RECT implementation status at checkpoint `3825181`:
 
 - Channel 1 analog schematic remains polarity fixed.
 - `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` now includes a reviewable Channel 1 VREF-centered absolute-value rectifier candidate.
 - RECT is no longer only a blocked placeholder in the KiCad schematic.
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWABLE / CLEANUP RECOMMENDED / NOT FINAL HARDWARE APPROVAL**.
-- R332 / `R_RECT_PLACEHOLDER` was removed from the active path / marked DNP removed.
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**.
+- Checkpoint `3825181 cleanup channel 1 rectifier schematic readability` applied the Channel 1 RECT schematic readability cleanup.
+- Cleanup target was `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
+- RECT block readability was improved without intentional topology/function change.
+- R332 / the old RECT placeholder marker was fully removed.
+- `EMG1_RECT_PLACEHOLDER_REMOVED` is no longer present.
+- Stale/forbidden strings were checked and absent from the cleaned child sheet: `ADC_REF`, `No ERC`, `R_RECT_PLACEHOLDER`, `EMG1_RECT_PLACEHOLDER_REMOVED`, `RECT BLOCKED PLACEHOLDER`, `ENV placeholder`, `not functional until RECT`, and `TP_analog_VREF`.
 - `EMG1_RECT_DRV` is no longer passively biased to `analog VREF` through the old 1M placeholder as the active implementation.
 - U302B and U302C were repurposed from reserved followers into the two-op-amp RECT candidate.
 - U302D remains the ENV buffer.
@@ -60,7 +65,7 @@ Channel 1 RECT post-implementation review result:
 - U302C role was confirmed: `+` input -> `analog VREF`, `-` input -> `EMG1_RECT_SUM2`, output -> `EMG1_RECT_DRV`.
 - D331/D332 orientation matches the implementation plan using the local KiCad `Device:D_Schottky` pin convention.
 - R333-R338 match the planned 10k/20k rectifier resistor network.
-- R332 is DNP / removed from the active path and no longer biases `EMG1_RECT_DRV`.
+- R332 / old RECT placeholder marker has now been fully removed and no longer biases `EMG1_RECT_DRV`.
 - `EMG1_RECT_DRV` is driven by U302C output.
 - `EMG1_RECT_DRV -> R331 470R -> EMG1_RECT` remains intact.
 - `C331 1nF` to GND remains intact.
@@ -70,18 +75,19 @@ Channel 1 RECT post-implementation review result:
 - No No ERC markers were added.
 - No new 5V analog/ADC use was introduced.
 
-Cleanup recommended before Channel 2 or PCB:
+Cleanup/checks before Channel 2 or PCB:
 
-- Visual cleanup of the RECT block is recommended before duplication.
+- RECT block readability cleanup was applied at checkpoint `3825181`.
+- Channel 1 RECT remains reviewable, not final hardware approval.
 - D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
 - D331/D332 footprint/BOM choice must be locked before PCB.
 - MCP6004 footprint/BOM choice must be reviewed before PCB.
 - Resistor tolerance/matching for the 10k/20k network should be specified.
-- The ENV note should be clarified later to distinguish `C341 = 1uF to analog VREF` from `C351 = 4.7nF to GND`.
-- Do not start Channel 2 until Channel 1 RECT cleanup/review is accepted.
+- ENV/output cap notes were clarified to distinguish `C341 = 1uF to analog VREF`, `C351 = 4.7nF to GND`, and RAW/RECT output caps `C321/C331 = 1nF to GND`.
+- Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
 - Do not start PCB.
 
-Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWABLE_CLEANUP_RECOMMENDED_NOT_FINAL_HW_APPROVAL**.
+Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWED_CLEANED_READABILITY_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 
@@ -166,12 +172,14 @@ Final rectifier simulation/model status: **RECTIFIER_SIMULATION_MODEL_CONFIRMATI
 
 KiCad RECT implementation status:
 
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWABLE / CLEANUP RECOMMENDED / NOT FINAL HARDWARE APPROVAL**.
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**.
 - KiCad schematic has been updated with the Channel 1 RECT candidate in `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
+- Checkpoint `3825181` applied readability cleanup only to `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`.
 - `EMG1_RECT_DRV` is no longer placeholder-biased to `analog VREF` through the old active 1M placeholder.
 - `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need review and validation before Channel 2 or PCB.
 - Channel 2 remains **NOT STARTED**.
 - PCB remains **NOT STARTED**.
+- DSTK SPI/power remains **NOT CONNECTED**.
 - This is not final hardware approval and not production ready.
 
 ## Important
@@ -181,7 +189,7 @@ This is not a finished V5 fabrication layout yet.
 The V5 schematic and PCB still need the planned hardware expansion:
 
 - second EMG channel
-- Channel 1 RECT cleanup/review acceptance
+- cleaned Channel 1 RECT review acceptance
 - RAW/RECT/ENV analog stages for Channel 2
 - DSTK22807 carrier footprint
 - power/regulator/BAT_MON details
@@ -191,11 +199,11 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Review and accept the implemented Channel 1 RECT cleanup recommendations.
+- Review and accept the cleaned Channel 1 RECT schematic.
 - Review symbol/footprint/BOM choices for D331/D332 and MCP6004.
 - Confirm resistor matching/tolerance plan for the 10k/20k rectifier network.
-- Confirm ENV behavior after RECT implementation and clarify the C341/C351 documentation note.
-- Do not duplicate to Channel 2 until Channel 1 RECT cleanup/review is accepted.
+- Confirm ENV behavior after RECT implementation.
+- Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
 - Do not start PCB layout yet.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval or production readiness.
