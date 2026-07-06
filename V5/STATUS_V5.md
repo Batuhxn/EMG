@@ -120,7 +120,18 @@ Cleanup/checks before Channel 2 or PCB:
 - Exact resistor MPN/series/tempco is still not locked.
 - MCP6004 offset/swing/crossover and BAS70 leakage may dominate small-signal error.
 - Layout should keep the ratio network close and thermally similar.
-- ENV/output cap notes were clarified to distinguish `C341 = 1uF to analog VREF`, `C351 = 4.7nF to GND`, and RAW/RECT output caps `C321/C331 = 1nF to GND`.
+- Channel 1 RAW/RECT/ENV capacitor dielectric/package verification verdict: **RECT_ENV_CAPACITOR_DECISION_READY**.
+- Confirmed capacitor roles: `C321 = 1nF` RAW ADC/output cap to GND, `C331 = 1nF` RECT ADC/output cap to GND, `C351 = 4.7nF` ENV ADC/output cap to GND, `C341 = 1uF` ENV LPF storage cap from `ENV_LPF_NODE` to `analog VREF`, and `C360 = 100nF` U302 local decoupling cap.
+- First-prototype capacitor decision for C321/C331: 1nF C0G/NP0, 0805, 5% or better preferred.
+- First-prototype capacitor decision for C351: 4.7nF C0G/NP0, 0805 preferred; X7R is an acceptable fallback if C0G/NP0 availability becomes difficult.
+- First-prototype capacitor decision for C341: 1uF X7R, 0805, 10% acceptable, with 16V or 25V rating to reduce DC-bias derating.
+- First-prototype capacitor decision for C360: 100nF X7R, 0805, 16V or 25V local decoupling.
+- Avoid Y5V/Z5U for these analog/output/decoupling capacitors.
+- Compact alternative: 0603 can be considered later if layout density matters; keep C321/C331/C351 as C0G/NP0 where practical and keep C341/C360 as X7R.
+- Remaining capacitor risk: C341 tolerance and DC-bias derating shift the ENV cutoff.
+- Remaining capacitor risk: C341 returns to `analog VREF`, so VREF buffer stability/loading should be reviewed.
+- Remaining capacitor risk: MCP6004 output stability with ADC/output caps should remain protected by 470R series resistors, but still needs review.
+- Exact capacitor MPN/voltage/tolerance is not locked yet.
 - Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
 - Do not start PCB.
 
@@ -131,6 +142,8 @@ D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPR
 U302 MCP6004 MPN/footprint decision status: **CHANNEL_1_RECT_MCP6004_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Channel 1 RECT resistor matching decision status: **CHANNEL_1_RECT_RESISTOR_MATCHING_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
+
+Channel 1 RAW/RECT/ENV capacitor decision status: **CHANNEL_1_RECT_ENV_CAPACITOR_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 
@@ -246,7 +259,8 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 - Review and assign D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` only after cathode-band orientation is visually checked against the schematic.
 - Review and assign U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` only after the MCP6004 symbol/library mismatch warning is reviewed.
 - Assign R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
-- Confirm ENV behavior after RECT implementation.
+- Assign C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
+- Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
 - Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
 - Do not start PCB layout yet.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
