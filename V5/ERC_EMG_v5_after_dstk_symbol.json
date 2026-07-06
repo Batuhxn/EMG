@@ -1,0 +1,454 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-07-06T15:44:42",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/2c477672-822a-487d-bb83-204f5f41dbd8",
+            "violations": [
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Horizontal Wire, length 0.1651 mm",
+                            "pos": {
+                                "x": 2.5019,
+                                "y": 0.7366
+                            },
+                            "uuid": "77a81a90-6264-4c79-ac85-447a6814d0a1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                },
+                {
+                    "description": "Symbol 'D_Schottky' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol D331 [D_Schottky]",
+                            "pos": {
+                                "x": 2.7686,
+                                "y": 1.7018
+                            },
+                            "uuid": "a968f559-84e3-4b7f-9ee0-43042e08ab5d"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'D_Schottky' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol D332 [D_Schottky]",
+                            "pos": {
+                                "x": 2.7686,
+                                "y": 1.8034
+                            },
+                            "uuid": "4f4a1864-77e5-4e36-a9b3-7df978b960de"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'MCP6004' doesn't match copy in library 'Amplifier_Operational'",
+                    "items": [
+                        {
+                            "description": "Symbol U302 [MCP6004]",
+                            "pos": {
+                                "x": 3.2258,
+                                "y": 0.7366
+                            },
+                            "uuid": "c1300000-0000-4000-8000-0000000003a0"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'MCP6004' doesn't match copy in library 'Amplifier_Operational'",
+                    "items": [
+                        {
+                            "description": "Symbol U302 [MCP6004]",
+                            "pos": {
+                                "x": 3.3782,
+                                "y": 1.5748
+                            },
+                            "uuid": "c1300000-0000-4000-8000-0000000003d6"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'MCP6004' doesn't match copy in library 'Amplifier_Operational'",
+                    "items": [
+                        {
+                            "description": "Symbol U302 [MCP6004]",
+                            "pos": {
+                                "x": 3.3782,
+                                "y": 2.2987
+                            },
+                            "uuid": "c1300000-0000-4000-8000-0000000003ff"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'MCP6004' doesn't match copy in library 'Amplifier_Operational'",
+                    "items": [
+                        {
+                            "description": "Symbol U302 [MCP6004]",
+                            "pos": {
+                                "x": 2.7813,
+                                "y": 3.0607
+                            },
+                            "uuid": "c1300000-0000-4000-8000-00000000040a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'MCP6004' doesn't match copy in library 'Amplifier_Operational'",
+                    "items": [
+                        {
+                            "description": "Symbol U302 [MCP6004]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 1.651
+                            },
+                            "uuid": "c1300000-0000-4000-8000-000000000414"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'DSTK_3V3_CANDIDATE'",
+                            "pos": {
+                                "x": 0.1778,
+                                "y": 0.2794
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000003"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Horizontal Wire, length 0.0889 mm",
+                            "pos": {
+                                "x": 0.4953,
+                                "y": 0.9398
+                            },
+                            "uuid": "6ccf9b42-b31c-44c8-98a7-37d5f4f251ad"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'EMG2_RAW'",
+                            "pos": {
+                                "x": 1.143,
+                                "y": 0.9017
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000027"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'EMG2_RECT'",
+                            "pos": {
+                                "x": 1.143,
+                                "y": 0.9271
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000028"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'EMG2_ENV'",
+                            "pos": {
+                                "x": 1.143,
+                                "y": 0.9525
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000029"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Vertical Wire, length 0.1143 mm",
+                            "pos": {
+                                "x": 0.9652,
+                                "y": 1.7145
+                            },
+                            "uuid": "30000000-0000-4000-8000-000000000045"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'ADC_SCLK'",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 0.8763
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000035"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'ADC_MISO'",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 0.9017
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000034"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'ADC_MOSI'",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 0.9271
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000033"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "Label 'ADC_CS'",
+                            "pos": {
+                                "x": 1.651,
+                                "y": 0.9525
+                            },
+                            "uuid": "10000000-0000-4000-8000-000000000032"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Horizontal Wire, length 0.2286 mm",
+                            "pos": {
+                                "x": 2.6924,
+                                "y": 1.1176
+                            },
+                            "uuid": "30000000-0000-4000-8000-000000000046"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                }
+            ]
+        },
+        {
+            "path": "/EMG_CHANNEL_1_ANALOG/",
+            "uuid_path": "/2c477672-822a-487d-bb83-204f5f41dbd8/6a4b9db0-8b5f-4b75-9f44-83fd05e7b301",
+            "violations": []
+        },
+        {
+            "path": "/POWER_REFERENCE_BLOCK/",
+            "uuid_path": "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101",
+            "violations": [
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 4 [CH3, Input, Line]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 0.9017
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000017"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 5 [CH4, Input, Line]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 0.9271
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000018"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 6 [CH5, Input, Line]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 0.9525
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000019"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 13 [CLK, Input, Clock]",
+                            "pos": {
+                                "x": 1.5494,
+                                "y": 0.8763
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000026"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 11 [Din, Input, Line]",
+                            "pos": {
+                                "x": 1.5494,
+                                "y": 0.9271
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000024"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Input pin not driven by any Output pins",
+                    "items": [
+                        {
+                            "description": "Symbol U201 Pin 10 [~{CS}/SHDN, Input, Line]",
+                            "pos": {
+                                "x": 1.5494,
+                                "y": 0.9525
+                            },
+                            "uuid": "20000000-0000-4000-8000-000000000023"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_driven"
+                },
+                {
+                    "description": "Symbol U202 has input pins in units [ B ] that are not placed",
+                    "items": [
+                        {
+                            "description": "Symbol U202 [MCP6002-xP]",
+                            "pos": {
+                                "x": 1.2192,
+                                "y": 1.7145
+                            },
+                            "uuid": "50000000-0000-4000-8000-000000000013"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "missing_input_pin"
+                },
+                {
+                    "description": "Symbol U202 has unplaced units [ B ]",
+                    "items": [
+                        {
+                            "description": "Symbol U202 [MCP6002-xP]",
+                            "pos": {
+                                "x": 1.2192,
+                                "y": 1.7145
+                            },
+                            "uuid": "50000000-0000-4000-8000-000000000013"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "missing_unit"
+                }
+            ]
+        }
+    ],
+    "source": "EMG_v5.kicad_sch"
+}
