@@ -8,7 +8,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 
 Current schematic checkpoint:
 
-- `3825181 cleanup channel 1 rectifier schematic readability`
+- `eca2cc3 assign channel 1 rectifier footprints`
 - Root schematic: `V5/EMG_v5.kicad_sch`
 - Power/reference child sheet: `V5/POWER_REFERENCE_BLOCK.kicad_sch`
 - Channel 1 analog child sheet: `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
@@ -18,7 +18,7 @@ Current schematic checkpoint:
 Current schematic status:
 
 - Power/reference schematic block: **ADDED / REVIEWED ENOUGH FOR CURRENT PLANNING**
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / NOT FINAL HARDWARE APPROVAL**
 - Channel 2 analog schematic: **NOT STARTED / NO**
 - PCB layout: **NOT STARTED / NO**
 - Full two-channel analog EMG chain: **NOT COMPLETE**
@@ -27,15 +27,18 @@ Current schematic status:
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
 
-Channel 1 analog / RECT implementation status at checkpoint `3825181`:
+Channel 1 analog / RECT implementation status at checkpoint `eca2cc3`:
 
 - Channel 1 analog schematic remains polarity fixed.
 - `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` now includes a reviewable Channel 1 VREF-centered absolute-value rectifier candidate.
 - RECT is no longer only a blocked placeholder in the KiCad schematic.
-- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / NOT FINAL HARDWARE APPROVAL**.
+- Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / CLEANED READABILITY / FOOTPRINT FIELDS ASSIGNED / NOT FINAL HARDWARE APPROVAL**.
 - Checkpoint `3825181 cleanup channel 1 rectifier schematic readability` applied the Channel 1 RECT schematic readability cleanup.
+- Checkpoint `eca2cc3 assign channel 1 rectifier footprints` assigned Channel 1 RECT/ENV-related schematic footprint fields.
 - Cleanup target was `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
+- Footprint assignment edit target was also `V5/EMG_CHANNEL_1_ANALOG.kicad_sch` only.
 - RECT block readability was improved without intentional topology/function change.
+- Footprint assignment diff was limited to footprint property fields; no value, net, or topology changes were intended.
 - R332 / the old RECT placeholder marker was fully removed.
 - `EMG1_RECT_PLACEHOLDER_REMOVED` is no longer present.
 - Stale/forbidden strings were checked and absent from the cleaned child sheet: `ADC_REF`, `No ERC`, `R_RECT_PLACEHOLDER`, `EMG1_RECT_PLACEHOLDER_REMOVED`, `RECT BLOCKED PLACEHOLDER`, `ENV placeholder`, `not functional until RECT`, and `TP_analog_VREF`.
@@ -80,7 +83,7 @@ Cleanup/checks before Channel 2 or PCB:
 - RECT block readability cleanup was applied at checkpoint `3825181`.
 - Channel 1 RECT remains reviewable, not final hardware approval.
 - D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
-- D331/D332 diode MPN/footprint direction is now recorded for first-prototype planning, but schematic footprint fields are not assigned yet.
+- D331/D332 diode MPN/footprint direction is recorded for first-prototype planning, and schematic footprint fields were assigned at checkpoint `eca2cc3`.
 - D331/D332 KiCad symbol convention: `Device:D_Schottky` uses pin 1 = K / cathode and pin 2 = A / anode.
 - Current D331/D332 orientation matches the previous Channel 1 RECT review: D331 K -> `EMG1_RECT_U302B_DRV`, D331 A -> `EMG1_RECT_A1_OUT`; D332 K -> `EMG1_RECT_SUM1`, D332 A -> `EMG1_RECT_U302B_DRV`.
 - Do not use `BAS70FILM` with a plain 2-pin `Device:D_Schottky` symbol plus generic 3-pad SOT-23 footprint for the first prototype.
@@ -132,10 +135,34 @@ Cleanup/checks before Channel 2 or PCB:
 - Remaining capacitor risk: C341 returns to `analog VREF`, so VREF buffer stability/loading should be reviewed.
 - Remaining capacitor risk: MCP6004 output stability with ADC/output caps should remain protected by 470R series resistors, but still needs review.
 - Exact capacitor MPN/voltage/tolerance is not locked yet.
+- Channel 1 RECT/ENV footprint field assignment status: **CHANNEL_1_RECT_FOOTPRINT_FIELDS_ASSIGNED_NOT_FINAL_HW_APPROVAL**.
+- Assigned schematic footprint fields at checkpoint `eca2cc3`:
+  - D331 = `Diode_SMD:D_SOD-123`
+  - D332 = `Diode_SMD:D_SOD-123`
+  - U302 = `Package_DIP:DIP-14_W7.62mm`
+  - R333 = `Resistor_SMD:R_0805_2012Metric`
+  - R334 = `Resistor_SMD:R_0805_2012Metric`
+  - R335 = `Resistor_SMD:R_0805_2012Metric`
+  - R336 = `Resistor_SMD:R_0805_2012Metric`
+  - R337 = `Resistor_SMD:R_0805_2012Metric`
+  - R338 = `Resistor_SMD:R_0805_2012Metric`
+  - C321 = `Capacitor_SMD:C_0805_2012Metric`
+  - C331 = `Capacitor_SMD:C_0805_2012Metric`
+  - C351 = `Capacitor_SMD:C_0805_2012Metric`
+  - C341 = `Capacitor_SMD:C_0805_2012Metric`
+  - C360 = `Capacitor_SMD:C_0805_2012Metric`
+- Root GUI ERC after footprint assignment remained 6 errors and 21 warnings.
+- The 6 errors are still the expected U201 placeholder input errors: CH3, CH4, CH5, CLK, Din, and `~CS/SHDN`.
+- No new D331/D332 pin-not-connected errors appeared after footprint assignment.
+- No new real RECT/ENV ERC errors appeared after footprint assignment.
+- D331/D332 schematic value still says `BAT54/BAS70`; actual first-prototype MPN direction remains `BAS70ZFILM`.
+- Exact ordering MPNs for passives are not locked yet.
+- D331/D332 cathode-band footprint orientation must be visually checked before PCB.
+- MCP6004 symbol/library mismatch warning still needs review.
 - Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
 - Do not start PCB.
 
-Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWED_CLEANED_READABILITY_NOT_FINAL_HW_APPROVAL**.
+Final Channel 1 RECT status: **CHANNEL_1_RECT_FOOTPRINT_FIELDS_ASSIGNED_NOT_FINAL_HW_APPROVAL**.
 
 D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
@@ -145,9 +172,12 @@ Channel 1 RECT resistor matching decision status: **CHANNEL_1_RECT_RESISTOR_MATC
 
 Channel 1 RAW/RECT/ENV capacitor decision status: **CHANNEL_1_RECT_ENV_CAPACITOR_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
-Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
+Channel 1 RECT/ENV footprint field assignment status: **CHANNEL_1_RECT_FOOTPRINT_FIELDS_ASSIGNED_NOT_FINAL_HW_APPROVAL**.
+
+Current root ERC status after the Channel 1 RECT/ENV footprint field assignment:
 
 - Remaining ERC errors: 6 expected placeholder errors.
+- Remaining ERC warnings: 21.
 - Real new ERC errors after RECT implementation: 0.
 - `U201` CH3 input not driven.
 - `U201` CH4 input not driven.
@@ -156,9 +186,11 @@ Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 - `U201` Din input not driven.
 - `U201` `~CS/SHDN` input not driven.
 - These are intentional for now because Channel 2 and DSTK SPI are not connected yet.
-- GUI ERC after diode fix showed 6 errors only.
+- GUI ERC after footprint assignment showed 6 errors and 21 warnings.
 - The 6 errors are the expected U201 placeholder input errors: CH3, CH4, CH5, CLK, Din, and `~CS/SHDN`.
 - The temporary D331/D332 pin-not-connected errors were fixed.
+- No new D331/D332 pin-not-connected errors appeared after footprint assignment.
+- No new real RECT/ENV ERC errors appeared after footprint assignment.
 - Warnings remain, including symbol/library mismatch and existing placeholder/single-pin label warnings.
 - These warnings do not approve hardware and can be reviewed separately.
 - Do not add No ERC markers for these placeholders yet.
@@ -255,11 +287,11 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Review and accept the cleaned Channel 1 RECT schematic.
-- Review and assign D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` only after cathode-band orientation is visually checked against the schematic.
-- Review and assign U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` only after the MCP6004 symbol/library mismatch warning is reviewed.
-- Assign R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
-- Assign C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
+- Review and accept the cleaned Channel 1 RECT schematic with the newly assigned footprint fields.
+- Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
+- Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
+- Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
+- Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
 - Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
 - Do not start PCB layout yet.
