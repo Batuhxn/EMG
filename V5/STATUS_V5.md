@@ -105,7 +105,21 @@ Cleanup/checks before Channel 2 or PCB:
 - Before PCB, confirm rectifier crossover behavior and output stability with ADC RC caps and ENV/storage load.
 - Exact MCP6004 vendor LTspice model is still not locally locked.
 - Final MCP6004 purchase-page/datasheet package check is still required before ordering.
-- Resistor tolerance/matching for the 10k/20k network should be specified.
+- Channel 1 RECT resistor matching verification verdict: **RECT_RESISTOR_MATCHING_DECISION_READY**.
+- Confirmed RECT resistor roles: `R333 = 10k` RIN1, `R334 = 10k` RF1, `R335 = 1M` A1 bias / off-state return toward `analog VREF`, `R336 = 20k` RRAW2, `R337 = 10k` RA12, and `R338 = 20k` RF2.
+- Ratio-critical resistors: R333/R334 as the 10k/10k first-stage pair, and R336/R337/R338 for the weighted summer.
+- Key weighted-summer ratios: `R336 = R338 = 20k` and `R338/R337 = 2`.
+- `R335 = 1M` is not ratio-critical; it is mainly bias/leakage/off-state related.
+- First-prototype resistor decision: use 0.1% thin-film, 0805 for R333, R334, R336, R337, and R338.
+- Use the same manufacturer/series/package/tempco for the ratio-critical resistors where possible.
+- Reason: the first prototype should separate rectifier topology error from resistor mismatch.
+- `R335 = 1M` may be 1% thin-film 0805; 0.1% is optional only for BOM simplicity or later sensitivity findings.
+- Compact / cost-down alternatives: 0603 thin-film can be used later if layout density matters, and 1% thin-film may be considered after tolerance sensitivity or bench validation.
+- 1% thick-film is probably functional but is not preferred for first validation of the rectifier candidate.
+- Remaining risk: run tolerance sensitivity or bench check before relaxing ratio-critical parts to 1%.
+- Exact resistor MPN/series/tempco is still not locked.
+- MCP6004 offset/swing/crossover and BAS70 leakage may dominate small-signal error.
+- Layout should keep the ratio network close and thermally similar.
 - ENV/output cap notes were clarified to distinguish `C341 = 1uF to analog VREF`, `C351 = 4.7nF to GND`, and RAW/RECT output caps `C321/C331 = 1nF to GND`.
 - Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
 - Do not start PCB.
@@ -115,6 +129,8 @@ Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWED_CLEANED_READA
 D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 U302 MCP6004 MPN/footprint decision status: **CHANNEL_1_RECT_MCP6004_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
+
+Channel 1 RECT resistor matching decision status: **CHANNEL_1_RECT_RESISTOR_MATCHING_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 
@@ -229,7 +245,7 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 - Review and accept the cleaned Channel 1 RECT schematic.
 - Review and assign D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` only after cathode-band orientation is visually checked against the schematic.
 - Review and assign U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` only after the MCP6004 symbol/library mismatch warning is reviewed.
-- Confirm resistor matching/tolerance plan for the 10k/20k rectifier network.
+- Assign R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Confirm ENV behavior after RECT implementation.
 - Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
 - Do not start PCB layout yet.
