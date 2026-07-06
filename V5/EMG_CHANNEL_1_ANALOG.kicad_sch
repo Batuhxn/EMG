@@ -3705,7 +3705,7 @@
 				)
 			)
 		)
-		(property "Value" "BAT54/BAS70"
+		(property "Value" "BAS70ZFILM"
 			(at 276.86 183.388 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4095,7 +4095,7 @@
 				)
 			)
 		)
-		(property "Value" "BAT54/BAS70"
+		(property "Value" "BAS70ZFILM"
 			(at 276.86 173.228 0)
 			(show_name no)
 			(do_not_autoplace no)
