@@ -80,7 +80,15 @@ Cleanup/checks before Channel 2 or PCB:
 - RECT block readability cleanup was applied at checkpoint `3825181`.
 - Channel 1 RECT remains reviewable, not final hardware approval.
 - D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
-- D331/D332 footprint/BOM choice must be locked before PCB.
+- D331/D332 diode MPN/footprint direction is now recorded for first-prototype planning, but schematic footprint fields are not assigned yet.
+- D331/D332 KiCad symbol convention: `Device:D_Schottky` uses pin 1 = K / cathode and pin 2 = A / anode.
+- Current D331/D332 orientation matches the previous Channel 1 RECT review: D331 K -> `EMG1_RECT_U302B_DRV`, D331 A -> `EMG1_RECT_A1_OUT`; D332 K -> `EMG1_RECT_SUM1`, D332 A -> `EMG1_RECT_U302B_DRV`.
+- Do not use `BAS70FILM` with a plain 2-pin `Device:D_Schottky` symbol plus generic 3-pad SOT-23 footprint for the first prototype.
+- `BAS70FILM` is deferred because the ST SOT-23 single diode uses two active package pins plus a third unused/NC-style pad and needs explicit custom mapping or a project-local 3-pin symbol/footprint review.
+- Recommended D331/D332 first-prototype direction: MPN `BAS70ZFILM`, package SOD-123, KiCad symbol `Device:D_Schottky`, KiCad footprint `Diode_SMD:D_SOD-123`.
+- `BAS70ZFILM` is preferred because the two-terminal SOD-123 package avoids SOT-23 third-pad / NC ambiguity and maps cleanly to the 2-pin diode symbol.
+- Avoid `BAS70-04`, `BAS70-05`, `BAS70-06`, and BAT54A/C/S dual/common variants for this rectifier pass.
+- Before PCB/layout, visually verify D331/D332 cathode-band orientation against the KiCad footprint and rectifier schematic.
 - MCP6004 footprint/BOM choice must be reviewed before PCB.
 - Resistor tolerance/matching for the 10k/20k network should be specified.
 - ENV/output cap notes were clarified to distinguish `C341 = 1uF to analog VREF`, `C351 = 4.7nF to GND`, and RAW/RECT output caps `C321/C331 = 1nF to GND`.
@@ -88,6 +96,8 @@ Cleanup/checks before Channel 2 or PCB:
 - Do not start PCB.
 
 Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWED_CLEANED_READABILITY_NOT_FINAL_HW_APPROVAL**.
+
+D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 
@@ -200,7 +210,8 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 ## Next Actions
 
 - Review and accept the cleaned Channel 1 RECT schematic.
-- Review symbol/footprint/BOM choices for D331/D332 and MCP6004.
+- Review and assign D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` only after cathode-band orientation is visually checked against the schematic.
+- Review symbol/footprint/BOM choices for MCP6004.
 - Confirm resistor matching/tolerance plan for the 10k/20k rectifier network.
 - Confirm ENV behavior after RECT implementation.
 - Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
