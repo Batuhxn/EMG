@@ -89,7 +89,22 @@ Cleanup/checks before Channel 2 or PCB:
 - `BAS70ZFILM` is preferred because the two-terminal SOD-123 package avoids SOT-23 third-pad / NC ambiguity and maps cleanly to the 2-pin diode symbol.
 - Avoid `BAS70-04`, `BAS70-05`, `BAS70-06`, and BAT54A/C/S dual/common variants for this rectifier pass.
 - Before PCB/layout, visually verify D331/D332 cathode-band orientation against the KiCad footprint and rectifier schematic.
-- MCP6004 footprint/BOM choice must be reviewed before PCB.
+- U302 MCP6004 MPN/package/footprint verification verdict: **MCP6004_PDIP14_SOCKETED_FIRST_PROTO_READY**.
+- U302 uses KiCad symbol `Amplifier_Operational:MCP6004`.
+- U302 units are present as one package: U302A, U302B, U302C, U302D, plus power unit.
+- U302 pin mapping matches MCP6004/LM324-style quad op-amp pinout: U302A 1=OUT, 2=-, 3=+; U302B 7=OUT, 6=-, 5=+; U302C 8=OUT, 9=-, 10=+; U302D 14=OUT, 13=-, 12=+; power 4=V+, 11=V-.
+- U302 power unit is present with V+ -> `3V3_ADC` and V- -> GND.
+- C360 100nF local decoupling is present.
+- MCP6004 caveat: the schematic still has an MCP6004 symbol/library mismatch or stale metadata warning, but functional pin numbering matches the expected MCP6004 pinout.
+- Recommended U302 first-prototype direction: MPN `MCP6004-I/P`, package PDIP-14, KiCad symbol `Amplifier_Operational:MCP6004`, KiCad footprint `Package_DIP:DIP-14_W7.62mm`.
+- Use socketed PDIP for first prototype bring-up/debug.
+- Recommended compact U302 alternative: MPN `MCP6004-I/SL`, package SOIC-14, KiCad footprint `Package_SO:SOIC-14_3.9x8.7mm_P1.27mm`.
+- MCP6004-I/ST / TSSOP-14 is only a later compact option with KiCad footprint `Package_SO:TSSOP-14_4.4x5mm_P0.65mm`; it is not recommended for the first prototype because hand bring-up/debug and inspection are worse than PDIP/SOIC.
+- Before PCB, resolve/review the MCP6004 symbol/library mismatch warning before final footprint assignment.
+- Before PCB, confirm MCP6004 input common-mode range and output swing at `3V3_ADC = 3.3 V`.
+- Before PCB, confirm rectifier crossover behavior and output stability with ADC RC caps and ENV/storage load.
+- Exact MCP6004 vendor LTspice model is still not locally locked.
+- Final MCP6004 purchase-page/datasheet package check is still required before ordering.
 - Resistor tolerance/matching for the 10k/20k network should be specified.
 - ENV/output cap notes were clarified to distinguish `C341 = 1uF to analog VREF`, `C351 = 4.7nF to GND`, and RAW/RECT output caps `C321/C331 = 1nF to GND`.
 - Do not start Channel 2 until the cleaned Channel 1 RECT schematic is reviewed/accepted.
@@ -98,6 +113,8 @@ Cleanup/checks before Channel 2 or PCB:
 Final Channel 1 RECT status: **CHANNEL_1_RECT_IMPLEMENTED_REVIEWED_CLEANED_READABILITY_NOT_FINAL_HW_APPROVAL**.
 
 D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
+
+U302 MCP6004 MPN/footprint decision status: **CHANNEL_1_RECT_MCP6004_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 
 Current root ERC status after the Channel 1 RECT KiCad candidate fix pass:
 
@@ -211,7 +228,7 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 - Review and accept the cleaned Channel 1 RECT schematic.
 - Review and assign D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` only after cathode-band orientation is visually checked against the schematic.
-- Review symbol/footprint/BOM choices for MCP6004.
+- Review and assign U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` only after the MCP6004 symbol/library mismatch warning is reviewed.
 - Confirm resistor matching/tolerance plan for the 10k/20k rectifier network.
 - Confirm ENV behavior after RECT implementation.
 - Do not duplicate to Channel 2 until cleaned Channel 1 RECT review is accepted.
