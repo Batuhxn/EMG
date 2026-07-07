@@ -2322,6 +2322,36 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 185.42) (xy 88.9 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000001")
+	)
+	(wire
+		(pts
+			(xy 88.9 185.42) (xy 88.9 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 88.9 187.96) (xy 68.58 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts
 			(xy 109.22 163.83) (xy 119.38 163.83)
 		)
 		(stroke
@@ -3840,6 +3870,94 @@
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(reference "U202")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:MCP6002-xP")
+		(at 76.2 185.42 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "70000000-0000-4000-8000-000000000004")
+		(property "Reference" "U202"
+			(at 76.2 177.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MCP6002-xP"
+			(at 76.2 195.58 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 76.2 185.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 185.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 76.2 185.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "5"
+			(uuid "70000000-0000-4000-8000-000000000005")
+		)
+		(pin "6"
+			(uuid "70000000-0000-4000-8000-000000000006")
+		)
+		(pin "7"
+			(uuid "70000000-0000-4000-8000-000000000007")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 2)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 2)
 				)
 			)
 		)
