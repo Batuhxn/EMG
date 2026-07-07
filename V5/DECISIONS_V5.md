@@ -246,7 +246,7 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - KiCad GUI ERC after diode pin fixes returned to 6 expected placeholder errors only from U201 CH3/CH4/CH5/CLK/Din/`~CS/SHDN`.
 - The temporary D331/D332 pin-not-connected errors were fixed.
 - Real new ERC errors after RECT implementation: 0.
-- Warnings remain, including symbol/library mismatch and other existing planning placeholders; these do not approve hardware and can be reviewed separately.
+- Earlier warnings included symbol/library mismatch and planning placeholders; the MCP6004 and D_Schottky metadata mismatch warnings have since been cleaned. Remaining warnings are DSTK power/SPI planning placeholders only.
 - Channel 2 has since been implemented as a controlled schematic duplicate/adaptation of Channel 1 at checkpoint `60d5881`.
 - PCB remains **NOT STARTED**.
 - DSTK SPI/power remains **NOT CONNECTED**.
@@ -286,7 +286,7 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - D331/D332 pin-not-connected errors were resolved.
 - New real RECT ERC errors: 0.
 - RECT block readability cleanup was applied at checkpoint `3825181`.
-- D331/D332 and MCP6004 symbol/library mismatch warnings should be reviewed.
+- D331/D332 and MCP6004 symbol metadata mismatch warnings have since been reviewed and cleaned; exact ordering/package/orientation review still remains before PCB.
 - D331/D332 diode MPN/footprint direction is recorded for first-prototype planning, and schematic footprint fields were assigned at checkpoint `eca2cc3`.
 - D331/D332 visible schematic value text was clarified at checkpoint `8f2bf9e`.
 - D331 value is now `BAS70ZFILM`.
@@ -313,12 +313,12 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - U302 pin mapping matches MCP6004/LM324-style quad op-amp pinout: U302A 1=OUT, 2=-, 3=+; U302B 7=OUT, 6=-, 5=+; U302C 8=OUT, 9=-, 10=+; U302D 14=OUT, 13=-, 12=+; power 4=V+, 11=V-.
 - U302 power unit is present with V+ -> `3V3_ADC` and V- -> GND.
 - C360 100nF local decoupling is present.
-- MCP6004 caveat: the schematic still has an MCP6004 symbol/library mismatch or stale metadata warning, but functional pin numbering matches the expected MCP6004 pinout.
+- MCP6004 caveat: the schematic previously had an MCP6004 symbol/library mismatch or stale metadata warning, but functional pin numbering matched the expected MCP6004 pinout. The embedded MCP6004 metadata mismatch has since been cleaned without pin/unit/net/topology/refdes/value/footprint change.
 - Recommended U302 first-prototype direction: MPN `MCP6004-I/P`, package PDIP-14, KiCad symbol `Amplifier_Operational:MCP6004`, KiCad footprint `Package_DIP:DIP-14_W7.62mm`.
 - Use socketed PDIP for first prototype bring-up/debug.
 - Recommended compact U302 alternative: MPN `MCP6004-I/SL`, package SOIC-14, KiCad footprint `Package_SO:SOIC-14_3.9x8.7mm_P1.27mm`.
 - MCP6004-I/ST / TSSOP-14 is only a later compact option with KiCad footprint `Package_SO:TSSOP-14_4.4x5mm_P0.65mm`; it is not recommended for the first prototype because hand bring-up/debug and inspection are worse than PDIP/SOIC.
-- Before PCB, resolve/review the MCP6004 symbol/library mismatch warning before final footprint assignment.
+- Before PCB, keep the MCP6004 package/MPN/ordering review open even though the MCP6004 metadata mismatch warning has been cleaned.
 - Before PCB, confirm MCP6004 input common-mode range and output swing at `3V3_ADC = 3.3 V`.
 - Before PCB, confirm rectifier crossover behavior and output stability with ADC RC caps and ENV/storage load.
 - Exact MCP6004 vendor LTspice model is still not locally locked.
@@ -375,7 +375,7 @@ Current observed pad mapping from `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`:
 - No net, topology, footprint, symbol, or diode orientation change was made by the value-text clarification.
 - Exact ordering MPNs for passives are not locked yet.
 - D331/D332 cathode-band footprint orientation must be visually checked before PCB.
-- MCP6004 symbol/library mismatch warning still needs review.
+- MCP6004 package/MPN/ordering review still remains before PCB, although the MCP6004 metadata mismatch warning has since been cleaned.
 - Final Channel 1 RECT status: **CHANNEL_1_READY_FOR_CHANNEL_2_DUPLICATION_NOT_FINAL_HW_APPROVAL**.
 - D331/D332 diode MPN/footprint decision status: **CHANNEL_1_RECT_DIODE_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
 - U302 MCP6004 MPN/footprint decision status: **CHANNEL_1_RECT_MCP6004_MPN_FOOTPRINT_DECISION_READY_NOT_FINAL_HW_APPROVAL**.
@@ -424,7 +424,7 @@ Channel 2 implementation and legacy root cleanup status:
 - `3V3_ADC` / `analog VREF` label-not-connected errors were fixed.
 - No D431/D432 pin-not-connected errors appeared.
 - No new real Channel 1/Channel 2 errors remain.
-- Remaining caveats: this is not final hardware approval; D431/D432 cathode-band orientation must be visually reviewed before PCB; U302/U402 MCP6004 symbol/library mismatch warnings remain; D331/D332/D431/D432 D_Schottky symbol/library mismatch warnings remain; exact passive ordering MPNs remain unlocked; DSTK SPI/power remains disconnected; PCB remains not started.
+- Remaining caveats: this is not final hardware approval; D331/D332/D431/D432 cathode-band orientation must be visually reviewed before PCB; exact passive ordering MPNs remain unlocked; DSTK SPI/power remains disconnected; PCB remains not started. U302/U402 MCP6004 and D331/D332/D431/D432 D_Schottky metadata mismatch warnings have since been cleaned.
 
 Channel TRS and RAW gain fix decision:
 
@@ -441,10 +441,45 @@ Channel TRS and RAW gain fix decision:
 - Reason: post-implementation review found T/S mapping inversion and RAW positive-feedback risk.
 - Constraints preserved: no PCB, no DSTK SPI/power, no `ADC_REF` in analog child sheets, `REF_ELECTRODE` isolated from GND/chassis/USB, no No ERC markers.
 - Additional preserved boundaries: U301/U401 INA polarity unchanged, U302D/U402D ENV buffer unchanged, RECT path unchanged, ENV path unchanged, MCP3208/U201 mapping unchanged, root schematic unchanged, and `POWER_REFERENCE_BLOCK` unchanged.
-- Root ERC after the post-fix review reported 29 total messages: 3 errors and 26 warnings.
+- Root ERC after the earlier TRS/RAW post-fix review reported 29 total messages: 3 errors and 26 warnings; this historical result has since been superseded by the final cleanup review result of 8 total messages: 3 errors and 5 warnings.
 - Remaining errors are the expected SPI placeholders only: U201 Pin 13 CLK input not driven, U201 Pin 11 Din input not driven, and U201 Pin 10 `~CS/SHDN` input not driven.
 - No unexpected post-fix errors were reported: no new Channel 1/Channel 2 error, no U201 CH0-CH5 input error, no DGND error, no GND / `3V3_ADC` / `analog VREF` label-not-connected error, no #FLG conflict, and no D331/D332/D431/D432 pin-not-connected error.
 - This is not final hardware approval, and the local commit has not been pushed.
+
+Final cleanup / remaining ERC warning decisions:
+
+- Current status: **FINAL_WARNINGS_DOCS_SYNC_READY_NOT_FINAL_HW_APPROVAL**.
+- Current local HEAD: `ddb646e place unused U202B op amp unit safely`.
+- Recent cleanup commits:
+  - `0e23acf cleanup MCP6004 symbol metadata mismatch`
+  - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
+  - `ddb646e place unused U202B op amp unit safely`
+- Decision: clean local embedded MCP6004 metadata only.
+- Reason: the MCP6004 mismatch was metadata/library-cache level, not pin/topology.
+- Scope: U302/U402 in the Channel 1 and Channel 2 analog sheets.
+- Result: no pin, unit, net, topology, refdes, value, or footprint change; MCP6004 mismatch warnings are no longer present.
+- Decision: clean local embedded `Device:D_Schottky` metadata only.
+- Reason: the D_Schottky mismatch was `ki_fp_filters` metadata only.
+- Scope: D331/D332/D431/D432.
+- Result: `BAS70ZFILM` and `Diode_SMD:D_SOD-123` were retained; `BAT54`, `BAS70FILM`, SOT-23, or 3-pin diode ambiguity was not introduced; rectifier orientation was preserved; D_Schottky mismatch warnings are no longer present.
+- Decision: place U202B unused op amp unit as a safe unity follower.
+- Reason: unused op amp unit should not be left floating before PCB/final schematic review.
+- Implementation: U202B non-inverting input pin 5 to `analog VREF`; inverting input pin 6 tied to output pin 7; output pin 7 only local feedback.
+- U202B output is not connected to `ADC_REF`, `3V3_ADC`, GND, `VREF_MON`, `BAT_MON`, or any other signal path.
+- U202A remains the analog VREF buffer.
+- U202 power unit remains V+ -> `3V3_ADC` and V- -> GND.
+- No No ERC marker, no `no_connect`, no `global_label`, and no `PWR_FLAG` were added.
+- `ADC_REF` and `analog VREF` were not merged.
+- Decision: keep U201 SPI input errors and `ADC_SCLK` / `ADC_MISO` / `ADC_MOSI` / `ADC_CS` isolated labels until DSTK SPI integration.
+- Decision: keep `DSTK_3V3_CANDIDATE` isolated label until the DSTK power-source strategy is finalized.
+- Do not add No ERC markers for these placeholders unless explicitly decided later.
+- These remaining placeholders are blockers before PCB/final integration, but acceptable for the current schematic cleanup checkpoint.
+- Final root ERC review after the cleanup series: 3 errors / 5 warnings / 8 total messages.
+- Remaining errors are expected DSTK SPI placeholders only: U201 Pin 13 CLK input not driven, U201 Pin 11 Din input not driven, and U201 Pin 10 `~CS/SHDN` input not driven.
+- Remaining warnings are expected DSTK power/SPI planning placeholders only: `DSTK_3V3_CANDIDATE`, `ADC_SCLK`, `ADC_MISO`, `ADC_MOSI`, and `ADC_CS` isolated pin labels.
+- This is not final hardware approval.
+- PCB has not been started.
+- DSTK SPI/power has not been connected.
 
 Channel 1 RECT LTspice simulation status:
 
@@ -618,13 +653,12 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - Continue with review/planning only; do not treat the TRS/RAW gain fix as final hardware approval.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
-- Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
-- Review the U402 `MCP6004` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
+- Keep U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` and U402 `MCP6004` / `Package_DIP:DIP-14_W7.62mm` package/orderability review open before PCB; the MCP6004 metadata mismatch warning itself has been cleaned.
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
 - Plan DSTK SPI/power connection after Channel 2 post-implementation review.
-- Current root ERC target is 3 expected SPI placeholder errors only; do not add No ERC markers for them yet.
+- Current root ERC review result is 3 expected SPI placeholder errors plus 5 DSTK power/SPI planning placeholder warnings; do not add No ERC markers for them yet.
 - Do not start PCB.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval.
 - Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
