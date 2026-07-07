@@ -295,7 +295,7 @@
 					)
 				)
 			)
-			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm2902-n.pdf"
+			(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/21733j.pdf"
 				(at 1.27 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -306,7 +306,7 @@
 					)
 				)
 			)
-			(property "Description" "Low-Power, Quad-Operational Amplifiers, DIP-14/SOIC-14/SSOP-14"
+			(property "Description" "1MHz, Low-Power Op Amp, DIP-14/SOIC-14/TSSOP-14"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
