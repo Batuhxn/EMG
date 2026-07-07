@@ -426,6 +426,26 @@ Channel 2 implementation and legacy root cleanup status:
 - No new real Channel 1/Channel 2 errors remain.
 - Remaining caveats: this is not final hardware approval; D431/D432 cathode-band orientation must be visually reviewed before PCB; U302/U402 MCP6004 symbol/library mismatch warnings remain; D331/D332/D431/D432 D_Schottky symbol/library mismatch warnings remain; exact passive ordering MPNs remain unlocked; DSTK SPI/power remains disconnected; PCB remains not started.
 
+Channel TRS and RAW gain fix decision:
+
+- Current status: **CHANNEL_TRS_AND_RAW_GAIN_FIX_COMMITTED_NOT_PUSHED_NOT_FINAL_HW_APPROVAL**.
+- Commit `1e5d3b0 fix channel trs mapping and raw gain input polarity` records the accepted schematic fix.
+- Decision: TRS physical mapping and schematic net mapping fixed for both channels.
+- J301 mapping is now Tip/T -> `EMG1_IN_P`, Ring/R -> `EMG1_IN_N`, Sleeve/S -> `EMG1_REF_ELECTRODE`.
+- J401 mapping is now Tip/T -> `EMG2_IN_P`, Ring/R -> `EMG2_IN_N`, Sleeve/S -> `EMG2_REF_ELECTRODE`.
+- Physical TRS electrode cable measurement note: sari/yellow tip = Tip/T, yesil/green middle body = Ring/R, kirmizi/red rear body = Sleeve/S.
+- Resulting project mapping: sari/yellow Tip/T -> `EMGx_IN_P`, yesil/green Ring/R -> `EMGx_IN_N`, kirmizi/red Sleeve/S -> `EMGx_REF_ELECTRODE`.
+- Decision: RAW gain op-amp input polarity fixed for both channels.
+- U302A now has `RAW_HPF_NODE` on the non-inverting input / + and `RAW_GAIN_FB` on the inverting input / -; U302A output downstream RAW path is preserved.
+- U402A now has `EMG2_RAW_HPF_NODE` on the non-inverting input / + and `EMG2_RAW_GAIN_FB` on the inverting input / -; U402A output downstream RAW path is preserved.
+- Reason: post-implementation review found T/S mapping inversion and RAW positive-feedback risk.
+- Constraints preserved: no PCB, no DSTK SPI/power, no `ADC_REF` in analog child sheets, `REF_ELECTRODE` isolated from GND/chassis/USB, no No ERC markers.
+- Additional preserved boundaries: U301/U401 INA polarity unchanged, U302D/U402D ENV buffer unchanged, RECT path unchanged, ENV path unchanged, MCP3208/U201 mapping unchanged, root schematic unchanged, and `POWER_REFERENCE_BLOCK` unchanged.
+- Root ERC after the post-fix review reported 29 total messages: 3 errors and 26 warnings.
+- Remaining errors are the expected SPI placeholders only: U201 Pin 13 CLK input not driven, U201 Pin 11 Din input not driven, and U201 Pin 10 `~CS/SHDN` input not driven.
+- No unexpected post-fix errors were reported: no new Channel 1/Channel 2 error, no U201 CH0-CH5 input error, no DGND error, no GND / `3V3_ADC` / `analog VREF` label-not-connected error, no #FLG conflict, and no D331/D332/D431/D432 pin-not-connected error.
+- This is not final hardware approval, and the local commit has not been pushed.
+
 Channel 1 RECT LTspice simulation status:
 
 - Simulation planning/prototype files now exist:
@@ -566,6 +586,8 @@ Channel 1 RECT KiCad candidate: **IMPLEMENTED / REVIEWED / NOT FINAL HARDWARE AP
 
 Channel 2 analog schematic: **IMPLEMENTED / NOT FINAL HARDWARE APPROVAL**.
 
+Channel TRS / RAW gain fix: **COMMITTED LOCALLY / NOT PUSHED / NOT FINAL HARDWARE APPROVAL**.
+
 PCB layout: **NO**.
 
 Small power/reference schematic block proposal: **READY_FOR_REVIEW**.
@@ -592,7 +614,8 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Perform Channel 2 post-implementation review.
+- Keep `1e5d3b0` local until push is explicitly approved.
+- Continue with review/planning only; do not treat the TRS/RAW gain fix as final hardware approval.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
@@ -635,4 +658,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_REMOVED_NOT_FINAL_HW_APPROVAL**
+Final decision: **CHANNEL_TRS_AND_RAW_GAIN_FIX_COMMITTED_NOT_PUSHED_NOT_FINAL_HW_APPROVAL**

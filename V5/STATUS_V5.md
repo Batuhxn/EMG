@@ -1,6 +1,6 @@
 # EMG V5 Status
 
-Date: 2026-07-06
+Date: 2026-07-07
 
 ## Current State
 
@@ -8,6 +8,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 
 Current schematic checkpoint:
 
+- `1e5d3b0 fix channel trs mapping and raw gain input polarity`
 - `080eef1 remove legacy root emg schematic block`
 - `60d5881 implement channel 2 analog schematic`
 - Root schematic: `V5/EMG_v5.kicad_sch`
@@ -28,6 +29,21 @@ Current schematic status:
 - USB plus external 3.3 V simultaneous connection: **NOT APPROVED**
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
+
+Channel TRS / RAW gain fix status: **CHANNEL_TRS_AND_RAW_GAIN_FIX_COMMITTED_NOT_PUSHED_NOT_FINAL_HW_APPROVAL**.
+
+- Commit `1e5d3b0 fix channel trs mapping and raw gain input polarity` is local and has not been pushed to `github-emg/v5/measured-dstk22807-footprint` yet.
+- J301 TRS mapping is fixed: Tip/T -> `EMG1_IN_P`, Ring/R -> `EMG1_IN_N`, Sleeve/S -> `EMG1_REF_ELECTRODE`.
+- J401 TRS mapping is fixed: Tip/T -> `EMG2_IN_P`, Ring/R -> `EMG2_IN_N`, Sleeve/S -> `EMG2_REF_ELECTRODE`.
+- Physical TRS electrode cable measurement note: sari/yellow tip = Tip/T, yesil/green middle body = Ring/R, kirmizi/red rear body = Sleeve/S.
+- With that physical measurement, the project mapping is now sari/yellow Tip/T -> `EMGx_IN_P`, yesil/green Ring/R -> `EMGx_IN_N`, and kirmizi/red Sleeve/S -> `EMGx_REF_ELECTRODE`.
+- U302A RAW gain topology is fixed: `RAW_HPF_NODE` -> U302A non-inverting input / +, `RAW_GAIN_FB` -> U302A inverting input / -, and the U302A output downstream RAW path is preserved.
+- U402A RAW gain topology is fixed: `EMG2_RAW_HPF_NODE` -> U402A non-inverting input / +, `EMG2_RAW_GAIN_FB` -> U402A inverting input / -, and the U402A output downstream RAW path is preserved.
+- Preserved boundaries: U301/U401 INA polarity unchanged; U302D/U402D ENV buffer unchanged; RECT path unchanged; ENV path unchanged; MCP3208/U201 mapping unchanged; root schematic unchanged; `POWER_REFERENCE_BLOCK` unchanged.
+- PCB was not started, DSTK SPI/power was not connected, no No ERC markers were added, and this is not final hardware approval.
+- Root ERC in the post-fix review reported 29 total messages: 3 errors and 26 warnings.
+- Remaining errors are the expected SPI placeholders only: U201 Pin 13 CLK input not driven, U201 Pin 11 Din input not driven, and U201 Pin 10 `~CS/SHDN` input not driven.
+- No unexpected post-fix errors were reported: no new Channel 1/Channel 2 error, no U201 CH0-CH5 input error, no DGND error, no GND / `3V3_ADC` / `analog VREF` label-not-connected error, no #FLG conflict, and no D331/D332/D431/D432 pin-not-connected error.
 
 Channel 2 and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_REMOVED_NOT_FINAL_HW_APPROVAL**.
 
@@ -369,7 +385,8 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Perform Channel 2 post-implementation review.
+- Keep `1e5d3b0` as a local, not-yet-pushed checkpoint until push is explicitly approved.
+- Continue with review/planning only; do not treat the TRS/RAW gain fix as final hardware approval.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review the U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` assignment alongside the remaining MCP6004 symbol/library mismatch warning.
