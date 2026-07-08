@@ -299,6 +299,59 @@ Battery decision for first analog validation:
 - Pre-schematic implementation gate: select exact regulator MPN/package/footprint.
 - Pre-schematic implementation gate: define no-USB human-contact procedure.
 
+3xAA LDO current/dropout target decision:
+
+- Current status: **3XAA_LDO_CURRENT_DROPOUT_TARGETS_REVIEWED_NOT_IMPLEMENTED**.
+- Decision: use preliminary first-validation LDO output current capability target of at least 50 mA for `3V3_ADC`, pending datasheet lookup and measured analog/ADC load.
+- Decision: allow 100 mA or higher regulator class only if noise, dropout, quiescent current, package thermal behavior, reverse-current behavior, and capacitor stability remain suitable.
+- Decision: do not treat output current rating alone as a selection criterion.
+- Decision: use preliminary dropout target of <=300 mV at the chosen current budget target.
+- Decision: prefer <=200 mV dropout at the expected measured analog/ADC load.
+- Decision: use preliminary LDO Vin max target of >=5.5 V preferred minimum and >=6.0 V more comfortable.
+- Decision: do not select regulator MPN/package/footprint in this checkpoint.
+- Decision: do not approve schematic implementation in this checkpoint.
+- Decision: do not approve DSTK 3V3 or 5V/VBUS as analog/ADC rail sources.
+- Reason: the analog/ADC load is expected to be modest, but exact current must come from datasheet lookup and bench measurement.
+- Reason: a 50 mA class target gives a practical first-validation margin without blindly oversizing.
+- Reason: 100 mA or higher may be easy to source, but oversizing can affect package, quiescent current, noise, dropout, and stability tradeoffs.
+- Reason: lower dropout increases usable 3xAA alkaline battery range.
+- Reason: fresh 3xAA alkaline pack voltage may be around 4.5 V to 4.8 V, so LDO input rating and `BAT_MON` maximum-voltage review need margin.
+- Reason: 3xAA NiMH is not equivalent because nominal pack voltage is about 3.6 V and dropout margin is much narrower.
+- Reason: `3V3_ADC` ripple/noise affects ADC readings.
+- Reason: `ADC_REF` ripple affects ADC full-scale behavior directly.
+- Reason: `analog VREF` noise affects RAW/RECT/ENV bias behavior.
+- Current budget framework: U201 MCP3208 requires datasheet lookup, bench measurement, and margin.
+- Current budget framework: U202 MCP6002 analog VREF buffer and safe unused follower require datasheet lookup and bench measurement.
+- Current budget framework: U302 MCP6004 Channel 1 analog/RECT/ENV requires datasheet lookup and bench measurement.
+- Current budget framework: U402 MCP6004 Channel 2 analog/RECT/ENV requires datasheet lookup and bench measurement.
+- Current budget framework: U301 INA333 Channel 1 requires datasheet lookup.
+- Current budget framework: U401 INA333 Channel 2 requires datasheet lookup.
+- Current budget framework: analog VREF divider/buffer loading requires estimate and bench measurement.
+- Current budget framework: `ADC_REF` feed/decoupling loading requires datasheet and bench review.
+- Current budget framework: `BAT_MON` divider loading and ADC source impedance require review.
+- Current budget framework: `VREF_MON` sampling path requires review.
+- Current budget framework: test points, leakage, and margin must be included in the current budget margin.
+- Schematic implementation gate: LDO current target selected.
+- Schematic implementation gate: LDO dropout target selected.
+- Schematic implementation gate: LDO Vin max target selected.
+- Schematic implementation gate: LDO noise/PSRR target language accepted.
+- Schematic implementation gate: protection strategy selected.
+- Schematic implementation gate: switch strategy selected.
+- Schematic implementation gate: `BAT_MON` divider maximum voltage and ratio selected.
+- Schematic implementation gate: test points confirmed: `BAT_PACK`, `3V3_ADC`, `ADC_REF`, `analog VREF`, and GND.
+- Schematic implementation gate: `ADC_REF` generation/decoupling strategy selected.
+- Schematic implementation gate: analog VREF buffer loading checked.
+- Schematic implementation gate: exact regulator MPN/package/footprint selected later.
+- Schematic implementation gate: no-USB human-contact procedure documented.
+- Constraint: 3xAA alkaline remains first analog validation only.
+- Constraint: 3xAA is not final product battery selection.
+- Constraint: 1S protected Li-ion/LiPo remains deferred final product battery candidate.
+- Constraint: `ADC_REF` and `analog VREF` remain separate.
+- Constraint: human-contact testing remains battery-isolated only.
+- Constraint: USB must be disconnected when electrodes are attached to a human.
+- Constraint: battery-powered operation alone is not final safety approval.
+- Constraint: PCB/enclosure/isolation safety must be reviewed separately before final human test approval.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -868,4 +921,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **3XAA_LOW_NOISE_3V3_ADC_LDO_REQUIREMENTS_REVIEWED_NOT_IMPLEMENTED**
+Final decision: **3XAA_LDO_CURRENT_DROPOUT_TARGETS_REVIEWED_NOT_IMPLEMENTED**

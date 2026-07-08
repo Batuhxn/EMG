@@ -9,7 +9,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local/remote HEAD: `854e438 sync docs with first 3xaa battery decision`
+- Current local/remote HEAD: `2f772d8 sync docs with 3xaa ldo requirements`
 - Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
 - Working tree baseline after push: clean.
 - Recent pushed DSTK/SPI commits:
@@ -19,6 +19,7 @@ Current branch / checkpoint:
   - `54d9089 sync docs with dstk power strategy`
   - `eba22c8 sync docs with local 3v3 adc regulator plan`
   - `854e438 sync docs with first 3xaa battery decision`
+  - `2f772d8 sync docs with 3xaa ldo requirements`
 - Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
@@ -184,6 +185,33 @@ Battery decision status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FIN
 - `analog VREF` 1.65 V analog front-end bias/reference node'dur, ADC full-scale reference değildir.
 - Human-contact testing battery-isolated only ve USB disconnected policy korunur.
 - BLE idle/active noise comparison, human-electrode connected test approval değildir; yalnızca no-human bench/debug veya ileride ayrı onaylanmış battery-powered DSTK senaryosu için measurement item olarak kalır.
+- This is not final hardware approval.
+
+3xAA LDO current/dropout target review status: **3XAA_LDO_CURRENT_DROPOUT_TARGETS_REVIEWED_NOT_IMPLEMENTED**.
+
+- 3xAA alkaline -> low-noise 3.3 V LDO -> `3V3_ADC` path current/dropout/input/noise targets have been reviewed.
+- This is only a pre-schematic target review.
+- No schematic edit has been made.
+- PCB has not been started.
+- Regulator MPN/package/footprint has not been selected.
+- BOM has not been locked.
+- Practical first-validation LDO current capability target: at least 50 mA, pending datasheet lookup and measured analog/ADC load.
+- 100 mA or higher regulator class may be acceptable only if noise, dropout, package thermal behavior, quiescent current, reverse-current behavior, and capacitor stability remain suitable.
+- No blind oversizing decision has been made.
+- Preliminary dropout target: <=300 mV at the chosen current budget target.
+- Preferred dropout target: <=200 mV at the expected measured analog/ADC load.
+- Preliminary LDO Vin max target: >=5.5 V preferred minimum, >=6.0 V more comfortable for 3xAA alkaline fresh/open-circuit margin.
+- These are review targets, not final component specs.
+- 3xAA alkaline fresh/open-circuit pack voltage is treated as approximately 4.5 V to 4.8 V for margin review.
+- LDO regulation is lost when loaded battery pack voltage drops below 3.3 V plus selected LDO dropout.
+- 3xAA NiMH remains outside this decision because nominal pack voltage gives much narrower dropout margin.
+- Thermal sanity estimate: `P_LDO = (Vin - 3.3 V) * Iload`. At Vin 4.8 V, 50 mA is about 75 mW and 100 mA is about 150 mW before package/enclosure review.
+- DSTK 3V3/5V remain not approved for analog/ADC rails.
+- MCP3208 VDD remains planned from selected `3V3_ADC`.
+- MCP3208 VREF remains `ADC_REF`.
+- `ADC_REF` and `analog VREF` remain separate.
+- Human-contact testing remains battery-isolated only, with USB disconnected.
+- SPI/BLE active noise comparison is a bench/debug measurement item only and does not approve human-electrode testing with USB or unresolved DSTK power.
 - This is not final hardware approval.
 
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
