@@ -225,6 +225,37 @@ Local/separate 3V3_ADC regulator pre-schematic decision:
 - Human safety boundary: this is a student/prototype sensor development record, not medical device approval.
 - Human safety boundary: PCB/enclosure/isolation safety must be reviewed separately before any final human test approval.
 
+Battery decision for first analog validation:
+
+- Current status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FINAL_PRODUCT**.
+- Decision: use 3xAA alkaline battery pack as the first analog validation / bring-up battery candidate.
+- Decision: do not treat 3xAA as the final product battery decision.
+- Decision: keep 1S protected Li-ion/LiPo as the later final product battery candidate.
+- Decision: defer Li-ion/LiPo implementation until analog chain behavior, regulator topology, `3V3_ADC` current budget, charger/backfeed behavior, and human-contact safety procedure are reviewed.
+- Decision: do not approve any schematic battery/regulator implementation in this checkpoint.
+- Decision: do not approve DSTK 3V3 as the `3V3_ADC` source.
+- Decision: do not approve DSTK 5V/VBUS for analog/ADC rails.
+- Reason: 3xAA alkaline gives a simple battery-isolated source for first analog validation.
+- Reason: 3xAA avoids USB charger/load-sharing/backfeed variables during early analog bring-up.
+- Reason: 3xAA allows low-noise 3.3 V LDO evaluation without immediately introducing boost/buck-boost switching noise.
+- Reason: 3xAA is easier to debug and measure during first bench validation.
+- Reason: 1S Li-ion/LiPo is better for final product form factor and rechargeability, but it needs buck-boost or buck-boost plus low-noise LDO review for stable 3.3 V operation across the discharge range.
+- Reason: Li-ion/LiPo also requires charger/protection/load-sharing and human-contact safety policy review.
+- Constraint: 3xAA path still requires regulator selection before schematic implementation.
+- Constraint: battery chemistry for final product remains unlocked.
+- Constraint: regulator MPN/package/footprint remains unlocked.
+- Constraint: MCP3208 VDD remains planned from selected `3V3_ADC`.
+- Constraint: MCP3208 VREF remains `ADC_REF` and must stay within VDD limits.
+- Constraint: `ADC_REF` and `analog VREF` must remain separate.
+- Constraint: `REF_ELECTRODE` nets must not be connected to GND/chassis/USB.
+- Constraint: USB-powered human EMG testing is not approved.
+- Constraint: USB must be disconnected when electrodes are attached to a human.
+- Constraint: battery-powered operation is required for human-contact testing, but battery-powered alone is not final safety approval.
+- Constraint: PCB/enclosure/isolation safety must be reviewed separately before any final human test approval.
+- Future architecture note: first analog validation candidate is 3xAA alkaline -> switch/protection -> low-noise 3.3 V regulator -> `3V3_ADC`.
+- Future architecture note: later final product candidate is 1S protected Li-ion/LiPo -> charger/protection policy -> buck-boost or buck-boost plus low-noise LDO -> `3V3_ADC`.
+- Boundary: do not implement either architecture in schematic in this docs-only checkpoint.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -794,4 +825,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **LOCAL_3V3_ADC_REGULATOR_PRE_SCHEMATIC_PLAN_REVIEWED_NOT_IMPLEMENTED**
+Final decision: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FINAL_PRODUCT**

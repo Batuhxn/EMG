@@ -9,7 +9,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local/remote HEAD: `54d9089 sync docs with dstk power strategy`
+- Current local/remote HEAD: `eba22c8 sync docs with local 3v3 adc regulator plan`
 - Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
 - Working tree baseline after push: clean.
 - Recent pushed DSTK/SPI commits:
@@ -17,6 +17,7 @@ Current branch / checkpoint:
   - `3494631 sync kicad metadata and analog label placement`
   - `352b06f sync docs with dstk spi integration`
   - `54d9089 sync docs with dstk power strategy`
+  - `eba22c8 sync docs with local 3v3 adc regulator plan`
 - Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
@@ -139,6 +140,26 @@ Pre-schematic local 3V3_ADC measurement checklist:
 - Power-up/power-down sequencing.
 - Reverse current path check.
 - Thermal check under expected load.
+
+Battery decision status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FINAL_PRODUCT**.
+
+- First analog validation / bring-up battery candidate is 3xAA alkaline battery pack.
+- This is selected only for first analog validation and controlled bench bring-up.
+- This is not the final product battery decision.
+- Final product battery candidate remains 1S protected Li-ion/LiPo.
+- Li-ion/LiPo path is deferred until analog chain behavior, `3V3_ADC` current budget, regulator noise, backfeed behavior, and safety procedure are better defined.
+- Reason for 3xAA first: simple isolated source, no charger/USB backfeed complexity, easier debug, and lower switching-noise risk than boost/buck-boost-first approaches.
+- Expected future first-validation architecture: 3xAA alkaline -> switch/protection -> low-noise 3.3 V regulator -> `3V3_ADC`.
+- Regulator MPN/package/footprint has not been selected.
+- 3xAA regulator schematic implementation has not been approved yet.
+- No schematic edit has been made for this battery decision.
+- No PCB work has been started.
+- DSTK 3V3 remains unapproved as the `3V3_ADC` source.
+- DSTK 5V/VBUS remains no-go for analog/ADC rails.
+- `ADC_REF` remains separate from `analog VREF`.
+- Human-contact EMG testing remains battery-isolated only.
+- USB must be disconnected from any human-electrode test setup.
+- This is not final hardware approval.
 
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
 
