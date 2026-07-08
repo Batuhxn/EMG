@@ -9,9 +9,13 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local HEAD: `ddb646e place unused U202B op amp unit safely`
-- Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` may still be at `a577711`; local branch is ahead by 3 commits and has not been pushed.
-- Recent cleanup commits:
+- Current local/remote HEAD: `3494631 sync kicad metadata and analog label placement`
+- Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
+- Working tree baseline after push: clean.
+- Recent pushed DSTK/SPI commits:
+  - `79730dd connect dstk spi and mark unused pins`
+  - `3494631 sync kicad metadata and analog label placement`
+- Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
   - `ddb646e place unused U202B op amp unit safely`
@@ -33,28 +37,58 @@ Current schematic status:
 - Channel 2 analog schematic: **IMPLEMENTED / NOT FINAL HARDWARE APPROVAL**
 - PCB layout: **NOT STARTED / NO**
 - Full two-channel analog EMG chain schematic: **CANDIDATES IMPLEMENTED / NOT FINAL HARDWARE APPROVAL**
+- DSTK SPI-only integration: **CONNECTED / REVIEWED / NOT FINAL HARDWARE APPROVAL**
 - DSTK external 3.3 V powering: **NOT APPROVED YET**
 - USB plus external 3.3 V simultaneous connection: **NOT APPROVED**
 - Human USB testing: **FORBIDDEN**
 - 5V analog/ADC: **NOT APPROVED**
 
-Final remaining ERC/warnings status: **FINAL_WARNINGS_DOCS_SYNC_READY_NOT_FINAL_HW_APPROVAL**.
+DSTK SPI/U501 status: **DSTK_SPI_CONNECTED_U501_UNUSED_PINS_MARKED_NOT_FINAL_HW_APPROVAL**.
 
-- Root ERC final review after the cleanup series reported 8 total messages: 3 errors and 5 warnings.
-- Remaining errors are expected DSTK SPI placeholders only:
-  - U201 Pin 13 CLK input not driven
-  - U201 Pin 11 Din input not driven
-  - U201 Pin 10 `~CS/SHDN` input not driven
-- Remaining warnings are expected DSTK power/SPI planning placeholders only:
-  - `DSTK_3V3_CANDIDATE` isolated pin label
-  - `ADC_SCLK` isolated pin label
-  - `ADC_MISO` isolated pin label
-  - `ADC_MOSI` isolated pin label
-  - `ADC_CS` isolated pin label
-- U302/U402 MCP6004 mismatch warnings are no longer present.
-- D331/D332/D431/D432 D_Schottky mismatch warnings are no longer present.
-- Unconnected wire endpoint warnings are no longer present.
-- U202 missing/unplaced unit warnings are no longer present.
+- Commit `79730dd connect dstk spi and mark unused pins` connected the DSTK22807 SPI-only path and marked intentional U501 unused pins.
+- Commit `3494631 sync kicad metadata and analog label placement` recorded KiCad sheet metadata sync plus analog reference/value placement cleanup.
+- U501 was added to the root schematic with symbol `EMG_V5:DSTK22807_ESP32H2_SuperMini_Measured`.
+- U501 footprint is `EMG_V5:DSTK22807_ESP32H2_SuperMini_Carrier_Measured_THT`.
+- U501 GND / pin 11 is connected to root/system GND for SPI logic reference only.
+- This GND connection is not DSTK power-source approval.
+- MCP3208 SPI mapping is now:
+  - `ADC_CS` -> U501 GPIO14 / pin 13
+  - `ADC_SCLK` -> U501 GPIO13 / pin 14
+  - `ADC_MOSI` -> U501 GPIO12 / pin 15
+  - `ADC_MISO` -> U501 GPIO11 / pin 16
+- U201 MCP3208 SPI mapping remains: CLK -> `ADC_SCLK`, Din -> `ADC_MOSI`, Dout -> `ADC_MISO`, CS/SHDN -> `ADC_CS`.
+- `POWER_REFERENCE_BLOCK` exposes `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` as hierarchical labels/sheet pins to root.
+- Analog channel mapping remains CH0 -> `EMG1_RAW`, CH1 -> `EMG1_RECT`, CH2 -> `EMG1_ENV`, CH3 -> `EMG2_RAW`, CH4 -> `EMG2_RECT`, CH5 -> `EMG2_ENV`, CH6 -> `VREF_MON`, CH7 -> `BAT_MON`.
+- Explicit KiCad no_connect markers are used only for intentional unused U501 pins: TX, RX, GPIO0, GPIO1, GPIO2, GPIO3, GPIO4, GPIO5, GPIO8, 5V_VBUS, 3V3, GPIO10, and GPIO9.
+- No ERC marker was used.
+- no_connect markers are not placed on U501 GND or SPI-connected pins.
+- U501 3V3 is not connected to any rail.
+- U501 5V_VBUS is not connected to any rail.
+- There is no DSTK 3V3 -> `3V3_ADC` connection.
+- There is no 5V analog/ADC supply.
+- USB/backfeed strategy remains unresolved.
+- `DSTK_3V3_CANDIDATE` remains a power strategy placeholder.
+- `V5/EMG_v5.kicad_pro` sheet metadata / sheets list sync was committed; `EMG_CHANNEL_2_ANALOG` is present in the sheet list.
+- ERC/project/library settings were not intentionally changed by the metadata sync.
+- Channel 1/2 analog sheet changes in the metadata/placement commit were limited to R301/R302/R303 and R401/R402/R403 reference/value property placement.
+- No Channel 1/2 net, wire, pin, topology, value, or footprint change was made by that placement cleanup.
+
+Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
+
+- Root ERC after DSTK SPI/U501 cleanup reported 2 total messages: 0 errors and 2 warnings.
+- Remaining warnings:
+  - U501 footprint library warning: current CLI config does not include the `EMG_V5` footprint library.
+  - `DSTK_3V3_CANDIDATE` isolated pin label.
+- Closed by DSTK SPI/U501 work:
+  - U201 CLK/Din/`~CS/SHDN` input-not-driven errors.
+  - `ADC_CS` / `ADC_SCLK` / `ADC_MOSI` / `ADC_MISO` isolated label warnings.
+  - U501 unused pin-not-connected errors.
+  - U501 RX input-not-driven error.
+  - U501 3V3/5V_VBUS power input-not-driven errors.
+- U302/U402 MCP6004 mismatch warnings remain absent.
+- D331/D332/D431/D432 D_Schottky mismatch warnings remain absent.
+- Unconnected wire endpoint warnings remain absent.
+- U202 missing/unplaced unit warnings remain absent.
 - No label-not-connected or pin-not-connected errors remain.
 - No U201 DGND error remains.
 - No #FLG conflict remains.
@@ -66,7 +100,8 @@ Cleanup series technical summary:
 - D_Schottky cleanup: D331/D332/D431/D432 embedded `Device:D_Schottky` metadata mismatch was cleaned as `ki_fp_filters` metadata sync only. They remain `Device:D_Schottky`, value `BAS70ZFILM`, footprint `Diode_SMD:D_SOD-123`, with pin convention pin 1 = K / cathode and pin 2 = A / anode. Rectifier topology and diode orientation were preserved.
 - U202B unused unit cleanup: U202 is `MCP6002-xP` in `POWER_REFERENCE_BLOCK`; U202A remains the analog VREF buffer; the U202 power unit remains V+ -> `3V3_ADC` and V- -> GND. U202B/unit 2 was placed as a safe unused unity follower with pin 5 (+) to `analog VREF`, pin 6 (-) tied to pin 7 output, and pin 7 only local feedback. U202B output is not connected to `analog VREF`, `ADC_REF`, `3V3_ADC`, GND, `VREF_MON`, `BAT_MON`, or any other signal path.
 - PCB has not been started.
-- DSTK SPI/power has not been connected.
+- DSTK power strategy has not been solved.
+- DSTK SPI is connected only as SPI logic integration.
 - Final hardware approval has not been given.
 - `ADC_REF` is not placed inside analog child sheets.
 - `ADC_REF` is not merged with `analog VREF`.
@@ -74,9 +109,9 @@ Cleanup series technical summary:
 - `EMG1_REF_ELECTRODE` and `EMG2_REF_ELECTRODE` remain high-Z/reference electrode only and are not tied to GND/chassis/USB.
 - No No ERC markers were added.
 
-Channel TRS / RAW gain fix status: **CHANNEL_TRS_AND_RAW_GAIN_FIX_COMMITTED_NOT_PUSHED_NOT_FINAL_HW_APPROVAL**.
+Channel TRS / RAW gain fix status: **CHANNEL_TRS_AND_RAW_GAIN_FIX_PUSHED_NOT_FINAL_HW_APPROVAL**.
 
-- Commit `1e5d3b0 fix channel trs mapping and raw gain input polarity` is local and has not been pushed to `github-emg/v5/measured-dstk22807-footprint` yet.
+- Commit `1e5d3b0 fix channel trs mapping and raw gain input polarity` has been pushed to `github-emg/v5/measured-dstk22807-footprint` as part of the current branch history.
 - J301 TRS mapping is fixed: Tip/T -> `EMG1_IN_P`, Ring/R -> `EMG1_IN_N`, Sleeve/S -> `EMG1_REF_ELECTRODE`.
 - J401 TRS mapping is fixed: Tip/T -> `EMG2_IN_P`, Ring/R -> `EMG2_IN_N`, Sleeve/S -> `EMG2_REF_ELECTRODE`.
 - Physical TRS electrode cable measurement note: sari/yellow tip = Tip/T, yesil/green middle body = Ring/R, kirmizi/red rear body = Sleeve/S.
@@ -84,9 +119,9 @@ Channel TRS / RAW gain fix status: **CHANNEL_TRS_AND_RAW_GAIN_FIX_COMMITTED_NOT_
 - U302A RAW gain topology is fixed: `RAW_HPF_NODE` -> U302A non-inverting input / +, `RAW_GAIN_FB` -> U302A inverting input / -, and the U302A output downstream RAW path is preserved.
 - U402A RAW gain topology is fixed: `EMG2_RAW_HPF_NODE` -> U402A non-inverting input / +, `EMG2_RAW_GAIN_FB` -> U402A inverting input / -, and the U402A output downstream RAW path is preserved.
 - Preserved boundaries: U301/U401 INA polarity unchanged; U302D/U402D ENV buffer unchanged; RECT path unchanged; ENV path unchanged; MCP3208/U201 mapping unchanged; root schematic unchanged; `POWER_REFERENCE_BLOCK` unchanged.
-- PCB was not started, DSTK SPI/power was not connected, no No ERC markers were added, and this is not final hardware approval.
-- Root ERC in the earlier TRS/RAW post-fix review reported 29 total messages: 3 errors and 26 warnings; this historical result has since been superseded by the final cleanup review result of 8 total messages: 3 errors and 5 warnings.
-- Remaining errors are the expected SPI placeholders only: U201 Pin 13 CLK input not driven, U201 Pin 11 Din input not driven, and U201 Pin 10 `~CS/SHDN` input not driven.
+- PCB was not started, DSTK power was not connected, no No ERC markers were added, and this is not final hardware approval.
+- Root ERC in the earlier TRS/RAW post-fix review reported 29 total messages: 3 errors and 26 warnings; this historical result has since been superseded by the DSTK SPI/U501 review result of 2 total messages: 0 errors and 2 warnings.
+- Former U201 SPI placeholder errors are now closed by the DSTK SPI-only integration.
 - No unexpected post-fix errors were reported: no new Channel 1/Channel 2 error, no U201 CH0-CH5 input error, no DGND error, no GND / `3V3_ADC` / `analog VREF` label-not-connected error, no #FLG conflict, and no D331/D332/D431/D432 pin-not-connected error.
 
 Channel 2 and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_REMOVED_NOT_FINAL_HW_APPROVAL**.
@@ -101,7 +136,7 @@ Channel 2 and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_RE
 - `EMG2_REF_ELECTRODE` remains isolated from GND/chassis/USB.
 - No No ERC markers were added.
 - PCB was not started.
-- DSTK SPI/power was not connected.
+- At that checkpoint, DSTK SPI/power was not connected; DSTK SPI has since been connected in commit `79730dd`.
 - EMG2 outputs are integrated with MCP3208 U201: `EMG2_RAW -> CH3`, `EMG2_RECT -> CH4`, and `EMG2_ENV -> CH5`.
 - Previous U201 CH3/CH4/CH5 placeholder input errors disappeared.
 - Channel 2 inherited the Channel 1 BOM/footprint strategy: D431/D432 use `BAS70ZFILM`, `Device:D_Schottky`, and `Diode_SMD:D_SOD-123`; U402 uses MCP6004 and `Package_DIP:DIP-14_W7.62mm`; Channel 2 RECT resistors inherit the 0805 resistor footprint strategy; relevant capacitors inherit the 0805 capacitor footprint strategy.
@@ -119,7 +154,7 @@ Channel 2 and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED_LEGACY_ROOT_RE
 - `3V3_ADC` / `analog VREF` label-not-connected errors were fixed.
 - No D431/D432 pin-not-connected errors appeared.
 - No new real Channel 1/Channel 2 errors remain.
-- Remaining caveats: this is not final hardware approval; D331/D332/D431/D432 cathode-band orientation must be visually reviewed before PCB; exact passive ordering MPNs remain unlocked; DSTK SPI/power remains disconnected; PCB remains not started. U302/U402 MCP6004 and D331/D332/D431/D432 D_Schottky metadata mismatch warnings have since been cleaned.
+- Remaining caveats: this is not final hardware approval; D331/D332/D431/D432 cathode-band orientation must be visually reviewed before PCB; exact passive ordering MPNs remain unlocked; DSTK power remains unresolved; PCB remains not started. U302/U402 MCP6004 and D331/D332/D431/D432 D_Schottky metadata mismatch warnings have since been cleaned.
 
 Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 
@@ -154,7 +189,7 @@ Channel 1 analog / RECT implementation status at checkpoint `8f2bf9e`:
 - `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
 - Channel 2 was later implemented as a controlled schematic duplicate/adaptation of Channel 1 at checkpoint `60d5881`.
 - PCB remains **NOT STARTED**.
-- DSTK SPI/power remains **NOT CONNECTED**.
+- DSTK power remains **NOT CONNECTED / NOT APPROVED**; DSTK SPI-only logic wiring is now connected.
 - Exact MCP600x vendor model and exact diode model limitations still remain.
 Channel 1 RECT post-implementation review result:
 
@@ -309,7 +344,7 @@ Channel 2 implementation and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED
 - `EMG2_REF_ELECTRODE` remains isolated from GND/chassis/USB.
 - No No ERC markers were added.
 - PCB was not started.
-- DSTK SPI/power was not connected.
+- At that checkpoint, DSTK SPI/power was not connected; DSTK SPI has since been connected in commit `79730dd`.
 - D431/D432 inherited the Channel 1 diode decision: `BAS70ZFILM`, `Device:D_Schottky`, `Diode_SMD:D_SOD-123`.
 - U402 inherited the Channel 1 op-amp package direction: MCP6004, `Package_DIP:DIP-14_W7.62mm`.
 - Channel 2 RECT resistors inherit the 0805 resistor footprint strategy.
@@ -324,7 +359,7 @@ Channel 2 implementation and legacy root cleanup status: **CHANNEL_2_IMPLEMENTED
 - Root GND PWR_FLAG/source declaration was restored cleanly after legacy block deletion.
 - The old legacy block was not restored.
 
-Current root ERC status after Channel 2 implementation and legacy root cleanup:
+Historical root ERC status after Channel 2 implementation and legacy root cleanup:
 
 - GUI/ERC target reached: 3 errors remain.
 - Remaining errors are expected SPI placeholders only:
@@ -338,7 +373,7 @@ Current root ERC status after Channel 2 implementation and legacy root cleanup:
 - `3V3_ADC` / `analog VREF` label-not-connected errors were fixed.
 - No D431/D432 pin-not-connected errors appeared.
 - No new real Channel 1/Channel 2 errors remain.
-- Remaining ERC errors are expected only until DSTK SPI is connected.
+- This historical ERC status has since been superseded by the DSTK SPI/U501 result of 0 errors and 2 known warnings.
 
 ## Rectifier LTspice Simulation Status
 
@@ -412,7 +447,7 @@ KiCad RECT implementation status:
 - `EMG1_RECT` and `EMG1_ENV` are no longer merely placeholder-only in KiCad, but still need PCB/hardware review before layout.
 - Channel 2 has since been implemented as a controlled schematic duplicate/adaptation of Channel 1 at checkpoint `60d5881`.
 - PCB remains **NOT STARTED**.
-- DSTK SPI/power remains **NOT CONNECTED**.
+- DSTK power remains **NOT CONNECTED / NOT APPROVED**; DSTK SPI-only logic wiring is now connected.
 - This is not final hardware approval and not production ready.
 
 ## Important
@@ -429,7 +464,6 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 
 ## Next Actions
 
-- Keep `1e5d3b0` as a local, not-yet-pushed checkpoint until push is explicitly approved.
 - Continue with review/planning only; do not treat the TRS/RAW gain fix as final hardware approval.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
@@ -437,10 +471,10 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
-- Plan DSTK SPI/power connection after Channel 2 post-implementation review.
-- Current root ERC review result is 3 expected SPI placeholder errors plus 5 DSTK power/SPI planning placeholder warnings; do not add No ERC markers for them yet.
+- Plan DSTK power-source strategy separately; DSTK SPI-only logic wiring is now connected.
+- Current root ERC review result is 0 errors plus 2 known warnings; do not add No ERC markers for the remaining planning/library warnings.
 - Do not start PCB layout yet.
-- Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
+- Do not connect DSTK22807 3V3 or 5V/VBUS to analog/ADC rails until power behavior is verified and explicitly approved.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval or production readiness.
 
 ## Next Required Input
