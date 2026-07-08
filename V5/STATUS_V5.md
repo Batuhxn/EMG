@@ -9,13 +9,14 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local/remote HEAD: `352b06f sync docs with dstk spi integration`
+- Current local/remote HEAD: `54d9089 sync docs with dstk power strategy`
 - Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
 - Working tree baseline after push: clean.
 - Recent pushed DSTK/SPI commits:
   - `79730dd connect dstk spi and mark unused pins`
   - `3494631 sync kicad metadata and analog label placement`
   - `352b06f sync docs with dstk spi integration`
+  - `54d9089 sync docs with dstk power strategy`
 - Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
@@ -98,6 +99,46 @@ DSTK power-source review status: **DSTK_POWER_PLAN_KEEP_PLACEHOLDER_DOCS_ONLY**.
 - Do not add a No ERC marker for the `DSTK_3V3_CANDIDATE` warning.
 - This is not final hardware approval.
 - PCB has not been started.
+
+Local/separate 3V3_ADC regulator plan status: **LOCAL_3V3_ADC_REGULATOR_PRE_SCHEMATIC_PLAN_REVIEWED_NOT_IMPLEMENTED**.
+
+- Local/separate `3V3_ADC` regulator strategy has been reviewed at pre-schematic level.
+- No schematic edit has been made for this regulator strategy.
+- No PCB work has been started.
+- No regulator MPN/package/footprint has been selected.
+- Battery chemistry is not locked yet.
+- DSTK 3V3 remains unapproved as the `3V3_ADC` source.
+- DSTK 5V/VBUS remains no-go for analog/ADC rails.
+- `3V3_ADC` remains the selected analog/ADC rail name.
+- MCP3208 VDD should be powered from the selected `3V3_ADC` rail in the future implementation.
+- MCP3208 VREF remains `ADC_REF` and must stay within MCP3208 VDD limits.
+- `ADC_REF` remains separate from `analog VREF`.
+- `analog VREF` remains the analog front-end bias/reference node, not the ADC full-scale reference.
+- `EMG1_REF_ELECTRODE` and `EMG2_REF_ELECTRODE` remain isolated from GND/chassis/USB.
+- Human-contact EMG testing remains battery-isolated only.
+- USB must be disconnected from any human-electrode test setup.
+- This is not final hardware approval.
+- A future schematic implementation requires a separate approved plan.
+
+Pre-schematic local 3V3_ADC measurement checklist:
+
+- Battery chemistry.
+- Battery min/nom/max voltage.
+- Estimated analog/ADC load current.
+- `3V3_ADC` no-load voltage.
+- `3V3_ADC` loaded voltage.
+- `3V3_ADC` ripple/noise.
+- `ADC_REF` DC level and ripple/noise.
+- `analog VREF` DC level and ripple/noise.
+- MCP3208 VDD/VREF relationship.
+- `BAT_MON` divider output at maximum battery voltage.
+- `BAT_MON` source impedance / ADC sampling effect.
+- BLE idle/active comparison.
+- SPI inactive/active comparison.
+- USB connected/disconnected backfeed check.
+- Power-up/power-down sequencing.
+- Reverse current path check.
+- Thermal check under expected load.
 
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
 

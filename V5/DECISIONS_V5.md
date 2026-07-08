@@ -187,6 +187,44 @@ DSTK power-source strategy placeholder decision:
 - Boundary: PCB has not been started.
 - Boundary: this is not final hardware approval.
 
+Local/separate 3V3_ADC regulator pre-schematic decision:
+
+- Current status: **LOCAL_3V3_ADC_REGULATOR_PRE_SCHEMATIC_PLAN_REVIEWED_NOT_IMPLEMENTED**.
+- Decision: plan a local/separate battery-side `3V3_ADC` regulator path before PCB work.
+- Decision: do not approve DSTK 3V3 as the analog/ADC rail source at this checkpoint.
+- Decision: do not approve DSTK 5V/VBUS for analog/ADC rails.
+- Decision: keep `DSTK_3V3_CANDIDATE` as a planning placeholder only.
+- Decision: keep `ADC_REF` and `analog VREF` separate.
+- Decision: keep human-contact testing battery-isolated only.
+- Reason: DSTK 3V3 voltage presence alone does not prove current capacity, low noise, BLE/RF load behavior, or safe backfeed behavior.
+- Reason: EMG/ADC measurements are sensitive to supply ripple, reference ripple, and analog bias noise.
+- Reason: for a 12-bit ADC at 3.3 V, 1 LSB is approximately 0.8 mV, so rail/reference noise must be evaluated at that scale. This is a review scale, not a final spec.
+- Reason: `ADC_REF` ripple affects ADC full-scale behavior directly.
+- Reason: `analog VREF` noise affects RAW/RECT/ENV bias behavior.
+- Reason: `BAT_MON` divider must be checked against battery maximum voltage and ADC input/source impedance constraints.
+- Battery/topology note: 1S Li-ion/LiPo LDO-only cannot guarantee 3.3 V regulation across the full discharge range.
+- Battery/topology note: 1S Li-ion/LiPo buck-only also cannot regulate once battery voltage falls near/below 3.3 V.
+- Battery/topology note: if 1S Li-ion/LiPo is selected, evaluate buck-boost or buck-boost plus low-noise LDO.
+- Battery/topology note: 2xAA may be below 3.3 V depending on chemistry/state of discharge, so boost or buck-boost may be required.
+- Battery/topology note: 3xAA may allow an LDO depending on chemistry and dropout, but maximum voltage, power loss, and dropout must be checked.
+- Battery/topology note: buck-only is efficient but has higher switching-noise risk, so it is less attractive as the only first analog validation source.
+- Battery/topology note: buck plus low-noise LDO can improve noise but increases BOM/layout complexity.
+- Battery/topology note: final topology cannot be selected before battery chemistry and load current are defined.
+- Regulator selection criteria: input voltage range, 3.3 V output, output current margin, dropout or buck-boost operating range, quiescent current, PSRR, output noise, reverse current/backfeed behavior, enable pin need, startup/soft-start behavior, stable output capacitor range and ESR, package and hand-solderability, availability, and datasheet reference design requirements.
+- Source selection policy: local regulator output must not be tied directly to DSTK 3V3.
+- Source selection policy: `DSTK_3V3_CANDIDATE` and local regulator output must not be shorted together.
+- Source selection policy: if jumper/0R selectable source is later used, population policy must allow only one source path at a time.
+- Source selection policy: do not implement source selection in this docs-only checkpoint.
+- Source selection policy: prefer clearer future source naming such as `LOCAL_3V3_ADC_SOURCE` or `LOCAL_3V3_ADC_REG`, but do not rename schematic nets in this task.
+- Measurement checklist before schematic implementation: battery chemistry, battery min/nom/max voltage, estimated analog/ADC load current, `3V3_ADC` no-load voltage, `3V3_ADC` loaded voltage, `3V3_ADC` ripple/noise, `ADC_REF` DC level and ripple/noise, `analog VREF` DC level and ripple/noise, MCP3208 VDD/VREF relationship, `BAT_MON` divider output at maximum battery voltage, `BAT_MON` source impedance / ADC sampling effect, BLE idle/active comparison, SPI inactive/active comparison, USB connected/disconnected backfeed check, power-up/power-down sequencing, reverse current path check, and thermal check under expected load.
+- Human safety boundary: USB-powered human EMG testing is not approved.
+- Human safety boundary: USB must be disconnected when electrodes are attached to a human.
+- Human safety boundary: battery-powered operation is required for human-contact testing, but battery-powered alone is not final safety approval.
+- Human safety boundary: `REF_ELECTRODE` nets must not be connected to GND/chassis/USB.
+- Human safety boundary: 5V analog/ADC is not approved.
+- Human safety boundary: this is a student/prototype sensor development record, not medical device approval.
+- Human safety boundary: PCB/enclosure/isolation safety must be reviewed separately before any final human test approval.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -756,4 +794,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **DSTK_SPI_CONNECTED_U501_UNUSED_PINS_MARKED_NOT_FINAL_HW_APPROVAL**
+Final decision: **LOCAL_3V3_ADC_REGULATOR_PRE_SCHEMATIC_PLAN_REVIEWED_NOT_IMPLEMENTED**
