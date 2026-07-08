@@ -9,7 +9,7 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local/remote HEAD: `eba22c8 sync docs with local 3v3 adc regulator plan`
+- Current local/remote HEAD: `854e438 sync docs with first 3xaa battery decision`
 - Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
 - Working tree baseline after push: clean.
 - Recent pushed DSTK/SPI commits:
@@ -18,6 +18,7 @@ Current branch / checkpoint:
   - `352b06f sync docs with dstk spi integration`
   - `54d9089 sync docs with dstk power strategy`
   - `eba22c8 sync docs with local 3v3 adc regulator plan`
+  - `854e438 sync docs with first 3xaa battery decision`
 - Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
@@ -159,6 +160,30 @@ Battery decision status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FIN
 - `ADC_REF` remains separate from `analog VREF`.
 - Human-contact EMG testing remains battery-isolated only.
 - USB must be disconnected from any human-electrode test setup.
+- This is not final hardware approval.
+
+3xAA low-noise 3V3_ADC LDO requirements status: **3XAA_LOW_NOISE_3V3_ADC_LDO_REQUIREMENTS_REVIEWED_NOT_IMPLEMENTED**.
+
+- 3xAA alkaline first analog validation battery path için low-noise 3.3 V LDO requirements review edildi.
+- Bu yalnızca requirements / pre-schematic review'dür.
+- Schematic edit yapılmadı.
+- PCB başlamadı.
+- Regulator MPN/package/footprint seçilmedi.
+- BOM lock yapılmadı.
+- 3xAA kararı alkaline-specific first validation kararıdır.
+- 3xAA final product battery kararı değildir.
+- 3xAA NiMH bu kararın parçası değildir; NiMH kullanılırsa nominal 3.6 V pack voltajı nedeniyle LDO dropout margin çok daha dar olur.
+- 1S protected Li-ion/LiPo final product candidate olarak deferred kalır.
+- Expected first-validation path: 3xAA alkaline -> switch/protection -> low-noise 3.3 V LDO -> `3V3_ADC`.
+- 3xAA fresh/open-circuit pack voltage yaklaşık 4.5 V ila 4.8 V mertebesinde olabilir; `BAT_MON` ve regulator input range buna göre margin ile kontrol edilmeli.
+- Minimum usable battery voltage, actual load current altında 3.3 V + selected LDO dropout eşiğiyle belirlenecek.
+- DSTK 3V3/5V analog/ADC için hâlâ onaylı değildir.
+- MCP3208 VDD selected `3V3_ADC`'den beslenecek şekilde planlanır.
+- MCP3208 VREF = `ADC_REF` olarak kalır ve VDD sınırları içinde doğrulanmalıdır.
+- `ADC_REF` ve `analog VREF` ayrı kalır.
+- `analog VREF` 1.65 V analog front-end bias/reference node'dur, ADC full-scale reference değildir.
+- Human-contact testing battery-isolated only ve USB disconnected policy korunur.
+- BLE idle/active noise comparison, human-electrode connected test approval değildir; yalnızca no-human bench/debug veya ileride ayrı onaylanmış battery-powered DSTK senaryosu için measurement item olarak kalır.
 - This is not final hardware approval.
 
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.

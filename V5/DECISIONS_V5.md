@@ -256,6 +256,49 @@ Battery decision for first analog validation:
 - Future architecture note: later final product candidate is 1S protected Li-ion/LiPo -> charger/protection policy -> buck-boost or buck-boost plus low-noise LDO -> `3V3_ADC`.
 - Boundary: do not implement either architecture in schematic in this docs-only checkpoint.
 
+3xAA low-noise 3V3_ADC LDO requirements decision:
+
+- Current status: **3XAA_LOW_NOISE_3V3_ADC_LDO_REQUIREMENTS_REVIEWED_NOT_IMPLEMENTED**.
+- Decision: use 3xAA alkaline -> switch/protection -> low-noise 3.3 V LDO -> `3V3_ADC` as the first analog validation path candidate.
+- Decision: treat this as alkaline-specific first validation planning, not as final product battery selection.
+- Decision: do not include 3xAA NiMH in this decision.
+- Decision: keep 1S protected Li-ion/LiPo deferred as the later final product battery candidate.
+- Decision: do not approve any schematic implementation in this checkpoint.
+- Decision: do not select regulator MPN/package/footprint in this checkpoint.
+- Decision: do not approve DSTK 3V3 or 5V/VBUS as analog/ADC rail sources.
+- Reason: 3xAA alkaline gives a simple battery-isolated source for early analog bring-up.
+- Reason: it avoids charger/load-sharing/USB backfeed variables.
+- Reason: it avoids boost/buck-boost switching noise during first analog validation.
+- Reason: it allows low-noise LDO evaluation before introducing switching regulators.
+- Reason: 3xAA fresh/open-circuit can be around 4.5 V to 4.8 V, so LDO input rating, `BAT_MON` maximum voltage, and power dissipation must be checked with margin.
+- Reason: LDO regulation will be lost when pack voltage under load falls below 3.3 V plus selected LDO dropout.
+- Reason: for 3xAA NiMH, nominal pack voltage is about 3.6 V, so dropout margin is much narrower and this must not be assumed equivalent to alkaline.
+- Constraint: minimum usable battery voltage must be measured with actual load.
+- Constraint: load current must be estimated from datasheets and later measured.
+- Constraint: LDO selection must check dropout, PSRR, output noise, output current margin, quiescent current, reverse current/backfeed behavior, capacitor stability, thermal behavior, package/hand-solderability, and datasheet reference design.
+- Constraint: `3V3_ADC` ripple/noise must be measured.
+- Constraint: `ADC_REF` DC level and ripple/noise must be measured.
+- Constraint: `analog VREF` DC level and ripple/noise must be measured.
+- Constraint: MCP3208 VDD/VREF relationship must be verified.
+- Constraint: `BAT_MON` divider output at maximum 3xAA voltage and source impedance / ADC sampling effect must be checked.
+- Constraint: BLE idle/active comparison is a measurement item only; it does not approve human-electrode testing with USB or unresolved DSTK power.
+- Constraint: human-contact testing remains battery-isolated only.
+- Constraint: USB must be disconnected when electrodes are attached to a human.
+- Constraint: battery-powered operation alone is not final safety approval.
+- Constraint: PCB/enclosure/isolation safety must be reviewed separately before final human test approval.
+- Pre-schematic implementation gate: confirm 3xAA alkaline-only scope.
+- Pre-schematic implementation gate: define LDO current budget target.
+- Pre-schematic implementation gate: define LDO dropout target.
+- Pre-schematic implementation gate: define LDO noise/PSRR target.
+- Pre-schematic implementation gate: define protection strategy.
+- Pre-schematic implementation gate: define switch strategy.
+- Pre-schematic implementation gate: define `BAT_MON` divider ratio.
+- Pre-schematic implementation gate: define test points `BAT_PACK`, `3V3_ADC`, `ADC_REF`, `analog VREF`, and GND.
+- Pre-schematic implementation gate: define `ADC_REF` generation/decoupling strategy.
+- Pre-schematic implementation gate: confirm `analog VREF` buffer loading.
+- Pre-schematic implementation gate: select exact regulator MPN/package/footprint.
+- Pre-schematic implementation gate: define no-USB human-contact procedure.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -825,4 +868,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FINAL_PRODUCT**
+Final decision: **3XAA_LOW_NOISE_3V3_ADC_LDO_REQUIREMENTS_REVIEWED_NOT_IMPLEMENTED**
