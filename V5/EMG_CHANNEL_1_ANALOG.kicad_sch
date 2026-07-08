@@ -4245,7 +4245,7 @@
 		(dnp no)
 		(uuid "c1300000-0000-4000-8000-000000000320")
 		(property "Reference" "R301"
-			(at 83.82 48.26 0)
+			(at 83.82 53.848 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4255,7 +4255,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 83.82 63.5 0)
+			(at 83.82 55.88 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4323,7 +4323,7 @@
 		(dnp no)
 		(uuid "c1300000-0000-4000-8000-000000000327")
 		(property "Reference" "R302"
-			(at 83.82 60.96 0)
+			(at 83.566 66.04 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4333,7 +4333,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 83.82 76.2 0)
+			(at 83.82 68.58 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4401,7 +4401,7 @@
 		(dnp no)
 		(uuid "c1300000-0000-4000-8000-00000000032e")
 		(property "Reference" "R303"
-			(at 83.82 73.66 0)
+			(at 83.82 78.74 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4411,7 +4411,7 @@
 			)
 		)
 		(property "Value" "220k"
-			(at 83.82 88.9 0)
+			(at 83.82 81.534 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

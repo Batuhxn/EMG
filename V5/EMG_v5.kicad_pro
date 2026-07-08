@@ -670,12 +670,16 @@
       "EMG_v5"
     ],
     [
-      "4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101",
-      "POWER_REFERENCE_BLOCK"
-    ],
-    [
       "6a4b9db0-8b5f-4b75-9f44-83fd05e7b301",
       "EMG_CHANNEL_1_ANALOG"
+    ],
+    [
+      "daafd134-eb58-4fde-8e0b-ae901f016f45",
+      "EMG_CHANNEL_2_ANALOG"
+    ],
+    [
+      "4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101",
+      "POWER_REFERENCE_BLOCK"
     ]
   ],
   "text_variables": {},
