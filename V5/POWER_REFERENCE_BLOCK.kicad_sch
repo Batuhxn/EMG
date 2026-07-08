@@ -1651,16 +1651,6 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000069")
 	)
-	(text "1uF C_OUT candidate"
-		(exclude_from_sim no)
-		(at 35.306 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "7d41d45d-add3-4b50-8343-fc31438b9c96")
-	)
 	(text "ADC_REF feed/filter candidate from selected 3V3_ADC"
 		(exclude_from_sim no)
 		(at 241.3 66.04 0)
@@ -1694,17 +1684,15 @@
 		)
 		(uuid "60000000-0000-4000-8000-000000000001")
 	)
-	(junction
-		(at 49.53 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "21ce936f-45a5-46c2-9727-e41464a0c557")
-	)
-	(junction
-		(at 87.63 171.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2f579186-e823-4beb-ab8e-fe67663b5299")
+	(text "1uF C_OUT candidate"
+		(exclude_from_sim no)
+		(at 35.306 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "7d41d45d-add3-4b50-8343-fc31438b9c96")
 	)
 	(junction
 		(at 43.18 168.91)
@@ -1782,23 +1770,13 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 31.75) (xy 73.66 31.75)
+			(xy 68.58 31.75) (xy 88.9 31.75)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "10000000-0000-4000-8000-000000000011")
-	)
-	(wire
-		(pts
-			(xy 73.66 31.75) (xy 88.9 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50000000-0000-4000-8000-000000000003")
 	)
 	(wire
 		(pts
@@ -1929,36 +1907,6 @@
 			(type default)
 		)
 		(uuid "30000000-0000-4000-8000-000000000016")
-	)
-	(wire
-		(pts
-			(xy 241.3 63.5) (xy 255.27 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50000000-0000-4000-8000-000000000004")
-	)
-	(wire
-		(pts
-			(xy 262.89 63.5) (xy 276.86 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50000000-0000-4000-8000-000000000005")
-	)
-	(wire
-		(pts
-			(xy 276.86 63.5) (xy 292.1 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "60000000-0000-4000-8000-000000000003")
 	)
 	(wire
 		(pts
@@ -2292,63 +2240,23 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 182.88) (xy 68.58 173.99)
+			(xy 241.3 63.5) (xy 255.27 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "66ef7f8b-7490-4936-8fe7-c53886c1b271")
+		(uuid "50000000-0000-4000-8000-000000000004")
 	)
 	(wire
 		(pts
-			(xy 87.63 171.45) (xy 87.63 182.88)
+			(xy 262.89 63.5) (xy 292.1 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8d011366-af33-4c2e-b883-e9548fd9980d")
-	)
-	(wire
-		(pts
-			(xy 101.6 180.34) (xy 101.6 177.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c431a03d-165a-409e-88c5-fc783d76a353")
-	)
-	(wire
-		(pts
-			(xy 83.82 185.42) (xy 88.9 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70000000-0000-4000-8000-000000000001")
-	)
-	(wire
-		(pts
-			(xy 88.9 185.42) (xy 88.9 187.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70000000-0000-4000-8000-000000000002")
-	)
-	(wire
-		(pts
-			(xy 88.9 187.96) (xy 68.58 187.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70000000-0000-4000-8000-000000000003")
+		(uuid "50000000-0000-4000-8000-000000000005")
 	)
 	(wire
 		(pts
@@ -2390,6 +2298,66 @@
 		)
 		(uuid "50000000-0000-4000-8000-000000000009")
 	)
+	(wire
+		(pts
+			(xy 68.58 182.88) (xy 68.58 173.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66ef7f8b-7490-4936-8fe7-c53886c1b271")
+	)
+	(wire
+		(pts
+			(xy 83.82 185.42) (xy 88.9 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000001")
+	)
+	(wire
+		(pts
+			(xy 88.9 185.42) (xy 88.9 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 88.9 187.96) (xy 68.58 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70000000-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts
+			(xy 87.63 171.45) (xy 87.63 182.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d011366-af33-4c2e-b883-e9548fd9980d")
+	)
+	(wire
+		(pts
+			(xy 101.6 180.34) (xy 101.6 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c431a03d-165a-409e-88c5-fc783d76a353")
+	)
 	(label "DSTK_3V3_CANDIDATE"
 		(at 17.78 27.94 0)
 		(effects
@@ -2409,17 +2377,6 @@
 			(justify left bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000004")
-	)
-	(hierarchical_label "3V3_ADC"
-		(shape output)
-		(at 73.66 31.75 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000005")
 	)
 	(label "BAT+"
 		(at 16.51 80.01 0)
@@ -2481,72 +2438,6 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000022")
 	)
-	(hierarchical_label "EMG1_RAW"
-		(shape input)
-		(at 114.3 82.55 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000024")
-	)
-	(hierarchical_label "EMG1_RECT"
-		(shape input)
-		(at 114.3 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000025")
-	)
-	(hierarchical_label "EMG1_ENV"
-		(shape input)
-		(at 114.3 87.63 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000026")
-	)
-	(hierarchical_label "EMG2_RAW"
-		(shape input)
-		(at 114.3 90.17 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000027")
-	)
-	(hierarchical_label "EMG2_RECT"
-		(shape input)
-		(at 114.3 92.71 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000028")
-	)
-	(hierarchical_label "EMG2_ENV"
-		(shape input)
-		(at 114.3 95.25 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000029")
-	)
 	(label "VREF_MON"
 		(at 114.3 97.79 180)
 		(effects
@@ -2566,46 +2457,6 @@
 			(justify right bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000031")
-	)
-	(label "ADC_CS"
-		(at 165.1 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000032")
-	)
-	(label "ADC_MOSI"
-		(at 165.1 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000033")
-	)
-	(label "ADC_MISO"
-		(at 165.1 90.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000034")
-	)
-	(label "ADC_SCLK"
-		(at 165.1 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000035")
 	)
 	(label "GND"
 		(at 137.16 109.22 270)
@@ -2697,17 +2548,6 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000049")
 	)
-	(hierarchical_label "analog VREF"
-		(shape output)
-		(at 68.58 182.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000050")
-	)
 	(label "GND"
 		(at 30.48 184.15 0)
 		(effects
@@ -2757,17 +2597,6 @@
 			(justify left bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000059")
-	)
-	(hierarchical_label "GND"
-		(shape passive)
-		(at 101.6 191.77 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "20000000-0000-4000-8000-000000000061")
 	)
 	(label "3V3_ADC"
 		(at 241.3 63.5 0)
@@ -2828,6 +2657,149 @@
 			(justify left bottom)
 		)
 		(uuid "50000000-0000-4000-8000-00000000000f")
+	)
+	(hierarchical_label "3V3_ADC"
+		(shape output)
+		(at 73.66 31.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000005")
+	)
+	(hierarchical_label "EMG1_RAW"
+		(shape input)
+		(at 114.3 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000024")
+	)
+	(hierarchical_label "EMG1_RECT"
+		(shape input)
+		(at 114.3 85.09 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000025")
+	)
+	(hierarchical_label "EMG1_ENV"
+		(shape input)
+		(at 114.3 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000026")
+	)
+	(hierarchical_label "EMG2_RAW"
+		(shape input)
+		(at 114.3 90.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000027")
+	)
+	(hierarchical_label "EMG2_RECT"
+		(shape input)
+		(at 114.3 92.71 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000028")
+	)
+	(hierarchical_label "EMG2_ENV"
+		(shape input)
+		(at 114.3 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000029")
+	)
+	(hierarchical_label "ADC_CS"
+		(shape input)
+		(at 165.1 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000032")
+	)
+	(hierarchical_label "ADC_MOSI"
+		(shape input)
+		(at 165.1 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000033")
+	)
+	(hierarchical_label "ADC_MISO"
+		(shape output)
+		(at 165.1 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000034")
+	)
+	(hierarchical_label "ADC_SCLK"
+		(shape input)
+		(at 165.1 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000035")
+	)
+	(hierarchical_label "analog VREF"
+		(shape output)
+		(at 68.58 182.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10000000-0000-4000-8000-000000000050")
+	)
+	(hierarchical_label "GND"
+		(shape passive)
+		(at 101.6 191.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "20000000-0000-4000-8000-000000000061")
 	)
 	(symbol
 		(lib_id "Jumper:SolderJumper_2_Open")
@@ -3875,94 +3847,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Amplifier_Operational:MCP6002-xP")
-		(at 76.2 185.42 0)
-		(unit 2)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "70000000-0000-4000-8000-000000000004")
-		(property "Reference" "U202"
-			(at 76.2 177.8 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MCP6002-xP"
-			(at 76.2 195.58 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 76.2 185.42 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 76.2 185.42 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 76.2 185.42 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "5"
-			(uuid "70000000-0000-4000-8000-000000000005")
-		)
-		(pin "6"
-			(uuid "70000000-0000-4000-8000-000000000006")
-		)
-		(pin "7"
-			(uuid "70000000-0000-4000-8000-000000000007")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U202")
-					(unit 2)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "U202")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 82.55 177.8 90)
 		(unit 1)
@@ -4323,9 +4207,9 @@
 		)
 		(property "Footprint" ""
 			(at 259.08 65.278 90)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4334,9 +4218,9 @@
 		)
 		(property "Datasheet" "~"
 			(at 259.08 63.5 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4397,9 +4281,9 @@
 		)
 		(property "Value" "MCP6002-xP"
 			(at 121.92 181.61 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4408,9 +4292,9 @@
 		)
 		(property "Footprint" ""
 			(at 121.92 171.45 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4419,9 +4303,9 @@
 		)
 		(property "Datasheet" ""
 			(at 121.92 171.45 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4443,6 +4327,24 @@
 		)
 		(pin "8"
 			(uuid "50000000-0000-4000-8000-000000000015")
+		)
+		(pin "5"
+			(uuid "56233336-dc0d-4a11-bb27-b6d89d46969b")
+		)
+		(pin "3"
+			(uuid "7cede00d-4caa-43c3-b487-93e6920784e2")
+		)
+		(pin "7"
+			(uuid "26279320-ee23-445e-96ea-e831e9168ac6")
+		)
+		(pin "6"
+			(uuid "8640e054-ec07-4dc3-b0fe-21efa1165d23")
+		)
+		(pin "1"
+			(uuid "ce257299-f028-4bfb-aca4-4b76bb075873")
+		)
+		(pin "2"
+			(uuid "5b80b6df-4ec2-4373-94fc-ccf177a37586")
 		)
 		(instances
 			(project "EMG_v5"
@@ -4494,9 +4396,9 @@
 		)
 		(property "Footprint" ""
 			(at 143.2052 175.26 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4505,9 +4407,9 @@
 		)
 		(property "Datasheet" "~"
 			(at 142.24 171.45 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4711,6 +4613,109 @@
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(reference "#FLG204")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:MCP6002-xP")
+		(at 76.2 185.42 0)
+		(unit 2)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "70000000-0000-4000-8000-000000000004")
+		(property "Reference" "U202"
+			(at 76.2 177.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MCP6002-xP"
+			(at 76.2 195.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 76.2 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 76.2 185.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "5"
+			(uuid "70000000-0000-4000-8000-000000000005")
+		)
+		(pin "6"
+			(uuid "70000000-0000-4000-8000-000000000006")
+		)
+		(pin "7"
+			(uuid "70000000-0000-4000-8000-000000000007")
+		)
+		(pin "8"
+			(uuid "edf2036e-c86c-410f-8f3f-7d3da589090e")
+		)
+		(pin "1"
+			(uuid "bc2cb403-137d-4751-80d1-e62112deb1c5")
+		)
+		(pin "2"
+			(uuid "70c2622d-1612-4d45-8836-636b059151ce")
+		)
+		(pin "3"
+			(uuid "8fa41fa2-9d72-4164-8a6e-b86f7e68d73f")
+		)
+		(pin "4"
+			(uuid "ca06a9fe-c573-4994-907b-a26ffcdbf8fc")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 2)
+				)
+			)
+			(project "EMG_v4"
+				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U202")
+					(unit 2)
 				)
 			)
 		)
