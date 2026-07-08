@@ -162,6 +162,31 @@ DSTK SPI-only integration decision:
 - This is not final hardware approval.
 - PCB has not been started.
 
+DSTK power-source strategy placeholder decision:
+
+- Current status: **DSTK_POWER_PLAN_KEEP_PLACEHOLDER_DOCS_ONLY**.
+- Decision: keep `DSTK_3V3_CANDIDATE` as a docs-tracked planning placeholder for now.
+- Decision: do not connect U501 3V3 to `3V3_ADC` at this checkpoint.
+- Decision: do not connect U501 5V_VBUS to analog/ADC rails.
+- Decision: do not suppress the `DSTK_3V3_CANDIDATE` warning with a No ERC marker.
+- Reason: U501 3V3 voltage was measured as 3.295 V under USB power, but this does not prove safe use as an analog/ADC rail source.
+- Reason: U501 5V was measured as 5.125 V under USB power, but 5V analog/ADC is no-go.
+- Reason: current capacity, BLE/RF load effect, regulator noise, and USB/external-source backfeed behavior are not confirmed.
+- Reason: human-contact EMG testing must remain battery-isolated.
+- Option review: DSTK 3V3 -> `3V3_ADC` is not approved now and requires regulator/current/noise/backfeed confirmation.
+- Option review: local/separate `3V3_ADC` regulator is the safer controlled candidate and needs a separate plan.
+- Option review: selectable/jumper source remains a possible later approach, but only one source may be populated or closed.
+- Option review: keeping the placeholder is the approved current checkpoint decision.
+- Measurement needs before changing this decision:
+  - identify the DSTK onboard regulator or power-path model,
+  - dummy-load test at 5 mA, 10 mA, 20 mA, 30 mA, and optionally 50 mA,
+  - observe 3V3 droop/noise with BLE/RF active,
+  - evaluate USB/external 3.3 V backfeed behavior,
+  - define a USB-disconnected battery-only human-test procedure.
+- Boundary: no schematic power edit is approved by this decision.
+- Boundary: PCB has not been started.
+- Boundary: this is not final hardware approval.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -688,19 +713,19 @@ USB-powered human EMG testing: **FORBIDDEN**.
 
 ## 11. Recommended Next Action
 
-- Keep `1e5d3b0` local until push is explicitly approved.
-- Continue with review/planning only; do not treat the TRS/RAW gain fix as final hardware approval.
+- Continue with review/planning only; do not treat the TRS/RAW gain fix, DSTK SPI integration, or DSTK power placeholder decision as final hardware approval.
 - Review D331/D332 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Review D431/D432 `BAS70ZFILM` / `Diode_SMD:D_SOD-123` cathode-band orientation visually against the schematic before PCB.
 - Keep U302 `MCP6004-I/P` / `Package_DIP:DIP-14_W7.62mm` and U402 `MCP6004` / `Package_DIP:DIP-14_W7.62mm` package/orderability review open before PCB; the MCP6004 metadata mismatch warning itself has been cleaned.
 - Lock exact ordering MPNs for R333/R334/R336/R337/R338 as 0.1% thin-film 0805 from the same series where possible; keep R335 as 1% thin-film 0805 unless BOM simplification or sensitivity results justify 0.1%.
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
-- Plan DSTK SPI/power connection after Channel 2 post-implementation review.
-- Current root ERC review result is 3 expected SPI placeholder errors plus 5 DSTK power/SPI planning placeholder warnings; do not add No ERC markers for them yet.
+- Plan DSTK power-source strategy separately; DSTK SPI-only logic wiring is now connected.
+- Current root ERC review result is 0 errors plus 2 known warnings; do not add No ERC markers for the remaining planning/library warnings.
+- Current DSTK power-source review verdict is `DSTK_POWER_PLAN_KEEP_PLACEHOLDER_DOCS_ONLY`.
 - Do not start PCB.
 - Do not treat the KiCad/LTspice RECT candidates as final hardware approval.
-- Do not connect DSTK22807 power/SPI nets until pinout and power behavior are verified.
+- Do not connect DSTK22807 3V3 or 5V/VBUS to analog/ADC rails until power behavior is verified and explicitly approved.
 - Do not begin full board schematic.
 - Do not use 5V as analog/ADC supply.
 

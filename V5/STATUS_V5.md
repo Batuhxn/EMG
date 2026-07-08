@@ -9,12 +9,13 @@ The V5 folder now contains a clean separate KiCad working base copied from the v
 Current branch / checkpoint:
 
 - Branch: `v5/measured-dstk22807-footprint`
-- Current local/remote HEAD: `3494631 sync kicad metadata and analog label placement`
+- Current local/remote HEAD: `352b06f sync docs with dstk spi integration`
 - Remote tracking note: `github-emg/v5/measured-dstk22807-footprint` is at the same HEAD.
 - Working tree baseline after push: clean.
 - Recent pushed DSTK/SPI commits:
   - `79730dd connect dstk spi and mark unused pins`
   - `3494631 sync kicad metadata and analog label placement`
+  - `352b06f sync docs with dstk spi integration`
 - Recent cleanup commits before DSTK SPI:
   - `0e23acf cleanup MCP6004 symbol metadata mismatch`
   - `39ff7c9 cleanup Schottky diode symbol metadata mismatch`
@@ -72,6 +73,31 @@ DSTK SPI/U501 status: **DSTK_SPI_CONNECTED_U501_UNUSED_PINS_MARKED_NOT_FINAL_HW_
 - ERC/project/library settings were not intentionally changed by the metadata sync.
 - Channel 1/2 analog sheet changes in the metadata/placement commit were limited to R301/R302/R303 and R401/R402/R403 reference/value property placement.
 - No Channel 1/2 net, wire, pin, topology, value, or footprint change was made by that placement cleanup.
+
+DSTK power-source review status: **DSTK_POWER_PLAN_KEEP_PLACEHOLDER_DOCS_ONLY**.
+
+- Latest DSTK power-source strategy review kept the power placeholder as documentation/tracking only.
+- U501 DSTK SPI is connected and U501 GND / pin 11 remains connected to root/system GND for SPI logic reference.
+- U501 3V3 remains intentionally no_connect.
+- U501 5V_VBUS remains intentionally no_connect.
+- `DSTK_3V3_CANDIDATE` remains a planning placeholder.
+- `DSTK_3V3_CANDIDATE` is not connected to U501 3V3.
+- Selected schematic rail remains `3V3_ADC`.
+- `ADC_REF` remains separate from `analog VREF`.
+- Direct DSTK 3V3 -> `3V3_ADC` connection is not approved.
+- Reason: DSTK 3V3 voltage presence was measured, but current capacity, noise, BLE/RF load effect, and USB/backfeed behavior are not verified.
+- Local/separate 3.3 V regulator path remains the safer controlled candidate for battery-isolated human EMG.
+- Selectable/jumper source strategy remains a possible later direction; only one source may be populated or closed if that path is later approved.
+- No schematic power edit is approved at this checkpoint.
+- Next safe work is DSTK 3V3 measurement/review or a local regulator path plan, not PCB.
+- No USB-powered human EMG testing.
+- Human-contact test requires battery-isolated operation.
+- No 5V analog/ADC.
+- No DSTK 3V3 -> `3V3_ADC` connection unless a later power review explicitly approves it.
+- No DSTK 5V/VBUS analog/ADC connection.
+- Do not add a No ERC marker for the `DSTK_3V3_CANDIDATE` warning.
+- This is not final hardware approval.
+- PCB has not been started.
 
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
 
@@ -472,6 +498,7 @@ PCB layout must not start for the DSTK22807 carrier until the physical board is 
 - Lock exact ordering MPNs for C321/C331 as 1nF C0G/NP0 0805, C351 as 4.7nF C0G/NP0 0805 preferred, and C341/C360 as X7R 0805 with suitable voltage ratings before Channel 2 or PCB.
 - Confirm ENV behavior and analog VREF buffer loading after RECT/capacitor decisions.
 - Plan DSTK power-source strategy separately; DSTK SPI-only logic wiring is now connected.
+- Current DSTK power-source review verdict is `DSTK_POWER_PLAN_KEEP_PLACEHOLDER_DOCS_ONLY`.
 - Current root ERC review result is 0 errors plus 2 known warnings; do not add No ERC markers for the remaining planning/library warnings.
 - Do not start PCB layout yet.
 - Do not connect DSTK22807 3V3 or 5V/VBUS to analog/ADC rails until power behavior is verified and explicitly approved.
