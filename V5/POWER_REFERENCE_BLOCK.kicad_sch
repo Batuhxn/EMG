@@ -1354,74 +1354,383 @@
 			)
 			(embedded_fonts no)
 		)
-	)
-	(text "SOURCE SELECT - MUTUALLY EXCLUSIVE"
-		(exclude_from_sim no)
-		(at 15.24 17.78 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(bold yes)
-			)
-			(justify left bottom)
+	(symbol "EMG_V5:PMV48XP"
+		(pin_names
+			(offset 1.016)
 		)
-		(uuid "10000000-0000-4000-8000-000000000001")
-	)
-	(text "Populate only one source path.\nDo not tie candidate sources together.\nDo not backfeed DSTK 3V3."
 		(exclude_from_sim no)
-		(at 15.24 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Q"
+			(at 0 7.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
-			(justify left bottom)
 		)
-		(uuid "10000000-0000-4000-8000-000000000002")
+		(property "Value" "PMV48XP"
+			(at 0 -7.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 0 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf"
+			(at 0 -12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "PMV48XP P-channel MOSFET, SOT-23; pins 1=G, 2=S, 3=D"
+			(at 0 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "PMV48XP_0_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "PMV48XP_1_1"
+			(pin input line
+				(at -7.62 0 0)
+				(length 2.54)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -2.54 180)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 2.54 180)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
 	)
-	(text "LDO FALLBACK - NOT MANDATORY"
-		(exclude_from_sim no)
-		(at 15.24 73.66 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(bold yes)
-			)
-			(justify left bottom)
+
+	(symbol "EMG_V5:TPS7A2033PDBVR"
+		(pin_names
+			(offset 1.016)
 		)
-		(uuid "10000000-0000-4000-8000-000000000012")
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U"
+			(at 0 7.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TPS7A2033PDBVR"
+			(at 0 -7.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+			(at 0 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
+			(at 0 -12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "TPS7A2033PDBVR 3.3 V LDO, SOT-23-5/DBV; pins 1=IN, 2=GND, 3=EN, 4=N/C, 5=OUT"
+			(at 0 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "TPS7A2033PDBVR_0_1"
+			(rectangle
+				(start -5.08 5.08)
+				(end 5.08 -5.08)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "TPS7A2033PDBVR_1_1"
+			(pin power_in line
+				(at -7.62 2.54 0)
+				(length 2.54)
+				(name "IN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -7.62 -2.54 0)
+				(length 2.54)
+				(name "EN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 7.62 -2.54 180)
+				(length 2.54)
+				(name "N/C"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_out line
+				(at 7.62 2.54 180)
+				(length 2.54)
+				(name "OUT"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
 	)
-	(text "MCP1702-class candidate, not final BOM.\nExternal LDO is fallback only.\nBattery assumption: 1S LiPo/Li-ion, not locked."
-		(exclude_from_sim no)
-		(at 15.24 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+(symbol "EMG_V5:EMG_Conn_01x02_Pin"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "Conn_01x02_Pin" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 0 -7.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 0 -10.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "EMG_Conn_01x02_Pin_1_1"
+				(rectangle (start 1.27 2.54) (end -1.27 -2.54) (stroke (width 0.1524) (type default)) (fill (type background)))
+				(pin passive line (at 5.08 1.27 180) (length 3.81) (name "Pin_1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+				(pin passive line (at 5.08 -1.27 180) (length 3.81) (name "Pin_2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
 			)
-			(justify left bottom)
 		)
-		(uuid "10000000-0000-4000-8000-000000000013")
-	)
-	(text "Generic LDO placeholder\nBAT+ -> LDO -> LDO_3V3_FALLBACK"
-		(exclude_from_sim no)
-		(at 73.914 114.808 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+
+(symbol "EMG_V5:EMG_SW_SPST"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "SW_SPST" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "EMG_SW_SPST_0_1"
+				(circle (center -2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
+				(circle (center 2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.524 0.254) (xy 1.524 1.27)) (stroke (width 0) (type default)) (fill (type none)))
 			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000014")
-	)
-	(text "TP_LDO_3V3_FALLBACK"
-		(exclude_from_sim no)
-		(at 58.42 94.234 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+			(symbol "EMG_SW_SPST_1_1"
+				(pin passive line (at -5.08 0 0) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+				(pin passive line (at 5.08 0 180) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
 			)
-			(justify left bottom)
 		)
-		(uuid "10000000-0000-4000-8000-000000000018")
+
+(symbol "EMG_V5:EMG_TestPoint"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "TestPoint" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "EMG_TestPoint_0_1"
+				(circle (center 0 0) (radius 0.762) (stroke (width 0.1524) (type default)) (fill (type none)))
+			)
+			(symbol "EMG_TestPoint_1_1"
+				(pin passive line (at 0 0 0) (length 0) (name "1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			)
+		)
+
+		(symbol "Connector:Conn_01x02_Pin"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "Conn_01x02_Pin" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 0 -7.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 0 -10.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle (start 1.27 2.54) (end -1.27 -2.54) (stroke (width 0.1524) (type default)) (fill (type background)))
+				(pin passive line (at 5.08 1.27 180) (length 3.81) (name "Pin_1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+				(pin passive line (at 5.08 -1.27 180) (length 3.81) (name "Pin_2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			)
+		)
+
+		(symbol "Switch:SW_SPST"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "SW_SPST" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "SW_SPST_0_1"
+				(circle (center -2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
+				(circle (center 2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
+				(polyline (pts (xy -1.524 0.254) (xy 1.524 1.27)) (stroke (width 0) (type default)) (fill (type none)))
+			)
+			(symbol "SW_SPST_1_1"
+				(pin passive line (at -5.08 0 0) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+				(pin passive line (at 5.08 0 180) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			)
+		)
+
+		(symbol "TestPoint:TestPoint"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Value" "TestPoint" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(property "Datasheet" "~" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+			(symbol "TestPoint_0_1"
+				(circle (center 0 0) (radius 0.762) (stroke (width 0.1524) (type default)) (fill (type none)))
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line (at 0 0 0) (length 0) (name "1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			)
+		)
+
 	)
 	(text "MCP3208 ADC SUPPORT"
 		(exclude_from_sim no)
@@ -1526,17 +1835,6 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000055")
 	)
-	(text "Candidate values only.\nRecalculate if battery max voltage changes.\nADC acquisition/source impedance still requires review."
-		(exclude_from_sim no)
-		(at 241.3 139.7 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000056")
-	)
 	(text "TP_BAT_MON"
 		(exclude_from_sim no)
 		(at 292.1 111.76 0)
@@ -1617,17 +1915,6 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000066")
 	)
-	(text "TP_BAT / BAT+\nTP_DSTK_3V3_CANDIDATE\nTP_LDO_3V3_FALLBACK\nTP_3V3_ADC\nTP_ADC_REF\nTP_ANALOG_VREF\nTP_GND\nTP_VREF_MON\nTP_BAT_MON"
-		(exclude_from_sim no)
-		(at 15.24 241.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000067")
-	)
 	(text "SAFETY NOTES"
 		(exclude_from_sim no)
 		(at 15.24 277.368 0)
@@ -1662,17 +1949,6 @@
 		)
 		(uuid "50000000-0000-4000-8000-000000000001")
 	)
-	(text "ERC/source declaration only; actual source selected by JP201/JP202 population"
-		(exclude_from_sim no)
-		(at 76.2 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "50000000-0000-4000-8000-000000000002")
-	)
 	(text "ERC/source declaration only; ADC_REF is fed from 3V3_ADC through R206"
 		(exclude_from_sim no)
 		(at 289.56 68.58 0)
@@ -1683,16 +1959,6 @@
 			(justify left bottom)
 		)
 		(uuid "60000000-0000-4000-8000-000000000001")
-	)
-	(text "1uF C_OUT candidate"
-		(exclude_from_sim no)
-		(at 35.306 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "7d41d45d-add3-4b50-8343-fc31438b9c96")
 	)
 	(junction
 		(at 43.18 168.91)
@@ -1705,12 +1971,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "30000000-0000-4000-8000-000000000039")
-	)
-	(junction
-		(at 68.58 31.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "40000000-0000-4000-8000-000000000002")
 	)
 	(junction
 		(at 83.82 171.45)
@@ -1730,66 +1990,6 @@
 	)
 	(wire
 		(pts
-			(xy 17.78 27.94) (xy 45.72 27.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10000000-0000-4000-8000-000000000007")
-	)
-	(wire
-		(pts
-			(xy 17.78 35.56) (xy 45.72 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10000000-0000-4000-8000-000000000008")
-	)
-	(wire
-		(pts
-			(xy 55.88 27.94) (xy 68.58 27.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10000000-0000-4000-8000-000000000009")
-	)
-	(wire
-		(pts
-			(xy 55.88 35.56) (xy 68.58 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10000000-0000-4000-8000-000000000010")
-	)
-	(wire
-		(pts
-			(xy 68.58 31.75) (xy 88.9 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10000000-0000-4000-8000-000000000011")
-	)
-	(wire
-		(pts
-			(xy 24.13 93.98) (xy 49.53 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1229c258-4a59-4147-b0a7-83199da22b13")
-	)
-	(wire
-		(pts
 			(xy 101.6 187.96) (xy 101.6 191.77)
 		)
 		(stroke
@@ -1797,36 +1997,6 @@
 			(type default)
 		)
 		(uuid "1f8eaff6-6f47-4ce1-a269-2ce007684b52")
-	)
-	(wire
-		(pts
-			(xy 16.51 80.01) (xy 49.53 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30000000-0000-4000-8000-000000000001")
-	)
-	(wire
-		(pts
-			(xy 16.51 87.63) (xy 49.53 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30000000-0000-4000-8000-000000000003")
-	)
-	(wire
-		(pts
-			(xy 24.13 101.6) (xy 49.53 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30000000-0000-4000-8000-000000000007")
 	)
 	(wire
 		(pts
@@ -2110,16 +2280,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 27.94) (xy 68.58 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40000000-0000-4000-8000-000000000001")
-	)
-	(wire
-		(pts
 			(xy 114.3 82.55) (xy 124.46 82.55)
 		)
 		(stroke
@@ -2358,86 +2518,6 @@
 		)
 		(uuid "c431a03d-165a-409e-88c5-fc783d76a353")
 	)
-	(label "DSTK_3V3_CANDIDATE"
-		(at 17.78 27.94 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000003")
-	)
-	(label "LDO_3V3_FALLBACK"
-		(at 17.78 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000004")
-	)
-	(label "BAT+"
-		(at 16.51 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000015")
-	)
-	(label "GND"
-		(at 16.51 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000016")
-	)
-	(label "BAT+"
-		(at 44.45 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000019")
-	)
-	(label "GND"
-		(at 44.45 87.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000020")
-	)
-	(label "LDO_3V3_FALLBACK"
-		(at 24.13 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000021")
-	)
-	(label "GND"
-		(at 24.13 101.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10000000-0000-4000-8000-000000000022")
-	)
 	(label "VREF_MON"
 		(at 114.3 97.79 180)
 		(effects
@@ -2568,7 +2648,7 @@
 		)
 		(uuid "10000000-0000-4000-8000-000000000052")
 	)
-	(label "BAT+"
+	(label "LDO_IN"
 		(at 254 96.52 0)
 		(effects
 			(font
@@ -2800,334 +2880,6 @@
 			(justify left bottom)
 		)
 		(uuid "20000000-0000-4000-8000-000000000061")
-	)
-	(symbol
-		(lib_id "Jumper:SolderJumper_2_Open")
-		(at 50.8 27.94 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "20000000-0000-4000-8000-000000000001")
-		(property "Reference" "JP201"
-			(at 50.8 25.4 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "JP_SEL_DSTK_DNP"
-			(at 50.8 30.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 27.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 27.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 50.8 27.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "20000000-0000-4000-8000-000000000002")
-		)
-		(pin "2"
-			(uuid "20000000-0000-4000-8000-000000000003")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP201")
-					(unit 1)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP201")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Jumper:SolderJumper_2_Open")
-		(at 50.8 35.56 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "20000000-0000-4000-8000-000000000004")
-		(property "Reference" "JP202"
-			(at 50.8 33.02 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "JP_SEL_LDO_DNP"
-			(at 50.8 38.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 35.56 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 35.56 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 50.8 35.56 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "20000000-0000-4000-8000-000000000005")
-		)
-		(pin "2"
-			(uuid "20000000-0000-4000-8000-000000000006")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP202")
-					(unit 1)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "JP202")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 49.53 83.82 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "20000000-0000-4000-8000-000000000007")
-		(property "Reference" "C201"
-			(at 49.53 76.2 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1uF C_IN candidate"
-			(at 34.798 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 49.53 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 49.53 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "20000000-0000-4000-8000-000000000008")
-		)
-		(pin "2"
-			(uuid "20000000-0000-4000-8000-000000000009")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C201")
-					(unit 1)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C201")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 49.53 97.79 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "20000000-0000-4000-8000-000000000010")
-		(property "Reference" "C202"
-			(at 49.53 90.17 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1uF C_OUT candidate"
-			(at 54.61 110.49 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 49.53 97.79 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 97.79 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 49.53 97.79 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "20000000-0000-4000-8000-000000000011")
-		)
-		(pin "2"
-			(uuid "20000000-0000-4000-8000-000000000012")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C202")
-					(unit 1)
-				)
-			)
-			(project "EMG_v4"
-				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "C202")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Analog_ADC:MCP3208")
@@ -4031,7 +3783,7 @@
 				)
 			)
 		)
-		(property "Value" "330k"
+		(property "Value" "68k"
 			(at 266.7 104.14 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4113,7 +3865,7 @@
 				)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "100k"
 			(at 266.7 119.38 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4720,6 +4472,451 @@
 			)
 		)
 	)
+	(text "3XAA FIRST-VALIDATION POWER PATH\nJ201 pin 1: BAT_PACK+; pin 2: GND\nSW201 -> Q201 reverse-polarity PMOS -> LDO_IN"
+		(at 15.24 43.18 0)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "90100000-0000-4000-8000-000000000001")
+	)
+	(text "TPS7A2033PDBVR first-validation LDO\nIN and EN tied to protected LDO_IN\nOUT feeds 3V3_ADC only through R207 0R measurement link"
+		(at 101.6 45.72 0)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "90100000-0000-4000-8000-000000000002")
+	)
+	(text "BAT_MON reviewed for 3xAA alkaline validation: 68k / 100k with 10nF shunt cap. Source is protected LDO_IN."
+		(at 238.76 91.44 0)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "90100000-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts (xy 73.66 31.75) (xy 88.9 31.75))
+		(stroke (width 0) (type default))
+		(uuid "90100000-0000-4000-8000-000000000004")
+	)
+	(wire
+		(pts (xy 269.24 111.76) (xy 292.1 111.76))
+		(stroke (width 0) (type default))
+		(uuid "90100000-0000-4000-8000-000000000005")
+	)
+
+	(label "GND"
+		(at 25.4 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000006")
+	)
+
+	(label "BAT_PACK+"
+		(at 25.4 53.34 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000007")
+	)
+
+	(label "BAT_PACK+"
+		(at 43.18 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "90100000-0000-4000-8000-000000000008")
+	)
+
+	(label "SW_BAT+"
+		(at 53.34 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000009")
+	)
+
+	(label "GND"
+		(at 66.04 58.42 0)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "90100000-0000-4000-8000-000000000010")
+	)
+
+	(label "SW_BAT+"
+		(at 81.28 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000011")
+	)
+
+	(label "LDO_IN"
+		(at 81.28 60.96 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000012")
+	)
+
+	(label "LDO_IN"
+		(at 91.44 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000013")
+	)
+
+	(label "LDO_IN"
+		(at 113.03 63.5 0)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "90100000-0000-4000-8000-000000000014")
+	)
+
+	(label "LDO_IN"
+		(at 113.03 58.42 0)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "90100000-0000-4000-8000-000000000015")
+	)
+
+	(label "GND"
+		(at 120.65 53.34 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000016")
+	)
+
+	(label "TPS7A2033_OUT"
+		(at 128.27 58.42 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000017")
+	)
+
+	(label "LDO_IN"
+		(at 104.14 74.93 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000018")
+	)
+
+	(label "GND"
+		(at 104.14 82.55 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000019")
+	)
+
+	(label "TPS7A2033_OUT"
+		(at 142.24 74.93 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000020")
+	)
+
+	(label "GND"
+		(at 142.24 82.55 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000021")
+	)
+
+	(label "TPS7A2033_OUT"
+		(at 156.21 63.5 0)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "90100000-0000-4000-8000-000000000022")
+	)
+
+	(label "3V3_ADC"
+		(at 163.83 63.5 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000023")
+	)
+
+	(label "GND"
+		(at 292.1 119.38 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000000024")
+	)
+
+	(no_connect
+		(at 128.27 63.5)
+		(uuid "90100000-0000-4000-8000-000000000025")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_Conn_01x02_Pin")
+		(at 20.32 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000026")
+		(property "Reference" "J201" (at 17.78 49.53 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "3xAA_BATTERY" (at 17.78 59.69 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 20.32 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000027"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000028"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "J201") (unit 1))))
+	)
+	(symbol
+		(lib_id "EMG_V5:EMG_SW_SPST")
+		(at 48.26 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000029")
+		(property "Reference" "SW201" (at 48.26 52.07 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "MAIN_PWR_SW" (at 48.26 59.69 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 48.26 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 48.26 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000030"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000031"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "SW201") (unit 1))))
+	)
+	(symbol
+		(lib_id "EMG_V5:PMV48XP")
+		(at 73.66 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000032")
+		(property "Reference" "Q201" (at 73.66 50.8 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "PMV48XP" (at 73.66 66.04 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 73.66 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf" (at 73.66 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000033"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000034"))
+		(pin "3" (uuid "90100000-0000-4000-8000-000000000035"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "Q201") (unit 1))))
+	)
+	(symbol
+		(lib_id "EMG_V5:TPS7A2033PDBVR")
+		(at 120.65 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000036")
+		(property "Reference" "U203" (at 120.65 50.8 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPS7A2033PDBVR" (at 120.65 71.12 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 120.65 73.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf" (at 120.65 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000037"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000038"))
+		(pin "3" (uuid "90100000-0000-4000-8000-000000000039"))
+		(pin "4" (uuid "90100000-0000-4000-8000-000000000040"))
+		(pin "5" (uuid "90100000-0000-4000-8000-000000000041"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "U203") (unit 1))))
+	)
+
+	(symbol
+		(lib_id "Device:C")
+		(at 104.14 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000042")
+		(property "Reference" "C209" (at 106.68 77.47 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2.2uF" (at 106.68 80.01 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 105.105 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 104.14 78.74 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000043"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000044"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C209") (unit 1))))
+	)
+
+	(symbol
+		(lib_id "Device:C")
+		(at 142.24 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000045")
+		(property "Reference" "C210" (at 144.78 77.47 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2.2uF" (at 144.78 80.01 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 143.205 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 142.24 78.74 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000046"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000047"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C210") (unit 1))))
+	)
+
+	(symbol
+		(lib_id "Device:R")
+		(at 160.02 63.5 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000048")
+		(property "Reference" "R207" (at 162.56 62.23 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "0R" (at 162.56 64.77 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 160.985 67.31 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 160.02 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000049"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000050"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "R207") (unit 1))))
+	)
+
+	(symbol
+		(lib_id "Device:C")
+		(at 292.1 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000051")
+		(property "Reference" "C211" (at 294.64 114.3 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10nF" (at 294.64 116.84 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 293.065 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 292.1 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000052"))
+		(pin "2" (uuid "90100000-0000-4000-8000-000000000053"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C211") (unit 1))))
+	)
+
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 91.44 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000054")
+		(property "Reference" "#FLG205" (at 91.44 57.785 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Value" "PWR_FLAG" (at 91.44 59.69 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 91.44 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 91.44 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000000055"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "#FLG205") (unit 1))))
+	)
+
+	(label "BAT_PACK+"
+		(at 25.4 62.23 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001001")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 25.4 62.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000060")
+		(property "Reference" "TP201" (at 25.4 59.69 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "BAT_PACK+" (at 25.4 64.77 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 30.48 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 30.48 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002001"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP201") (unit 1))))
+	)
+
+	(label "SW_BAT+"
+		(at 58.42 60.96 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001002")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 58.42 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000061")
+		(property "Reference" "TP202" (at 58.42 58.42 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SW_BAT+" (at 58.42 63.5 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 63.5 60.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 63.5 60.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002002"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP202") (unit 1))))
+	)
+
+	(label "LDO_IN"
+		(at 99.06 55.88 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001003")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 99.06 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000062")
+		(property "Reference" "TP203" (at 99.06 53.34 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "LDO_IN" (at 99.06 58.42 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 104.14 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 104.14 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002003"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP203") (unit 1))))
+	)
+
+	(label "3V3_ADC"
+		(at 172.72 63.5 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001004")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 172.72 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000063")
+		(property "Reference" "TP204" (at 172.72 60.96 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "3V3_ADC" (at 172.72 66.04 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 177.8 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 177.8 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002004"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP204") (unit 1))))
+	)
+
+	(label "BAT_MON"
+		(at 292.1 107.95 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001005")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 292.1 107.95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000064")
+		(property "Reference" "TP205" (at 292.1 105.41 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "BAT_MON" (at 292.1 110.49 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 297.18 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 297.18 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002005"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP205") (unit 1))))
+	)
+
+	(label "GND"
+		(at 142.24 86.36 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "90100000-0000-4000-8000-000000001006")
+	)
+
+	(symbol
+		(lib_id "EMG_V5:EMG_TestPoint")
+		(at 142.24 86.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90100000-0000-4000-8000-000000000065")
+		(property "Reference" "TP206" (at 142.24 83.82 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "GND" (at 142.24 88.9 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 147.32 86.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "~" (at 147.32 86.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(pin "1" (uuid "90100000-0000-4000-8000-000000002006"))
+		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP206") (unit 1))))
+	)
+
 	(sheet_instances
 		(path "/"
 			(page "2")
