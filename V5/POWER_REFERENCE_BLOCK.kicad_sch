@@ -766,6 +766,116 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:Conn_01x02_Pin"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 1.27 2.54)
+					(end -1.27 -2.54)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at 5.08 1.27 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -1.27 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -1061,6 +1171,1117 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "EMG_TestPoint_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_1_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_1_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_TestPoint_2"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_2_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_2_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_TestPoint_3"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_3_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_3_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_TestPoint_4"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_4_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_4_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_TestPoint_5"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_5_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_5_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_V5:EMG_Conn_01x02_Pin"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 1.27 2.54)
+					(end -1.27 -2.54)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at 5.08 1.27 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -1.27 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_V5:EMG_SW_SPST"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "SW"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_SPST"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_SW_SPST_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.254) (xy 1.524 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_SW_SPST_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_V5:EMG_TestPoint"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "EMG_TestPoint_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_V5:PMV48XP"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "Q"
+				(at 0 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PMV48XP"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 0 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf"
+				(at 0 -12.7 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "PMV48XP P-channel MOSFET, SOT-23; pins 1=G, 2=S, 3=D"
+				(at 0 -15.24 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PMV48XP_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "PMV48XP_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "G"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "EMG_V5:TPS7A2033PDBVR"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TPS7A2033PDBVR"
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+				(at 0 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
+				(at 0 -12.7 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "TPS7A2033PDBVR 3.3 V LDO, SOT-23-5/DBV; pins 1=IN, 2=GND, 3=EN, 4=N/C, 5=OUT"
+				(at 0 -15.24 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TPS7A2033PDBVR_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TPS7A2033PDBVR_1_1"
+				(pin power_in line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "N/C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Jumper:SolderJumper_2_Open"
 			(pin_numbers
 				(hide yes)
@@ -1239,6 +2460,235 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Switch:SW_SPST"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "SW"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_SPST"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "SW_SPST_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.254) (xy 1.524 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_SPST_1_1"
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "TestPoint:TestPoint"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 0)
+					(radius 0.762)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 0)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:PWR_FLAG"
 			(power global)
 			(pin_numbers
@@ -1354,383 +2804,6 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "EMG_V5:PMV48XP"
-		(pin_names
-			(offset 1.016)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "Q"
-			(at 0 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PMV48XP"
-			(at 0 -7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 0 -10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf"
-			(at 0 -12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "PMV48XP P-channel MOSFET, SOT-23; pins 1=G, 2=S, 3=D"
-			(at 0 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "PMV48XP_0_1"
-			(rectangle
-				(start -5.08 5.08)
-				(end 5.08 -5.08)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-		)
-		(symbol "PMV48XP_1_1"
-			(pin input line
-				(at -7.62 0 0)
-				(length 2.54)
-				(name "G"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -2.54 180)
-				(length 2.54)
-				(name "S"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 2.54 180)
-				(length 2.54)
-				(name "D"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-	)
-
-	(symbol "EMG_V5:TPS7A2033PDBVR"
-		(pin_names
-			(offset 1.016)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "U"
-			(at 0 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TPS7A2033PDBVR"
-			(at 0 -7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-			(at 0 -10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
-			(at 0 -12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "TPS7A2033PDBVR 3.3 V LDO, SOT-23-5/DBV; pins 1=IN, 2=GND, 3=EN, 4=N/C, 5=OUT"
-			(at 0 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "TPS7A2033PDBVR_0_1"
-			(rectangle
-				(start -5.08 5.08)
-				(end 5.08 -5.08)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-		)
-		(symbol "TPS7A2033PDBVR_1_1"
-			(pin power_in line
-				(at -7.62 2.54 0)
-				(length 2.54)
-				(name "IN"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_in line
-				(at 0 7.62 90)
-				(length 2.54)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -7.62 -2.54 0)
-				(length 2.54)
-				(name "EN"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 7.62 -2.54 180)
-				(length 2.54)
-				(name "N/C"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_out line
-				(at 7.62 2.54 180)
-				(length 2.54)
-				(name "OUT"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-	)
-(symbol "EMG_V5:EMG_Conn_01x02_Pin"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "Conn_01x02_Pin" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 0 -7.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 0 -10.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "EMG_Conn_01x02_Pin_1_1"
-				(rectangle (start 1.27 2.54) (end -1.27 -2.54) (stroke (width 0.1524) (type default)) (fill (type background)))
-				(pin passive line (at 5.08 1.27 180) (length 3.81) (name "Pin_1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-				(pin passive line (at 5.08 -1.27 180) (length 3.81) (name "Pin_2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
-(symbol "EMG_V5:EMG_SW_SPST"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "SW" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "SW_SPST" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "EMG_SW_SPST_0_1"
-				(circle (center -2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
-				(circle (center 2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
-				(polyline (pts (xy -1.524 0.254) (xy 1.524 1.27)) (stroke (width 0) (type default)) (fill (type none)))
-			)
-			(symbol "EMG_SW_SPST_1_1"
-				(pin passive line (at -5.08 0 0) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-				(pin passive line (at 5.08 0 180) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
-(symbol "EMG_V5:EMG_TestPoint"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "TP" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "TestPoint" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "EMG_TestPoint_0_1"
-				(circle (center 0 0) (radius 0.762) (stroke (width 0.1524) (type default)) (fill (type none)))
-			)
-			(symbol "EMG_TestPoint_1_1"
-				(pin passive line (at 0 0 0) (length 0) (name "1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
-		(symbol "Connector:Conn_01x02_Pin"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "Conn_01x02_Pin" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 0 -7.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 0 -10.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "Conn_01x02_Pin_1_1"
-				(rectangle (start 1.27 2.54) (end -1.27 -2.54) (stroke (width 0.1524) (type default)) (fill (type background)))
-				(pin passive line (at 5.08 1.27 180) (length 3.81) (name "Pin_1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-				(pin passive line (at 5.08 -1.27 180) (length 3.81) (name "Pin_2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
-		(symbol "Switch:SW_SPST"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "SW" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "SW_SPST" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "SW_SPST_0_1"
-				(circle (center -2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
-				(circle (center 2.032 0) (radius 0.508) (stroke (width 0) (type default)) (fill (type none)))
-				(polyline (pts (xy -1.524 0.254) (xy 1.524 1.27)) (stroke (width 0) (type default)) (fill (type none)))
-			)
-			(symbol "SW_SPST_1_1"
-				(pin passive line (at -5.08 0 0) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-				(pin passive line (at 5.08 0 180) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
-		(symbol "TestPoint:TestPoint"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "TP" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Value" "TestPoint" (at 0 -2.54 0) (effects (font (size 1.27 1.27))))
-			(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(property "Datasheet" "~" (at 5.08 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-			(symbol "TestPoint_0_1"
-				(circle (center 0 0) (radius 0.762) (stroke (width 0.1524) (type default)) (fill (type none)))
-			)
-			(symbol "TestPoint_1_1"
-				(pin passive line (at 0 0 0) (length 0) (name "1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-			)
-		)
-
 	)
 	(text "MCP3208 ADC SUPPORT"
 		(exclude_from_sim no)
@@ -1746,7 +2819,7 @@
 	)
 	(text "ADC notes\nVDD = 3V3_ADC.\nVREF = ADC_REF.\nADC_REF is not analog VREF.\nIf MCP3208 is ever powered at 5V,\nDOUT level shifting is required."
 		(exclude_from_sim no)
-		(at 177.8 60.96 0)
+		(at 18.796 124.206 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1769,7 +2842,7 @@
 	)
 	(text "Local decoupling required near MCP3208."
 		(exclude_from_sim no)
-		(at 241.3 55.88 0)
+		(at 241.046 53.848 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1837,7 +2910,7 @@
 	)
 	(text "TP_BAT_MON"
 		(exclude_from_sim no)
-		(at 292.1 111.76 0)
+		(at 295.402 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1940,7 +3013,7 @@
 	)
 	(text "ADC_REF feed/filter candidate from selected 3V3_ADC"
 		(exclude_from_sim no)
-		(at 241.3 66.04 0)
+		(at 241.3 67.818 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1951,7 +3024,7 @@
 	)
 	(text "ERC/source declaration only; ADC_REF is fed from 3V3_ADC through R206"
 		(exclude_from_sim no)
-		(at 289.56 68.58 0)
+		(at 241.046 74.168 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1959,6 +3032,39 @@
 			(justify left bottom)
 		)
 		(uuid "60000000-0000-4000-8000-000000000001")
+	)
+	(text "3XAA FIRST-VALIDATION POWER PATH\nJ201 pin 1: BAT_PACK+; pin 2: GND\nSW201 -> Q201 reverse-polarity PMOS -> LDO_IN"
+		(exclude_from_sim no)
+		(at 15.24 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "90100000-0000-4000-8000-000000000001")
+	)
+	(text "TPS7A2033PDBVR first-validation LDO\nIN and EN tied to protected LDO_IN\nOUT feeds 3V3_ADC only through R207 0R measurement link"
+		(exclude_from_sim no)
+		(at 101.6 45.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "90100000-0000-4000-8000-000000000002")
+	)
+	(text "BAT_MON reviewed for 3xAA alkaline validation: 68k / 100k with 10nF shunt cap. Source is protected LDO_IN."
+		(exclude_from_sim no)
+		(at 238.76 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "90100000-0000-4000-8000-000000000003")
 	)
 	(junction
 		(at 43.18 168.91)
@@ -1973,10 +3079,20 @@
 		(uuid "30000000-0000-4000-8000-000000000039")
 	)
 	(junction
+		(at 68.58 180.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "58debbc4-72c1-4fd9-9aba-127319986fcb")
+	)
+	(junction
 		(at 83.82 171.45)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "83915da1-293b-41a0-a10e-9e319158a3b9")
+	)
+	(no_connect
+		(at 128.27 63.5)
+		(uuid "90100000-0000-4000-8000-000000000025")
 	)
 	(wire
 		(pts
@@ -1997,6 +3113,16 @@
 			(type default)
 		)
 		(uuid "1f8eaff6-6f47-4ce1-a269-2ce007684b52")
+	)
+	(wire
+		(pts
+			(xy 68.58 180.34) (xy 68.58 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2962a508-1028-4498-9ba7-76b1dcf6657c")
 	)
 	(wire
 		(pts
@@ -2150,16 +3276,6 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 182.88) (xy 68.58 182.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "30000000-0000-4000-8000-000000000027")
-	)
-	(wire
-		(pts
 			(xy 83.82 171.45) (xy 78.74 171.45)
 		)
 		(stroke
@@ -2240,7 +3356,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 77.47) (xy 137.16 68.58)
+			(xy 132.08 77.47) (xy 132.08 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2250,7 +3366,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 77.47) (xy 144.78 68.58)
+			(xy 151.13 77.47) (xy 151.13 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2460,7 +3576,27 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 182.88) (xy 68.58 173.99)
+			(xy 292.1 120.65) (xy 292.1 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54a9a488-08a9-4af7-ac3e-e7043edea67f")
+	)
+	(wire
+		(pts
+			(xy 33.02 90.17) (xy 29.21 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ef339e5-035f-42c1-9eca-aacf8aeebed5")
+	)
+	(wire
+		(pts
+			(xy 68.58 180.34) (xy 68.58 173.99)
 		)
 		(stroke
 			(width 0)
@@ -2470,7 +3606,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 185.42) (xy 88.9 185.42)
+			(xy 83.82 190.5) (xy 88.9 190.5)
 		)
 		(stroke
 			(width 0)
@@ -2480,7 +3616,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 185.42) (xy 88.9 187.96)
+			(xy 88.9 190.5) (xy 88.9 198.12)
 		)
 		(stroke
 			(width 0)
@@ -2490,7 +3626,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 187.96) (xy 68.58 187.96)
+			(xy 88.9 198.12) (xy 68.58 198.12)
 		)
 		(stroke
 			(width 0)
@@ -2500,13 +3636,63 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 171.45) (xy 87.63 182.88)
+			(xy 142.24 78.74) (xy 142.24 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fb8638d-d5b6-420d-aceb-af8f40f585a8")
+	)
+	(wire
+		(pts
+			(xy 72.39 31.75) (xy 91.44 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bb2f43b-794c-426f-ab2a-0f461b06f67c")
+	)
+	(wire
+		(pts
+			(xy 87.63 171.45) (xy 87.63 180.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "8d011366-af33-4c2e-b883-e9548fd9980d")
+	)
+	(wire
+		(pts
+			(xy 269.24 111.76) (xy 292.1 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90100000-0000-4000-8000-000000000005")
+	)
+	(wire
+		(pts
+			(xy 36.83 109.22) (xy 29.21 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af7ee741-dd4e-4c7d-b190-c558e20bfe94")
+	)
+	(wire
+		(pts
+			(xy 299.72 107.95) (xy 292.1 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b20f4415-846a-44dd-91ef-bb563c014a5a")
 	)
 	(wire
 		(pts
@@ -2517,6 +3703,66 @@
 			(type default)
 		)
 		(uuid "c431a03d-165a-409e-88c5-fc783d76a353")
+	)
+	(wire
+		(pts
+			(xy 68.58 198.12) (xy 68.58 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc9c9ef6-2a92-4793-94b2-1a8f5c23fb96")
+	)
+	(wire
+		(pts
+			(xy 29.21 68.58) (xy 33.02 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dca5d5a1-f447-4288-9fcb-88492f2c84d2")
+	)
+	(wire
+		(pts
+			(xy 132.08 77.47) (xy 137.16 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e05e9a43-83d3-4a57-8c2e-7dd7f42e076a")
+	)
+	(wire
+		(pts
+			(xy 68.58 180.34) (xy 87.63 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee3b7c86-3cdb-42d3-8855-f7ac0a7518c7")
+	)
+	(wire
+		(pts
+			(xy 142.24 68.58) (xy 142.24 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa53c112-397d-41b6-bea4-7edc40505265")
+	)
+	(wire
+		(pts
+			(xy 151.13 77.47) (xy 144.78 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fff03d62-a772-41b3-978c-5348b4fc21fa")
 	)
 	(label "VREF_MON"
 		(at 114.3 97.79 180)
@@ -2559,7 +3805,7 @@
 		(uuid "10000000-0000-4000-8000-000000000037")
 	)
 	(label "ADC_REF"
-		(at 137.16 68.58 270)
+		(at 132.08 68.58 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2569,7 +3815,7 @@
 		(uuid "10000000-0000-4000-8000-000000000038")
 	)
 	(label "3V3_ADC"
-		(at 144.78 68.58 270)
+		(at 151.13 68.58 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2689,7 +3935,7 @@
 		(uuid "50000000-0000-4000-8000-00000000000a")
 	)
 	(label "ADC_REF"
-		(at 276.86 63.5 0)
+		(at 267.97 63.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2738,9 +3984,259 @@
 		)
 		(uuid "50000000-0000-4000-8000-00000000000f")
 	)
+	(label "GND"
+		(at 25.4 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000006")
+	)
+	(label "BAT_PACK+"
+		(at 25.4 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000007")
+	)
+	(label "BAT_PACK+"
+		(at 25.4 80.01 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000008")
+	)
+	(label "SW_BAT+"
+		(at 35.56 80.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000009")
+	)
+	(label "GND"
+		(at 66.04 58.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000010")
+	)
+	(label "SW_BAT+"
+		(at 81.28 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000011")
+	)
+	(label "LDO_IN"
+		(at 81.28 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000012")
+	)
+	(label "LDO_IN"
+		(at 91.44 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000013")
+	)
+	(label "LDO_IN"
+		(at 113.03 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000014")
+	)
+	(label "LDO_IN"
+		(at 113.03 58.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000015")
+	)
+	(label "GND"
+		(at 120.65 53.34 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000016")
+	)
+	(label "TPS7A2033_OUT"
+		(at 128.27 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000017")
+	)
+	(label "LDO_IN"
+		(at 104.14 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000018")
+	)
+	(label "GND"
+		(at 104.14 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000019")
+	)
+	(label "TPS7A2033_OUT"
+		(at 142.24 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000020")
+	)
+	(label "GND"
+		(at 142.24 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000021")
+	)
+	(label "TPS7A2033_OUT"
+		(at 156.21 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000022")
+	)
+	(label "3V3_ADC"
+		(at 163.83 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000023")
+	)
+	(label "GND"
+		(at 292.1 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000000024")
+	)
+	(label "BAT_PACK+"
+		(at 33.02 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001001")
+	)
+	(label "SW_BAT+"
+		(at 33.02 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001002")
+	)
+	(label "LDO_IN"
+		(at 29.21 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001003")
+	)
+	(label "3V3_ADC"
+		(at 36.83 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001004")
+	)
+	(label "BAT_MON"
+		(at 299.72 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001005")
+	)
+	(label "GND"
+		(at 142.24 86.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90100000-0000-4000-8000-000000001006")
+	)
 	(hierarchical_label "3V3_ADC"
 		(shape output)
-		(at 73.66 31.75 0)
+		(at 72.39 31.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2861,7 +4357,7 @@
 	)
 	(hierarchical_label "analog VREF"
 		(shape output)
-		(at 68.58 182.88 0)
+		(at 68.58 180.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2893,7 +4389,7 @@
 		(dnp no)
 		(uuid "20000000-0000-4000-8000-000000000013")
 		(property "Reference" "U201"
-			(at 131.318 74.93 0)
+			(at 125.476 75.438 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2903,7 +4399,7 @@
 			)
 		)
 		(property "Value" "MCP3208-CI/P"
-			(at 139.446 65.786 0)
+			(at 139.7 65.532 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3028,7 +4524,7 @@
 			)
 		)
 		(property "Value" "100nF VDD candidate"
-			(at 269.24 34.29 0)
+			(at 277.622 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3110,7 +4606,7 @@
 			)
 		)
 		(property "Value" "1uF or 4.7uF bulk candidate"
-			(at 307.34 34.29 0)
+			(at 319.024 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3192,7 +4688,7 @@
 			)
 		)
 		(property "Value" "100nF ADC_REF candidate"
-			(at 269.24 49.53 0)
+			(at 279.654 49.276 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3274,7 +4770,7 @@
 			)
 		)
 		(property "Value" "1uF ADC_REF optional"
-			(at 307.34 49.53 0)
+			(at 315.976 49.784 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3948,7 +5444,7 @@
 			)
 		)
 		(property "Value" "0R/10R candidate"
-			(at 259.08 66.04 90)
+			(at 258.826 70.358 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4201,7 +5697,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 88.9 31.75 90)
+		(at 91.44 31.75 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4209,10 +5705,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "50000000-0000-4000-8000-000000000019")
 		(property "Reference" "#FLG203"
-			(at 86.995 31.75 0)
+			(at 89.535 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4223,7 +5718,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 85.09 31.7499 90)
+			(at 94.488 34.29 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4234,7 +5729,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 31.75 0)
+			(at 91.44 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4245,7 +5740,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 31.75 0)
+			(at 91.44 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4256,7 +5751,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 88.9 31.75 0)
+			(at 91.44 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4294,7 +5789,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "60000000-0000-4000-8000-000000000005")
 		(property "Reference" "#FLG204"
 			(at 290.195 63.5 0)
@@ -4308,7 +5802,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 288.29 63.4999 90)
+			(at 292.1 60.96 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4371,7 +5865,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:MCP6002-xP")
-		(at 76.2 185.42 0)
+		(at 76.2 190.5 0)
 		(unit 2)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4381,7 +5875,7 @@
 		(dnp no)
 		(uuid "70000000-0000-4000-8000-000000000004")
 		(property "Reference" "U202"
-			(at 76.2 177.8 0)
+			(at 76.2 182.88 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4391,7 +5885,7 @@
 			)
 		)
 		(property "Value" "MCP6002-xP"
-			(at 76.2 195.58 0)
+			(at 76.2 200.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4402,7 +5896,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 76.2 185.42 0)
+			(at 76.2 190.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4413,7 +5907,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 76.2 185.42 0)
+			(at 76.2 190.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4424,7 +5918,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 76.2 185.42 0)
+			(at 76.2 190.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4472,451 +5966,1173 @@
 			)
 		)
 	)
-	(text "3XAA FIRST-VALIDATION POWER PATH\nJ201 pin 1: BAT_PACK+; pin 2: GND\nSW201 -> Q201 reverse-polarity PMOS -> LDO_IN"
-		(at 15.24 43.18 0)
-		(effects (font (size 1.27 1.27)) (justify left))
-		(uuid "90100000-0000-4000-8000-000000000001")
-	)
-	(text "TPS7A2033PDBVR first-validation LDO\nIN and EN tied to protected LDO_IN\nOUT feeds 3V3_ADC only through R207 0R measurement link"
-		(at 101.6 45.72 0)
-		(effects (font (size 1.27 1.27)) (justify left))
-		(uuid "90100000-0000-4000-8000-000000000002")
-	)
-	(text "BAT_MON reviewed for 3xAA alkaline validation: 68k / 100k with 10nF shunt cap. Source is protected LDO_IN."
-		(at 238.76 91.44 0)
-		(effects (font (size 1.27 1.27)) (justify left))
-		(uuid "90100000-0000-4000-8000-000000000003")
-	)
-	(wire
-		(pts (xy 73.66 31.75) (xy 88.9 31.75))
-		(stroke (width 0) (type default))
-		(uuid "90100000-0000-4000-8000-000000000004")
-	)
-	(wire
-		(pts (xy 269.24 111.76) (xy 292.1 111.76))
-		(stroke (width 0) (type default))
-		(uuid "90100000-0000-4000-8000-000000000005")
-	)
-
-	(label "GND"
-		(at 25.4 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000006")
-	)
-
-	(label "BAT_PACK+"
-		(at 25.4 53.34 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000007")
-	)
-
-	(label "BAT_PACK+"
-		(at 43.18 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "90100000-0000-4000-8000-000000000008")
-	)
-
-	(label "SW_BAT+"
-		(at 53.34 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000009")
-	)
-
-	(label "GND"
-		(at 66.04 58.42 0)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "90100000-0000-4000-8000-000000000010")
-	)
-
-	(label "SW_BAT+"
-		(at 81.28 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000011")
-	)
-
-	(label "LDO_IN"
-		(at 81.28 60.96 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000012")
-	)
-
-	(label "LDO_IN"
-		(at 91.44 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000013")
-	)
-
-	(label "LDO_IN"
-		(at 113.03 63.5 0)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "90100000-0000-4000-8000-000000000014")
-	)
-
-	(label "LDO_IN"
-		(at 113.03 58.42 0)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "90100000-0000-4000-8000-000000000015")
-	)
-
-	(label "GND"
-		(at 120.65 53.34 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000016")
-	)
-
-	(label "TPS7A2033_OUT"
-		(at 128.27 58.42 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000017")
-	)
-
-	(label "LDO_IN"
-		(at 104.14 74.93 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000018")
-	)
-
-	(label "GND"
-		(at 104.14 82.55 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000019")
-	)
-
-	(label "TPS7A2033_OUT"
-		(at 142.24 74.93 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000020")
-	)
-
-	(label "GND"
-		(at 142.24 82.55 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000021")
-	)
-
-	(label "TPS7A2033_OUT"
-		(at 156.21 63.5 0)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "90100000-0000-4000-8000-000000000022")
-	)
-
-	(label "3V3_ADC"
-		(at 163.83 63.5 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000023")
-	)
-
-	(label "GND"
-		(at 292.1 119.38 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000000024")
-	)
-
-	(no_connect
-		(at 128.27 63.5)
-		(uuid "90100000-0000-4000-8000-000000000025")
-	)
-
 	(symbol
 		(lib_id "EMG_V5:EMG_Conn_01x02_Pin")
 		(at 20.32 54.61 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000026")
-		(property "Reference" "J201" (at 17.78 49.53 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "3xAA_BATTERY" (at 17.78 59.69 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 20.32 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000027"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000028"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "J201") (unit 1))))
+		(property "Reference" "J201"
+			(at 17.78 49.53 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3xAA_BATTERY"
+			(at 17.78 59.69 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 20.32 62.23 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 20.32 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 20.32 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000027")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000028")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "J201")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "EMG_V5:EMG_SW_SPST")
-		(at 48.26 55.88 0)
+		(at 30.48 80.01 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000029")
-		(property "Reference" "SW201" (at 48.26 52.07 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "MAIN_PWR_SW" (at 48.26 59.69 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 48.26 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 48.26 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000030"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000031"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "SW201") (unit 1))))
+		(property "Reference" "SW201"
+			(at 30.48 77.216 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MAIN_PWR_SW"
+			(at 30.48 83.058 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 30.48 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 30.48 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 30.48 80.01 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000030")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000031")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "SW201")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "EMG_V5:PMV48XP")
 		(at 73.66 58.42 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000032")
-		(property "Reference" "Q201" (at 73.66 50.8 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "PMV48XP" (at 73.66 66.04 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 73.66 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf" (at 73.66 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000033"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000034"))
-		(pin "3" (uuid "90100000-0000-4000-8000-000000000035"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "Q201") (unit 1))))
+		(property "Reference" "Q201"
+			(at 73.66 50.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PMV48XP"
+			(at 73.66 66.04 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 73.66 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PMV48XP.pdf"
+			(at 73.66 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 73.66 58.42 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000033")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000034")
+		)
+		(pin "3"
+			(uuid "90100000-0000-4000-8000-000000000035")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "Q201")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "EMG_V5:TPS7A2033PDBVR")
 		(at 120.65 60.96 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000036")
-		(property "Reference" "U203" (at 120.65 50.8 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "TPS7A2033PDBVR" (at 120.65 71.12 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 120.65 73.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf" (at 120.65 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000037"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000038"))
-		(pin "3" (uuid "90100000-0000-4000-8000-000000000039"))
-		(pin "4" (uuid "90100000-0000-4000-8000-000000000040"))
-		(pin "5" (uuid "90100000-0000-4000-8000-000000000041"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "U203") (unit 1))))
+		(property "Reference" "U203"
+			(at 120.65 50.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TPS7A2033PDBVR"
+			(at 120.65 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+			(at 120.65 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps7a20.pdf"
+			(at 120.65 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 120.65 60.96 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000037")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000038")
+		)
+		(pin "3"
+			(uuid "90100000-0000-4000-8000-000000000039")
+		)
+		(pin "4"
+			(uuid "90100000-0000-4000-8000-000000000040")
+		)
+		(pin "5"
+			(uuid "90100000-0000-4000-8000-000000000041")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U203")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(symbol
 		(lib_id "Device:C")
 		(at 104.14 78.74 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000042")
-		(property "Reference" "C209" (at 106.68 77.47 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "2.2uF" (at 106.68 80.01 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 105.105 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 104.14 78.74 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000043"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000044"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C209") (unit 1))))
+		(property "Reference" "C209"
+			(at 106.68 77.47 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2uF"
+			(at 106.68 80.01 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.105 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 104.14 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000043")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000044")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C209")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(symbol
 		(lib_id "Device:C")
-		(at 142.24 78.74 0)
+		(at 142.24 74.93 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000045")
-		(property "Reference" "C210" (at 144.78 77.47 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "2.2uF" (at 144.78 80.01 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 143.205 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 142.24 78.74 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000046"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000047"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C210") (unit 1))))
+		(property "Reference" "C210"
+			(at 139.7 71.628 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2uF"
+			(at 145.034 72.898 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.205 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 142.24 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 142.24 74.93 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000046")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000047")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C210")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(symbol
 		(lib_id "Device:R")
 		(at 160.02 63.5 90)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000048")
-		(property "Reference" "R207" (at 162.56 62.23 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "0R" (at 162.56 64.77 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 160.985 67.31 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 160.02 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000049"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000050"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "R207") (unit 1))))
+		(property "Reference" "R207"
+			(at 160.02 61.468 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 160.274 63.5 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.985 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 160.02 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 160.02 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000049")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000050")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R207")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(symbol
 		(lib_id "Device:C")
 		(at 292.1 115.57 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000051")
-		(property "Reference" "C211" (at 294.64 114.3 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "10nF" (at 294.64 116.84 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 293.065 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 292.1 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000052"))
-		(pin "2" (uuid "90100000-0000-4000-8000-000000000053"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "C211") (unit 1))))
+		(property "Reference" "C211"
+			(at 297.434 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10nF"
+			(at 297.434 116.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 293.065 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 292.1 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 292.1 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000052")
+		)
+		(pin "2"
+			(uuid "90100000-0000-4000-8000-000000000053")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C211")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 91.44 55.88 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000054")
-		(property "Reference" "#FLG205" (at 91.44 57.785 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Value" "PWR_FLAG" (at 91.44 59.69 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "" (at 91.44 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 91.44 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000000055"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "#FLG205") (unit 1))))
+		(property "Reference" "#FLG205"
+			(at 91.44 57.785 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 91.44 59.69 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 91.44 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 91.44 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 91.44 55.88 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000000055")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG205")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "BAT_PACK+"
-		(at 25.4 62.23 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001001")
-	)
-
 	(symbol
+		(lib_name "EMG_TestPoint_1")
 		(lib_id "EMG_V5:EMG_TestPoint")
-		(at 25.4 62.23 0)
+		(at 29.21 68.58 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000060")
-		(property "Reference" "TP201" (at 25.4 59.69 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "BAT_PACK+" (at 25.4 64.77 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 30.48 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 30.48 62.23 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002001"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP201") (unit 1))))
+		(property "Reference" "TP201"
+			(at 33.02 66.04 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BAT_PACK+"
+			(at 33.274 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 34.29 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 29.21 68.58 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002001")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP201")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "SW_BAT+"
-		(at 58.42 60.96 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001002")
-	)
-
 	(symbol
+		(lib_name "EMG_TestPoint_2")
 		(lib_id "EMG_V5:EMG_TestPoint")
-		(at 58.42 60.96 0)
+		(at 29.21 90.17 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000061")
-		(property "Reference" "TP202" (at 58.42 58.42 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "SW_BAT+" (at 58.42 63.5 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 63.5 60.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 63.5 60.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002002"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP202") (unit 1))))
+		(property "Reference" "TP202"
+			(at 29.21 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_BAT+"
+			(at 29.21 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 34.29 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 29.21 90.17 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002002")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP202")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "LDO_IN"
-		(at 99.06 55.88 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001003")
-	)
-
 	(symbol
+		(lib_name "EMG_TestPoint_3")
 		(lib_id "EMG_V5:EMG_TestPoint")
-		(at 99.06 55.88 0)
+		(at 29.21 100.33 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000062")
-		(property "Reference" "TP203" (at 99.06 53.34 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "LDO_IN" (at 99.06 58.42 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 104.14 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 104.14 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002003"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP203") (unit 1))))
+		(property "Reference" "TP203"
+			(at 29.21 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LDO_IN"
+			(at 29.21 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 34.29 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 29.21 100.33 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002003")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP203")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "3V3_ADC"
-		(at 172.72 63.5 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001004")
-	)
-
 	(symbol
+		(lib_name "EMG_TestPoint_4")
 		(lib_id "EMG_V5:EMG_TestPoint")
-		(at 172.72 63.5 0)
+		(at 29.21 109.22 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000063")
-		(property "Reference" "TP204" (at 172.72 60.96 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "3V3_ADC" (at 172.72 66.04 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 177.8 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 177.8 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002004"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP204") (unit 1))))
+		(property "Reference" "TP204"
+			(at 39.624 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3V3_ADC"
+			(at 40.64 106.172 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 34.29 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 29.21 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP204")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "BAT_MON"
-		(at 292.1 107.95 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001005")
-	)
-
 	(symbol
+		(lib_name "EMG_TestPoint_5")
 		(lib_id "EMG_V5:EMG_TestPoint")
 		(at 292.1 107.95 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000064")
-		(property "Reference" "TP205" (at 292.1 105.41 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "BAT_MON" (at 292.1 110.49 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 297.18 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 297.18 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002005"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP205") (unit 1))))
+		(property "Reference" "TP205"
+			(at 292.1 102.362 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BAT_MON"
+			(at 286.258 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 297.18 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 297.18 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 292.1 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002005")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP205")
+					(unit 1)
+				)
+			)
+		)
 	)
-
-	(label "GND"
-		(at 142.24 86.36 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "90100000-0000-4000-8000-000000001006")
-	)
-
 	(symbol
 		(lib_id "EMG_V5:EMG_TestPoint")
 		(at 142.24 86.36 0)
 		(unit 1)
+		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
+		(in_pos_files yes)
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000065")
-		(property "Reference" "TP206" (at 142.24 83.82 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "GND" (at 142.24 88.9 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 147.32 86.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(property "Datasheet" "~" (at 147.32 86.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-		(pin "1" (uuid "90100000-0000-4000-8000-000000002006"))
-		(instances (project "EMG_v5" (path "/08b37bb5-a1eb-455e-b244-e675432ad74c" (reference "TP206") (unit 1))))
+		(property "Reference" "TP206"
+			(at 142.24 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 142.24 88.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 147.32 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 142.24 86.36 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "90100000-0000-4000-8000-000000002006")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP206")
+					(unit 1)
+				)
+			)
+		)
 	)
-
 	(sheet_instances
 		(path "/"
 			(page "2")
