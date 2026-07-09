@@ -294,6 +294,121 @@ Battery decision status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FIN
 - The full-load 300 mA dropout number must not be treated as the expected project operating point.
 - At the actual low expected load, dropout should be lower than the full-load condition, but no guaranteed low-current dropout value is invented here without an explicit reviewed datasheet table value.
 
+PMOS / BAT_MON / SPI off-power final pre-implementation gate status: **3XAA_TPS7A2033_PMOS_BATMON_SPI_OFFPOWER_REVIEWED_READY_WITH_CAVEATS_NO_SCHEMATIC_EDIT_NO_PCB_NOT_FINAL_HW_APPROVAL**.
+
+- A narrow documentation-sync checkpoint records the latest completed review of the remaining first-validation power-path gates.
+- Scope: 3xAA alkaline first analog validation only.
+- This is not final product battery architecture.
+- This is not final hardware approval.
+- This is not human-test approval.
+- This is not PCB approval.
+- No schematic implementation has been made for this checkpoint.
+- No KiCad file has been edited for this checkpoint.
+- Preferred first-validation architecture direction is now:
+  - 3xAA alkaline.
+  - Main high-side switch.
+  - PMOS reverse-polarity protection.
+  - Protected `LDO_IN`.
+  - BAT_MON divider/filter from protected `LDO_IN` to GND.
+  - `TPS7A2033PDBVR` IN from protected `LDO_IN`.
+  - `TPS7A2033PDBVR` OUT through a 0R/current-measure link to `3V3_ADC`.
+- Preferred LDO candidate remains TI `TPS7A2033PDBVR`.
+- The TPS7A2033 selection was not reopened.
+- Previous current-budget estimates remain:
+  - Typical expected `3V3_ADC` load: approximately 1.6 mA.
+  - Conservative verified static/active subtotal: approximately 2.5 mA.
+  - Practical first-validation design budget: 10 mA.
+  - Regulator-capability planning floor: at least 50 mA.
+- These current values remain datasheet-based engineering estimates, not measured current.
+- TPS7A2033 material caveat remains: no other source may intentionally hold `3V3_ADC` high while the TPS7A20 input is collapsed unless a future reviewed protection topology explicitly makes this safe.
+- PMOS reverse-polarity review result: `PMV48XP_SELECTED_AS_PREFERRED_EXACT_FIRST_VALIDATION_CANDIDATE`.
+- Preferred exact first-validation PMOS candidate: Nexperia `PMV48XP`.
+- Reviewed PMV48XP properties:
+  - Type: P-channel MOSFET.
+  - Package: SOT-23 / TO-236AB.
+  - `VDS`: -20 V.
+  - `VGS` absolute maximum: +/-12 V.
+  - `RDS(on)` maximum: 55 mOhm at `VGS = -4.5 V`.
+  - `RDS(on)` maximum: 81 mOhm at `VGS = -2.5 V`.
+  - Pin 1 = Gate.
+  - Pin 2 = Source.
+  - Pin 3 = Drain.
+- Reviewed PMV48XP intended connection:
+  - Switched battery positive -> Drain / physical pin 3.
+  - Protected `LDO_IN` -> Source / physical pin 2.
+  - Gate -> system GND / physical pin 1.
+- Reviewed PMOS operation:
+  - Under correct pack polarity, initial conduction occurs through the intrinsic body diode from drain toward source.
+  - The source node rises.
+  - `VGS` becomes negative.
+  - The PMOS enhances and provides a low-drop conduction path.
+  - Under reversed pack polarity, the body diode is reverse-biased and the PMOS remains off.
+- PMOS caveat: pack-level PMOS reverse-polarity protection does not by itself guarantee protection against one individual AA cell being inserted backwards while the total series-pack output polarity remains positive.
+- PMV48XP is not final production MPN lock.
+- PMV48XP lifecycle/prototype availability was not confirmed from reviewed primary manufacturer documentation.
+- KiCad symbol pin mapping and physical package pin mapping must be verified before implementation.
+- No PMOS footprint is assigned or locked by this checkpoint.
+- Old BAT_MON divider candidate is no longer suitable for the current 3xAA first-validation direction:
+  - Top resistor: 330k.
+  - Bottom resistor: 1M.
+  - At 4.8 V, BAT_MON is approximately 3.61 V.
+  - This exceeds a 3.3 V `ADC_REF` normal operating range.
+  - Absolute maximum ADC input limits must not be used as normal operating targets.
+- BAT_MON values are locked for schematic implementation planning:
+  - Top resistor: 68k.
+  - Bottom resistor: 100k.
+  - Capacitor: 10 nF from BAT_MON to GND.
+  - Sense node: protected `LDO_IN`.
+- BAT_MON reviewed calculations:
+  - Divider ratio: approximately 0.595.
+  - BAT_MON at 4.5 V: approximately 2.679 V.
+  - BAT_MON at 4.8 V: approximately 2.857 V.
+  - BAT_MON at 5.5 V review point: approximately 3.274 V.
+  - Divider current at 4.8 V: approximately 28.6 uA.
+  - Thevenin resistance: approximately 40.5 kOhm.
+  - RC time constant with 10 nF: approximately 0.405 ms.
+  - Five time constants: approximately 2.0 ms.
+- BAT_MON firmware policy direction:
+  - BAT_MON is a slow housekeeping measurement.
+  - After switching to MCP3208 CH7, discard the first conversion.
+  - Wait at least 5 ms.
+  - Acquire several samples.
+  - Average the samples.
+- Actual BAT_MON accuracy and settling still require bench measurement.
+- Exact BAT_MON resistor and capacitor MPNs are not locked.
+- SPI off-power reviewed problematic condition:
+  - DSTK22807 / ESP32-H2 powered.
+  - `3V3_ADC` off.
+  - MCP3208 VDD at 0 V or collapsing.
+  - SPI physically connected through `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO`.
+- MCP3208 datasheet-backed input/output absolute maximum limit: `VSS - 0.6 V` to `VDD + 0.6 V`.
+- Applying approximately 3.3 V to MCP3208 digital inputs while VDD = 0 V is not an approved operating condition.
+- Internal clamp/injection or partial-powering behavior may occur, but exact behavior is not approved as a normal operating mode.
+- Small SPI series resistors alone do not make the powered-DSTK / unpowered-MCP3208 condition safe or datasheet-approved.
+- First-validation hard rule: USB-powered DSTK + `3V3_ADC` off + SPI physically connected is FORBIDDEN for first validation.
+- Firmware-only high-Z policy is not sufficient from the instant of power-up because firmware cannot guarantee GPIO state before reset/boot completes.
+- Actual DSTK22807 carrier pull-up/pull-down circuitry on GPIO11, GPIO12, GPIO13, and GPIO14 remains unconfirmed from current project evidence.
+- SPI series resistors remain useful candidates for edge-rate damping, ringing reduction, noise control, and partial fault-current reduction.
+- SPI series resistor candidate range remains 100R to 330R.
+- If one common first schematic candidate is desired, 220R is reasonable.
+- Exact SPI series resistor value is not locked by this documentation-sync checkpoint.
+- SPI series resistors are not the off-power safety solution.
+- Main remaining uncontrolled backfeed/off-power risk after the PMOS and BAT_MON reviews is through the SPI interface, not through the selected PMOS or BAT_MON divider.
+- Existing power-source boundaries remain preserved:
+  - No DSTK 3V3 -> `3V3_ADC`.
+  - No DSTK 5V/VBUS -> analog or ADC rails.
+  - No local LDO output directly tied to DSTK 3V3.
+  - No other source may intentionally hold `3V3_ADC` high while the TPS7A20 input is collapsed.
+  - `ADC_REF` and `analog VREF` remain separate.
+  - `analog VREF` remains approximately 1.65 V analog midscale bias/reference.
+  - `ADC_REF` remains the MCP3208 full-scale reference.
+  - `EMG1_REF_ELECTRODE` and `EMG2_REF_ELECTRODE` must not be tied to GND, chassis, or USB.
+  - Human-contact EMG testing remains battery-isolated only.
+  - USB must be disconnected whenever electrodes are attached to a human.
+  - Battery-powered operation alone is not final human-test approval.
+  - No No ERC markers.
+  - PCB has not started.
+
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
 
 - Root ERC after DSTK SPI/U501 cleanup reported 2 total messages: 0 errors and 2 warnings.
