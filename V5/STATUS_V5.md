@@ -214,6 +214,86 @@ Battery decision status: **BATTERY_DECISION_FIRST_ANALOG_VALIDATION_3XAA_NOT_FIN
 - SPI/BLE active noise comparison is a bench/debug measurement item only and does not approve human-electrode testing with USB or unresolved DSTK power.
 - This is not final hardware approval.
 
+3V3_ADC current-budget / TPS7A2033 review status: **3V3_ADC_CURRENT_BUDGET_SUPPORTS_TPS7A2033_PREFERRED_WITH_BACKFEED_CAVEAT_NOT_FINAL_HW_APPROVAL**.
+
+- A narrow datasheet-based `3V3_ADC` current-budget review was completed for the actual analog/ADC rail load.
+- Baseline at review start: branch `v5/KiCad`, HEAD `e64516c refine root schematic layout`, clean working tree.
+- The current first-validation power direction is now recorded as: 3xAA alkaline -> switch/protection -> `TPS7A2033PDBVR` candidate -> `3V3_ADC`.
+- Preferred LDO candidate: TI `TPS7A2033PDBVR`.
+- This remains a preferred candidate only.
+- This is not final hardware approval.
+- This is not schematic implementation approval.
+- This is not final production MPN lock.
+- This is not footprint lock.
+- This is not BOM lock.
+- This is not PCB approval.
+- Component counts used for the reviewed current budget:
+  - 1x U201 MCP3208.
+  - 1x U202 MCP6002 package = 2 op-amp channels.
+  - 2x MCP6004 packages, U302 and U402 = 8 op-amp channels total.
+  - 2x INA333 devices, U301 and U401.
+- MCP3208 supply current reviewed from primary Microchip documentation:
+  - Typical supply current: 320 uA.
+  - Maximum supply current: 400 uA.
+  - Reviewed condition: `VDD = VREF = 5 V`, `TA = -40 C to +85 C`, `fSAMPLE = 100 ksps`, DOUT unloaded.
+  - Exact MCP3208 current at the project 3.3 V operating point is not confirmed as a separate guaranteed datasheet table value.
+- MCP3208 reference input drain reviewed from primary Microchip documentation:
+  - Typical reference input drain: 100 uA.
+  - Maximum reference input drain: 150 uA.
+  - Reviewed at 5 V.
+  - This contribution must be included because `ADC_REF` is fed from `3V3_ADC` through the current R206 0R/10R candidate direction.
+- MCP6002/MCP6004 current basis reviewed from primary Microchip documentation:
+  - Quiescent current is specified per amplifier, not per package.
+  - Typical quiescent current: 100 uA per amplifier.
+  - Maximum quiescent current under the reviewed datasheet conditions: 170 uA per amplifier.
+  - U202 MCP6002 uses both amplifiers in one package.
+  - U302 and U402 MCP6004 use eight amplifiers total across two packages.
+- INA333 current reviewed from primary TI documentation:
+  - Typical supply current: 50 uA per device.
+  - Maximum supply current: 75 uA at 25 C under the reviewed conditions.
+  - Maximum supply current: 80 uA over the wider reviewed temperature range.
+  - The project uses two INA333 devices.
+- analog VREF divider current:
+  - R201 = 47k.
+  - R202 = 47k.
+  - Calculated current is approximately 35.1 uA at 3.3 V.
+- BAT_MON divider current:
+  - R204 = 330k.
+  - R205 = 1M.
+  - Calculated current is approximately 3.61 uA at 4.8 V battery input.
+  - This is battery-input drain, not direct `3V3_ADC` rail load.
+- `VREF_MON` static load is expected to be very small, but exact dynamic sampling disturbance remains unconfirmed.
+- Reviewed current-budget totals:
+  - Typical expected `3V3_ADC` load: approximately 1.6 mA.
+  - Conservative verified static/active subtotal: approximately 2.5 mA.
+  - Practical first-validation design budget: 10 mA.
+  - Existing regulator-capability planning floor: at least 50 mA.
+- The approximately 1.6 mA and 2.5 mA values are datasheet-based engineering estimates, not measured values.
+- The 10 mA value is a practical first-validation design budget, not the expected measured current.
+- The 50 mA value is a conservative regulator-capability planning floor, not the expected operating load.
+- Actual `3V3_ADC` rail current remains unmeasured and requires bench validation.
+- `TPS7A2033PDBVR` remains the preferred LDO candidate because the expected analog/ADC load is far below its 300 mA output capability, and because the part has a suitable project-specific balance of 1.6 V to 6.0 V recommended input range, 6.5 V absolute maximum input, low output noise, strong PSRR, low quiescent current, low dropout, and SOT-23-5 / DBV package availability.
+- The 300 mA output rating is not the expected operating current and is not the only reason the part is preferred.
+- Material caveat: reverse-current/backfeed behavior remains open.
+- TI documentation warns that reverse current can flow from output to input after input collapse and may damage the regulator.
+- No other source may intentionally hold `3V3_ADC` high while the TPS7A20 input is collapsed, unless a future reviewed protection topology explicitly makes this safe.
+- Existing power-source boundaries remain preserved:
+  - No DSTK 3V3 -> `3V3_ADC`.
+  - No DSTK 5V/VBUS -> analog or ADC rail.
+  - No local LDO output tied directly to DSTK 3V3.
+  - `ADC_REF` and `analog VREF` remain separate.
+  - `analog VREF` remains approximately 1.65 V analog midscale bias/reference.
+  - `ADC_REF` remains the MCP3208 full-scale reference.
+  - `REF_ELECTRODE` nets must not be tied to GND, chassis, or USB.
+  - Human-contact EMG testing remains battery-isolated only.
+  - USB must be disconnected whenever electrodes are attached to a human.
+- First-pass thermal sanity at `Vin = 4.8 V`, `Vout = 3.3 V`, using `P_LDO = (Vin - Vout) * Iload`:
+  - 10 mA -> approximately 15 mW.
+  - 50 mA -> approximately 75 mW.
+- These thermal values are first-pass dissipation estimates only; actual junction behavior depends on PCB copper, layout, ambient temperature, package mounting, and datasheet thermal test conditions.
+- The full-load 300 mA dropout number must not be treated as the expected project operating point.
+- At the actual low expected load, dropout should be lower than the full-load condition, but no guaranteed low-current dropout value is invented here without an explicit reviewed datasheet table value.
+
 Final DSTK SPI/U501 ERC status: **DSTK_SPI_U501_ERC_ZERO_ERRORS_TWO_WARNINGS_NOT_FINAL_HW_APPROVAL**.
 
 - Root ERC after DSTK SPI/U501 cleanup reported 2 total messages: 0 errors and 2 warnings.

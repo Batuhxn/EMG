@@ -352,6 +352,81 @@ Battery decision for first analog validation:
 - Constraint: battery-powered operation alone is not final safety approval.
 - Constraint: PCB/enclosure/isolation safety must be reviewed separately before final human test approval.
 
+3V3_ADC current-budget and TPS7A2033 preferred-candidate decision:
+
+- Current status: **3V3_ADC_CURRENT_BUDGET_SUPPORTS_TPS7A2033_PREFERRED_WITH_BACKFEED_CAVEAT_NOT_FINAL_HW_APPROVAL**.
+- Decision: keep TI `TPS7A2033PDBVR` as the preferred LDO candidate for the first-validation `3V3_ADC` path.
+- Decision: record the current first-validation architecture direction as 3xAA alkaline -> switch/protection -> `TPS7A2033PDBVR` candidate -> `3V3_ADC`.
+- Decision: treat `TPS7A2033PDBVR` as a preferred candidate only, not final hardware approval, not schematic implementation approval, not final production MPN lock, not footprint lock, not BOM lock, and not PCB approval.
+- Decision: do not reopen LDO selection from this review because the reviewed datasheet-based current budget does not contradict the previous preference for `TPS7A2033PDBVR`.
+- Decision: keep the 10 mA practical first-validation design budget as a design budget, not as expected measured current.
+- Decision: keep the at-least-50 mA regulator-capability planning floor as a conservative capability floor, not as expected operating load.
+- Decision: actual `3V3_ADC` rail current still requires bench measurement before final hardware approval.
+- Reviewed component count: 1x U201 MCP3208.
+- Reviewed component count: 1x U202 MCP6002 package = 2 op-amp channels.
+- Reviewed component count: 2x MCP6004 packages, U302 and U402 = 8 op-amp channels total.
+- Reviewed component count: 2x INA333 devices, U301 and U401.
+- Datasheet-backed MCP3208 supply current:
+  - Typical supply current: 320 uA.
+  - Maximum supply current: 400 uA.
+  - Reviewed condition: `VDD = VREF = 5 V`, `TA = -40 C to +85 C`, `fSAMPLE = 100 ksps`, DOUT unloaded.
+  - Exact MCP3208 current at the project 3.3 V operating point is not confirmed as a separate guaranteed datasheet table value.
+- Datasheet-backed MCP3208 reference input drain:
+  - Typical reference input drain: 100 uA.
+  - Maximum reference input drain: 150 uA.
+  - Reviewed at 5 V.
+  - This current is included because `ADC_REF` is fed from `3V3_ADC` through the current R206 0R/10R candidate direction.
+- Datasheet-backed MCP6002/MCP6004 current basis:
+  - Quiescent current is specified per amplifier, not per package.
+  - Typical quiescent current: 100 uA per amplifier.
+  - Maximum quiescent current under the reviewed datasheet conditions: 170 uA per amplifier.
+  - The project uses both amplifiers in one MCP6002 package.
+  - The project uses two MCP6004 packages, four amplifiers per package, eight amplifiers total.
+- Datasheet-backed INA333 current:
+  - Typical supply current: 50 uA per device.
+  - Maximum supply current: 75 uA at 25 C under the reviewed conditions.
+  - Maximum supply current: 80 uA over the wider reviewed temperature range.
+  - The project uses two INA333 devices.
+- Calculated analog VREF divider current:
+  - R201 = 47k.
+  - R202 = 47k.
+  - Current is approximately 35.1 uA at 3.3 V.
+- Calculated BAT_MON divider current:
+  - R204 = 330k.
+  - R205 = 1M.
+  - Current is approximately 3.61 uA at 4.8 V battery input.
+  - This is battery-input drain, not direct `3V3_ADC` rail load.
+- `VREF_MON` static load is expected to be very small, but exact dynamic sampling disturbance remains unconfirmed.
+- Reviewed current-budget result:
+  - Typical expected `3V3_ADC` load: approximately 1.6 mA.
+  - Conservative verified static/active subtotal: approximately 2.5 mA.
+  - Practical first-validation design budget: 10 mA.
+  - Existing regulator-capability planning floor: at least 50 mA.
+- The approximately 1.6 mA and approximately 2.5 mA totals are datasheet-based engineering estimates, not measured values.
+- Reason: `TPS7A2033PDBVR` remains preferred because the expected analog/ADC load is far below its 300 mA output capability.
+- Reason: `TPS7A2033PDBVR` has a suitable project-specific balance of 1.6 V to 6.0 V recommended input range, 6.5 V absolute maximum input, low output noise, strong PSRR, low quiescent current, low dropout, and SOT-23-5 / DBV package availability.
+- Constraint: the 300 mA output capability is not the expected operating current and is not the only reason the part remains preferred.
+- Material caveat: reverse-current/backfeed behavior remains open.
+- TI documentation warns that reverse current can flow from output to input after input collapse and may damage the regulator.
+- Constraint: no other source may intentionally hold `3V3_ADC` high while the TPS7A20 input is collapsed, unless a future reviewed protection topology explicitly makes this safe.
+- Constraint: no DSTK 3V3 -> `3V3_ADC`.
+- Constraint: no DSTK 5V/VBUS -> analog or ADC rail.
+- Constraint: no local LDO output tied directly to DSTK 3V3.
+- Constraint: `ADC_REF` and `analog VREF` remain separate.
+- Constraint: `analog VREF` remains approximately 1.65 V analog midscale bias/reference.
+- Constraint: `ADC_REF` remains the MCP3208 full-scale reference.
+- Constraint: `REF_ELECTRODE` nets must not be tied to GND, chassis, or USB.
+- Constraint: human-contact EMG testing remains battery-isolated only.
+- Constraint: USB must be disconnected whenever electrodes are attached to a human.
+- Thermal sanity result at `Vin = 4.8 V`, `Vout = 3.3 V`, using `P_LDO = (Vin - Vout) * Iload`:
+  - 10 mA -> approximately 15 mW.
+  - 50 mA -> approximately 75 mW.
+- Constraint: these thermal values are first-pass dissipation estimates only; actual junction behavior depends on PCB copper, layout, ambient temperature, package mounting, and datasheet thermal test conditions.
+- Constraint: the full-load 300 mA dropout number must not be treated as the expected project operating point.
+- Constraint: at the actual low expected load, dropout should be lower than the full-load condition, but no guaranteed low-current dropout value is invented here without an explicit reviewed datasheet table value.
+- Schematic implementation status: not implemented.
+- PCB status: not started.
+
 ## 6. MCP3208 Status
 
 - `MCP3208-CI/P` PDIP-16 is recommended for the socketed first prototype.
@@ -921,4 +996,4 @@ USB-powered human EMG testing: **FORBIDDEN**.
 - `V5/EMG_v5.kicad_sch`
 - `V5/EMG_v5.kicad_pro`
 
-Final decision: **3XAA_LDO_CURRENT_DROPOUT_TARGETS_REVIEWED_NOT_IMPLEMENTED**
+Final decision: **3V3_ADC_CURRENT_BUDGET_SUPPORTS_TPS7A2033_PREFERRED_WITH_BACKFEED_CAVEAT_NOT_FINAL_HW_APPROVAL**
