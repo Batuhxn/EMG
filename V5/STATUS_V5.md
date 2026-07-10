@@ -5,7 +5,7 @@ Date: 2026-07-10
 ## Repository State
 
 - Branch: `v5/KiCad`
-- Current HEAD: `70feb41 sync power helper symbols and refine schematic layout`
+- Current HEAD: `bc3c0d634800511806baf46fd018810f28c3e0ae`
 - Tracking target: `origin/v5/KiCad`
 - Ahead/behind after the latest fetch: `0 / 0`
 - Current tracked V5 schematic root: `V5/EMG_v5.kicad_sch`
@@ -149,23 +149,32 @@ Active open gates include MCP3208 VDD/VREF relationship, ADC input source impeda
 
 This evidence supports schematic-level review and bench-test planning only. It does not establish final hardware correctness, production readiness, or manufacturer-level compliance.
 
-## Current SPI State and Open Backfeed Constraint
+## Current SPI State and Unequal-Power Constraint
 
 The current SPI mapping is:
 
 | SPI net | U501 GPIO | U501 pin | MCP3208 function |
 |---|---:|---:|---|
-| `ADC_CS` | GPIO14 | 13 | `~CS/SHDN` |
-| `ADC_SCLK` | GPIO13 | 14 | CLK |
-| `ADC_MOSI` | GPIO12 | 15 | Din |
-| `ADC_MISO` | GPIO11 | 16 | Dout |
+| `ADC_CS` | GPIO14 | 13 | U201 `~CS/SHDN`, pin 10 |
+| `ADC_SCLK` | GPIO13 | 14 | U201 CLK, pin 13 |
+| `ADC_MOSI` | GPIO12 | 15 | U201 Din, pin 11 |
+| `ADC_MISO` | GPIO11 | 16 | U201 Dout, pin 12 |
 
-The powered-DSTK / unpowered-ADC SPI backfeed condition remains unresolved:
+The four SPI nets are currently connected directly. There are no series resistors, pull-ups, pull-downs, buffers, bus switches, or isolators. The carrier power path is not modeled in the schematic, and the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
 
-- A powered DSTK22807 must not drive the MCP3208 SPI pins while `3V3_ADC` is off or collapsing.
-- USB-powered DSTK operation with `3V3_ADC` off and SPI physically connected is not an approved first-validation condition.
-- Firmware-only high-impedance handling is not accepted as the complete power-up safety solution.
-- Candidate SPI series resistors are not treated as the off-power safety solution.
+The unequal-power architecture decision is now established but not implemented:
+
+- The current direct connection is not accepted as safe for unequal-power states.
+- Physical disconnect of `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` is required before USB attachment, one-sided power, deliberate collapse of either domain, or programming/debugging with unequal power states.
+- Removing the removable DSTK carrier may satisfy the requirement only if removal opens all four nets and no alternate conductive path remains.
+- Firmware-only high-impedance policy, series resistors alone, and procedure-only prohibition are not accepted as sufficient standalone protection.
+- No power-domain-aware buffer or digital isolator is selected for the current prototype.
+
+The manufacturer-evidence basis is that MCP3208 digital pins are limited to `VSS - 0.6V` through `VDD + 0.6V`; a 3.3V high is therefore outside the published absolute maximum when MCP3208 VDD is 0V. No manufacturer-published safe off-power injection-current limit was found for resistor-only protection. MCP3208 DOUT behavior at VDD = 0V and DSTK carrier GPIO clamp behavior remain unspecified or undocumented.
+
+Future project-level bench acceptance must show one action opens all four nets, no alternate path remains, open-state resistance is at least 10 MOhm, SPI-caused unpowered `3V3_ADC` rise is no more than 50mV, and injected current remains below the 1uA-per-signal project ceiling with a 0uA target. The 50mV and 1uA criteria are project thresholds, not manufacturer limits. Unequal-power validation must have no human connection.
+
+MCP3208 `CS/SHDN` separately lacks an ADC-side pull-up. CS may be undefined while the DSTK is disconnected, resetting, or high-impedance. Pull-up value selection and implementation are the next separate electrical review and remain unimplemented.
 
 ## Legacy Placeholder State
 
@@ -224,7 +233,8 @@ Future DSTK validation must cover:
 - ESP32-H2 reset and stability under load.
 - BLE/RF-active rail noise and analog/ADC disturbance.
 - USB coexistence and disconnected/connected source behavior.
-- Reverse-current and backfeed measurement, including the powered-DSTK/unpowered-MCP3208 case.
+- Physical-disconnect resistance, alternate-path, rail-rise, and injected-current validation for both unequal-power directions.
+- CS-high behavior after a separately approved ADC-side pull-up implementation.
 - Physical carrier dimensions, pin labels/orientation, antenna keepout, and USB overhang before placement approval.
 
 ## Evidence Limits and Open Work
@@ -234,7 +244,8 @@ Future DSTK validation must cover:
 - Exact component pinouts, package variants, operating limits, and application requirements still require local manufacturer evidence before final hardware approval.
 - Multiple schematic parts still lack finalized footprints or ordering MPNs.
 - Power-path and BAT_MON behavior still require controlled bench validation.
-- Powered-DSTK / unpowered-ADC SPI behavior remains an unresolved safety constraint.
+- The SPI physical-disconnect architecture is selected but remains unimplemented and unvalidated; direct unequal-power operation remains prohibited.
+- MCP3208 ADC-side CS pull-up value selection and implementation remain open.
 - Human-connected testing remains battery-only and still requires separate safety approval.
 
 Human-connected operation additionally requires USB disconnected, no bench supply, no mains-connected test equipment, and no earth-referenced oscilloscope connection while electrodes are attached. EMG V5 is a prototype development system, not a medical device, and the current documentation is not human-test approval.

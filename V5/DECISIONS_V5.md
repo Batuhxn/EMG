@@ -162,14 +162,27 @@ Engineering basis:
 - Exact MCP600x and BAS70 vendor models are not locally locked; generic op-amp and diode models limit the evidence to candidate behavior and bench-test planning.
 - Simulation results do not grant final hardware, manufacturer-level, PCB, or production approval.
 
-## 8. SPI Off-Power Safety Constraint
+## 8. SPI Unequal-Power Architecture Decision
 
-- The powered-DSTK / unpowered-MCP3208 condition remains unresolved.
-- A powered DSTK22807 must not drive `ADC_CS`, `ADC_SCLK`, or `ADC_MOSI` while MCP3208 VDD is off or collapsing.
-- USB-powered DSTK operation with `3V3_ADC` off and SPI physically connected is forbidden for first validation.
-- Firmware-only high-impedance policy is not accepted as a complete power-up safety solution.
-- SPI series resistors may be reviewed for signal integrity or fault-current reduction, but they are not the off-power safety solution and their exact value is not locked.
-- Future DSTK work must measure current capability, dummy-load response, loaded voltage, regulator temperature, reset stability, BLE/RF noise, USB coexistence, and reverse-current/backfeed behavior.
+- The current direct DSTK22807-to-MCP3208 SPI connection is not accepted as safe for unequal-power states.
+- The minimum accepted architecture for the removable-carrier prototype is physical disconnect of all four nets: `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO`.
+- One disconnect action must open all four signals before USB is attached, either side is powered alone, `3V3_ADC` is intentionally collapsed while DSTK remains powered, DSTK power is intentionally collapsed while MCP3208 remains powered, or programming/debugging occurs with unequal power states.
+- Physically removing the removable DSTK carrier may satisfy this decision only if removal demonstrably opens all four SPI nets and no alternate conductive path remains.
+- Firmware-only high-impedance policy, series resistors alone, and procedure-only unequal-power prohibition are rejected as sufficient standalone protection.
+- Series resistors may still be reviewed for signal integrity or fault-current reduction, but they are not the selected off-power architecture and no value is locked.
+- A power-domain-aware buffer, bus switch, or digital isolator is not selected for the current prototype.
+- Manufacturer evidence limits MCP3208 digital pins to `VSS - 0.6V` through `VDD + 0.6V`; therefore a 3.3V high is outside the published absolute maximum when MCP3208 VDD is 0V.
+- No manufacturer-published safe off-power injection-current limit was found for defensible resistor-only protection. MCP3208 DOUT behavior at VDD = 0V and DSTK carrier GPIO clamp behavior remain undocumented.
+- Future physical-disconnect bench acceptance requires one-action four-line opening, no alternate path, at least 10 MOhm open-state resistance, no more than 50mV SPI-caused rise on unpowered `3V3_ADC`, and a 0uA injected-current target with a project ceiling below 1uA per signal.
+- The 50mV and 1uA criteria are project-level bench acceptance thresholds, not manufacturer-published limits.
+- Unequal-power validation must have no human connection.
+
+### Separate CS/SHDN Constraint
+
+- MCP3208 `CS/SHDN` currently has no ADC-side pull-up.
+- CS may be undefined when DSTK is disconnected, resetting, or high-impedance.
+- Pull-up value selection and implementation require a separate electrical review; no value or implementation is approved by this decision.
+- After a future approved implementation, CS must remain high whenever MCP3208 is powered and DSTK is disconnected.
 
 ## 9. Human-Test Safety Constraints
 

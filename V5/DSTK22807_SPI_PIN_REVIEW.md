@@ -1,18 +1,25 @@
 ﻿# DSTK22807 SPI Pin Review for MCP3208
 
-This document reviews provisional ESP32-H2 GPIO candidates for connecting an MCP3208 ADC over SPI through the DSTK22807 ESP32-H2 Super Mini carrier footprint.
+This document records the current ESP32-H2-to-MCP3208 SPI mapping and the accepted unequal-power-state architecture for the removable DSTK22807 prototype.
 
-This is a review document only. No schematic connection, footprint pad rename, or firmware assignment is approved by this document.
+The current schematic already connects the four SPI nets directly. This document approves no schematic, footprint, firmware, pull-up, buffer, bus-switch, or isolator implementation change. The carrier GPIO mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
 
-## 1. Current repo state
+## 1. Current implementation
 
-- Branch: `v5/measured-dstk22807-footprint`
-- Git status before edit: clean
-- Last 5 commits at start of review:
-  - `f6e2b14 document observed DSTK22807 pinout mapping`
-  - `3824d20 clean up DSTK22807 carrier footprint silkscreen`
-  - `b4ba0e9 add measured provisional DSTK22807 carrier footprint`
-  - `b7384a1 emergency baseline from transferred EMG project`
+| SPI net | DSTK22807 endpoint | MCP3208 endpoint | Direction from DSTK |
+| --- | --- | --- | --- |
+| `ADC_CS` | U501 GPIO14 / pad 13 | U201 `CS/SHDN` pin 10 | Output |
+| `ADC_SCLK` | U501 GPIO13 / pad 14 | U201 `CLK` pin 13 | Output |
+| `ADC_MOSI` | U501 GPIO12 / pad 15 | U201 `DIN` pin 11 | Output |
+| `ADC_MISO` | U501 GPIO11 / pad 16 | U201 `DOUT` pin 12 | Input |
+
+Current limitations:
+
+- All four signals are direct connections.
+- There are no SPI series resistors or pull-up/pull-down resistors.
+- There is no buffer, power-domain-aware bus switch, or digital isolator.
+- The carrier power path is not modeled in the schematic; U501 `5V_VBUS` and `3V3` are unconnected there.
+- GPIO/pad mapping still depends on the provisional right-row reversal recorded from physical observation.
 
 ## 2. Existing observed pinout
 
@@ -98,11 +105,11 @@ MCP3208 net needs for this project:
 | `ADC_MOSI` | Output | Connects to MCP3208 `DIN` |
 | `ADC_MISO` | Input | Connects to MCP3208 `DOUT` |
 
-## 5. Candidate SPI assignment
+## 5. Current SPI assignment
 
-Recommended candidate set avoids TX/RX, power pins, GPIO8/GPIO9 strapping pins, and left-row strapping candidates.
+The implemented assignment avoids TX/RX, power pins, GPIO8/GPIO9 strapping pins, and left-row strapping candidates.
 
-| MCP3208 Net | ESP32-H2 GPIO Candidate | Footprint Pad | Reason | Risk | Confidence |
+| MCP3208 Net | ESP32-H2 GPIO | Footprint Pad | Reason | Risk | Confidence |
 | --- | --- | --- | --- | --- | --- |
 | `ADC_CS` | GPIO14 | Pad 13 | Right-row GPIO; not identified as strapping in checked official docs; convenient chip-select output | Pad mapping still provisional from right-row reversal | Medium |
 | `ADC_SCLK` | GPIO13 | Pad 14 | Right-row GPIO; not identified as strapping in checked official docs; suitable GPIO-matrix SPI clock candidate | Pad mapping still provisional; GPIO13 can be RTC/32k-related on bare SoC context, confirm board does not use it | Medium |
@@ -131,38 +138,53 @@ Backup candidate:
 
 Also avoid assuming GPIO26/GPIO27 or USB-related pins are available unless the actual DSTK22807 breakout exposes them and USB Serial/JTAG usage is intentionally handled.
 
-## 7. Blockers before schematic
+## 7. Remaining carrier-evidence gates
 
 - Physical pinout must be confirmed a second time by clear photo and/or continuity measurement.
 - Right-row reversal must be confirmed: top-right footprint pad 10 must be `5V`, and bottom-right footprint pad 18 must be `GPIO9`.
 - USB side and antenna side must be physically confirmed.
 - DSTK22807 vendor board pinout/schematic should be located or independently verified.
 - ESP32-H2 official pin capability has been checked at SoC/ESP-IDF level, but the specific development board routing is still unverified.
-- MCP3208 exact MPN, package, symbol-footprint mapping, VDD, VREF, and level compatibility must be verified separately before schematic integration.
+- MCP3208 exact MPN, package, symbol-footprint mapping, VDD, VREF, and level compatibility require separate evidence closure.
 - MCP3208 should be powered at 3.3V for direct ESP32-H2 SPI compatibility; if powered at 5V, level shifting is required for the MCP3208 `DOUT` path into ESP32-H2.
 - Human-test safety: electrodes must not be connected to a human subject while the system is powered from USB, 5V, mains-connected equipment, oscilloscope earth, or any non-isolated supply path.
 
-## 8. Recommendation
+## 8. Unequal-power-state architecture decision
 
-Recommended SPI candidate set:
+The current direct connection is not accepted as safe when the DSTK22807 and MCP3208 are not powered together.
 
-- `ADC_CS = GPIO14 / Pad 13`
-- `ADC_SCLK = GPIO13 / Pad 14`
-- `ADC_MOSI = GPIO12 / Pad 15`
-- `ADC_MISO = GPIO11 / Pad 16`
+Manufacturer-evidence basis:
 
-Confidence: Medium for SoC GPIO/SPI feasibility; Low-to-Medium for the actual DSTK22807 board until physical pinout and right-row reversal are confirmed.
+- MCP3208 digital pins are limited to `VSS - 0.6V` through `VDD + 0.6V`.
+- With MCP3208 VDD at 0V, a 3.3V DSTK-driven high is outside the published absolute maximum.
+- No manufacturer-published safe off-power injection-current limit was found for defensible resistor-only protection.
+- MCP3208 DOUT behavior at VDD = 0V and DSTK carrier GPIO clamp behavior remain undocumented.
 
-Remaining blockers:
+Firmware-only high-impedance policy, series resistors alone, and procedure-only prohibition are rejected as sufficient standalone protection. A power-domain-aware buffer or digital isolator is not selected for this prototype.
 
-- Confirm physical pin mapping again.
-- Confirm right-row top/bottom orientation.
-- Confirm board USB and antenna orientation.
-- Confirm MCP3208 supply at 3.3V or add level shifting if 5V is used.
-- Confirm selected GPIOs are not consumed by board hardware, boot configuration, or future firmware needs.
+The minimum accepted architecture is **physical disconnect of all four SPI signals**. One disconnect action must open `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` before USB attachment, one-sided power, deliberate collapse of either power domain, or programming/debugging with unequal power states. Removing the removable DSTK carrier may satisfy this requirement only if removal demonstrably opens all four nets and leaves no alternate conductive path.
 
-Should schematic implementation proceed? `NO` unless all blockers above are closed.
+Future project-level bench acceptance must establish:
+
+- One action opens all four SPI lines and no alternate path remains.
+- Open-state resistance is at least 10 MOhm.
+- SPI-caused rise of unpowered `3V3_ADC` is no more than 50mV.
+- Injected-current target is 0uA, with a project bench ceiling below 1uA per signal.
+- No human is connected during unequal-power validation.
+
+The 50mV and 1uA values are project-level bench thresholds, not manufacturer-published limits.
+
+### Separate CS/SHDN issue
+
+MCP3208 `CS/SHDN` currently has no ADC-side pull-up. When the DSTK is disconnected, resetting, or high-impedance, CS may be undefined even if the MCP3208 is powered. Selecting and implementing a pull-up is the next separate electrical review; no value or implementation is approved here. After a future approved implementation, bench validation must show CS remains high whenever MCP3208 is powered and DSTK is disconnected.
+
+### Human-test boundary
+
+- Unequal-power validation must have no human connection.
+- Human-connected operation remains battery-only, with USB disconnected.
+- Bench supplies, mains-connected equipment, and earth-referenced oscilloscopes remain prohibited while electrodes are attached.
+- This architecture decision is not medical-device approval or human-test approval.
 
 ## Decision
 
-`SPI_PIN_REVIEW_READY_FOR_REVIEW`
+`SPI_PHYSICAL_DISCONNECT_REQUIRED`
