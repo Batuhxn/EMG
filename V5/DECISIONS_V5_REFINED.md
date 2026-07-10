@@ -1,317 +1,83 @@
-# V5 Decisions Log
+# EMG V5 Decisions - Refined
 
-Date: 2026-07-08
+Date synchronized: 2026-07-10
 
-## Purpose
+## Locked Architecture
 
-This file records the current V5 design decisions for the EMG project. It separates locked decisions, provisional decisions, rejected or blocked options, and gates that must close before PCB work.
+- Two EMG channels, each producing `RAW`, `RECT`, and `ENV`.
+- MCP3208 on `3V3_ADC`.
+- Channel allocation:
+  - CH0-CH2: `EMG1_RAW`, `EMG1_RECT`, `EMG1_ENV`
+  - CH3-CH5: `EMG2_RAW`, `EMG2_RECT`, `EMG2_ENV`
+  - CH6: `VREF_MON`
+  - CH7: `BAT_MON`
+- `ADC_REF` and `analog VREF` remain separate.
 
-This document is not schematic implementation, PCB implementation, BOM lock, fabrication approval, or human-test approval. It is the decision record that should guide the next controlled steps.
+## DSTK22807 Mapping
 
-Current repository baseline for this decision log:
+- Use `EMG_V5:DSTK22807_ESP32H2_SuperMini_Measured` with `EMG_V5:DSTK22807_ESP32H2_SuperMini_Carrier_Measured_THT`.
+- Pins/pads 1-18 remain one-to-one.
+- SPI mapping:
+  - `ADC_CS`: U501 pin 13 / GPIO14
+  - `ADC_SCLK`: U501 pin 14 / GPIO13
+  - `ADC_MOSI`: U501 pin 15 / GPIO12
+  - `ADC_MISO`: U501 pin 16 / GPIO11
 
-- Branch: `v5/KiCad`
-- HEAD: `bc5ff05 sync docs with 3xaa ldo target review`
+## First-Validation Power Decision
 
-## Locked Decisions
+The implemented first-validation path is:
 
-### Project Line
+`J201 -> SW201 -> Q201 -> LDO_IN -> U203 -> R207 -> 3V3_ADC`
 
-- V4 is preserved.
-- V5 continues as a separate development line.
-- The current V5 work remains controlled schematic/planning work until explicit approval is given for broader implementation.
-- PCB layout has not started and is not approved to start.
+- Source: 3xAA alkaline for first validation only.
+- Q201: `PMV48XP` pack-level reverse-polarity PMOS.
+- U203: `TPS7A2033PDBVR`.
+- R207: `0R` output/current-measure link.
+- DSTK 3V3 and 5V/VBUS must not feed `3V3_ADC`.
+- No other source may hold `3V3_ADC` high while the LDO input is collapsed without a separately approved protection topology.
 
-### Controller / Wireless Module
+## BAT_MON Decision
 
-- The first V5 prototype uses the DSTK22807 ESP32-H2 development board.
-- A bare ESP32-H2-MINI module footprint is not used for the first V5 prototype.
-- The DSTK22807 is mounted through a removable header/socket style carrier for first prototype bring-up.
-- The DSTK22807 carrier footprint is geometry/mechanical planning only; signal labels are not embedded into the footprint geometry.
+- Source: protected `LDO_IN`
+- `R204 = 68k`
+- `R205 = 100k`
+- `C211 = 10nF`
+- Destination: MCP3208 CH7
+- Accuracy and settling require bench measurement; exact ordering MPNs remain open.
 
-### ADC
+## Mandatory Constraints
 
-- MCP3208 is the selected ADC.
-- First prototype MCP3208 package direction: `MCP3208-CI/P` PDIP-16.
-- KiCad symbol: `Analog_ADC:MCP3208`.
-- KiCad footprint: `Package_DIP:DIP-16_W7.62mm`.
-- MCP3208 TSSOP is not used unless an exact official MPN and datasheet-backed package/pinout proof are found later.
+- Powered DSTK22807 with unpowered/collapsing MCP3208 remains a forbidden first-validation SPI condition.
+- Firmware-only high-impedance handling and candidate SPI series resistors are not complete off-power safety solutions.
+- Human-connected testing remains battery-only, with USB disconnected, and still requires separate safety approval.
+- `V5/EMG_v5.kicad_pcb` is a legacy, unsynchronized V4-style board and must not be treated as the current V5 layout or as PCB-readiness evidence.
+- `R206 = 0R/10R candidate` and other unresolved candidate values remain unresolved.
+- Manufacturer-level correctness must not be claimed without local datasheet or populated MPN evidence.
+- No PCB, fabrication, or production approval follows from the current schematic decisions.
 
-Locked MCP3208 channel mapping:
+## Rejected or Blocked Alternatives
 
-| MCP3208 Channel | V5 Net |
-| --- | --- |
-| CH0 | `EMG1_RAW` |
-| CH1 | `EMG1_RECT` |
-| CH2 | `EMG1_ENV` |
-| CH3 | `EMG2_RAW` |
-| CH4 | `EMG2_RECT` |
-| CH5 | `EMG2_ENV` |
-| CH6 | `VREF_MON` |
-| CH7 | `BAT_MON` |
-
-### Analog Signal Strategy
-
-- V5 physically produces `RAW`, `RECT`, and `ENV` nodes for each channel.
-- Channel 1 and Channel 2 use the hierarchical analog sheet structure.
-- `ADC_REF` and `analog VREF` must remain separate.
-- `ADC_REF` is the MCP3208 ADC full-scale reference.
-- `analog VREF` is the analog front-end midscale bias/reference node.
-- `EMG1_REF_ELECTRODE` and `EMG2_REF_ELECTRODE` must not be tied to GND, chassis, or USB.
-
-### Channel Connector and Gain Fixes
-
-- TRS mapping is fixed:
-  - Tip/T -> `EMGx_IN_P`
-  - Ring/R -> `EMGx_IN_N`
-  - Sleeve/S -> `EMGx_REF_ELECTRODE`
-- Physical cable observation is recorded as:
-  - yellow tip -> Tip/T
-  - green middle body -> Ring/R
-  - red rear body -> Sleeve/S
-- RAW gain polarity is fixed:
-  - Channel 1 U302A: non-inverting input from `RAW_HPF_NODE`, inverting input from `RAW_GAIN_FB`.
-  - Channel 2 U402A: non-inverting input from `EMG2_RAW_HPF_NODE`, inverting input from `EMG2_RAW_GAIN_FB`.
-
-### Rectifier / Envelope First-Prototype Direction
-
-- D331/D332/D431/D432 first-prototype diode direction:
-  - Value / MPN direction: `BAS70ZFILM`
-  - Symbol: `Device:D_Schottky`
-  - Footprint: `Diode_SMD:D_SOD-123`
-- Do not use `BAS70FILM` with a plain two-pin diode symbol plus generic three-pad SOT-23 footprint for the first prototype.
-- Avoid `BAS70-04`, `BAS70-05`, `BAS70-06`, and BAT54A/C/S dual/common variants for this rectifier pass.
-- U302/U402 first-prototype op-amp package direction remains socketed/inspectable:
-  - U302 direction: `MCP6004-I/P`, `Package_DIP:DIP-14_W7.62mm`
-  - U402 direction: MCP6004, `Package_DIP:DIP-14_W7.62mm`
-- Exact ordering MPNs for op-amps, passives, and capacitors remain open.
-
-### Human-Contact Safety Boundary
-
-When electrodes are attached to a human:
-
-- Use battery-isolated operation only.
-- Disconnect USB.
-- Do not use USB power, 5 V power, bench-supply power, mains-connected equipment, or oscilloscope earth.
-- Do not connect `REF_ELECTRODE` nets to GND, chassis, or USB.
-
-Battery operation is required for human-contact testing, but it is not by itself final safety approval.
-
-## Provisional Decisions
-
-### DSTK22807 Pinout and SPI
-
-Observed DSTK22807 pin mapping:
-
-| Footprint Pad | Observed / Provisional Label | Status |
-| --- | --- | --- |
-| 1 | TX | Observed |
-| 2 | RX | Observed |
-| 3 | GPIO0 | Observed |
-| 4 | GPIO1 | Observed |
-| 5 | GPIO2 | Observed |
-| 6 | GPIO3 | Observed |
-| 7 | GPIO4 | Observed |
-| 8 | GPIO5 | Observed |
-| 9 | GPIO8 | Observed |
-| 10 | 5V | Confirmed by right-row order review |
-| 11 | GND | Confirmed by right-row order review |
-| 12 | 3V3 | Confirmed by right-row order review |
-| 13 | GPIO14 | Confirmed by right-row order review |
-| 14 | GPIO13 | Confirmed by right-row order review |
-| 15 | GPIO12 | Confirmed by right-row order review |
-| 16 | GPIO11 | Confirmed by right-row order review |
-| 17 | GPIO10 | Confirmed by right-row order review |
-| 18 | GPIO9 | Confirmed by right-row order review |
-
-DSTK SPI-only integration is connected as:
-
-| SPI Net | U501 GPIO | U501 Pin |
-| --- | --- | --- |
-| `ADC_CS` | GPIO14 | Pin 13 |
-| `ADC_SCLK` | GPIO13 | Pin 14 |
-| `ADC_MOSI` | GPIO12 | Pin 15 |
-| `ADC_MISO` | GPIO11 | Pin 16 |
-
-This is approved only as SPI logic integration. It does not approve DSTK 3V3 or 5V/VBUS as an analog/ADC supply.
-
-U501 GND / pin 11 is connected to root/system GND for the SPI logic reference. This is not a power-source approval.
-
-### DSTK Power Status
-
-- USB-powered measurement observed approximately:
-  - 5V/VBUS: 5.125 V to 5.126 V
-  - 3V3: 3.291 V to 3.295 V
-- Unpowered 3V3 rail decay was observed and is consistent with capacitor discharge/leakage.
-- DSTK 3V3 current capacity, noise, BLE/RF load behavior, and backfeed behavior remain unresolved.
-- DSTK external 3.3 V powering is not approved.
-- USB plus external 3.3 V simultaneous connection is not approved.
-- DSTK 5V/VBUS is not approved for analog/ADC rails.
-
-### First-Validation Battery / Regulator Direction
-
-Current first-validation candidate:
-
-`3xAA alkaline battery pack -> switch/protection -> low-noise 3.3 V LDO -> 3V3_ADC`
-
-Decision scope:
-
-- This is a first analog validation candidate only.
-- This is not a final product battery decision.
-- The final product battery candidate remains deferred, with 1S protected Li-ion/LiPo still possible later.
-- 3xAA NiMH is outside this decision because the lower nominal pack voltage gives much narrower LDO dropout margin.
-- Regulator MPN, package, footprint, BOM item, and schematic implementation are not selected or approved.
-
-Current LDO target review:
-
-- Current capability target: at least 50 mA for first validation, pending actual current budget.
-- Higher-current LDO classes may be considered if noise, dropout, thermal behavior, quiescent current, reverse-current behavior, capacitor stability, and package suitability are acceptable.
-- Preliminary dropout target: <=300 mV at the selected current budget.
-- Preferred dropout target: <=200 mV at the measured expected analog/ADC load.
-- Vin max target: >=5.5 V preferred minimum; >=6.0 V is more comfortable for fresh 3xAA alkaline margin.
-- Fresh 3xAA alkaline pack voltage is treated as approximately 4.5 V to 4.8 V for margin review.
-
-### Power and Reference Architecture
-
-- `3V3_ADC` remains the selected analog/ADC rail name.
-- MCP3208 VDD is planned to be powered from the selected `3V3_ADC` source.
-- MCP3208 VREF remains `ADC_REF` and must stay within MCP3208 VDD limits.
-- `ADC_REF` remains separate from `analog VREF`.
-- `analog VREF` remains the analog front-end bias/reference node.
-- `VREF_MON` measures `analog VREF` on MCP3208 CH6.
-- `BAT_MON` divider/scaling remains unresolved.
-- `AGND` and `DGND` should be handled as controlled return strategy on a common ground system, not as blindly split floating grounds.
-
-## Rejected / Blocked Options
-
-The following are rejected or blocked at the current checkpoint:
-
-- Starting PCB layout.
-- Treating the current schematic candidates as final hardware approval.
-- Using DSTK 3V3 as `3V3_ADC` without load, noise, and backfeed review.
-- Using DSTK 5V/VBUS as an analog/ADC rail.
-- USB-powered human-contact EMG testing.
-- Human-contact testing while USB is connected.
-- Tying `EMG1_REF_ELECTRODE` or `EMG2_REF_ELECTRODE` to GND, chassis, or USB.
-- Merging `ADC_REF` and `analog VREF`.
-- Shorting a local regulator output directly to DSTK 3V3.
-- Allowing two 3.3 V sources to be populated/closed at the same time in any future source-selection scheme.
-- Suppressing the `DSTK_3V3_CANDIDATE` planning warning with a No ERC marker at this checkpoint.
-- Selecting regulator MPN/package/footprint/BOM without datasheet review and current budget.
-- Implementing the 3xAA LDO path in schematic without a separate approved plan.
-- Using a bare ESP32-H2 module for the first V5 prototype.
-- Using MCP3208 TSSOP without exact MPN/package/pinout proof.
+- 3xAA NiMH is not equivalent to 3xAA alkaline because its nominal voltage leaves substantially less LDO dropout margin.
+- Protected 1S Li-ion/LiPo is deferred pending charger/protection, backfeed, noise, and safety review.
+- DSTK 3V3 and 5V/VBUS are not approved analog/ADC sources pending load/noise/USB/backfeed evidence.
+- The former selectable/jumper source approach is superseded by the implemented single first-validation path; reintroduction requires a new mutual-exclusion/backfeed decision.
+- Ambiguous SOT-23 or dual-diode rectifier substitutions are blocked without explicit symbol/footprint review.
+- An unreviewed bare-module footprint is blocked; first prototype work uses the measured removable DSTK22807 THT carrier direction.
 
 ## Decision Tree
 
-Current high-level path:
-
-1. Keep V5 as controlled schematic/planning work.
-2. Preserve the implemented two-channel analog and DSTK SPI candidate schematics.
-3. Do not start PCB until power, safety, and component gates close.
-4. Use 3xAA alkaline plus low-noise 3.3 V LDO as the first-validation power candidate.
-5. Review candidate LDOs against current, dropout, noise, PSRR, stability, reverse-current, thermal, package, and availability requirements.
-6. Keep DSTK 3V3 and 5V/VBUS disconnected from analog/ADC rails unless a later explicit review approves a source strategy.
-7. If a future selectable source strategy is used, make the selection mutually exclusive by design and by population rule.
-
-Power-source decision branch:
-
-```text
-Need 3V3_ADC source
-|
-+-- DSTK 3V3 direct?
-|   +-- Current decision: blocked
-|   +-- Required first: load/noise/current/backfeed/BLE behavior review
-|
-+-- DSTK 5V/VBUS?
-|   +-- Current decision: rejected for analog/ADC rails
-|
-+-- Local battery-side regulator?
-    +-- Current decision: preferred first-validation candidate
-    +-- First path: 3xAA alkaline -> switch/protection -> low-noise 3.3 V LDO -> 3V3_ADC
-    +-- Required first: regulator review, current budget, BAT_MON review, schematic plan approval
-```
-
-Human-test decision branch:
-
-```text
-Electrodes attached to human?
-|
-+-- Yes
-|   +-- Battery isolated only
-|   +-- USB disconnected
-|   +-- No bench supply, mains equipment, USB power, 5 V power, or oscilloscope earth
-|   +-- REF_ELECTRODE nets isolated from GND/chassis/USB
-|
-+-- No
-    +-- Bench measurements may be planned separately
-    +-- Still do not approve unresolved power/backfeed paths by implication
-```
+1. Keep human-connected operation battery-only with USB and earth/mains-connected equipment absent.
+2. Use the implemented 3xAA alkaline -> PMV48XP -> TPS7A2033 -> `3V3_ADC` path for controlled first validation.
+3. Keep DSTK power isolated from the analog/ADC rail and treat SPI off-power behavior as unresolved.
+4. Bench-check power, BAT_MON, ADC/VREF, analog stability, and RECT/ENV behavior.
+5. Close footprints, ordering MPNs, carrier placement, antenna/USB constraints, test points, and safety markings.
+6. Only then request separate approval for a current V5-synchronized PCB.
 
 ## Open Gates Before PCB
 
-PCB work must not start until these gates are reviewed and accepted:
-
-- Confirm the intended `3V3_ADC` source strategy.
-- Select and review a 3.3 V regulator candidate, if the local LDO path proceeds.
-- Lock regulator MPN, suffix, package, footprint, capacitor requirements, and BOM entry.
-- Estimate or measure analog/ADC current budget.
-- Confirm 3xAA alkaline minimum usable voltage under expected load and selected LDO dropout.
-- Review `BAT_MON` divider values for fresh 3xAA maximum voltage, ADC input range, source impedance, and sampling behavior.
-- Confirm MCP3208 VDD / `ADC_REF` relationship.
-- Review `ADC_REF` filtering, decoupling, ripple/noise, and startup behavior.
-- Review `analog VREF` buffer stability, loading, noise, and interaction with ENV capacitors.
-- Confirm MCP6004 input common-mode range and output swing at `3V3_ADC = 3.3 V`.
-- Confirm MCP6004 output stability with ADC/output RC loads and ENV storage load.
-- Visually verify D331/D332/D431/D432 cathode-band orientation against the SOD-123 footprint.
-- Lock exact ordering MPNs for ratio-critical rectifier resistors.
-- Lock exact ordering MPNs and dielectric/voltage choices for analog capacitors.
-- Confirm DSTK power-path behavior before any DSTK rail is considered as a source.
-- Define a human-contact safety procedure.
-- Confirm enclosure/isolation/mechanical safety expectations for any later human test.
-- Review all remaining ERC warnings and decide whether they are acceptable or must be closed by real design changes.
-
-## Historical Notes
-
-Relevant recent checkpoints:
-
-- `bc5ff05 sync docs with 3xaa ldo target review`
-- `2f772d8 sync docs with 3xaa ldo requirements`
-- `854e438 sync docs with first 3xaa battery decision`
-- `eba22c8 sync docs with local 3v3 adc regulator plan`
-- `54d9089 sync docs with dstk power strategy`
-- `79730dd connect dstk spi and mark unused pins`
-- `3494631 sync kicad metadata and analog label placement`
-- `1e5d3b0 fix channel trs mapping and raw gain input polarity`
-- `080eef1 remove legacy root emg schematic block`
-- `60d5881 implement channel 2 analog schematic`
-
-Historical cleanup notes:
-
-- MCP6004 and `Device:D_Schottky` metadata mismatch warnings were cleaned as metadata/library-cache cleanup, not topology changes.
-- U202B unused op-amp unit was placed as a safe unity follower using `analog VREF`; it is not connected into `ADC_REF`, `3V3_ADC`, GND, `VREF_MON`, `BAT_MON`, or another signal path.
-- Earlier ERC counts with U201 SPI placeholder errors are superseded by the DSTK SPI integration.
-- Latest documented ERC status is 0 errors and 2 known warnings:
-  - U501 footprint library warning from CLI configuration.
-  - `DSTK_3V3_CANDIDATE` isolated pin label.
-
-Source documents that fed this decision log include:
-
-- `V5/STATUS_V5.md`
-- `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`
-- `V5/DSTK22807_SPI_PIN_REVIEW.md`
-- `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
-- `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
-- `V5/POWER_REFERENCE_ARCHITECTURE_REVIEW.md`
-- `V5/POWER_REFERENCE_SCHEMATIC_BLOCK_PROPOSAL.md`
-- `V5/POWER_REFERENCE_COMPONENT_CANDIDATES.md`
-- `V5/BOM_V5_DRAFT.md`
-- `V5/sim/rectifier/RECTIFIER_MODEL_CONFIRMATION.md`
-- `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
-- `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`
-- `V5/POWER_REFERENCE_BLOCK.kicad_sch`
-- `V5/EMG_v5.kicad_sch`
-
-Current final decision marker:
-
-**3XAA_LDO_CURRENT_DROPOUT_TARGETS_REVIEWED_NOT_IMPLEMENTED**
+- Actual `3V3_ADC` current, dropout, noise, temperature, capacitor stability, and reverse-current behavior.
+- PMV48XP single-cell reversal limitation plus lifecycle/final-MPN status.
+- MCP3208 acquisition/source impedance, VDD/VREF, `VREF_MON`, analog-VREF stability, and `ADC_REF` ripple.
+- Diode orientation, MCP6004 orderability/3.3 V behavior, ratio parts, capacitor derating, and generic-model limitations.
+- DSTK dummy-load/current/noise/reset/USB/backfeed measurements.
+- Final footprints, ordering MPNs, test points, safety silkscreen, mechanical carrier placement, antenna keepout, USB overhang, and current V5 board synchronization.
