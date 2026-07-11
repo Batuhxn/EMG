@@ -151,17 +151,19 @@ Future no-human-connected prototype validation should compare ADC-derived pack v
 - MCP3208 VDD remains `3V3_ADC`.
 - U202A remains the analog-VREF buffer direction.
 - U202B remains placed in its safe unused unity-follower configuration.
-- `R206 = 0R/10R candidate` remains unresolved and must not be converted into a finalized value by documentation cleanup.
-- C205 and C206 remain candidate/optional values until separately reviewed.
+- Finalize `R206 = 0R` between `3V3_ADC` and `ADC_REF`. MCP3208 VDD remains on `3V3_ADC`, while pin 15 VREF remains on the derived `ADC_REF` net. The zero-ohm link avoids an intentional load-dependent reference drop; a separate external reference is not justified for first validation.
+- Finalize `C205 = 100nF` and populate `C206 = 1uF`, each from `ADC_REF` to GND. C205 provides local high-frequency bypassing and C206 provides local charge storage consistent with MCP3208 manufacturer application guidance.
+- PCB implementation constraint: place C205 closest to MCP3208 pins 15/14, place C206 adjacent, place R206 at the `ADC_REF` branch entry, keep `ADC_REF` short and away from digital switching, and do not route digital return current through the reference-capacitor ground return.
+- This decision does not close actual `ADC_REF` ripple, conversion-correlated disturbance, final SPI-clock interaction, or bench validation. Exact capacitor MPNs, packages, dielectric, tolerance, and voltage rating remain unresolved. Startup discard/blanking remains a candidate firmware policy, not finalized behavior.
 - The first-validation VREF monitor interface keeps `R203 = 1k` from `analog VREF` to `VREF_MON` and finalizes `C207 = 220pF` from `VREF_MON` to GND; `VREF_MON` remains connected to MCP3208 CH6.
 - C207 is selected as a first-validation balance between sampling-kickback suppression and acquisition settling. Simplified modeling estimates an approximately 275 mV conservative full-scale local charge-sharing kick, approximately 0.24 us RC time constant, approximately 1.95 us recovery to 0.1 LSB, approximately 0.0013 LSB residual at 500 kHz, and approximately 0.66 LSB residual at 1 MHz. These are engineering-model estimates, not manufacturer guarantees.
 - `VREF_MON` remains a lower-cadence diagnostic candidate rather than a time-critical fast-frame requirement. Dummy-first CH6 sampling remains a candidate firmware policy, not finalized firmware behavior.
 - `C208 = 100nF` is finalized as U202's dedicated local high-frequency bypass from `3V3_ADC` to GND. PCB placement must keep it approximately within 2 mm of U202 supply pins 8 and 4 with a short, low-inductance return path; same-net connectivity alone does not satisfy this placement constraint.
 - C203 does not automatically replace C208 and remains a separate rail/local-bypass candidate with unresolved role and placement. C204 remains a separate `1uF or 4.7uF` bulk-capacitance candidate and does not replace local high-frequency bypassing.
 - The shared analog-VREF architecture is accepted at schematic level for first validation. Analog-VREF dynamic movement, two-channel coupling, startup settling, and bench validation remain open; manufacturer-guaranteed stability and bench-validated absence of coupling are not claimed.
-- MCP3208 VDD/VREF operating relationship remains an open gate.
+- The finalized first-validation MCP3208 supply/reference topology is VDD on `3V3_ADC` and VREF on `ADC_REF` derived through R206; its actual dynamic performance remains a validation gate.
 - ADC input source impedance and acquisition-time behavior must be reviewed for all eight channels.
-- U202 exact MPN/footprint, `ADC_REF` behavior, and R206 remain unresolved.
+- U202 exact MPN/footprint and actual `ADC_REF` dynamic behavior remain unresolved.
 - AGND and DGND are controlled return and placement concepts on a common ground system. Blindly split or floating ground islands are not approved.
 
 ## 7. Analog Interface, RECT, and ENV Decisions

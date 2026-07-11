@@ -4751,7 +4751,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF ADC_REF candidate"
+		(property "Value" "100nF"
 			(at 279.654 49.276 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4839,7 +4839,7 @@
 				)
 			)
 		)
-		(property "Value" "1uF ADC_REF optional"
+		(property "Value" "1uF"
 			(at 315.976 49.784 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5561,7 +5561,7 @@
 				)
 			)
 		)
-		(property "Value" "0R/10R candidate"
+		(property "Value" "0R"
 			(at 258.826 70.358 90)
 			(show_name no)
 			(do_not_autoplace no)
