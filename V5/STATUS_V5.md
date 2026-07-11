@@ -174,11 +174,13 @@ The current SPI mapping is:
 | SPI net | U501 GPIO | U501 pin | MCP3208 function |
 |---|---:|---:|---|
 | `ADC_CS` | GPIO14 | 13 | U201 `~CS/SHDN`, pin 10 |
-| `ADC_SCLK` | GPIO13 | 14 | U201 CLK, pin 13 |
+| `ADC_SCLK` | GPIO4 | 7 | U201 CLK, pin 13 |
 | `ADC_MOSI` | GPIO12 | 15 | U201 Din, pin 11 |
 | `ADC_MISO` | GPIO11 | 16 | U201 Dout, pin 12 |
 
 The four SPI signals remain direct controller-to-ADC connections with no series resistors, pull-downs, buffers, bus switches, or isolators. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`. The carrier power path is not modeled in the schematic, and the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
+
+`ADC_SCLK` is finalized on U501 GPIO4/pad 7 rather than GPIO13/pad 14. Strong ESP32-H2 SuperMini board-family evidence indicates a conventional onboard LED branch on GPIO13; this branch was not shown to prevent operation over the considered 100kHz-1MHz SPI range, but it creates an avoidable clock-correlated load in a sensitive mixed-signal system. GPIO4 has no known onboard peripheral conflict, is not a documented ESP32-H2 datasheet strapping pin, and is the native SPI2 `FSPICLK` function. GPIO0 remains available for possible CAL/MARK use, GPIO10 remains a generic right-row spare/trigger/sync candidate, and GPIO13 is only a possible future onboard-status resource; no QoL allocation is approved here.
 
 The unequal-power architecture decision is now established but not implemented:
 
@@ -193,6 +195,8 @@ The manufacturer-evidence basis is that MCP3208 digital pins are limited to `VSS
 Future project-level bench acceptance must show one action opens all four nets, no alternate path remains, open-state resistance is at least 10 MOhm, SPI-caused unpowered `3V3_ADC` rise is no more than 50mV, and injected current remains below the 1uA-per-signal project ceiling with a 0uA target. The 50mV and 1uA criteria are project thresholds, not manufacturer limits. Unequal-power validation must have no human connection.
 
 MCP3208-side `R208 = 10k` now holds `CS/SHDN` high when controller drive is absent, keeping the ADC deselected while it remains powered. Calculated CS-low current at 3.3V is approximately 330uA and R208 dissipation is approximately 1.09mW. These are schematic calculations, not bench measurements. The pull-up does not replace the four-line physical-disconnect requirement. The tracked firmware SPI pin mapping remains separately unresolved.
+
+The exact carrier revision, GPIO13 LED polarity/resistor, exact user-board GPIO4 behavior, final PCB SPI routing, assembled SCLK waveform, final SPI clock, tracked firmware correction, physical four-line disconnect, carrier battery-only power, VBUS isolation/backfeed protection, final QoL architecture, and bench validation remain open.
 
 ## Legacy Placeholder State
 

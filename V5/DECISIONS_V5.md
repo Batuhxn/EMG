@@ -45,9 +45,13 @@ The SPI allocation is:
 | SPI net | U501 GPIO | U501 pin | MCP3208 function |
 |---|---:|---:|---|
 | `ADC_CS` | GPIO14 | 13 | `~CS/SHDN` |
-| `ADC_SCLK` | GPIO13 | 14 | CLK |
+| `ADC_SCLK` | GPIO4 | 7 | CLK |
 | `ADC_MOSI` | GPIO12 | 15 | Din |
 | `ADC_MISO` | GPIO11 | 16 | Dout |
+
+- `ADC_SCLK` is remapped from GPIO13/pad 14 to GPIO4/pad 7. Strong ESP32-H2 SuperMini board-family evidence indicates a conventional onboard LED branch on GPIO13; although it was not shown to prevent operation over the considered 100kHz-1MHz range, its clock-correlated load is avoidable. GPIO4 has no known onboard peripheral conflict, is not a documented ESP32-H2 datasheet strapping pin, and is the native SPI2 `FSPICLK` function.
+- GPIO0 remains available for possible CAL/MARK use, GPIO10 remains a generic right-row spare/trigger/sync candidate, and GPIO13 is only a possible future onboard-status resource. No QoL function is assigned by this decision.
+- The tracked firmware mapping remains stale and must be corrected separately. Exact carrier revision, GPIO13 LED polarity/resistor, user-board GPIO4 behavior, final PCB routing, assembled SCLK waveform quality, and final SPI clock remain unresolved.
 
 ## 4. First-Validation Power Strategy
 

@@ -2,14 +2,14 @@
 
 This document records the current ESP32-H2-to-MCP3208 SPI mapping and the accepted unequal-power-state architecture for the removable DSTK22807 prototype.
 
-The current schematic already connects the four SPI nets directly. This document approves no schematic, footprint, firmware, pull-up, buffer, bus-switch, or isolator implementation change. The carrier GPIO mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
+The current schematic connects the four SPI nets directly. `ADC_SCLK` is implemented on GPIO4/pad 7 to avoid the board-family GPIO13 onboard-LED load. This document approves no firmware, footprint, buffer, bus-switch, isolator, or QoL implementation change. The carrier GPIO mapping remains provisional because official revision-specific DSTK22807 documentation is unavailable.
 
 ## 1. Current implementation
 
 | SPI net | DSTK22807 endpoint | MCP3208 endpoint | Direction from DSTK |
 | --- | --- | --- | --- |
 | `ADC_CS` | U501 GPIO14 / pad 13 | U201 `CS/SHDN` pin 10 | Output |
-| `ADC_SCLK` | U501 GPIO13 / pad 14 | U201 `CLK` pin 13 | Output |
+| `ADC_SCLK` | U501 GPIO4 / pad 7 | U201 `CLK` pin 13 | Output |
 | `ADC_MOSI` | U501 GPIO12 / pad 15 | U201 `DIN` pin 11 | Output |
 | `ADC_MISO` | U501 GPIO11 / pad 16 | U201 `DOUT` pin 12 | Input |
 
@@ -107,12 +107,12 @@ MCP3208 net needs for this project:
 
 ## 5. Current SPI assignment
 
-The implemented assignment avoids TX/RX, power pins, GPIO8/GPIO9 strapping pins, and left-row strapping candidates.
+The implemented assignment avoids TX/RX, power pins, GPIO8/GPIO9 strapping pins, left-row strapping candidates, and the board-family GPIO13 onboard-LED branch.
 
 | MCP3208 Net | ESP32-H2 GPIO | Footprint Pad | Reason | Risk | Confidence |
 | --- | --- | --- | --- | --- | --- |
 | `ADC_CS` | GPIO14 | Pad 13 | Right-row GPIO; not identified as strapping in checked official docs; convenient chip-select output | Pad mapping still provisional from right-row reversal | Medium |
-| `ADC_SCLK` | GPIO13 | Pad 14 | Right-row GPIO; not identified as strapping in checked official docs; suitable GPIO-matrix SPI clock candidate | Pad mapping still provisional; GPIO13 can be RTC/32k-related on bare SoC context, confirm board does not use it | Medium |
+| `ADC_SCLK` | GPIO4 | Pad 7 | Exposed GPIO with no known onboard peripheral conflict; not a documented ESP32-H2 datasheet strapping pin; native SPI2 `FSPICLK`; suitable at schematic/chip level for the considered 100kHz-1MHz range | Exact user-board behavior, final PCB routing, and assembled waveform remain unverified | Medium |
 | `ADC_MOSI` | GPIO12 | Pad 15 | Right-row GPIO; not identified as strapping in checked official docs; output to MCP3208 DIN | Pad mapping still provisional | Medium |
 | `ADC_MISO` | GPIO11 | Pad 16 | Right-row GPIO; not identified as strapping in checked official docs; input from MCP3208 DOUT | Pad mapping still provisional; confirm MCP3208 powered at 3.3V or level-shifted | Medium |
 
@@ -121,6 +121,8 @@ Backup candidate:
 | Use | Candidate | Footprint Pad | Notes |
 | --- | --- | --- | --- |
 | Spare right-row GPIO | GPIO10 | Pad 17 | Keep as spare interrupt/debug/alternate CS candidate; avoid using until GPIO14-11 are confirmed |
+
+GPIO13/pad 14 is no longer assigned to project circuitry. Strong public board-family evidence indicates a conventional onboard LED branch on GPIO13. That branch was not shown to prevent SPI operation, but it creates avoidable clock-correlated current. GPIO0 remains available for possible CAL/MARK use; GPIO10 remains available as a generic spare/trigger/sync candidate. GPIO13 may be considered for future onboard status use, but no QoL assignment is approved here.
 
 ## 6. Pins to avoid for now
 
@@ -179,6 +181,8 @@ The 50mV and 1uA values are project-level bench thresholds, not manufacturer-pub
 `R208 = 10k` is implemented from MCP3208-side `ADC_CS` to `3V3_ADC`. It holds `CS/SHDN` high and keeps the MCP3208 deselected when controller drive is absent. At 3.3V, the calculated CS-low current is approximately 330uA and resistor dissipation is approximately 1.09mW.
 
 This is schematic-level implementation only; bench behavior is not yet established. The pull-up does not replace the required four-line physical disconnect. The tracked firmware SPI pin mapping remains separately unresolved and is not changed by this implementation.
+
+The tracked firmware remains stale (`GPIO4` CS, `GPIO5` CLK, `GPIO10` MOSI, `GPIO11` MISO) and must be corrected separately to match the approved hardware mapping (`GPIO14` CS, `GPIO4` SCLK, `GPIO12` MOSI, `GPIO11` MISO). Exact carrier revision, GPIO13 LED polarity/resistor, physical GPIO4 behavior, final PCB routing, assembled SCLK waveform, final SPI clock, physical four-line disconnect implementation, carrier battery-only power architecture, VBUS isolation/backfeed protection, final QoL architecture, and bench validation remain open.
 
 ### Human-test boundary
 
