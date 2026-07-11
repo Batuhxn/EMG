@@ -4575,7 +4575,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF VDD candidate"
+		(property "Value" "100nF"
 			(at 277.622 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4663,7 +4663,7 @@
 				)
 			)
 		)
-		(property "Value" "1uF or 4.7uF bulk candidate"
+		(property "Value" "1uF"
 			(at 319.024 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
