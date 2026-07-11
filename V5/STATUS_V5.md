@@ -124,11 +124,13 @@ The previous 330k/1M alternative is rejected for this architecture because it wo
 - `R206` remains an unresolved `0R/10R candidate`; this documentation synchronization does not finalize it.
 - C205 and C206 retain their current candidate/optional status.
 - The implemented VREF monitor interface is `analog VREF -> R203 1k -> VREF_MON -> MCP3208 CH6`, with `C207 = 220pF` from `VREF_MON` to GND. C207 is finalized for first validation as a balance between sampling-kickback suppression and acquisition settling.
+- `C208 = 100nF` is finalized as U202's dedicated local high-frequency bypass from `3V3_ADC` to GND. PCB placement must keep C208 approximately within 2 mm of U202 supply pins 8 and 4 with a short, low-inductance return path; same-net schematic connectivity alone does not establish correct physical decoupling.
+- C203 remains a separate 100 nF rail/local-bypass candidate whose role and placement are unresolved. C204 remains a separate `1uF or 4.7uF` bulk-capacitance candidate and does not replace C208's local high-frequency function.
 - DSTK 3V3 and 5V/VBUS are not connected to `3V3_ADC`.
 
 Simplified engineering modeling for C207 estimates an approximately 275 mV conservative full-scale local charge-sharing kick, approximately 0.24 us RC time constant, approximately 1.95 us recovery to 0.1 LSB, approximately 0.0013 LSB residual at 500 kHz, and approximately 0.66 LSB residual at 1 MHz. These are model estimates, not manufacturer guarantees or bench measurements. `VREF_MON` remains a lower-cadence diagnostic candidate rather than a time-critical fast-frame requirement; dummy-first CH6 sampling remains a candidate firmware policy, not finalized firmware behavior.
 
-Active open gates include MCP3208 VDD/VREF relationship, analog-VREF dynamic stability and channel-coupling bench validation, C208 local decoupling, U202 exact MPN/footprint, and `ADC_REF` ripple/noise including unresolved R206. AGND and DGND are controlled return and placement concepts on a common ground system; they are not approval for blind split planes or floating ground islands.
+The shared analog-VREF architecture is accepted at schematic level for first validation. Analog-VREF dynamic movement, two-channel coupling, startup settling, and bench validation remain open; no manufacturer-guaranteed stability or bench-validated absence of coupling is claimed. Other open gates include MCP3208 VDD/VREF relationship, C203 role/placement, C204 exact value, U202 exact MPN/footprint, and `ADC_REF` ripple/noise including unresolved R206. AGND and DGND are controlled return and placement concepts on a common ground system; they are not approval for blind split planes or floating ground islands.
 
 ## Analog Channel and Interface State
 

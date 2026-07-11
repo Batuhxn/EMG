@@ -2807,7 +2807,7 @@
 	)
 	(text "MCP3208 ADC SUPPORT"
 		(exclude_from_sim no)
-		(at 118.11 43.18 0)
+		(at 101.092 34.544 0)
 		(effects
 			(font
 				(size 1.524 1.524)
@@ -3046,7 +3046,7 @@
 	)
 	(text "TPS7A2033PDBVR first-validation LDO\nIN and EN tied to protected LDO_IN\nOUT feeds 3V3_ADC only through R207 0R measurement link"
 		(exclude_from_sim no)
-		(at 101.6 45.72 0)
+		(at 101.092 38.608 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3119,6 +3119,16 @@
 			(type default)
 		)
 		(uuid "1f8eaff6-6f47-4ce1-a269-2ce007684b52")
+	)
+	(wire
+		(pts
+			(xy 170.18 78.74) (xy 166.37 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22b24b94-013d-40b7-b3de-9085679b5760")
 	)
 	(wire
 		(pts
@@ -3492,16 +3502,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 95.25) (xy 160.02 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2080000-0000-4000-8000-000000000002")
-	)
-	(wire
-		(pts
 			(xy 154.94 92.71) (xy 165.1 92.71)
 		)
 		(stroke
@@ -3692,6 +3692,16 @@
 	)
 	(wire
 		(pts
+			(xy 160.02 95.25) (xy 160.02 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2080000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
 			(xy 36.83 109.22) (xy 29.21 109.22)
 		)
 		(stroke
@@ -3709,6 +3719,16 @@
 			(type default)
 		)
 		(uuid "b20f4415-846a-44dd-91ef-bb563c014a5a")
+	)
+	(wire
+		(pts
+			(xy 160.02 109.22) (xy 160.02 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c21c678f-a6d3-4994-b2d1-dd34fc1a7599")
 	)
 	(wire
 		(pts
@@ -3929,16 +3949,6 @@
 			(justify left bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000058")
-	)
-	(label "3V3_ADC"
-		(at 160.02 106.68 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a2080000-0000-4000-8000-000000000003")
 	)
 	(label "GND"
 		(at 254 127 0)
@@ -4251,7 +4261,7 @@
 		(uuid "90100000-0000-4000-8000-000000001005")
 	)
 	(label "GND"
-		(at 142.24 86.36 0)
+		(at 170.18 78.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4259,6 +4269,16 @@
 			(justify left bottom)
 		)
 		(uuid "90100000-0000-4000-8000-000000001006")
+	)
+	(label "3V3_ADC"
+		(at 160.02 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2080000-0000-4000-8000-000000000003")
 	)
 	(hierarchical_label "3V3_ADC"
 		(shape output)
@@ -4526,6 +4546,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "U201")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -4604,6 +4630,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C203")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "C203")
 					(unit 1)
 				)
@@ -4690,6 +4722,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C204")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -4768,6 +4806,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C205")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "C205")
 					(unit 1)
 				)
@@ -4854,6 +4898,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C206")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -4936,6 +4986,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "R201")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5014,6 +5070,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R202")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "R202")
 					(unit 1)
 				)
@@ -5118,6 +5180,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "U202")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5196,6 +5264,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R203")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "R203")
 					(unit 1)
 				)
@@ -5282,6 +5356,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C207")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5360,6 +5440,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R204")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "R204")
 					(unit 1)
 				)
@@ -5446,6 +5532,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "R205")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5526,6 +5618,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R206")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "R206")
 					(unit 1)
 				)
@@ -5633,6 +5731,12 @@
 					(unit 3)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "U202")
+					(unit 3)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5657,7 +5761,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF U202 local decoupling candidate"
+		(property "Value" "100nF"
 			(at 144.78 172.7201 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5715,6 +5819,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C208")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "C208")
 					(unit 1)
 				)
@@ -5803,6 +5913,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "#FLG203")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -5883,6 +5999,12 @@
 			)
 			(project "EMG_v4"
 				(path "/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG204")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "#FLG204")
 					(unit 1)
 				)
@@ -5990,6 +6112,12 @@
 					(unit 2)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "U202")
+					(unit 2)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6068,6 +6196,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "J201")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6142,6 +6276,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "SW201")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "SW201")
 					(unit 1)
 				)
@@ -6227,6 +6367,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "Q201")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6251,7 +6397,7 @@
 			)
 		)
 		(property "Value" "TPS7A2033PDBVR"
-			(at 120.65 71.12 0)
+			(at 120.65 68.072 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6310,6 +6456,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U203")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "U203")
 					(unit 1)
 				)
@@ -6392,6 +6544,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C209")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6466,6 +6624,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C210")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "C210")
 					(unit 1)
 				)
@@ -6548,80 +6712,9 @@
 					(unit 1)
 				)
 			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 160.02 102.87 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "a2080000-0000-4000-8000-000000000004")
-		(property "Reference" "R208"
-			(at 162.56 102.87 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 157.48 102.87 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 160.02 102.87 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 160.02 102.87 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "MCP3208 ADC-side CS/SHDN pull-up to 3V3_ADC"
-			(at 160.02 102.87 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a2080000-0000-4000-8000-000000000005")
-		)
-		(pin "2"
-			(uuid "a2080000-0000-4000-8000-000000000006")
-		)
-		(instances
-			(project "EMG_v5"
-				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
-					(reference "R208")
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "R207")
 					(unit 1)
 				)
 			)
@@ -6703,6 +6796,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C211")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6775,6 +6874,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "#FLG205")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "#FLG205")
 					(unit 1)
 				)
@@ -6855,6 +6960,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "TP201")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -6927,6 +7038,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP202")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "TP202")
 					(unit 1)
 				)
@@ -7007,6 +7124,12 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "TP203")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
@@ -7079,6 +7202,12 @@
 		(instances
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "TP204")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "TP204")
 					(unit 1)
 				)
@@ -7159,11 +7288,17 @@
 					(unit 1)
 				)
 			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "TP205")
+					(unit 1)
+				)
+			)
 		)
 	)
 	(symbol
 		(lib_id "EMG_V5:EMG_TestPoint")
-		(at 142.24 86.36 0)
+		(at 166.37 78.74 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7173,7 +7308,7 @@
 		(dnp no)
 		(uuid "90100000-0000-4000-8000-000000000065")
 		(property "Reference" "TP206"
-			(at 142.24 83.82 0)
+			(at 166.624 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7183,7 +7318,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 142.24 88.9 0)
+			(at 166.37 81.026 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7193,7 +7328,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 147.32 86.36 0)
+			(at 171.45 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7204,7 +7339,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 147.32 86.36 0)
+			(at 171.45 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7215,7 +7350,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 142.24 86.36 0)
+			(at 166.37 78.74 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7231,6 +7366,95 @@
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(reference "TP206")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "TP206")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 160.02 102.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a2080000-0000-4000-8000-000000000004")
+		(property "Reference" "R208"
+			(at 162.56 102.87 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 157.48 102.87 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 160.02 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "MCP3208 ADC-side CS/SHDN pull-up to 3V3_ADC"
+			(at 175.006 113.284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a2080000-0000-4000-8000-000000000005")
+		)
+		(pin "2"
+			(uuid "a2080000-0000-4000-8000-000000000006")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R208")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "R208")
 					(unit 1)
 				)
 			)

@@ -156,9 +156,12 @@ Future no-human-connected prototype validation should compare ADC-derived pack v
 - The first-validation VREF monitor interface keeps `R203 = 1k` from `analog VREF` to `VREF_MON` and finalizes `C207 = 220pF` from `VREF_MON` to GND; `VREF_MON` remains connected to MCP3208 CH6.
 - C207 is selected as a first-validation balance between sampling-kickback suppression and acquisition settling. Simplified modeling estimates an approximately 275 mV conservative full-scale local charge-sharing kick, approximately 0.24 us RC time constant, approximately 1.95 us recovery to 0.1 LSB, approximately 0.0013 LSB residual at 500 kHz, and approximately 0.66 LSB residual at 1 MHz. These are engineering-model estimates, not manufacturer guarantees.
 - `VREF_MON` remains a lower-cadence diagnostic candidate rather than a time-critical fast-frame requirement. Dummy-first CH6 sampling remains a candidate firmware policy, not finalized firmware behavior.
+- `C208 = 100nF` is finalized as U202's dedicated local high-frequency bypass from `3V3_ADC` to GND. PCB placement must keep it approximately within 2 mm of U202 supply pins 8 and 4 with a short, low-inductance return path; same-net connectivity alone does not satisfy this placement constraint.
+- C203 does not automatically replace C208 and remains a separate rail/local-bypass candidate with unresolved role and placement. C204 remains a separate `1uF or 4.7uF` bulk-capacitance candidate and does not replace local high-frequency bypassing.
+- The shared analog-VREF architecture is accepted at schematic level for first validation. Analog-VREF dynamic movement, two-channel coupling, startup settling, and bench validation remain open; manufacturer-guaranteed stability and bench-validated absence of coupling are not claimed.
 - MCP3208 VDD/VREF operating relationship remains an open gate.
 - ADC input source impedance and acquisition-time behavior must be reviewed for all eight channels.
-- Analog-VREF dynamic stability and channel-coupling bench validation remain open. C208 local decoupling, U202 exact MPN/footprint, `ADC_REF` behavior, and R206 remain unresolved.
+- U202 exact MPN/footprint, `ADC_REF` behavior, and R206 remain unresolved.
 - AGND and DGND are controlled return and placement concepts on a common ground system. Blindly split or floating ground islands are not approved.
 
 ## 7. Analog Interface, RECT, and ENV Decisions
