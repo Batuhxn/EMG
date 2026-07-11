@@ -94,7 +94,7 @@ The current tracked schematic implements BAT_MON as:
 - `C211 = 10nF` from `BAT_MON` to GND.
 - `BAT_MON` is connected to MCP3208 CH7.
 
-BAT_MON remains a slow housekeeping measurement. Its real accuracy and settling behavior still require bench measurement.
+BAT_MON remains an unbuffered slow housekeeping measurement, not a precision voltmeter. The current first-validation architecture keeps the implemented network unchanged: no buffer is added, U202B is not repurposed, and R204, R205, and C211 retain their current values. Full 12-bit absolute accuracy is not claimed. Its real accuracy and settling behavior are not yet bench-validated.
 
 ### BAT_MON Engineering Basis
 
@@ -107,7 +107,13 @@ BAT_MON remains a slow housekeeping measurement. Its real accuracy and settling 
 - RC time constant with C211 = 10 nF: approximately 0.405 ms.
 - Five time constants: approximately 2.0 ms.
 
-The first-validation firmware policy is to discard the first CH7 conversion after channel selection, wait at least 5 ms, then acquire and average multiple samples. The previous 330k/1M alternative is rejected for this architecture because it would produce approximately 3.61 V at 4.8 V input, above the intended 3.3 V ADC-reference operating range.
+MCP3208 CH7 source impedance is high relative to the manufacturer-characterized range. A first-validation candidate sampling policy keeps BAT_MON outside the time-critical fast EMG scan loop, performs one dummy CH7 conversion after channel selection, waits at least 5 ms before retaining a measurement, and uses a slow housekeeping cadence. Averaging may reduce random noise. Dummy conversion, delay, and averaging do not eliminate resistor-tolerance, ADC-input-leakage, ADC_REF, or other systematic errors. Exact cadence, retained-sample count, averaging depth, thresholds, guard bands, and calibration policy remain unresolved.
+
+U202B is currently configured as a safe unloaded unity follower on `analog VREF` and appears available for possible future reassignment. Reusing it as a BAT_MON buffer would supersede the existing safe-unused-channel decision and would require a separately approved stability, headroom, output-isolation, and schematic review. No reassignment is currently approved. Hardware buffering remains a future-revision reconsideration option if first-validation measurements establish a need.
+
+Future BAT_MON prototype validation is a no-human-connected gate. When physical current-V5 hardware is available, it should compare ADC-derived pack voltage against a calibrated DMM over representative `LDO_IN` values, compare immediate and delayed CH7 conversions, and exercise representative preceding-channel transitions. This decision establishes no precision, PCB-readiness, human-test, or medical-device approval claim.
+
+The previous 330k/1M alternative is rejected for this architecture because it would produce approximately 3.61 V at 4.8 V input, above the intended 3.3 V ADC-reference operating range.
 
 ## Current Power and Reference Separation
 

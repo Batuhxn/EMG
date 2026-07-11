@@ -108,9 +108,12 @@ The implemented BAT_MON network is locked for the current first-validation schem
 
 BAT_MON operating constraints:
 
-- BAT_MON is a slow housekeeping measurement.
-- Firmware must allow settling after selection and must use multiple samples/averaging for first validation.
-- Actual accuracy and settling must be established by bench measurement.
+- The current first-validation architecture keeps the existing unbuffered BAT_MON network.
+- BAT_MON is a slow housekeeping measurement, not a precision voltmeter.
+- Full 12-bit absolute accuracy is not guaranteed or claimed.
+- No buffer is added, U202B is not repurposed, and R204, R205, and C211 are not changed by this decision.
+- Hardware buffering is not justified before first-validation measurements establish a need.
+- Actual accuracy and settling are not yet bench-validated and remain a future prototype-validation gate.
 - Exact ordering MPNs for R204, R205, and C211 remain unlocked.
 
 Engineering basis:
@@ -120,8 +123,25 @@ Engineering basis:
 - Divider current is approximately 28.6 uA at 4.8 V.
 - Thevenin resistance is approximately 40.5 kOhm.
 - With C211 = 10 nF, the time constant is approximately 0.405 ms and five time constants are approximately 2.0 ms.
-- First-validation firmware must discard the first CH7 conversion after channel selection, wait at least 5 ms, and average multiple samples.
+- MCP3208 CH7 source impedance is high relative to the manufacturer-characterized range.
+- Dummy conversion and settling delay can mitigate channel-history disturbance but cannot eliminate resistor-tolerance, ADC-input-leakage, ADC_REF, or other systematic errors.
 - The prior 330k/1M alternative is rejected because it produces approximately 3.61 V at 4.8 V input, above the intended 3.3 V ADC-reference operating range.
+
+First-validation candidate sampling policy, not a finalized firmware requirement:
+
+- Keep BAT_MON outside the time-critical fast EMG scan loop.
+- Perform one dummy CH7 conversion after channel selection.
+- Wait at least 5 ms before retaining a measurement.
+- Use a slow housekeeping cadence; averaging may be used for random-noise reduction.
+- Exact cadence, retained-sample count, averaging depth, thresholds, guard bands, and calibration policy remain unresolved.
+
+Buffer-resource context:
+
+- U202B remains configured as a safe unloaded unity follower on `analog VREF` and appears available for possible future reassignment.
+- Reusing U202B for BAT_MON would supersede the existing safe-unused-channel decision and requires a separate approved stability, headroom, output-isolation, and schematic review.
+- No U202B reassignment is approved now. A unity-gain buffer, preferably using an existing suitable spare op-amp channel if later justified, remains a future-revision reconsideration option.
+
+Future no-human-connected prototype validation should compare ADC-derived pack voltage against a calibrated DMM over representative `LDO_IN` values, compare immediate and delayed CH7 conversions, and test representative preceding-channel transitions. This decision establishes no precision, PCB-readiness, human-test, or medical-device approval claim.
 
 ## 6. Reference-Rail Decisions
 
