@@ -3090,6 +3090,12 @@
 		(color 0 0 0 0)
 		(uuid "83915da1-293b-41a0-a10e-9e319158a3b9")
 	)
+	(junction
+		(at 160.02 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2080000-0000-4000-8000-000000000001")
+	)
 	(no_connect
 		(at 128.27 63.5)
 		(uuid "90100000-0000-4000-8000-000000000025")
@@ -3483,6 +3489,16 @@
 			(type default)
 		)
 		(uuid "40000000-0000-4000-8000-000000000020")
+	)
+	(wire
+		(pts
+			(xy 160.02 95.25) (xy 160.02 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2080000-0000-4000-8000-000000000002")
 	)
 	(wire
 		(pts
@@ -3913,6 +3929,16 @@
 			(justify left bottom)
 		)
 		(uuid "10000000-0000-4000-8000-000000000058")
+	)
+	(label "3V3_ADC"
+		(at 160.02 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2080000-0000-4000-8000-000000000003")
 	)
 	(label "GND"
 		(at 254 127 0)
@@ -6519,6 +6545,83 @@
 			(project "EMG_v5"
 				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
 					(reference "R207")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 160.02 102.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a2080000-0000-4000-8000-000000000004")
+		(property "Reference" "R208"
+			(at 162.56 102.87 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 157.48 102.87 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 160.02 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "MCP3208 ADC-side CS/SHDN pull-up to 3V3_ADC"
+			(at 160.02 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a2080000-0000-4000-8000-000000000005")
+		)
+		(pin "2"
+			(uuid "a2080000-0000-4000-8000-000000000006")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "R208")
 					(unit 1)
 				)
 			)

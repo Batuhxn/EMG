@@ -16,7 +16,7 @@ The current schematic already connects the four SPI nets directly. This document
 Current limitations:
 
 - All four signals are direct connections.
-- There are no SPI series resistors or pull-up/pull-down resistors.
+- There are no SPI series resistors or pull-down resistors. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`.
 - There is no buffer, power-domain-aware bus switch, or digital isolator.
 - The carrier power path is not modeled in the schematic; U501 `5V_VBUS` and `3V3` are unconnected there.
 - GPIO/pad mapping still depends on the provisional right-row reversal recorded from physical observation.
@@ -174,9 +174,11 @@ Future project-level bench acceptance must establish:
 
 The 50mV and 1uA values are project-level bench thresholds, not manufacturer-published limits.
 
-### Separate CS/SHDN issue
+### Implemented CS/SHDN pull-up
 
-MCP3208 `CS/SHDN` currently has no ADC-side pull-up. When the DSTK is disconnected, resetting, or high-impedance, CS may be undefined even if the MCP3208 is powered. Selecting and implementing a pull-up is the next separate electrical review; no value or implementation is approved here. After a future approved implementation, bench validation must show CS remains high whenever MCP3208 is powered and DSTK is disconnected.
+`R208 = 10k` is implemented from MCP3208-side `ADC_CS` to `3V3_ADC`. It holds `CS/SHDN` high and keeps the MCP3208 deselected when controller drive is absent. At 3.3V, the calculated CS-low current is approximately 330uA and resistor dissipation is approximately 1.09mW.
+
+This is schematic-level implementation only; bench behavior is not yet established. The pull-up does not replace the required four-line physical disconnect. The tracked firmware SPI pin mapping remains separately unresolved and is not changed by this implementation.
 
 ### Human-test boundary
 

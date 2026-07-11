@@ -177,12 +177,14 @@ Engineering basis:
 - The 50mV and 1uA criteria are project-level bench acceptance thresholds, not manufacturer-published limits.
 - Unequal-power validation must have no human connection.
 
-### Separate CS/SHDN Constraint
+### CS/SHDN Pull-Up Decision
 
-- MCP3208 `CS/SHDN` currently has no ADC-side pull-up.
-- CS may be undefined when DSTK is disconnected, resetting, or high-impedance.
-- Pull-up value selection and implementation require a separate electrical review; no value or implementation is approved by this decision.
-- After a future approved implementation, CS must remain high whenever MCP3208 is powered and DSTK is disconnected.
+- `R208 = 10k` is implemented from MCP3208-side `ADC_CS` to `3V3_ADC`.
+- R208 must hold `CS/SHDN` high and keep the MCP3208 deselected when controller drive is absent.
+- Calculated CS-low current at 3.3V is approximately 330uA; calculated resistor dissipation while low is approximately 1.09mW.
+- These values are schematic calculations and do not constitute bench validation.
+- R208 does not replace the required physical disconnect of all four SPI signals.
+- The tracked firmware SPI pin mapping remains separately unresolved and is not approved or changed by this decision.
 
 ## 9. Human-Test Safety Constraints
 

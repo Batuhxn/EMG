@@ -16,6 +16,8 @@ Date: 2026-07-10
 
 The repository also contains local untracked `V5/STATUS_V5.pdf` and `_recovery/` items. They are outside the synchronized tracked documentation state and must not be modified, added, staged, moved, or deleted without explicit approval.
 
+All `*_REFINED.md` files remain untouched and read-only for the R208 schematic implementation.
+
 ## Current Architecture
 
 EMG V5 is a controlled-development two-channel EMG acquisition system.
@@ -160,7 +162,7 @@ The current SPI mapping is:
 | `ADC_MOSI` | GPIO12 | 15 | U201 Din, pin 11 |
 | `ADC_MISO` | GPIO11 | 16 | U201 Dout, pin 12 |
 
-The four SPI nets are currently connected directly. There are no series resistors, pull-ups, pull-downs, buffers, bus switches, or isolators. The carrier power path is not modeled in the schematic, and the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
+The four SPI signals remain direct controller-to-ADC connections with no series resistors, pull-downs, buffers, bus switches, or isolators. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`. The carrier power path is not modeled in the schematic, and the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
 
 The unequal-power architecture decision is now established but not implemented:
 
@@ -174,7 +176,7 @@ The manufacturer-evidence basis is that MCP3208 digital pins are limited to `VSS
 
 Future project-level bench acceptance must show one action opens all four nets, no alternate path remains, open-state resistance is at least 10 MOhm, SPI-caused unpowered `3V3_ADC` rise is no more than 50mV, and injected current remains below the 1uA-per-signal project ceiling with a 0uA target. The 50mV and 1uA criteria are project thresholds, not manufacturer limits. Unequal-power validation must have no human connection.
 
-MCP3208 `CS/SHDN` separately lacks an ADC-side pull-up. CS may be undefined while the DSTK is disconnected, resetting, or high-impedance. Pull-up value selection and implementation are the next separate electrical review and remain unimplemented.
+MCP3208-side `R208 = 10k` now holds `CS/SHDN` high when controller drive is absent, keeping the ADC deselected while it remains powered. Calculated CS-low current at 3.3V is approximately 330uA and R208 dissipation is approximately 1.09mW. These are schematic calculations, not bench measurements. The pull-up does not replace the four-line physical-disconnect requirement. The tracked firmware SPI pin mapping remains separately unresolved.
 
 ## Legacy Placeholder State
 
@@ -234,7 +236,7 @@ Future DSTK validation must cover:
 - BLE/RF-active rail noise and analog/ADC disturbance.
 - USB coexistence and disconnected/connected source behavior.
 - Physical-disconnect resistance, alternate-path, rail-rise, and injected-current validation for both unequal-power directions.
-- CS-high behavior after a separately approved ADC-side pull-up implementation.
+- CS-high behavior with implemented R208 during controller disconnect, reset, and boot conditions.
 - Physical carrier dimensions, pin labels/orientation, antenna keepout, and USB overhang before placement approval.
 
 ## Evidence Limits and Open Work
@@ -245,7 +247,7 @@ Future DSTK validation must cover:
 - Multiple schematic parts still lack finalized footprints or ordering MPNs.
 - Power-path and BAT_MON behavior still require controlled bench validation.
 - The SPI physical-disconnect architecture is selected but remains unimplemented and unvalidated; direct unequal-power operation remains prohibited.
-- MCP3208 ADC-side CS pull-up value selection and implementation remain open.
+- MCP3208 ADC-side CS pull-up is implemented as `R208 = 10k`; bench validation remains open.
 - Human-connected testing remains battery-only and still requires separate safety approval.
 
 Human-connected operation additionally requires USB disconnected, no bench supply, no mains-connected test equipment, and no earth-referenced oscilloscope connection while electrodes are attached. EMG V5 is a prototype development system, not a medical device, and the current documentation is not human-test approval.
