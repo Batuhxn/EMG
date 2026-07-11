@@ -122,10 +122,13 @@ The previous 330k/1M alternative is rejected for this architecture because it wo
 - `analog VREF` is the approximately mid-supply analog bias/reference.
 - `ADC_REF` and `analog VREF` remain separate nets.
 - `R206` remains an unresolved `0R/10R candidate`; this documentation synchronization does not finalize it.
-- C205, C206, and C207 retain their current candidate/optional status.
+- C205 and C206 retain their current candidate/optional status.
+- The implemented VREF monitor interface is `analog VREF -> R203 1k -> VREF_MON -> MCP3208 CH6`, with `C207 = 220pF` from `VREF_MON` to GND. C207 is finalized for first validation as a balance between sampling-kickback suppression and acquisition settling.
 - DSTK 3V3 and 5V/VBUS are not connected to `3V3_ADC`.
 
-Active open gates include MCP3208 VDD/VREF relationship, ADC input source impedance and acquisition time, `VREF_MON` dynamic sampling disturbance, analog-VREF buffer loading/stability, and `ADC_REF` ripple/noise. AGND and DGND are controlled return and placement concepts on a common ground system; they are not approval for blind split planes or floating ground islands.
+Simplified engineering modeling for C207 estimates an approximately 275 mV conservative full-scale local charge-sharing kick, approximately 0.24 us RC time constant, approximately 1.95 us recovery to 0.1 LSB, approximately 0.0013 LSB residual at 500 kHz, and approximately 0.66 LSB residual at 1 MHz. These are model estimates, not manufacturer guarantees or bench measurements. `VREF_MON` remains a lower-cadence diagnostic candidate rather than a time-critical fast-frame requirement; dummy-first CH6 sampling remains a candidate firmware policy, not finalized firmware behavior.
+
+Active open gates include MCP3208 VDD/VREF relationship, analog-VREF dynamic stability and channel-coupling bench validation, C208 local decoupling, U202 exact MPN/footprint, and `ADC_REF` ripple/noise including unresolved R206. AGND and DGND are controlled return and placement concepts on a common ground system; they are not approval for blind split planes or floating ground islands.
 
 ## Analog Channel and Interface State
 

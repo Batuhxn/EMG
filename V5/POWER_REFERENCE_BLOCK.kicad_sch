@@ -5223,7 +5223,7 @@
 				)
 			)
 		)
-		(property "Value" "100pF-1nF candidate"
+		(property "Value" "220pF"
 			(at 114.808 184.404 0)
 			(show_name no)
 			(do_not_autoplace no)
