@@ -854,10 +854,6 @@
 		(uuid "50100000-0000-4000-8000-000000000009")
 	)
 	(no_connect
-		(at 210.82 54.61)
-		(uuid "50100000-0000-4000-8000-000000000010")
-	)
-	(no_connect
 		(at 210.82 59.69)
 		(uuid "50100000-0000-4000-8000-000000000012")
 	)
@@ -868,6 +864,44 @@
 	(no_connect
 		(at 210.82 74.93)
 		(uuid "50100000-0000-4000-8000-000000000018")
+	)
+	(wire
+		(pts
+			(xy 168.91 52.07) (xy 177.8 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-00000000001c")
+	)
+	(wire
+		(pts
+			(xy 177.8 52.07) (xy 177.8 44.45)
+		)
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-00000000001f")
+	)
+	(wire
+		(pts
+			(xy 177.8 44.45) (xy 220.98 44.45)
+		)
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000020")
+	)
+	(wire
+		(pts
+			(xy 220.98 44.45) (xy 220.98 54.61)
+		)
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000021")
+	)
+	(wire
+		(pts
+			(xy 220.98 54.61) (xy 210.82 54.61)
+		)
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000022")
 	)
 	(wire
 		(pts
@@ -1564,6 +1598,14 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(pin "CARRIER_VBUS_SW" output
+			(at 168.91 52.07 0)
+			(uuid "a2040000-0000-4000-8000-00000000001d")
+			(effects
+				(font (size 1.27 1.27))
+				(justify right)
 			)
 		)
 		(pin "ADC_MISO" output

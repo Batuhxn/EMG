@@ -1,11 +1,11 @@
 # EMG V5 Current Status
 
-Date: 2026-07-10
+Date: 2026-07-13
 
 ## Repository State
 
 - Branch: `v5/KiCad`
-- Current HEAD: `bc3c0d634800511806baf46fd018810f28c3e0ae`
+- Current HEAD: `37111ee remap adc sclk to gpio4`
 - Tracking target: `origin/v5/KiCad`
 - Ahead/behind after the latest fetch: `0 / 0`
 - Current tracked V5 schematic root: `V5/EMG_v5.kicad_sch`
@@ -16,7 +16,7 @@ Date: 2026-07-10
 
 The repository also contains local untracked `V5/STATUS_V5.pdf` and `_recovery/` items. They are outside the synchronized tracked documentation state and must not be modified, added, staged, moved, or deleted without explicit approval.
 
-All `*_REFINED.md` files remain untouched and read-only for the R208 schematic implementation.
+All `*_REFINED.md` files remain untouched and read-only.
 
 ## Current Architecture
 
@@ -64,6 +64,18 @@ Current implementation details:
 - U203 IN and EN are connected to protected `LDO_IN`.
 - U203 OUT reaches `3V3_ADC` through `R207 = 0R`.
 - `3V3_ADC` powers the analog and ADC domain.
+
+The tracked schematic now also implements the first-validation MCU battery branch:
+
+`LDO_IN -> U204 TPS22917DBVR -> CARRIER_VBUS_SW -> U501 carrier 5V/VBUS`
+
+- U204 VIN and ON are connected to protected `LDO_IN`.
+- `C212 = 2.2nF` connects U204 CT to VIN/`LDO_IN`; the approved policy is C0G/NP0, +/-10% or better, and 10 V minimum, with exact MPN unresolved.
+- The planned U204 output rise time is approximately 3.5-4.0 ms over the reviewed 3.6-5 V region. This is a typical planning result and requires assembled-board measurement.
+- U204 QOD is electrically unused and marked unconnected so USB-powered carrier VBUS is not intentionally discharged through QOD.
+- `C213 = 22uF` connects `CARRIER_VBUS_SW` to GND on the U204 output side. X7R is preferred, X5R is acceptable, 10 V is the minimum rating, and 1210 is preferred later; exact MPN and effective capacitance remain unresolved.
+- U501 carrier 3V3 remains externally unconnected. The carrier BAT pads/path remain unused, and 3xAA must not be connected to carrier BAT.
+- Battery operation requires USB physically absent. Simultaneous battery and USB operation remains unapproved.
 
 This is a first-validation implementation. It is not final product power architecture, production MPN approval, BOM lock, human-test approval, or PCB approval.
 
@@ -178,7 +190,7 @@ The current SPI mapping is:
 | `ADC_MOSI` | GPIO12 | 15 | U201 Din, pin 11 |
 | `ADC_MISO` | GPIO11 | 16 | U201 Dout, pin 12 |
 
-The four SPI signals remain direct controller-to-ADC connections with no series resistors, pull-downs, buffers, bus switches, or isolators. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`. The carrier power path is not modeled in the schematic, and the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
+The four SPI signals remain direct controller-to-ADC connections with no series resistors, pull-downs, buffers, bus switches, or isolators. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`. The battery-to-carrier power path is now modeled through U204, but the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
 
 `ADC_SCLK` is finalized on U501 GPIO4/pad 7 rather than GPIO13/pad 14. Strong ESP32-H2 SuperMini board-family evidence indicates a conventional onboard LED branch on GPIO13; this branch was not shown to prevent operation over the considered 100kHz-1MHz SPI range, but it creates an avoidable clock-correlated load in a sensitive mixed-signal system. GPIO4 has no known onboard peripheral conflict, is not a documented ESP32-H2 datasheet strapping pin, and is the native SPI2 `FSPICLK` function. GPIO0 remains available for possible CAL/MARK use, GPIO10 remains a generic right-row spare/trigger/sync candidate, and GPIO13 is only a possible future onboard-status resource; no QoL allocation is approved here.
 
@@ -196,7 +208,7 @@ Future project-level bench acceptance must show one action opens all four nets, 
 
 MCP3208-side `R208 = 10k` now holds `CS/SHDN` high when controller drive is absent, keeping the ADC deselected while it remains powered. Calculated CS-low current at 3.3V is approximately 330uA and R208 dissipation is approximately 1.09mW. These are schematic calculations, not bench measurements. The pull-up does not replace the four-line physical-disconnect requirement. The tracked firmware SPI pin mapping remains separately unresolved.
 
-The exact carrier revision, GPIO13 LED polarity/resistor, exact user-board GPIO4 behavior, final PCB SPI routing, assembled SCLK waveform, final SPI clock, tracked firmware correction, physical four-line disconnect, carrier battery-only power, VBUS isolation/backfeed protection, final QoL architecture, and bench validation remain open.
+The exact carrier revision, onboard capacitance, header/USB VBUS relationship, reverse leakage, startup rise time and peak current, RF-burst droop, brownout/reset behavior, low-battery dropout, effective C213 capacitance, GPIO13 LED polarity/resistor, exact user-board GPIO4 behavior, final PCB SPI routing, assembled SCLK waveform, final SPI clock, tracked firmware correction, physical USB mutual exclusion, physical four-line disconnect, final QoL architecture, and bench validation remain open. Bench work must also measure MCU-startup/RF disturbance on `3V3_ADC`, `ADC_REF`, analog VREF, and `BAT_MON`.
 
 ## Legacy Placeholder State
 

@@ -2804,6 +2804,212 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Power_Management:TPS22917DBV"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at -6.35 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TPS22917DBV"
+				(at 2.54 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+				(at 0 12.7 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tps22917.pdf"
+				(at 1.27 -17.78 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "1V to 5.5V, 2A, 80mΩ Ultra-Low Leakage Load Switch, SOT23-6"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "high-side power distribution switch"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TPS22917DBV_0_1"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TPS22917DBV_1_1"
+				(pin power_in line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "ON"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "CT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "QOD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "MCP3208 ADC SUPPORT"
 		(exclude_from_sim no)
@@ -3065,6 +3271,90 @@
 			(justify left)
 		)
 		(uuid "90100000-0000-4000-8000-000000000003")
+	)
+	(text "MCU BATTERY POWER PATH\nLDO_IN -> TPS22917DBVR -> CARRIER_VBUS_SW\nCT = 2.2nF to VIN; QOD unused; Cbulk = 22uF"
+		(exclude_from_sim no)
+		(at 185.42 43.18 0)
+		(effects
+			(font (size 1.27 1.27))
+			(justify left)
+		)
+		(uuid "a2040000-0000-4000-8000-00000000000e")
+	)
+	(junction
+		(at 193.04 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2040000-0000-4000-8000-00000000000f")
+	)
+	(junction
+		(at 231.14 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a2040000-0000-4000-8000-00000000001e")
+	)
+	(wire
+		(pts (xy 193.04 58.42) (xy 200.66 58.42))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000010")
+	)
+	(wire
+		(pts (xy 193.04 58.42) (xy 193.04 63.5))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000011")
+	)
+	(wire
+		(pts (xy 193.04 63.5) (xy 200.66 63.5))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000012")
+	)
+	(wire
+		(pts (xy 187.96 50.8) (xy 193.04 50.8))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000013")
+	)
+	(wire
+		(pts (xy 187.96 50.8) (xy 187.96 60.96))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000014")
+	)
+	(wire
+		(pts (xy 187.96 60.96) (xy 200.66 60.96))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000015")
+	)
+	(wire
+		(pts (xy 220.98 58.42) (xy 238.76 58.42))
+		(stroke (width 0) (type default))
+		(uuid "a2040000-0000-4000-8000-000000000016")
+	)
+	(label "LDO_IN"
+		(at 193.04 58.42 180)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "a2040000-0000-4000-8000-000000000017")
+	)
+	(label "GND"
+		(at 210.82 68.58 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "a2040000-0000-4000-8000-000000000018")
+	)
+	(label "GND"
+		(at 231.14 66.04 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "a2040000-0000-4000-8000-000000000019")
+	)
+	(no_connect
+		(at 220.98 63.5)
+		(uuid "a2040000-0000-4000-8000-00000000001a")
+	)
+	(hierarchical_label "CARRIER_VBUS_SW"
+		(shape output)
+		(at 238.76 58.42 0)
+		(effects
+			(font (size 1.27 1.27))
+			(justify left bottom)
+		)
+		(uuid "a2040000-0000-4000-8000-00000000001b")
 	)
 	(junction
 		(at 43.18 168.91)
@@ -7455,6 +7745,239 @@
 			(project "POWER_REFERENCE_BLOCK"
 				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
 					(reference "R208")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Power_Management:TPS22917DBV")
+		(at 210.82 60.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a2040000-0000-4000-8000-000000000001")
+		(property "Reference" "U204"
+			(at 204.47 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "TPS22917DBVR"
+			(at 213.36 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+			(at 210.82 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22917.pdf"
+			(at 210.82 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Description" "1V to 5.5V, 2A load switch with full-time reverse-current blocking; exact MPN TPS22917DBVR"
+			(at 210.82 60.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1" (uuid "a2040000-0000-4000-8000-000000000002"))
+		(pin "2" (uuid "a2040000-0000-4000-8000-000000000003"))
+		(pin "3" (uuid "a2040000-0000-4000-8000-000000000004"))
+		(pin "4" (uuid "a2040000-0000-4000-8000-000000000005"))
+		(pin "5" (uuid "a2040000-0000-4000-8000-000000000006"))
+		(pin "6" (uuid "a2040000-0000-4000-8000-000000000007"))
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "U204")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "U204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 193.04 54.61 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a2040000-0000-4000-8000-000000000008")
+		(property "Reference" "C212"
+			(at 198.374 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2nF"
+			(at 198.374 55.88 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.005 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 193.04 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "TPS22917 CT timing capacitor; C0G/NP0, 10V minimum, +/-10% or better; exact MPN unresolved"
+			(at 193.04 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a2040000-0000-4000-8000-000000000009")
+		)
+		(pin "2"
+			(uuid "a2040000-0000-4000-8000-00000000000a")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C212")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C212")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 231.14 62.23 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a2040000-0000-4000-8000-00000000000b")
+		(property "Reference" "C213"
+			(at 236.474 60.96 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22uF"
+			(at 236.474 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 232.105 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 231.14 62.23 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Carrier-side local bulk capacitor; X7R preferred, X5R acceptable, 10V minimum; exact MPN and effective capacitance unresolved"
+			(at 231.14 62.23 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a2040000-0000-4000-8000-00000000000c")
+		)
+		(pin "2"
+			(uuid "a2040000-0000-4000-8000-00000000000d")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/4b7d3b9f-6eb5-4b2b-a72d-ec3d44a09101"
+					(reference "C213")
+					(unit 1)
+				)
+			)
+			(project "POWER_REFERENCE_BLOCK"
+				(path "/9cf45c82-d182-4986-8f5d-3a2eb094c2d2"
+					(reference "C213")
 					(unit 1)
 				)
 			)

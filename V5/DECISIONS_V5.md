@@ -1,6 +1,6 @@
 # EMG V5 Current Decisions and Constraints
 
-Date synchronized: 2026-07-10
+Date synchronized: 2026-07-13
 
 This document contains current project decisions and mandatory constraints. Repository status, historical checkpoint narration, and validation logs belong in `STATUS_V5.md`.
 
@@ -71,6 +71,22 @@ The SPI allocation is:
 - No other source may intentionally hold `3V3_ADC` high while the TPS7A20 input is collapsed unless a later reviewed protection topology explicitly permits it.
 - The 3xAA path is for first validation only; it is not a final product battery or production architecture decision.
 
+### Implemented MCU Battery Branch
+
+- The implemented first-validation MCU branch is:
+
+  `LDO_IN -> U204 TPS22917DBVR -> CARRIER_VBUS_SW -> U501 carrier 5V/VBUS`
+
+- U204 VIN and ON are connected to protected `LDO_IN`; ON must not be moved to `SW_BAT+` without a new review.
+- `C212 = 2.2nF` connects CT to VIN/`LDO_IN`. The component policy is C0G/NP0, +/-10% or better, and 10 V minimum; 0603 is preferred later and exact MPN remains unresolved.
+- The planned output rise time is approximately 3.5-4.0 ms over the reviewed 3.6-5 V region. This is a typical planning value, not a guaranteed assembled-board result.
+- QOD remains floating/unused. It must not be connected to VOUT, GND, or a discharge resistor while externally powered USB VBUS remains a possible carrier state.
+- `C213 = 22uF` is on the switched output side from `CARRIER_VBUS_SW` to GND. X7R is preferred, X5R is acceptable, 10 V is the minimum rating, and 1210 is preferred later; exact MPN and effective capacitance remain unresolved.
+- Carrier 3V3 remains externally unconnected and unapproved as a project power input/source. The carrier BAT pads/path remain unused, and 3xAA-to-carrier-BAT is prohibited.
+- Battery operation requires USB physically absent. Simultaneous USB and battery operation remains unapproved.
+- USB programming requires the battery-to-carrier branch disabled, no human connection, and physical disconnection of `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` whenever unequal-power conditions exist.
+- Open validation includes exact carrier revision and capacitance, header/USB VBUS relationship, reverse leakage, startup rise time and peak current, RF-burst droop, brownout/reset behavior, low-battery dropout, effective C213 capacitance, disturbance on `3V3_ADC`, `ADC_REF`, analog VREF, and `BAT_MON`, physical USB mutual exclusion, physical four-line SPI disconnect, tracked firmware correction, and bench validation.
+
 ### TPS7A2033 Rationale and Planning Limits
 
 - Recorded `3V3_ADC` estimates are approximately 1.6 mA typical and 2.5 mA conservative static/active subtotal.
@@ -97,7 +113,7 @@ The SPI allocation is:
 - 3xAA NiMH is not electrically equivalent: approximately 3.6 V nominal pack voltage leaves much less 3.3 V LDO dropout margin.
 - Protected 1S Li-ion/LiPo remains deferred until charger/protection, low-voltage regulation, backfeed, analog-noise, and human-test safety behavior are separately reviewed.
 - DSTK 3V3 remains rejected/deferred as the analog/ADC source because current capability, BLE/RF noise, USB coexistence, and backfeed behavior are not closed.
-- DSTK 5V/VBUS remains rejected/deferred because it is USB-related, is not the selected 3.3 V analog domain, and would change ADC/SPI voltage compatibility and isolation assumptions.
+- DSTK 5V/VBUS remains rejected as an analog/ADC source. It is used only as the destination of the separately switched MCU battery branch and remains subject to USB mutual-exclusion, backfeed, and unequal-power constraints.
 - The former selectable/jumper strategy is superseded by the implemented single first-validation battery/LDO path. Reintroducing source selection would reopen mutual-exclusion and backfeed risks and requires a new decision.
 
 ## 5. BAT_MON Decision
