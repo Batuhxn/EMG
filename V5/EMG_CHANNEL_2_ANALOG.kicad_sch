@@ -4173,7 +4173,7 @@
 				)
 			)
 		)
-		(property "Value" "AudioJack3 TRS"
+		(property "Value" "SJ1-3523N"
 			(at 25.4 77.47 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4183,7 +4183,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Audio:Jack_3.5mm_CUI_SJ1-3523N_Horizontal"
 			(at 25.4 68.58 0)
 			(hide yes)
 			(show_name no)

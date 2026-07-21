@@ -6798,7 +6798,7 @@
 				)
 			)
 		)
-		(property "Value" "3xAA_BATTERY"
+		(property "Value" "B2B-XH-A(LF)(SN)"
 			(at 17.78 59.69 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6808,7 +6808,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical"
 			(at 20.32 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -6882,7 +6882,7 @@
 				)
 			)
 		)
-		(property "Value" "MAIN_PWR_SW"
+		(property "Value" "TS02CQE"
 			(at 30.48 83.058 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6892,7 +6892,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "EMG_V5:TS02CQE_SPST_THT"
 			(at 30.48 80.01 0)
 			(hide yes)
 			(show_name no)
