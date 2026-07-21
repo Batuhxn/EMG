@@ -853,9 +853,15 @@
 		(at 185.42 74.93)
 		(uuid "50100000-0000-4000-8000-000000000009")
 	)
-	(no_connect
-		(at 210.82 59.69)
-		(uuid "50100000-0000-4000-8000-000000000012")
+	(label "CARRIER_3V3"
+		(at 210.82 59.69 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "e5050000-0000-4000-8000-000000000001")
+	)
+	(label "CARRIER_3V3"
+		(at 168.91 57.15 180)
+		(effects (font (size 1.27 1.27)) (justify right bottom))
+		(uuid "e5050000-0000-4000-8000-000000000002")
 	)
 	(no_connect
 		(at 210.82 72.39)
@@ -1608,7 +1614,12 @@
 				(justify right)
 			)
 		)
-		(pin "ADC_MISO" output
+		(pin "CARRIER_3V3" input
+			(at 168.91 57.15 0)
+			(uuid "e5050000-0000-4000-8000-000000000003")
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(pin "MCU_ADC_MISO" output
 			(at 168.91 69.85 0)
 			(uuid "3bb4f27f-1939-4706-90f7-12544501b8df")
 			(effects
@@ -1618,7 +1629,7 @@
 				(justify right)
 			)
 		)
-		(pin "ADC_MOSI" input
+		(pin "MCU_ADC_MOSI" input
 			(at 168.91 67.31 0)
 			(uuid "17dc7890-0340-4388-bc04-e5de8956aa87")
 			(effects
@@ -1628,7 +1639,7 @@
 				(justify right)
 			)
 		)
-		(pin "ADC_SCLK" input
+		(pin "MCU_ADC_SCLK" input
 			(at 168.91 64.77 0)
 			(uuid "6643096f-4aca-4f12-8d18-77fdd67c5f84")
 			(effects
@@ -1638,7 +1649,7 @@
 				(justify right)
 			)
 		)
-		(pin "ADC_CS" input
+		(pin "MCU_ADC_CS" input
 			(at 168.91 62.23 0)
 			(uuid "74c6a624-19f7-48cb-9785-80fff13f4a2e")
 			(effects
