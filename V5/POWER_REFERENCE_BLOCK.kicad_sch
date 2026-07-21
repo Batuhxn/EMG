@@ -5760,7 +5760,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6002-xP"
+		(property "Value" "MCP6002-I/SN"
 			(at 76.2 166.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5770,7 +5770,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 76.2 171.45 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6308,7 +6308,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6002-xP"
+		(property "Value" "MCP6002-I/SN"
 			(at 121.92 181.61 0)
 			(hide yes)
 			(show_name no)
@@ -6319,7 +6319,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 121.92 171.45 0)
 			(hide yes)
 			(show_name no)
@@ -6689,7 +6689,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6002-xP"
+		(property "Value" "MCP6002-I/SN"
 			(at 76.2 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -6700,7 +6700,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 76.2 190.5 0)
 			(hide yes)
 			(show_name no)

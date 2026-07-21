@@ -5034,7 +5034,7 @@
 				)
 			)
 		)
-		(property "Value" "INA333xxDGK"
+		(property "Value" "INA333AIDGKT"
 			(at 196.85 90.17 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5044,7 +5044,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
 			(at 210.82 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -5442,7 +5442,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6004"
+		(property "Value" "MCP6004-I/SL"
 			(at 322.58 80.518 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5452,7 +5452,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 322.58 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -5868,7 +5868,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6004"
+		(property "Value" "MCP6004-I/SL"
 			(at 337.82 165.1 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5878,7 +5878,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 337.82 157.48 0)
 			(hide yes)
 			(show_name no)
@@ -6138,7 +6138,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6004"
+		(property "Value" "MCP6004-I/SL"
 			(at 337.312 236.982 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6148,7 +6148,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 337.82 229.87 0)
 			(hide yes)
 			(show_name no)
@@ -6252,7 +6252,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6004"
+		(property "Value" "MCP6004-I/SL"
 			(at 278.384 313.436 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6262,7 +6262,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 278.13 306.07 0)
 			(hide yes)
 			(show_name no)
@@ -6366,7 +6366,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP6004"
+		(property "Value" "MCP6004-I/SL"
 			(at 419.608 178.054 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6376,7 +6376,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 420.37 165.1 0)
 			(hide yes)
 			(show_name no)
