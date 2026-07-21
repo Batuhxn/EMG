@@ -14,13 +14,10 @@
 
 static const char *TAG = "emg_v5";
 
-/*
- * Confirm these pins from the physical DSTK22807 board before PCB layout.
- * Do not rely on bare ESP32-H2 module pin assumptions.
- */
-#define PIN_MCP3208_CS    GPIO_NUM_4
-#define PIN_MCP3208_CLK   GPIO_NUM_5
-#define PIN_MCP3208_MOSI  GPIO_NUM_10
+/* Pins follow the committed DSTK22807 carrier schematic mapping. */
+#define PIN_MCP3208_CS    GPIO_NUM_14
+#define PIN_MCP3208_CLK   GPIO_NUM_4
+#define PIN_MCP3208_MOSI  GPIO_NUM_12
 #define PIN_MCP3208_MISO  GPIO_NUM_11
 
 #define SAMPLE_RATE_HZ 1000
