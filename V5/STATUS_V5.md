@@ -1,303 +1,202 @@
 # EMG V5 Current Status
 
-Date: 2026-07-13
+## Repository checkpoint
+
+| Item | Current state |
+| --- | --- |
+| Branch | `v5/KiCad` |
+| Hardware implementation HEAD | `bbe257e2c9dc28f7537942b5f15370770654ba19` |
+| Upstream at checkpoint | `github-emg/v5/KiCad`, aligned `0 / 0` |
+| Checkpoint condition | Clean working tree and index before this documentation-only synchronization |
+| Latest hardware milestones | `223897a` TRS terminal correction; `bbe257e` unequal-power SPI isolation |
+
+The committed schematics, symbols, and project files at this checkpoint are the source of truth. Bench validation remains open unless explicitly stated otherwise below.
+
+## Implemented architecture
+
+### Electrode connectors
 
-## Repository State
+Both channels use the same terminal convention:
+
+| Connector | Tip / T | Ring / R | Sleeve / S |
+| --- | --- | --- | --- |
+| J301 | `EMG1_IN_P` | `EMG1_IN_N` | `EMG1_REF_ELECTRODE` |
+| J401 | `EMG2_IN_P` | `EMG2_IN_N` | `EMG2_REF_ELECTRODE` |
 
-- Branch: `v5/KiCad`
-- Current HEAD: `37111ee remap adc sclk to gpio4`
-- Tracking target: `origin/v5/KiCad`
-- Ahead/behind after the latest fetch: `0 / 0`
-- Current tracked V5 schematic root: `V5/EMG_v5.kicad_sch`
-- Current power/reference sheet: `V5/POWER_REFERENCE_BLOCK.kicad_sch`
-- Current analog sheets:
-  - `V5/EMG_CHANNEL_1_ANALOG.kicad_sch`
-  - `V5/EMG_CHANNEL_2_ANALOG.kicad_sch`
+The terminal mapping is implemented and is not an open design decision.
 
-The repository also contains local untracked `V5/STATUS_V5.pdf` and `_recovery/` items. They are outside the synchronized tracked documentation state and must not be modified, added, staged, moved, or deleted without explicit approval.
+### First-validation power path
+
+```text
+3xAA
+→ J201
+→ SW201
+→ Q201 reverse-polarity PMOS
+→ LDO_IN
+   ├→ U203 TPS7A2033
+   │   → R207 0 Ω
+   │   → 3V3_ADC
+   └→ U204 TPS22917
+       → CARRIER_VBUS_SW
+       → U501 pad 10 / 5V_VBUS
+```
 
-All `*_REFINED.md` files remain untouched and read-only.
+Power-domain boundaries:
 
-## Current Architecture
+- U501 pad 10 is `5V_VBUS`.
+- U501 pad 11 is GND.
+- U501 pad 12 is the monitored carrier `3V3` rail, named `CARRIER_3V3` at the isolation boundary.
+- Carrier `3V3` does not power `3V3_ADC`.
+- Carrier `5V_VBUS` does not directly power the analog or ADC rail.
+- `analog VREF` remains the analog midscale bias and is distinct from `ADC_REF`.
+- `ADC_REF` is derived from `3V3_ADC` through R206 = 0 Ω.
 
-EMG V5 is a controlled-development two-channel EMG acquisition system.
+### Carrier mapping evidence
 
-Each analog channel currently produces:
+The accepted project mapping is:
 
-- `RAW`
-- `RECT`
-- `ENV`
+- U501 pad 10 = `5V_VBUS`
+- U501 pad 11 = GND
+- U501 pad 12 = carrier `3V3`
 
-The MCP3208 channel allocation is:
+Carrier `3V3` was physically observed at approximately 3.291–3.31 V during powered operation. This mapping is authoritative project evidence and is no longer an implementation blocker. The observation does not establish external-power direction, current capability, or safe USB backfeeding.
 
-| MCP3208 channel | Current net |
-|---|---|
-| CH0 | `EMG1_RAW` |
-| CH1 | `EMG1_RECT` |
-| CH2 | `EMG1_ENV` |
-| CH3 | `EMG2_RAW` |
-| CH4 | `EMG2_RECT` |
-| CH5 | `EMG2_ENV` |
-| CH6 | `VREF_MON` |
-| CH7 | `BAT_MON` |
+### SPI GPIO mapping
 
-The measured DSTK22807 carrier remains represented by:
+| Function | Carrier GPIO | U501 pad | Direction |
+| --- | --- | --- | --- |
+| `ADC_CS` | GPIO14 | 13 | Carrier to ADC |
+| `ADC_SCLK` | GPIO4 | 7 | Carrier to ADC |
+| `ADC_MOSI` | GPIO12 | 15 | Carrier to ADC |
+| `ADC_MISO` | GPIO11 | 16 | ADC to carrier |
 
-- Symbol: `EMG_V5:DSTK22807_ESP32H2_SuperMini_Measured`
-- Footprint: `EMG_V5:DSTK22807_ESP32H2_SuperMini_Carrier_Measured_THT`
+The tracked firmware definitions are stale and do not yet match this schematic mapping.
 
-The project-local symbol and measured footprint retain one-to-one numbering for pins/pads 1 through 18.
+### Unequal-power SPI isolation
 
-## Implemented First-Validation Power Path
+U205 is `TXU0304PWR` with:
 
-The current tracked power/reference schematic implements the first-validation 3xAA path:
+- VCCA = `CARRIER_3V3`
+- VCCB = `3V3_ADC`
+- A1 → B1Y: CS
+- A2 → B2Y: SCLK
+- A3 → B3Y: MOSI
+- B4 → A4Y: MISO
 
-`J201 -> SW201 -> Q201 -> LDO_IN -> U203 -> R207 -> 3V3_ADC`
+Carrier-side nets are `MCU_ADC_CS`, `MCU_ADC_SCLK`, `MCU_ADC_MOSI`, and `MCU_ADC_MISO`. ADC-side nets remain `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO`. The committed netlist has no direct SPI bypass around U205.
 
-Current implementation details:
+R208 remains 10 kΩ entirely on the ADC side from `ADC_CS` to `3V3_ADC`, holding MCP3208 CS/SHDN high while U205 is disabled.
 
-- `J201`: 3xAA battery connector.
-- `SW201`: main high-side power switch.
-- `Q201`: `PMV48XP` P-channel MOSFET used for pack-level reverse-polarity protection.
-- Protected rail after Q201: `LDO_IN`.
-- `U203`: `TPS7A2033PDBVR` 3.3 V LDO.
-- U203 IN and EN are connected to protected `LDO_IN`.
-- U203 OUT reaches `3V3_ADC` through `R207 = 0R`.
-- `3V3_ADC` powers the analog and ADC domain.
+### Supervisor and OE qualification
 
-The tracked schematic now also implements the first-validation MCU battery branch:
+| Item | Implemented connection or value |
+| --- | --- |
+| U206 | `TPS3899DL30DSER`; monitors `CARRIER_3V3` |
+| U207 | `TPS3899DL29DSER`; monitors `3V3_ADC` |
+| Supervisor VDD | Both powered by `LDO_IN` |
+| RESET outputs | Open-drain, shared on `SPI_ISO_OE` |
+| Fault behavior | Either invalid rail forces OE low |
+| Valid behavior | Both rails must be valid before OE rises |
+| CTS | Open for minimum fault-side assertion delay |
+| C218 / C219 | 9.1 nF each |
+| Nominal valid-side qualification | Approximately 6.04 ms; not an exact guaranteed delay |
+| R209 | 47 kΩ ±1%, `LDO_IN` to `SPI_ISO_OE` |
+| R210 | 220 kΩ ±1%, `SPI_ISO_OE` to GND |
 
-`LDO_IN -> U204 TPS22917DBVR -> CARRIER_VBUS_SW -> U501 carrier 5V/VBUS`
+Decoupling and access:
 
-- U204 VIN and ON are connected to protected `LDO_IN`.
-- `C212 = 2.2nF` connects U204 CT to VIN/`LDO_IN`; the approved policy is C0G/NP0, +/-10% or better, and 10 V minimum, with exact MPN unresolved.
-- The planned U204 output rise time is approximately 3.5-4.0 ms over the reviewed 3.6-5 V region. This is a typical planning result and requires assembled-board measurement.
-- U204 QOD is electrically unused and marked unconnected so USB-powered carrier VBUS is not intentionally discharged through QOD.
-- `C213 = 22uF` connects `CARRIER_VBUS_SW` to GND on the U204 output side. X7R is preferred, X5R is acceptable, 10 V is the minimum rating, and 1210 is preferred later; exact MPN and effective capacitance remain unresolved.
-- U501 carrier 3V3 remains externally unconnected. The carrier BAT pads/path remain unused, and 3xAA must not be connected to carrier BAT.
-- Battery operation requires USB physically absent. Simultaneous battery and USB operation remains unapproved.
+- C214 = 100 nF for TXU VCCA.
+- C215 = 100 nF for TXU VCCB.
+- C216 = 100 nF for U206 VDD.
+- C217 = 100 nF for U207 VDD.
+- TP207 = `CARRIER_3V3`.
+- TP208 = `SPI_ISO_OE`.
 
-This is a first-validation implementation. It is not final product power architecture, production MPN approval, BOM lock, human-test approval, or PCB approval.
+### BAT_MON, ADC allocation, and analog state
 
-### Power Component Engineering Basis
+- The implemented BAT_MON network is R204 = 68 kΩ from `LDO_IN`, R205 = 100 kΩ to GND, and C211 = 10 nF to GND; it feeds MCP3208 CH7.
+- BAT_MON remains an unbuffered slow housekeeping measurement. Accuracy, settling, and calibration are not bench-validated.
+- MCP3208 CH0–CH7 remain allocated to `EMG1_RAW`, `EMG1_RECT`, `EMG1_ENV`, `EMG2_RAW`, `EMG2_RECT`, `EMG2_ENV`, `VREF_MON`, and `BAT_MON` respectively.
+- Both analog-channel candidates remain implemented. RAW polarity is corrected; RECT and ENV remain candidate circuits requiring bench validation.
+- `MCP6004-I/P` and `BAS70ZFILM` remain first-prototype directions with package, operating-margin, and orientation gates still open.
 
-The current `3V3_ADC` planning basis remains:
+### Reference implementation
 
-- Approximate typical load estimate: 1.6 mA.
-- Approximate conservative static/active subtotal: 2.5 mA.
-- Controlled first-validation budget: 10 mA.
-- Regulator capability planning floor: 50 mA.
+- R206 = 0 Ω derives `ADC_REF` from `3V3_ADC`; C205 = 100 nF and C206 = 1 µF provide local reference bypass/storage.
+- R203 = 1 kΩ and C207 = 220 pF form the `VREF_MON` interface from analog VREF to MCP3208 CH6.
+- C203 = 100 nF, C204 = 1 µF, and C208 = 100 nF retain their distinct ADC-supply, local-bulk, and U202-decoupling roles.
+- Reference ripple, conversion disturbance, startup settling, channel coupling, and physical capacitor placement remain open validation items.
 
-These values are engineering estimates and planning margins, not measured rail current. The TPS7A2033 300 mA capability is regulator headroom; it is not the expected operating current.
+## Latest validated ERC
 
-TPS7A2033 remains the first-validation direction because the previous component review found a suitable combination of input-voltage margin for fresh 3xAA alkaline, low-load dropout, PSRR, output noise, quiescent current, capacitor stability, package practicality, and thermal margin. Reverse-current behavior remains a material constraint: no alternate source may hold `3V3_ADC` high after `LDO_IN` collapses unless a later protection review explicitly permits it.
+Root ERC at hardware checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`:
 
-At 4.8 V input, the simple LDO dissipation estimate is approximately 15 mW at the 10 mA validation budget and 75 mW at the 50 mA planning floor. Actual temperature depends on PCB copper, ambient conditions, package mounting, and measured load.
+- Errors: 0
+- Warnings: 2
+- Exclusions: 0
 
-Q201 uses the recorded PMV48XP mapping `1=G`, `2=S`, `3=D`: gate to GND, drain to switched battery positive, and source to protected `LDO_IN`. Under correct polarity, initial body-diode conduction raises the source, makes VGS negative, and enhances the PMOS. Under reversed pack polarity, the intended body-diode direction blocks startup. This is pack-level protection only; one reversed AA cell may not be detected if the total series-pack output polarity remains positive. Lifecycle, availability, and final-production-MPN suitability remain open.
+The existing warnings are:
 
-## Implemented BAT_MON Network
+1. U501 project-local footprint-library resolution warning.
+2. U204 TPS22917 library-symbol mismatch.
 
-The current tracked schematic implements BAT_MON as:
+The design is not warning-free.
 
-- Source: protected `LDO_IN`.
-- `R204 = 68k` from `LDO_IN` to `BAT_MON`.
-- `R205 = 100k` from `BAT_MON` to GND.
-- `C211 = 10nF` from `BAT_MON` to GND.
-- `BAT_MON` is connected to MCP3208 CH7.
+## Safety boundary
 
-BAT_MON remains an unbuffered slow housekeeping measurement, not a precision voltmeter. The current first-validation architecture keeps the implemented network unchanged: no buffer is added, U202B is not repurposed, and R204, R205, and C211 retain their current values. Full 12-bit absolute accuracy is not claimed. Its real accuracy and settling behavior are not yet bench-validated.
+SPI unequal-power protection is an internal common-ground power-sequencing measure. It is not galvanic isolation and is not a patient-protection barrier.
 
-### BAT_MON Engineering Basis
+For human-connected acquisition:
 
-- Divider ratio: `100k / (68k + 100k)`, approximately 0.595.
-- BAT_MON at 4.5 V: approximately 2.679 V.
-- BAT_MON at 4.8 V: approximately 2.857 V.
-- BAT_MON at the 5.5 V review point: approximately 3.274 V.
-- Divider current at 4.8 V: approximately 28.6 uA.
-- Thevenin resistance: approximately 40.5 kOhm.
-- RC time constant with C211 = 10 nF: approximately 0.405 ms.
-- Five time constants: approximately 2.0 ms.
+- operation must be battery-only;
+- USB must be physically absent; and
+- mains-referenced instrumentation must not be connected.
 
-MCP3208 CH7 source impedance is high relative to the manufacturer-characterized range. A first-validation candidate sampling policy keeps BAT_MON outside the time-critical fast EMG scan loop, performs one dummy CH7 conversion after channel selection, waits at least 5 ms before retaining a measurement, and uses a slow housekeeping cadence. Averaging may reduce random noise. Dummy conversion, delay, and averaging do not eliminate resistor-tolerance, ADC-input-leakage, ADC_REF, or other systematic errors. Exact cadence, retained-sample count, averaging depth, thresholds, guard bands, and calibration policy remain unresolved.
+The TXU0304 circuit does not make USB-connected human testing acceptable.
 
-U202B is currently configured as a safe unloaded unity follower on `analog VREF` and appears available for possible future reassignment. Reusing it as a BAT_MON buffer would supersede the existing safe-unused-channel decision and would require a separately approved stability, headroom, output-isolation, and schematic review. No reassignment is currently approved. Hardware buffering remains a future-revision reconsideration option if first-validation measurements establish a need.
+## Active blockers and open work
 
-Future BAT_MON prototype validation is a no-human-connected gate. When physical current-V5 hardware is available, it should compare ADC-derived pack voltage against a calibrated DMM over representative `LDO_IN` values, compare immediate and delayed CH7 conversions, and exercise representative preceding-channel transitions. This decision establishes no precision, PCB-readiness, human-test, or medical-device approval claim.
+### Firmware
 
-The previous 330k/1M alternative is rejected for this architecture because it would produce approximately 3.61 V at 4.8 V input, above the intended 3.3 V ADC-reference operating range.
+The tracked firmware SPI definitions must be updated in a separate task to CS GPIO14, SCLK GPIO4, MOSI GPIO12, and MISO GPIO11.
 
-## Current Power and Reference Separation
+### Bench validation
 
-- `3V3_ADC` is the analog/ADC supply rail.
-- `ADC_REF` is the MCP3208 full-scale reference.
-- `analog VREF` is the approximately mid-supply analog bias/reference.
-- `ADC_REF` and `analog VREF` remain separate nets.
-- `R206 = 0R` connects `3V3_ADC` to `ADC_REF`; MCP3208 VDD remains on `3V3_ADC` and VREF remains on the derived `ADC_REF` net. The zero-ohm link avoids an intentional load-dependent reference drop; a separate external reference is not justified for first validation.
-- `C205 = 100nF` from `ADC_REF` to GND is the local high-frequency bypass, and populated `C206 = 1uF` from `ADC_REF` to GND provides local charge storage consistent with MCP3208 manufacturer application guidance.
-- PCB entry must place C205 closest to MCP3208 pins 15/14, with C206 adjacent, R206 at the `ADC_REF` branch entry, a short `ADC_REF` route away from digital switching, and no digital return current routed through the reference-capacitor ground return.
-- Actual `ADC_REF` ripple, conversion-correlated disturbance, final SPI-clock interaction, and bench behavior remain validation gates. Exact capacitor MPNs, packages, dielectric, tolerance, and voltage rating remain unresolved; startup discard/blanking remains a candidate firmware policy rather than a finalized requirement.
-- The implemented VREF monitor interface is `analog VREF -> R203 1k -> VREF_MON -> MCP3208 CH6`, with `C207 = 220pF` from `VREF_MON` to GND. C207 is finalized for first validation as a balance between sampling-kickback suppression and acquisition settling.
-- `C208 = 100nF` is finalized as U202's dedicated local high-frequency bypass from `3V3_ADC` to GND. PCB placement must keep C208 approximately within 2 mm of U202 supply pins 8 and 4 with a short, low-inductance return path; same-net schematic connectivity alone does not establish correct physical decoupling.
-- `C203 = 100nF` is finalized as the dedicated MCP3208 VDD-local high-frequency bypass and must be placed immediately adjacent to U201 pin 16/VDD with an appropriate low-inductance ground return; it is not claimed to satisfy every MCP3208 supply-bypass need alone. `C204 = 1uF` is finalized populated as distributed/local bulk support near the ADC and central analog-load region.
-- C210 remains the TPS7A2033 regulator-output capacitor. C203, C204, C210, ADC_REF-local C205/C206, U202-local C208, INA333-local C310/C410, and MCP6004-local C360/C460 have distinct physical roles despite rail overlap. Their nominal approximately 4.9uF rail-effective bookkeeping total does not make them physically or electrically interchangeable, and no additional `3V3_ADC` decoupling redesign is currently justified.
-- Future PCB placement must keep C210 close to U203 OUT/GND with a minimal regulator-output loop; C204 near the ADC/central analog cluster; C205 closest to U201 VREF/AGND with C206 adjacent; C208 approximately within 2 mm of U202 supply pins with a short return; and C310/C410 and C360/C460 at their respective INA333 and MCP6004 supply regions. Keep `ADC_REF` and `analog VREF` away from SPI switching edges, do not route digital return current through ADC/reference capacitor returns, and avoid ground splits that force signal-return detours.
-- Actual rail ripple, conversion-correlated disturbance, transient response, startup behavior, effective-capacitance derating, and bench validation remain open. Exact capacitor MPNs, packages, dielectrics, tolerances, and voltage ratings remain unresolved; no measured or guaranteed assembled-board performance is claimed.
-- DSTK 3V3 and 5V/VBUS are not connected to `3V3_ADC`.
+Still required:
 
-Simplified engineering modeling for C207 estimates an approximately 275 mV conservative full-scale local charge-sharing kick, approximately 0.24 us RC time constant, approximately 1.95 us recovery to 0.1 LSB, approximately 0.0013 LSB residual at 500 kHz, and approximately 0.66 LSB residual at 1 MHz. These are model estimates, not manufacturer guarantees or bench measurements. `VREF_MON` remains a lower-cadence diagnostic candidate rather than a time-critical fast-frame requirement; dummy-first CH6 sampling remains a candidate firmware policy, not finalized firmware behavior.
+- OE rise delay and threshold behavior during rail ramps;
+- OE low voltage with either supervisor asserted;
+- carrier-powered / ADC-off and ADC-powered / carrier-off tests;
+- asymmetric rail-collapse and residual-charge tests;
+- aggregate leakage, inactive-rail rise, and pin-relative voltage;
+- absence of phantom powering, unintended SPI activity, and false CS assertion;
+- SPI function and signal integrity with both rails valid;
+- carrier startup and RF-burst rail behavior;
+- BAT_MON accuracy;
+- `3V3_ADC` dropout and noise; and
+- `ADC_REF` and analog VREF disturbance.
 
-The shared analog-VREF architecture is accepted at schematic level for first validation. Analog-VREF dynamic movement, two-channel coupling, startup settling, and bench validation remain open; no manufacturer-guaranteed stability or bench-validated absence of coupling is claimed. Other open gates include U202 exact MPN/footprint, 3V3_ADC and `ADC_REF` ripple/noise, conversion-correlated disturbance, final SPI-clock interaction, capacitor effective-capacitance derating, placement-dependent behavior, and bench validation. AGND and DGND are controlled return and placement concepts on a common ground system; they are not approval for blind split planes or floating ground islands.
+TXU0304 remains bench-gated until the unequal-power acceptance criteria in `DECISIONS_V5.md` pass.
 
-## Analog Channel and Interface State
+### PCB readiness
 
-- Both Channel 1 and Channel 2 analog schematics are implemented as controlled candidates.
-- Connector mapping for both channels is Tip -> `EMGx_IN_P`, Ring -> `EMGx_IN_N`, Sleeve -> `EMGx_REF_ELECTRODE`.
-- Recorded cable mapping is yellow tip -> Tip, green middle body -> Ring, red rear body -> Sleeve.
-- RAW gain polarity is corrected: each RAW HPF node drives the non-inverting input, while the RAW gain feedback node drives the inverting input.
-- Reference-electrode nets remain isolated from GND, chassis, and USB.
+The project is not ready for PCB implementation. Remaining blockers include:
 
-### RECT and ENV State
+- unresolved footprint assignments across much of the design;
+- carrier mechanical orientation and antenna/USB keepout completion;
+- the U501 project-local library-resolution warning;
+- the U204 TPS22917 symbol mismatch warning;
+- placement, routing, DRC, EMC, thermal, and fabrication review; and
+- bench validation of the implemented power, reference, and SPI boundaries.
 
-- U302A/U402A implement RAW gain; U302B/U302C and U402B/U402C implement the VREF-centered RECT candidate; U302D/U402D buffer ENV.
-- RECT uses the two-op-amp, two-Schottky, 10k/20k weighted network and drives the 470R/ADC-cap output path.
-- ENV is derived from RECT through the 33k/1uF storage path referenced to `analog VREF`, then buffered to the ADC output network.
-- D331/D332/D431/D432 use the `BAS70ZFILM` / SOD-123 direction. Cathode-band orientation must be checked against the current schematic and footprint before PCB work.
-- Ambiguous SOT-23 single-diode mappings and BAS70/BAT54 dual/common variants are not approved substitutes without a new symbol/footprint review.
-- U302/U402 first-prototype direction remains socketed `MCP6004-I/P`, PDIP-14; orderability plus 3.3 V common-mode/output-swing behavior remain open.
-- Ratio-critical RECT resistors use the current 0.1% thin-film 0805 direction for R333/R334/R336/R337/R338 and the corresponding Channel 2 parts; R335/R435 may remain 1% thin-film.
-- C321/C331 and Channel 2 equivalents retain 1 nF C0G/NP0 0805 direction; C351/C451 retain 4.7 nF C0G/NP0 0805 preferred direction; C341/C441 retain 1 uF X7R 0805; C360/C460 retain 100 nF X7R 0805.
-- C341/C441 tolerance and DC-bias derating affect ENV cutoff, and the storage load must remain part of the analog-VREF buffer stability review.
+The legacy unsynchronized PCB must not be used as V5 implementation evidence.
 
-### Analog Validation Basis and Limits
+## Next recommended technical action
 
-- Behavioral simulation established the target `RECT_OUT = VREF + abs(RAW_IN - VREF)` and exercised the RECT/ENV loads.
-- A real-topology candidate used explicit op-amp stages, Schottky approximations, and the resistor network.
-- A conservative-RRIO candidate added finite gain/bandwidth and output-swing limits.
-- The initial conservative model error was traced to reversed macromodel transconductance polarity and corrected without changing the intended rectifier topology.
-- The simulations used generic op-amp and diode models rather than locally locked MCP600x and BAS70 vendor models.
+Synchronize the tracked firmware SPI GPIO definitions with the committed schematic mapping: CS GPIO14, SCLK GPIO4, MOSI GPIO12, and MISO GPIO11.
 
-This evidence supports schematic-level review and bench-test planning only. It does not establish final hardware correctness, production readiness, or manufacturer-level compliance.
+## Readiness verdict
 
-## Current SPI State and Unequal-Power Constraint
-
-The current SPI mapping is:
-
-| SPI net | U501 GPIO | U501 pin | MCP3208 function |
-|---|---:|---:|---|
-| `ADC_CS` | GPIO14 | 13 | U201 `~CS/SHDN`, pin 10 |
-| `ADC_SCLK` | GPIO4 | 7 | U201 CLK, pin 13 |
-| `ADC_MOSI` | GPIO12 | 15 | U201 Din, pin 11 |
-| `ADC_MISO` | GPIO11 | 16 | U201 Dout, pin 12 |
-
-The four SPI signals remain direct controller-to-ADC connections with no series resistors, pull-downs, buffers, bus switches, or isolators. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`. The battery-to-carrier power path is now modeled through U204, but the GPIO/pad mapping remains provisional because official DSTK22807 carrier documentation is unavailable.
-
-`ADC_SCLK` is finalized on U501 GPIO4/pad 7 rather than GPIO13/pad 14. Strong ESP32-H2 SuperMini board-family evidence indicates a conventional onboard LED branch on GPIO13; this branch was not shown to prevent operation over the considered 100kHz-1MHz SPI range, but it creates an avoidable clock-correlated load in a sensitive mixed-signal system. GPIO4 has no known onboard peripheral conflict, is not a documented ESP32-H2 datasheet strapping pin, and is the native SPI2 `FSPICLK` function. GPIO0 remains available for possible CAL/MARK use, GPIO10 remains a generic right-row spare/trigger/sync candidate, and GPIO13 is only a possible future onboard-status resource; no QoL allocation is approved here.
-
-The unequal-power architecture decision is now established but not implemented:
-
-- The current direct connection is not accepted as safe for unequal-power states.
-- Physical disconnect of `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` is required before USB attachment, one-sided power, deliberate collapse of either domain, or programming/debugging with unequal power states.
-- Removing the removable DSTK carrier may satisfy the requirement only if removal opens all four nets and no alternate conductive path remains.
-- Firmware-only high-impedance policy, series resistors alone, and procedure-only prohibition are not accepted as sufficient standalone protection.
-- No power-domain-aware buffer or digital isolator is selected for the current prototype.
-
-The manufacturer-evidence basis is that MCP3208 digital pins are limited to `VSS - 0.6V` through `VDD + 0.6V`; a 3.3V high is therefore outside the published absolute maximum when MCP3208 VDD is 0V. No manufacturer-published safe off-power injection-current limit was found for resistor-only protection. MCP3208 DOUT behavior at VDD = 0V and DSTK carrier GPIO clamp behavior remain unspecified or undocumented.
-
-Future project-level bench acceptance must show one action opens all four nets, no alternate path remains, open-state resistance is at least 10 MOhm, SPI-caused unpowered `3V3_ADC` rise is no more than 50mV, and injected current remains below the 1uA-per-signal project ceiling with a 0uA target. The 50mV and 1uA criteria are project thresholds, not manufacturer limits. Unequal-power validation must have no human connection.
-
-MCP3208-side `R208 = 10k` now holds `CS/SHDN` high when controller drive is absent, keeping the ADC deselected while it remains powered. Calculated CS-low current at 3.3V is approximately 330uA and R208 dissipation is approximately 1.09mW. These are schematic calculations, not bench measurements. The pull-up does not replace the four-line physical-disconnect requirement. The tracked firmware SPI pin mapping remains separately unresolved.
-
-The exact carrier revision, onboard capacitance, header/USB VBUS relationship, reverse leakage, startup rise time and peak current, RF-burst droop, brownout/reset behavior, low-battery dropout, effective C213 capacitance, GPIO13 LED polarity/resistor, exact user-board GPIO4 behavior, final PCB SPI routing, assembled SCLK waveform, final SPI clock, tracked firmware correction, physical USB mutual exclusion, physical four-line disconnect, final QoL architecture, and bench validation remain open. Bench work must also measure MCU-startup/RF disturbance on `3V3_ADC`, `ADC_REF`, analog VREF, and `BAT_MON`.
-
-## Legacy Placeholder State
-
-The following legacy source-selection placeholders are absent from the current tracked V5 schematics:
-
-- `JP201`
-- `JP202`
-- `DSTK_3V3_CANDIDATE`
-- `LDO_3V3_FALLBACK`
-
-## Fresh ERC State
-
-The latest fresh KiCad 10 ERC result for `V5/EMG_v5.kicad_sch` is:
-
-- 0 errors
-- 1 warning related to unresolved `EMG_V5` footprint-library configuration
-
-The warning is a footprint-library configuration/resolution warning. It is not an electrical design error.
-
-Earlier issue categories closed during schematic development included MCP3208 SPI input-drive placeholders, isolated SPI labels, unused U501 pins, unplaced U202B, and stale MCP6004/Schottky symbol metadata. Obsolete intermediate ERC counts are not current status. Genuine future issues must not be hidden with No ERC markers.
-
-## PCB State
-
-`V5/EMG_v5.kicad_pcb` is a legacy, unsynchronized V4-style board. Its legacy references and nets do not represent the current V5 hierarchical schematic.
-
-Therefore:
-
-- It must not be treated as the current V5 PCB layout.
-- It must not be used as evidence of V5 schematic-to-PCB synchronization.
-- V5 PCB readiness is not claimed.
-- PCB layout, routing, DRC, fabrication, and ordering approval remain outside the current state.
-
-### PCB-Entry Conditions
-
-Before current V5 PCB work can be approved:
-
-- Assign and review missing footprints for current schematic components.
-- Lock ordering MPNs where required, without treating schematic value text as purchase approval.
-- Inspect D331/D332/D431/D432 cathode-band orientation against the selected footprints.
-- Close MCP6004 package, orderability, common-mode, output-swing, and capacitive-load questions.
-- Define required test points for power, reference, SPI, RAW, RECT, ENV, and electrode-input nodes.
-- Define safety silkscreen and human-test warnings.
-- Close analog stability, RECT crossover, ENV storage-load, and ADC input acquisition/source-impedance checks.
-- Measure and accept `3V3_ADC`, `ADC_REF`, `analog VREF`, and `VREF_MON` behavior under relevant loads.
-- Place the measured carrier using physical board dimensions; preserve antenna keepout and USB connector overhang.
-- Create or synchronize a current V5 PCB from the current hierarchical schematic; do not reuse the legacy board as if synchronized.
-
-## DSTK22807 Validation and Mechanical Gates
-
-The measured removable THT carrier remains the approved mechanical direction for first prototype work. An unreviewed bare-module footprint is not an acceptable substitute because the project evidence is based on the physical DSTK22807 carrier, its measured header geometry, antenna side, and USB connector position.
-
-Future DSTK validation must cover:
-
-- 3V3 current capability and dummy-load testing.
-- Loaded rail voltage and regulator temperature.
-- ESP32-H2 reset and stability under load.
-- BLE/RF-active rail noise and analog/ADC disturbance.
-- USB coexistence and disconnected/connected source behavior.
-- Physical-disconnect resistance, alternate-path, rail-rise, and injected-current validation for both unequal-power directions.
-- CS-high behavior with implemented R208 during controller disconnect, reset, and boot conditions.
-- Physical carrier dimensions, pin labels/orientation, antenna keepout, and USB overhang before placement approval.
-
-## Evidence Limits and Open Work
-
-- The repository does not contain a complete local datasheet set or populated MPN evidence for all components.
-- Schematic/library consistency does not establish manufacturer-level component correctness.
-- Exact component pinouts, package variants, operating limits, and application requirements still require local manufacturer evidence before final hardware approval.
-- Multiple schematic parts still lack finalized footprints or ordering MPNs.
-- Power-path and BAT_MON behavior still require controlled bench validation.
-- The SPI physical-disconnect architecture is selected but remains unimplemented and unvalidated; direct unequal-power operation remains prohibited.
-- MCP3208 ADC-side CS pull-up is implemented as `R208 = 10k`; bench validation remains open.
-- Human-connected testing remains battery-only and still requires separate safety approval.
-
-Human-connected operation additionally requires USB disconnected, no bench supply, no mains-connected test equipment, and no earth-referenced oscilloscope connection while electrodes are attached. EMG V5 is a prototype development system, not a medical device, and the current documentation is not human-test approval.
-
-## Decision and Evidence Basis
-
-Current technical state and open gates are based principally on:
-
-- `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`
-- `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
-- `V5/DSTK22807_SPI_PIN_REVIEW.md`
-- `V5/DSTK22807_3V3_RAIL_CURRENT_BUDGET_REVIEW.md`
-- `V5/MCP3208_MPN_SYMBOL_FOOTPRINT_REVIEW.md`
-- `V5/POWER_REFERENCE_ARCHITECTURE_REVIEW.md`
-- `V5/POWER_REFERENCE_VALUE_LEVEL_DESIGN_REVIEW.md`
-- `V5/FIRST_SCHEMATIC_POWER_SOURCE_STRATEGY.md`
-- Current tracked V5 schematics and project-local libraries
-- Rectifier planning/model notes under `V5/sim/rectifier/`
-- Fresh KiCad ERC output described above
-
-Current readiness: schematic implementation under controlled review; not PCB-ready, fabrication-ready, production-ready, or approved for human testing.
+- Schematic architecture: implemented at the stated checkpoint.
+- Bench qualification: not complete.
+- PCB implementation readiness: **NOT READY**.

@@ -1,5 +1,7 @@
 ﻿# V5 Power / Reference Component Candidate Review
 
+> Historical review notice: this candidate review predates the implemented V5 power and SPI architecture and is not the current source of truth. Current decisions are defined by `STATUS_V5.md`, `DECISIONS_V5.md`, and checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
+
 ## 1. Current repo state
 
 | Item | State |

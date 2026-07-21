@@ -1,196 +1,88 @@
-﻿# DSTK22807 SPI Pin Review for MCP3208
+# DSTK22807 SPI Pin and Isolation Review
 
-This document records the current ESP32-H2-to-MCP3208 SPI mapping and the accepted unequal-power-state architecture for the removable DSTK22807 prototype.
+This document reflects the committed implementation at `bbe257e2c9dc28f7537942b5f15370770654ba19`. Older direct-SPI and candidate-pin conclusions are superseded.
 
-The current schematic connects the four SPI nets directly. `ADC_SCLK` is implemented on GPIO4/pad 7 to avoid the board-family GPIO13 onboard-LED load. This document approves no firmware, footprint, buffer, bus-switch, isolator, or QoL implementation change. The carrier GPIO mapping remains provisional because official revision-specific DSTK22807 documentation is unavailable.
+## Current carrier assignment
 
-## 1. Current implementation
+| SPI function | GPIO | U501 pad | Carrier-side net | ADC-side net |
+| --- | --- | --- | --- | --- |
+| CS | GPIO14 | 13 | `MCU_ADC_CS` | `ADC_CS` |
+| SCLK | GPIO4 | 7 | `MCU_ADC_SCLK` | `ADC_SCLK` |
+| MOSI | GPIO12 | 15 | `MCU_ADC_MOSI` | `ADC_MOSI` |
+| MISO | GPIO11 | 16 | `MCU_ADC_MISO` | `ADC_MISO` |
 
-| SPI net | DSTK22807 endpoint | MCP3208 endpoint | Direction from DSTK |
-| --- | --- | --- | --- |
-| `ADC_CS` | U501 GPIO14 / pad 13 | U201 `CS/SHDN` pin 10 | Output |
-| `ADC_SCLK` | U501 GPIO4 / pad 7 | U201 `CLK` pin 13 | Output |
-| `ADC_MOSI` | U501 GPIO12 / pad 15 | U201 `DIN` pin 11 | Output |
-| `ADC_MISO` | U501 GPIO11 / pad 16 | U201 `DOUT` pin 12 | Input |
+GPIO13 is not the current SCLK assignment. The tracked firmware remains stale and must later be changed from its old definitions to CS GPIO14, SCLK GPIO4, MOSI GPIO12, and MISO GPIO11.
 
-Current limitations:
+Preserved selection rationale: reviewed ESP32-H2 SuperMini board-family evidence indicated a conventional onboard LED branch on GPIO13, creating an avoidable clock-correlated load. GPIO4 had no known onboard peripheral conflict, is not a documented ESP32-H2 strapping pin, and provides the native SPI2 `FSPICLK` function. Exact carrier-revision behavior, GPIO13 LED details, user-board GPIO4 behavior, final clock rate, routing, and assembled SCLK waveform remain unresolved rather than assumed.
 
-- All four signals are direct connections.
-- There are no SPI series resistors or pull-down resistors. `R208 = 10k` is implemented on the MCP3208 side from `ADC_CS` to `3V3_ADC`.
-- There is no buffer, power-domain-aware bus switch, or digital isolator.
-- The carrier power path is not modeled in the schematic; U501 `5V_VBUS` and `3V3` are unconnected there.
-- GPIO/pad mapping still depends on the provisional right-row reversal recorded from physical observation.
+## Physical unequal-power boundary
 
-## 2. Existing observed pinout
+U205 is `TXU0304PWR`:
 
-Source document: `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`
-
-| Footprint Pad | Observed Label | Current Interpretation | Confidence |
-| --- | --- | --- | --- |
-| 1 | TX | UART/debug TX label | Observed |
-| 2 | RX | UART/debug RX label | Observed |
-| 3 | 0 | GPIO0 | Observed |
-| 4 | 1 | GPIO1 | Observed |
-| 5 | 2 | GPIO2 | Observed |
-| 6 | 3 | GPIO3 | Observed |
-| 7 | 4 | GPIO4 | Observed |
-| 8 | 5 | GPIO5 | Observed |
-| 9 | 8 | GPIO8 | Observed |
-| 10 | 5V | 5V rail | Provisional from right-row reversal |
-| 11 | GND | Ground | Provisional from right-row reversal |
-| 12 | 3V3 | 3.3V rail | Provisional from right-row reversal |
-| 13 | 14 | GPIO14 | Provisional from right-row reversal |
-| 14 | 13 | GPIO13 | Provisional from right-row reversal |
-| 15 | 12 | GPIO12 | Provisional from right-row reversal |
-| 16 | 11 | GPIO11 | Provisional from right-row reversal |
-| 17 | 10 | GPIO10 | Provisional from right-row reversal |
-| 18 | 9 | GPIO9 | Provisional from right-row reversal |
-
-## 3. ESP32-H2 GPIO capability review
-
-Official sources checked:
-
-- Espressif ESP32-H2 Series Datasheet v1.2: https://www.espressif.com/sites/default/files/documentation/esp32-h2_datasheet_en.pdf
-- ESP-IDF GPIO & RTC GPIO guide for ESP32-H2: https://docs.espressif.com/projects/esp-idf/en/latest/esp32h2/api-reference/peripherals/gpio.html
-- ESP-IDF SPI Master Driver guide for ESP32-H2: https://docs.espressif.com/projects/esp-idf/en/latest/esp32h2/api-reference/peripherals/spi_master.html
-
-Findings from official Espressif documentation:
-
-- ESP32-H2 has 19 programmable GPIOs in the datasheet feature list, and ESP-IDF states user-available pins for SiP flash variants are GPIO0-GPIO5, GPIO8-GPIO14, and GPIO22-GPIO27.
-- ESP-IDF documents GPIO0-GPIO27 as physical GPIO-capable pins, with peripheral input and output routable through GPIO matrix / IO MUX.
-- ESP32-H2 strapping pins include GPIO2, GPIO3, GPIO8, GPIO9, and GPIO25 per ESP-IDF GPIO documentation.
-- ESP32-H2 datasheet feature list highlights GPIO8, GPIO9, and GPIO25 as strapping pins; ESP-IDF additionally flags GPIO2 and GPIO3 as strapping pins.
-- GPIO15-GPIO21 are usually used for SPI flash and are not recommended for user applications; on SiP flash variants they are not fan-out to external pins.
-- GPIO26/GPIO27 are USB Serial/JTAG by default and should not be used unless that function is intentionally disabled.
-- SPI2 IO_MUX pins are CS0=GPIO1, SCLK=GPIO4, MISO=GPIO0, MOSI=GPIO5, QUADWP=GPIO2, QUADHD=GPIO3.
-- ESP-IDF SPI master driver allows SPI signals to be routed through GPIO matrix; for SPI host speeds at 80 MHz or lower, GPIO matrix routing behaves the same as IO_MUX routing according to the ESP32-H2 SPI guide.
-
-Implications for the observed DSTK22807 pins:
-
-- GPIO14, GPIO13, GPIO12, GPIO11, and GPIO10 are attractive right-row candidates because they avoid TX/RX labels and are not documented as strapping pins in the checked official sources.
-- GPIO9 and GPIO8 should be avoided for now because they are strapping pins.
-- GPIO2 and GPIO3 should also be treated cautiously because ESP-IDF flags them as strapping pins, even though they appear on the left row.
-- GPIO0, GPIO1, GPIO4, and GPIO5 are SPI2 IO_MUX-capable candidates, but they are on the left row and overlap with the measured board labels near TX/RX; using them is not necessary for low-speed MCP3208 SPI.
-- TX/RX should remain free for programming/debug until firmware and bring-up flow are intentionally defined.
-
-Unverified or board-specific items:
-
-- The DSTK22807 board schematic/pinout was not verified from an official vendor datasheet.
-- The observed right-row reversal must still be checked physically.
-- Whether the board routes TX/RX only to UART0 pins or through USB bridge circuitry is not confirmed.
-- USB connector side and antenna side remain physical-orientation blockers.
-
-## 4. MCP3208 SPI needs
-
-Official Microchip source checked:
-
-- Microchip MCP3204/3208 datasheet: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21298e.pdf
-
-Relevant MCP3208 digital interface facts:
-
-- MCP3208 uses SPI-compatible serial interface.
-- Digital SPI pins are `CS/SHDN`, `CLK`, `DIN`, and `DOUT`.
-- Single-supply operation is 2.7V to 5.5V.
-- Digital input high threshold is specified as `0.7 * VDD`; digital input low threshold is `0.3 * VDD`.
-- If MCP3208 is powered from 3.3V, ESP32-H2 3.3V logic is compatible in principle.
-- If MCP3208 is powered from 5V, MCP3208 `DOUT` can present 5V-level output to the ESP32-H2 and is not safe without level shifting or powering MCP3208 at 3.3V.
-- ADC reference and analog front-end reference selection are separate analog design topics and are not approved by this SPI pin review.
-
-MCP3208 net needs for this project:
-
-| MCP3208 Net | Direction from ESP32-H2 point of view | Notes |
+| U205 channel | Direction | Function |
 | --- | --- | --- |
-| `ADC_CS` | Output | Connects to MCP3208 `CS/SHDN` |
-| `ADC_SCLK` | Output | Connects to MCP3208 `CLK` |
-| `ADC_MOSI` | Output | Connects to MCP3208 `DIN` |
-| `ADC_MISO` | Input | Connects to MCP3208 `DOUT` |
+| A1 pin 2 → B1Y pin 13 | Carrier to ADC | CS |
+| A2 pin 3 → B2Y pin 12 | Carrier to ADC | SCLK |
+| A3 pin 4 → B3Y pin 11 | Carrier to ADC | MOSI |
+| B4 pin 10 → A4Y pin 5 | ADC to carrier | MISO |
 
-## 5. Current SPI assignment
+Supply and control connections:
 
-The implemented assignment avoids TX/RX, power pins, GPIO8/GPIO9 strapping pins, left-row strapping candidates, and the board-family GPIO13 onboard-LED branch.
+- Pin 1 VCCA → `CARRIER_3V3`
+- Pin 14 VCCB → `3V3_ADC`
+- Pin 7 GND → GND
+- Pin 8 OE → `SPI_ISO_OE`
+- Pins 6 and 9 are explicitly unconnected
 
-| MCP3208 Net | ESP32-H2 GPIO | Footprint Pad | Reason | Risk | Confidence |
-| --- | --- | --- | --- | --- | --- |
-| `ADC_CS` | GPIO14 | Pad 13 | Right-row GPIO; not identified as strapping in checked official docs; convenient chip-select output | Pad mapping still provisional from right-row reversal | Medium |
-| `ADC_SCLK` | GPIO4 | Pad 7 | Exposed GPIO with no known onboard peripheral conflict; not a documented ESP32-H2 datasheet strapping pin; native SPI2 `FSPICLK`; suitable at schematic/chip level for the considered 100kHz-1MHz range | Exact user-board behavior, final PCB routing, and assembled waveform remain unverified | Medium |
-| `ADC_MOSI` | GPIO12 | Pad 15 | Right-row GPIO; not identified as strapping in checked official docs; output to MCP3208 DIN | Pad mapping still provisional | Medium |
-| `ADC_MISO` | GPIO11 | Pad 16 | Right-row GPIO; not identified as strapping in checked official docs; input from MCP3208 DOUT | Pad mapping still provisional; confirm MCP3208 powered at 3.3V or level-shifted | Medium |
+The committed root netlist proves that the carrier-side and ADC-side SPI nets are distinct. No direct wire, global-label, hierarchical-label, or passive bypass remains.
 
-Backup candidate:
+R208 = 10 kΩ remains on the ADC side from `ADC_CS` to `3V3_ADC`. It holds MCP3208 CS/SHDN high while the translator is disabled and does not directly pull GPIO14.
 
-| Use | Candidate | Footprint Pad | Notes |
-| --- | --- | --- | --- |
-| Spare right-row GPIO | GPIO10 | Pad 17 | Keep as spare interrupt/debug/alternate CS candidate; avoid using until GPIO14-11 are confirmed |
+At 3.3 V, the retained schematic calculation is approximately 330 µA when CS is driven low and approximately 1.09 mW in R208. These are calculations, not bench measurements.
 
-GPIO13/pad 14 is no longer assigned to project circuitry. Strong public board-family evidence indicates a conventional onboard LED branch on GPIO13. That branch was not shown to prevent SPI operation, but it creates avoidable clock-correlated current. GPIO0 remains available for possible CAL/MARK use; GPIO10 remains available as a generic spare/trigger/sync candidate. GPIO13 may be considered for future onboard status use, but no QoL assignment is approved here.
+## Rail supervisors and OE
 
-## 6. Pins to avoid for now
+- U206 `TPS3899DL30DSER` monitors `CARRIER_3V3`.
+- U207 `TPS3899DL29DSER` monitors `3V3_ADC`.
+- Both supervisor VDD pins are powered from `LDO_IN`.
+- Both active-low open-drain RESET outputs share `SPI_ISO_OE`.
+- Either invalid rail forces OE low; both rails must be valid before OE rises.
+- CTS is open for minimum fault-side assertion delay.
+- C218 and C219 are 9.1 nF.
+- Valid-side qualification is approximately 6.04 ms nominal, not an exact guaranteed delay.
+- R209 = 47 kΩ ±1% from `LDO_IN` to `SPI_ISO_OE`.
+- R210 = 220 kΩ ±1% from `SPI_ISO_OE` to GND.
 
-| Pin / Label | Footprint Pad | Reason |
-| --- | --- | --- |
-| TX | Pad 1 | Keep free for programming/debug until bring-up strategy is defined |
-| RX | Pad 2 | Keep free for programming/debug until bring-up strategy is defined |
-| GPIO2 | Pad 5 | ESP-IDF flags as strapping pin |
-| GPIO3 | Pad 6 | ESP-IDF flags as strapping pin |
-| GPIO8 | Pad 9 | Officially documented strapping pin |
-| 5V | Pad 10 | Power rail, not GPIO; also avoid 5V/human-test hazards |
-| GND | Pad 11 | Ground, not GPIO |
-| 3V3 | Pad 12 | Power rail, not GPIO |
-| GPIO9 | Pad 18 | Officially documented strapping pin |
+Local support is C214/C215 = 100 nF at U205 VCCA/VCCB and C216/C217 = 100 nF at U206/U207 VDD. TP207 exposes `CARRIER_3V3`; TP208 exposes `SPI_ISO_OE`.
 
-Also avoid assuming GPIO26/GPIO27 or USB-related pins are available unless the actual DSTK22807 breakout exposes them and USB Serial/JTAG usage is intentionally handled.
+## Unequal-power bench gate
 
-## 7. Remaining carrier-evidence gates
+The earlier 0 µA target, below-1 µA-per-signal ceiling, and 10 MΩ inferred open-state resistance are superseded planning criteria. They are not manufacturer limits or patient-safety limits, and effective resistance is not a reliable semiconductor off-state model.
 
-- Physical pinout must be confirmed a second time by clear photo and/or continuity measurement.
-- Right-row reversal must be confirmed: top-right footprint pad 10 must be `5V`, and bottom-right footprint pad 18 must be `GPIO9`.
-- USB side and antenna side must be physically confirmed.
-- DSTK22807 vendor board pinout/schematic should be located or independently verified.
-- ESP32-H2 official pin capability has been checked at SoC/ESP-IDF level, but the specific development board routing is still unverified.
-- MCP3208 exact MPN, package, symbol-footprint mapping, VDD, VREF, and level compatibility require separate evidence closure.
-- MCP3208 should be powered at 3.3V for direct ESP32-H2 SPI compatibility; if powered at 5V, level shifting is required for the MCP3208 `DOUT` path into ESP32-H2.
-- Human-test safety: electrodes must not be connected to a human subject while the system is powered from USB, 5V, mains-connected equipment, oscilloscope earth, or any non-isolated supply path.
+Current acceptance requires:
 
-## 8. Unequal-power-state architecture decision
+1. Inactive rail initially below 10 mV.
+2. Inactive rail below 100 mV at all times.
+3. SPI-caused steady-state rise no more than 50 mV after at least 60 seconds and stabilization below 1 mV/s.
+4. Every inactive-domain SPI pin between local GND − 0.3 V and inactive rail + 0.3 V.
+5. Candidate guaranteed leakage no worse than 2.5 µA magnitude per channel and 10 µA aggregate.
+6. No functional phantom powering.
+7. No unintended SPI activity or false CS assertion.
 
-The current direct connection is not accepted as safe when the DSTK22807 and MCP3208 are not powered together.
+These tests have not yet passed. TXU0304 remains bench-gated.
 
-Manufacturer-evidence basis:
+## Safety boundary
 
-- MCP3208 digital pins are limited to `VSS - 0.6V` through `VDD + 0.6V`.
-- With MCP3208 VDD at 0V, a 3.3V DSTK-driven high is outside the published absolute maximum.
-- No manufacturer-published safe off-power injection-current limit was found for defensible resistor-only protection.
-- MCP3208 DOUT behavior at VDD = 0V and DSTK carrier GPIO clamp behavior remain undocumented.
+This circuit is internal common-ground unequal-power protection, not galvanic isolation or a patient-protection barrier. Human-connected acquisition remains battery-only with USB physically absent and no mains-referenced instrumentation.
 
-Firmware-only high-impedance policy, series resistors alone, and procedure-only prohibition are rejected as sufficient standalone protection. A power-domain-aware buffer or digital isolator is not selected for this prototype.
+## Remaining validation
 
-The minimum accepted architecture is **physical disconnect of all four SPI signals**. One disconnect action must open `ADC_CS`, `ADC_SCLK`, `ADC_MOSI`, and `ADC_MISO` before USB attachment, one-sided power, deliberate collapse of either power domain, or programming/debugging with unequal power states. Removing the removable DSTK carrier may satisfy this requirement only if removal demonstrably opens all four nets and leaves no alternate conductive path.
+- OE rail-ramp timing and asserted-low voltage
+- Carrier-on/ADC-off and ADC-on/carrier-off states
+- Asymmetric collapse and residual-charge behavior
+- Inactive-rail rise, aggregate leakage, and pin-relative voltage
+- Phantom-power and false-CS absence
+- SPI function and signal integrity with both rails valid
+- Carrier startup and RF-burst disturbance
 
-Future project-level bench acceptance must establish:
-
-- One action opens all four SPI lines and no alternate path remains.
-- Open-state resistance is at least 10 MOhm.
-- SPI-caused rise of unpowered `3V3_ADC` is no more than 50mV.
-- Injected-current target is 0uA, with a project bench ceiling below 1uA per signal.
-- No human is connected during unequal-power validation.
-
-The 50mV and 1uA values are project-level bench thresholds, not manufacturer-published limits.
-
-### Implemented CS/SHDN pull-up
-
-`R208 = 10k` is implemented from MCP3208-side `ADC_CS` to `3V3_ADC`. It holds `CS/SHDN` high and keeps the MCP3208 deselected when controller drive is absent. At 3.3V, the calculated CS-low current is approximately 330uA and resistor dissipation is approximately 1.09mW.
-
-This is schematic-level implementation only; bench behavior is not yet established. The pull-up does not replace the required four-line physical disconnect. The tracked firmware SPI pin mapping remains separately unresolved and is not changed by this implementation.
-
-The tracked firmware remains stale (`GPIO4` CS, `GPIO5` CLK, `GPIO10` MOSI, `GPIO11` MISO) and must be corrected separately to match the approved hardware mapping (`GPIO14` CS, `GPIO4` SCLK, `GPIO12` MOSI, `GPIO11` MISO). Exact carrier revision, GPIO13 LED polarity/resistor, physical GPIO4 behavior, final PCB routing, assembled SCLK waveform, final SPI clock, physical four-line disconnect implementation, carrier battery-only power architecture, VBUS isolation/backfeed protection, final QoL architecture, and bench validation remain open.
-
-### Human-test boundary
-
-- Unequal-power validation must have no human connection.
-- Human-connected operation remains battery-only, with USB disconnected.
-- Bench supplies, mains-connected equipment, and earth-referenced oscilloscopes remain prohibited while electrodes are attached.
-- This architecture decision is not medical-device approval or human-test approval.
-
-## Decision
-
-`SPI_PHYSICAL_DISCONNECT_REQUIRED`
+Current decision: the pin mapping and schematic isolation architecture are implemented; firmware synchronization and bench qualification remain open.

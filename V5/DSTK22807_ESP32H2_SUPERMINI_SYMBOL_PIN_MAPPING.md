@@ -1,46 +1,40 @@
-# DSTK22807 ESP32-H2 Super Mini Measured Symbol Pin Mapping
+# DSTK22807 ESP32-H2 Super Mini Symbol Pin Mapping
 
 Symbol: `EMG_V5:DSTK22807_ESP32H2_SuperMini_Measured`
 
 Assigned footprint: `EMG_V5:DSTK22807_ESP32H2_SuperMini_Carrier_Measured_THT`
 
-Source basis:
+This table reflects the mapping used by committed schematic checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
 
-- Measured project footprint: `V5/EMG_V5.pretty/DSTK22807_ESP32H2_SuperMini_Carrier_Measured_THT.kicad_mod`
-- Physical pinout observation: `V5/DSTK22807_PHYSICAL_PINOUT_OBSERVATION.md`
-- Power measurement note: `V5/DSTK22807_POWER_PIN_MEASUREMENT.md`
-- SPI/GPIO capability review: `V5/DSTK22807_SPI_PIN_REVIEW.md`
+## Accepted mapping
 
-## Assumptions
+| Pad / symbol pin | Pin name | Electrical type | Current project use or constraint |
+| --- | --- | --- | --- |
+| 1 | TX | Output | Reserved unless intentionally assigned |
+| 2 | RX | Input | Reserved unless intentionally assigned |
+| 3 | GPIO0 | Bidirectional | Unassigned |
+| 4 | GPIO1 | Bidirectional | Unassigned |
+| 5 | GPIO2 | Bidirectional | Unassigned; strapping caution |
+| 6 | GPIO3 | Bidirectional | Unassigned; strapping caution |
+| 7 | GPIO4 | Bidirectional | `ADC_SCLK` through `MCU_ADC_SCLK` and U205 |
+| 8 | GPIO5 | Bidirectional | Unassigned |
+| 9 | GPIO8 | Bidirectional | Unassigned; strapping caution |
+| 10 | `5V_VBUS` | Power input | Fed from `CARRIER_VBUS_SW` in the battery architecture |
+| 11 | GND | Power input | Common project ground |
+| 12 | `3V3` | Power input | Monitored as `CARRIER_3V3`; measured approximately 3.291–3.31 V while powered |
+| 13 | GPIO14 | Bidirectional | `ADC_CS` through `MCU_ADC_CS` and U205 |
+| 14 | GPIO13 | Bidirectional | Unassigned; not the current SCLK pin |
+| 15 | GPIO12 | Bidirectional | `ADC_MOSI` through `MCU_ADC_MOSI` and U205 |
+| 16 | GPIO11 | Bidirectional | `ADC_MISO` through `MCU_ADC_MISO` and U205 |
+| 17 | GPIO10 | Bidirectional | Unassigned spare |
+| 18 | GPIO9 | Bidirectional | Unassigned; strapping caution |
 
-- Footprint pad 1 is the top-left pad and aligns with the observed `TX` board label.
-- Left header column maps pads 1 through 9 from top to bottom.
-- Right header column maps pads 10 through 18 from top to bottom, based on the existing right-row reversal note.
-- `GND` is set as `Power Input`.
-- `5V_VBUS` and `3V3` are set as `Power Input` pins. This is conservative for ERC because the symbol does not declare the DSTK22807 board as a power source. USB measurement showed 5V and 3V3 are present while USB is connected, but external 3V3 powering and using 5V as an analog/ADC supply are not approved by the project notes.
-- GPIO pins are set as `Bidirectional`.
-- `TX` is set as `Output` and `RX` as `Input` because those labels indicate fixed UART/debug roles on the board header.
-- No No ERC markers are part of this symbol.
+## Mapping status and limits
 
-## Pin Mapping
+- Pads 10, 11, and 12 are accepted as `5V_VBUS`, GND, and carrier `3V3` respectively.
+- The implemented SPI assignment is GPIO14 CS, GPIO4 SCLK, GPIO12 MOSI, and GPIO11 MISO.
+- The symbol conservatively declares the exposed power pins as power inputs; it does not declare the carrier as a project power source.
+- The mapping evidence does not establish safe external 3V3 injection, current capability, or USB backfeed behavior.
+- No `No ERC` markers are part of the project-local carrier symbol.
 
-| Footprint pad number | Schematic pin number | Pin name | Electrical type | Notes |
-| --- | --- | --- | --- | --- |
-| 1 | 1 | TX | Output | Observed top-left pad label; keep free for programming/debug unless intentionally assigned. |
-| 2 | 2 | RX | Input | Observed left-row label; keep free for programming/debug unless intentionally assigned. |
-| 3 | 3 | GPIO0 | Bidirectional | Observed board label `0`. |
-| 4 | 4 | GPIO1 | Bidirectional | Observed board label `1`; SPI2 IO_MUX CS0-capable at SoC level per project review. |
-| 5 | 5 | GPIO2 | Bidirectional | Observed board label `2`; treated cautiously because ESP-IDF flags GPIO2 as a strapping pin. |
-| 6 | 6 | GPIO3 | Bidirectional | Observed board label `3`; treated cautiously because ESP-IDF flags GPIO3 as a strapping pin. |
-| 7 | 7 | GPIO4 | Bidirectional | Observed board label `4`; SPI2 IO_MUX SCLK-capable at SoC level per project review. |
-| 8 | 8 | GPIO5 | Bidirectional | Observed board label `5`; SPI2 IO_MUX MOSI-capable at SoC level per project review. |
-| 9 | 9 | GPIO8 | Bidirectional | Observed board label `8`; strapping pin, avoid unless intentionally handled. |
-| 10 | 10 | 5V_VBUS | Power Input | Provisional right-row reversal mapping. USB-powered measurement observed about 5.126 V on this pin; not approved as analog/ADC supply. |
-| 11 | 11 | GND | Power Input | Provisional right-row reversal mapping; measured ground reference pin. |
-| 12 | 12 | 3V3 | Power Input | Provisional right-row reversal mapping. USB-powered measurement observed about 3.291 V; external powering/backfeed behavior remains unresolved. |
-| 13 | 13 | GPIO14 | Bidirectional | Provisional right-row reversal mapping; preferred SPI candidate `ADC_CS` in project review. |
-| 14 | 14 | GPIO13 | Bidirectional | Provisional right-row reversal mapping; preferred SPI candidate `ADC_SCLK` in project review. |
-| 15 | 15 | GPIO12 | Bidirectional | Provisional right-row reversal mapping; preferred SPI candidate `ADC_MOSI` in project review. |
-| 16 | 16 | GPIO11 | Bidirectional | Provisional right-row reversal mapping; preferred SPI candidate `ADC_MISO` in project review. |
-| 17 | 17 | GPIO10 | Bidirectional | Provisional right-row reversal mapping; spare right-row GPIO candidate. |
-| 18 | 18 | GPIO9 | Bidirectional | Provisional right-row reversal mapping; strapping pin, avoid unless intentionally handled. |
+Mechanical orientation, USB accessibility, antenna keepout, and physical fit remain PCB-entry gates even though the electrical mapping used by the schematic is resolved.

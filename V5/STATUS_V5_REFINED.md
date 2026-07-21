@@ -1,79 +1,51 @@
-# EMG V5 Status - Refined
+# EMG V5 Status — Refined Mirror
 
-Date: 2026-07-10
+This is the maintained concise mirror of `STATUS_V5.md`. The primary status document and committed hardware at `bbe257e2c9dc28f7537942b5f15370770654ba19` control if detail is needed.
 
-## Current Snapshot
+## Checkpoint
 
 - Branch: `v5/KiCad`
-- HEAD: `70feb41 sync power helper symbols and refine schematic layout`
-- Tracking: `origin/v5/KiCad`, ahead/behind `0 / 0`
-- Root schematic: `V5/EMG_v5.kicad_sch`
-- Development state: controlled schematic review
-- PCB readiness: not claimed
-- Final hardware or human-test approval: not granted
+- Hardware HEAD: `bbe257e2c9dc28f7537942b5f15370770654ba19`
+- Upstream at checkpoint: aligned `0 / 0`
+- Milestones: `223897a` corrected both TRS terminal mappings; `bbe257e` implemented unequal-power SPI isolation
+- ERC: 0 errors, 2 warnings, 0 exclusions
+- Existing warnings: U501 project-local footprint-library resolution; U204 TPS22917 symbol mismatch
 
-## Implemented Architecture
+## Implemented interfaces
 
-The tracked V5 schematic contains two analog EMG channels. Each channel produces `RAW`, `RECT`, and `ENV`.
+- J301/J401 Tip → positive input, Ring → negative input, Sleeve → reference electrode.
+- U501 pad 10 = `5V_VBUS`, pad 11 = GND, pad 12 = carrier `3V3`/`CARRIER_3V3`.
+- Carrier 3V3 was observed at approximately 3.291–3.31 V during powered operation.
+- SPI GPIOs: CS GPIO14, SCLK GPIO4, MOSI GPIO12, MISO GPIO11.
+- U205 `TXU0304PWR`: VCCA `CARRIER_3V3`, VCCB `3V3_ADC`; CS/SCLK/MOSI A→B and MISO B→A.
+- Carrier-side SPI nets use `MCU_ADC_*`; ADC-side nets remain `ADC_*`; no direct bypass remains.
+- R208 remains 10 kΩ from ADC-side `ADC_CS` to `3V3_ADC`.
 
-MCP3208 allocation:
+## Supervisor network
 
-| Channel | Net |
-|---|---|
-| CH0-CH2 | `EMG1_RAW`, `EMG1_RECT`, `EMG1_ENV` |
-| CH3-CH5 | `EMG2_RAW`, `EMG2_RECT`, `EMG2_ENV` |
-| CH6 | `VREF_MON` |
-| CH7 | `BAT_MON` |
+- U206 `TPS3899DL30DSER` monitors `CARRIER_3V3`.
+- U207 `TPS3899DL29DSER` monitors `3V3_ADC`.
+- Both VDD pins use `LDO_IN`; RESET outputs share `SPI_ISO_OE`.
+- Either invalid rail holds OE low; both valid rails are required before release.
+- CTS is open; C218/C219 are 9.1 nF; valid-side qualification is approximately 6.04 ms nominal.
+- R209 = 47 kΩ ±1%; R210 = 220 kΩ ±1%.
+- C214–C217 are 100 nF local decouplers; TP207 is `CARRIER_3V3`; TP208 is `SPI_ISO_OE`.
 
-The measured DSTK22807 symbol and carrier footprint retain one-to-one pin/pad numbering 1 through 18.
+## Power and safety boundaries
 
-## Implemented First-Validation Power
+- `3V3_ADC` is generated from `LDO_IN` through U203 and R207.
+- Carrier VBUS is generated from `LDO_IN` through U204 and reaches U501 pad 10.
+- Carrier 3V3 does not power `3V3_ADC`.
+- `analog VREF` remains distinct from `ADC_REF`; R206 connects `3V3_ADC` to `ADC_REF`.
+- SPI protection is not galvanic or patient isolation.
+- Human-connected operation remains battery-only with USB physically absent and no mains-referenced instrumentation.
 
-Current tracked power path:
+## Open work
 
-`J201 -> SW201 -> Q201 -> LDO_IN -> U203 -> R207 -> 3V3_ADC`
+- Correct tracked firmware to CS GPIO14, SCLK GPIO4, MOSI GPIO12, MISO GPIO11.
+- Complete unequal-power, rail-ramp, leakage, phantom-power, SPI, power-noise, BAT_MON, and reference-disturbance bench tests.
+- Resolve footprint and mechanical work, the two ERC warnings, placement/routing/DRC, EMC, thermal, and fabrication checks.
 
-- Q201 is the `PMV48XP` pack-level reverse-polarity PMOS.
-- U203 is `TPS7A2033PDBVR`.
-- R207 is the `0R` link between U203 OUT and `3V3_ADC`.
+PCB readiness: **NOT READY**.
 
-Implemented BAT_MON network:
-
-- Source: protected `LDO_IN`
-- `R204 = 68k`
-- `R205 = 100k`
-- `C211 = 10nF`
-- Destination: MCP3208 CH7
-
-The following legacy placeholders are absent from current tracked V5 schematics: `JP201`, `JP202`, `DSTK_3V3_CANDIDATE`, and `LDO_3V3_FALLBACK`.
-
-## Current ERC
-
-- 0 errors
-- 1 warning related to unresolved `EMG_V5` footprint-library configuration
-
-This warning is not an electrical design error.
-
-## Open Constraints
-
-- Powered DSTK22807 with unpowered/collapsing MCP3208 remains an unresolved SPI backfeed condition.
-- DSTK 3V3 and 5V/VBUS are not analog/ADC supply sources.
-- `ADC_REF` and `analog VREF` remain separate.
-- Existing candidate values such as `R206 = 0R/10R candidate` remain unresolved.
-- No manufacturer-level correctness claim is made where local datasheet or populated MPN evidence is absent.
-- Human-connected testing remains battery-only and is not yet approved.
-
-Highest-risk open engineering items:
-
-- Powered-DSTK/unpowered-MCP3208 SPI backfeed needs a hardware-safe resolution and bench evidence.
-- The TPS7A2033 direction is sized against approximately 1.6 mA typical, 2.5 mA conservative, 10 mA validation-budget, and 50 mA planning-floor estimates; actual current, dropout, noise, temperature, capacitor stability, and reverse current remain to be measured.
-- BAT_MON uses the 68k/100k/10nF network and requires discard-first, at least 5 ms settling, and multi-sample averaging during first validation.
-- ADC acquisition/source impedance, MCP3208 VDD/VREF relationship, analog-VREF stability, `VREF_MON` disturbance, and `ADC_REF` ripple remain open.
-- Both analog channels are implemented, but rectifier evidence uses generic op-amp/diode models; diode orientation, MCP6004 3.3 V behavior, and C341/C441 stability/derating remain open.
-- Human-connected operation requires battery-only power with USB, bench supply, mains-connected instruments, and earth-referenced oscilloscope connections absent; this is not medical-device or human-test approval.
-
-## PCB State
-
-`V5/EMG_v5.kicad_pcb` is a legacy, unsynchronized V4-style board. It does not represent the current V5 schematic and does not establish PCB readiness.
-
-PCB entry remains blocked by missing/final footprints and MPNs, diode orientation, analog/ADC/VREF validation, test-point and safety-silkscreen definition, measured carrier placement, antenna keepout, USB overhang, and creation of a current V5-synchronized board.
+Next recommended technical action: synchronize the tracked firmware SPI GPIO definitions with the committed schematic mapping: CS GPIO14, SCLK GPIO4, MOSI GPIO12, and MISO GPIO11.

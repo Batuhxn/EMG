@@ -4,6 +4,8 @@ This document reviews the proposed MCP3208 ADC MPNs, official Microchip package/
 
 This is a review document only. No schematic, PCB, footprint, firmware, gerber, or production file changes are approved by this document.
 
+> Historical review notice: this document preserves MCP3208 selection evidence from its original checkpoint and is not the current source of truth. Carrier-pin candidates and direct-SPI descriptions in the historical body are superseded by `STATUS_V5.md`, `DECISIONS_V5.md`, `DSTK22807_SPI_PIN_REVIEW.md`, and committed checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
+
 ## 1. Current repo state
 
 - Branch: `v5/measured-dstk22807-footprint`
@@ -191,7 +193,7 @@ Reference document:
 DSTK22807 candidate SPI nets:
 
 - `ADC_CS = GPIO14 / Pad 13`
-- `ADC_SCLK = GPIO13 / Pad 14`
+- `ADC_SCLK = GPIO4 / Pad 7` (current committed mapping; the original GPIO13 candidate is superseded)
 - `ADC_MOSI = GPIO12 / Pad 15`
 - `ADC_MISO = GPIO11 / Pad 16`
 

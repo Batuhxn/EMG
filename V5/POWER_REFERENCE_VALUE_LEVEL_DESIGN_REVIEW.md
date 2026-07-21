@@ -1,5 +1,7 @@
 ﻿# V5 Power / Reference Value-Level Design Review
 
+> Historical review notice: this value-level candidate review predates the implemented V5 power and SPI architecture and is not the current source of truth. Current component connections and boundaries are defined by `STATUS_V5.md`, `DECISIONS_V5.md`, and checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
+
 ## 1. Current repo state
 
 | Item | State |

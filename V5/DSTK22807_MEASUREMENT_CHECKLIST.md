@@ -1,39 +1,39 @@
-# DSTK22807 Measurement Checklist
+# DSTK22807 Remaining Measurement and Mechanical Checklist
 
-Do this before PCB footprint placement.
+The electrical header mapping used by the committed schematic is resolved. This checklist covers remaining mechanical and bench evidence; it must not be used to reopen U501 pads 10–12 as an implementation blocker.
 
-## Physical
+## Accepted electrical mapping
 
-- Board length: listing says `23 mm`, confirm physically
-- Board width: listing says `18 mm`, confirm physically
-- PCB thickness: `TBD`
-- Header/castellated pitch: assumed `2.54 mm`, confirm physically
-- Number of pins per side: listing/photo indicates `9`
-- USB connector type and side: `TBD`
-- USB connector overhang beyond PCB edge: `TBD`
-- Antenna location: `TBD`
-- Antenna keepout rectangle: `TBD`
+| Board label / pad | Current project meaning |
+| --- | --- |
+| Pad 10 / 5V | `5V_VBUS` |
+| Pad 11 / GND | GND |
+| Pad 12 / 3V3 | Carrier `3V3` / `CARRIER_3V3` |
+| Pad 13 / GPIO14 | `ADC_CS` through U205 |
+| Pad 7 / GPIO4 | `ADC_SCLK` through U205 |
+| Pad 15 / GPIO12 | `ADC_MOSI` through U205 |
+| Pad 16 / GPIO11 | `ADC_MISO` through U205 |
 
-## Pin Labels
+## Mechanical checks before PCB implementation
 
-Record the exact printed labels from the physical board.
+- Confirm board length, width, and thickness against the real carrier.
+- Confirm 2.54 mm header pitch, row spacing, and physical fit.
+- Confirm USB connector side and overhang.
+- Confirm antenna location and keepout rectangle.
+- Confirm carrier orientation and assembly access.
+- Print or otherwise scale-check the project-local footprint against the real board.
 
-| Board Pin Label | ESP32-H2 GPIO | V5 Use |
-| --- | --- | --- |
-| `4` photo-derived, confirm physically | GPIO4 assumed | MCP3208_CS |
-| `5` photo-derived, confirm physically | GPIO5 assumed | MCP3208_CLK |
-| `10` photo-derived, confirm physically | GPIO10 assumed | MCP3208_MOSI |
-| `11` photo-derived, confirm physically | GPIO11 assumed | MCP3208_MISO |
-| TBD | TBD | 3V3 |
-| TBD | TBD | GND |
-| TBD | TBD | Optional EN/BOOT/TX/RX |
+Keep the carrier USB accessible at the PCB edge, keep analog input routing away from the antenna and digital pins, and place no copper, vias, traces, or components in the antenna keepout.
 
-Photo-derived visible labels include `TX`, `RX`, `0`, `1`, `2`, `3`, `4`, `5`, `BAT`, `5V`, `GND`, `3V3`, `14`, `13`, `12`, `11`, `10`, `9`, and bottom pads `22`, `25`, `26`, `27`.
+## Power and interface bench checks
 
-## Footprint Rules
+- Carrier startup and RF-burst rail behavior.
+- OE rise delay and threshold behavior during rail ramps.
+- OE low voltage with either supervisor asserted.
+- Carrier-on/ADC-off and ADC-on/carrier-off states.
+- Asymmetric rail collapse and residual-charge behavior.
+- Aggregate leakage, inactive-rail rise, and pin-relative voltage.
+- Absence of phantom powering, unintended SPI activity, and false CS assertion.
+- SPI function and signal integrity with both rails valid.
 
-- Keep DSTK22807 onboard USB accessible at the EMG PCB edge.
-- Keep analog input traces away from the DSTK22807 antenna and digital pins.
-- Do not put copper, vias, traces, or components under the antenna keepout.
-- Do not add a separate USB-C connector on the EMG PCB for V5 first prototype.
-- A first-pass carrier footprint exists under `EMG_V5.pretty`, based on `18 mm x 23 mm`, two `1x9` rows, `2.54 mm` pitch, and `15.24 mm` row spacing. Print/check against the real DSTK22807 board before fabrication.
+All human-connected acquisition remains battery-only with USB physically absent and no mains-referenced instrumentation.

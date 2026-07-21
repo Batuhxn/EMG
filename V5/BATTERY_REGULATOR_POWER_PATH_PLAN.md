@@ -1,5 +1,7 @@
 ﻿# V5 Battery / Regulator Architecture and DSTK22807 Power-Path Verification Plan
 
+> Historical planning notice: this pre-implementation plan is retained as design history and is not the current source of truth. Current carrier-power and rail-boundary decisions are defined by `STATUS_V5.md`, `DECISIONS_V5.md`, and checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
+
 ## 1. Current repo state
 
 | Item | State |

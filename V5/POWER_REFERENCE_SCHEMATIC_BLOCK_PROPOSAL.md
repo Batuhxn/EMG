@@ -1,5 +1,7 @@
 ﻿# V5 Power / Reference Schematic Block Proposal
 
+> Historical proposal notice: this document records a pre-implementation design proposal and is not the current source of truth. Its provisional carrier-pin and direct-SPI statements are superseded by the implemented architecture at `bbe257e2c9dc28f7537942b5f15370770654ba19`, `STATUS_V5.md`, and `DECISIONS_V5.md`.
+
 ## 1. Current repo state
 
 | Item | State |

@@ -1,5 +1,7 @@
 # V5 DSTK22807 3V3 Rail Current Budget Review
 
+> Historical review notice: this carrier-rail candidate analysis predates the implemented split-rail power architecture and is not the current source of truth. Current rail ownership and SPI-boundary decisions are defined by `STATUS_V5.md`, `DECISIONS_V5.md`, and checkpoint `bbe257e2c9dc28f7537942b5f15370770654ba19`.
+
 ## 1. Current repo state
 
 | Item | State |
