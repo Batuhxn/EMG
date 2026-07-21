@@ -2972,7 +2972,7 @@
 					)
 				)
 				(pin open_collector line
-					(at 10.16 -2.54 180)
+					(at 10.16 0 180)
 					(length 2.54)
 					(name "QOD"
 						(effects
@@ -3402,7 +3402,7 @@
 		(uuid "a2040000-0000-4000-8000-000000000019")
 	)
 	(no_connect
-		(at 220.98 63.5)
+		(at 220.98 60.96)
 		(uuid "a2040000-0000-4000-8000-00000000001a")
 	)
 	(hierarchical_label "CARRIER_VBUS_SW"
