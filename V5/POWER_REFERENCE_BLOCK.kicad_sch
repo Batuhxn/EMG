@@ -8287,7 +8287,7 @@
 				)
 			)
 		)
-		(property "Value" "22uF"
+		(property "Value" "47uF"
 			(at 236.474 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8297,7 +8297,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "EMG_V5:C_1210_3225_Murata_GRM32_Reflow"
 			(at 232.105 66.04 0)
 			(hide yes)
 			(show_name no)
