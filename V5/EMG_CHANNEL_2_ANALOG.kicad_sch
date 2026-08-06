@@ -661,6 +661,129 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Audio:AudioJack3"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1630,6 +1753,36 @@
 		)
 		(uuid "90000000-0000-4000-8000-000000000029")
 	)
+	(junction
+		(at 237.49 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4010000-0000-4000-8000-000000000001")
+	)
+	(junction
+		(at 373.38 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4020000-0000-4000-8000-000000000001")
+	)
+	(junction
+		(at 427.99 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4030000-0000-4000-8000-000000000001")
+	)
+	(junction
+		(at 351.79 229.87)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4040000-0000-4000-8000-000000000001")
+	)
+	(junction
+		(at 198.12 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4050000-0000-4000-8000-000000000001")
+	)
 	(wire
 		(pts
 			(xy 355.6 73.66) (xy 361.95 73.66)
@@ -2102,7 +2255,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 54.61) (xy 200.66 54.61)
+			(xy 195.58 54.61) (xy 198.12 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2192,7 +2345,7 @@
 	)
 	(wire
 		(pts
-			(xy 369.57 73.66) (xy 377.19 73.66)
+			(xy 369.57 73.66) (xy 373.38 73.66)
 		)
 		(stroke
 			(width 0)
@@ -2312,7 +2465,7 @@
 	)
 	(wire
 		(pts
-			(xy 345.44 229.87) (xy 355.6 229.87)
+			(xy 345.44 229.87) (xy 351.79 229.87)
 		)
 		(stroke
 			(width 0)
@@ -2432,7 +2585,7 @@
 	)
 	(wire
 		(pts
-			(xy 435.61 93.98) (xy 425.45 93.98)
+			(xy 435.61 93.98) (xy 427.99 93.98)
 		)
 		(stroke
 			(width 0)
@@ -2592,13 +2745,63 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 73.66) (xy 242.57 73.66)
+			(xy 220.98 73.66) (xy 237.49 73.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "90000000-0000-4000-8000-000000000126")
+	)
+	(wire
+		(pts
+			(xy 237.49 73.66) (xy 242.57 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4010000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 373.38 73.66) (xy 377.19 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4020000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 427.99 93.98) (xy 425.45 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4030000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 351.79 229.87) (xy 355.6 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4040000-0000-4000-8000-000000000002")
+	)
+	(wire
+		(pts
+			(xy 198.12 54.61) (xy 200.66 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4050000-0000-4000-8000-000000000002")
 	)
 	(label "EMG2_RECT_U402B_DRV"
 		(at 285.75 180.34 0)
@@ -7083,9 +7286,400 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 237.49 73.66 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4010000-0000-4000-8000-000000000003")
+		(property "Reference" "TP401"
+			(at 240.03 69.0879 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "EMG2_IA_OUT"
+			(at 240.03 71.6279 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 242.57 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 237.49 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b4010000-0000-4000-8000-000000000004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(reference "TP401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 373.38 73.66 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4020000-0000-4000-8000-000000000003")
+		(property "Reference" "TP402"
+			(at 375.92 69.0879 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "EMG2_RAW_DRV"
+			(at 375.92 71.6279 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 378.46 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 378.46 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 373.38 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b4020000-0000-4000-8000-000000000004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(reference "TP402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 427.99 93.98 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4030000-0000-4000-8000-000000000003")
+		(property "Reference" "TP403"
+			(at 430.53 89.4079 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "EMG2_RECT_DRV"
+			(at 430.53 91.9479 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 433.07 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 433.07 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 427.99 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b4030000-0000-4000-8000-000000000004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(reference "TP403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 351.79 229.87 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4040000-0000-4000-8000-000000000003")
+		(property "Reference" "TP404"
+			(at 347.98 221.488 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "EMG2_ENV_DRV"
+			(at 345.186 223.774 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 356.87 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 356.87 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 351.79 229.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b4040000-0000-4000-8000-000000000004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(reference "TP404")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 198.12 54.61 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4050000-0000-4000-8000-000000000003")
+		(property "Reference" "TP405"
+			(at 200.66 50.0379 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND_CH2"
+			(at 200.66 52.5779 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D2.0mm"
+			(at 203.2 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 198.12 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b4050000-0000-4000-8000-000000000004")
+		)
+		(instances
+			(project "EMG_v5"
+				(path "/2c477672-822a-487d-bb83-204f5f41dbd8/daafd134-eb58-4fde-8e0b-ae901f016f45"
+					(reference "TP405")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "4")
 		)
 	)
+	(embedded_fonts no)
 )
