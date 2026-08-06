@@ -3100,7 +3100,7 @@
 		)
 		(uuid "90000000-0000-4000-8000-000000000176")
 	)
-	(label "EMG2_RAW_HPF_NODE"
+	(label "EMG2_RAW_GAIN_FB"
 		(at 304.8 76.2 180)
 		(effects
 			(font
@@ -3110,7 +3110,7 @@
 		)
 		(uuid "90000000-0000-4000-8000-000000000177")
 	)
-	(label "EMG2_RAW_GAIN_FB"
+	(label "EMG2_RAW_HPF_NODE"
 		(at 304.8 71.12 180)
 		(effects
 			(font
@@ -7088,5 +7088,4 @@
 			(page "4")
 		)
 	)
-	(embedded_fonts no)
 )

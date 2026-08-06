@@ -3100,7 +3100,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-00000000039f")
 	)
-	(label "RAW_HPF_NODE"
+	(label "RAW_GAIN_FB"
 		(at 304.8 76.2 180)
 		(effects
 			(font
@@ -3110,7 +3110,7 @@
 		)
 		(uuid "c1300000-0000-4000-8000-0000000003a5")
 	)
-	(label "RAW_GAIN_FB"
+	(label "RAW_HPF_NODE"
 		(at 304.8 71.12 180)
 		(effects
 			(font
@@ -7088,5 +7088,4 @@
 			(page "3")
 		)
 	)
-	(embedded_fonts no)
 )

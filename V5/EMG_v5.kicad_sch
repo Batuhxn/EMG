@@ -853,16 +853,6 @@
 		(at 185.42 74.93)
 		(uuid "50100000-0000-4000-8000-000000000009")
 	)
-	(label "CARRIER_3V3"
-		(at 210.82 59.69 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "e5050000-0000-4000-8000-000000000001")
-	)
-	(label "CARRIER_3V3"
-		(at 168.91 57.15 180)
-		(effects (font (size 1.27 1.27)) (justify right bottom))
-		(uuid "e5050000-0000-4000-8000-000000000002")
-	)
 	(no_connect
 		(at 210.82 72.39)
 		(uuid "50100000-0000-4000-8000-000000000017")
@@ -870,44 +860,6 @@
 	(no_connect
 		(at 210.82 74.93)
 		(uuid "50100000-0000-4000-8000-000000000018")
-	)
-	(wire
-		(pts
-			(xy 168.91 52.07) (xy 177.8 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2040000-0000-4000-8000-00000000001c")
-	)
-	(wire
-		(pts
-			(xy 177.8 52.07) (xy 177.8 44.45)
-		)
-		(stroke (width 0) (type default))
-		(uuid "a2040000-0000-4000-8000-00000000001f")
-	)
-	(wire
-		(pts
-			(xy 177.8 44.45) (xy 220.98 44.45)
-		)
-		(stroke (width 0) (type default))
-		(uuid "a2040000-0000-4000-8000-000000000020")
-	)
-	(wire
-		(pts
-			(xy 220.98 44.45) (xy 220.98 54.61)
-		)
-		(stroke (width 0) (type default))
-		(uuid "a2040000-0000-4000-8000-000000000021")
-	)
-	(wire
-		(pts
-			(xy 220.98 54.61) (xy 210.82 54.61)
-		)
-		(stroke (width 0) (type default))
-		(uuid "a2040000-0000-4000-8000-000000000022")
 	)
 	(wire
 		(pts
@@ -1181,6 +1133,56 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 52.07) (xy 177.8 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-00000000001c")
+	)
+	(wire
+		(pts
+			(xy 177.8 52.07) (xy 177.8 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-00000000001f")
+	)
+	(wire
+		(pts
+			(xy 177.8 44.45) (xy 220.98 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-000000000020")
+	)
+	(wire
+		(pts
+			(xy 220.98 44.45) (xy 220.98 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-000000000021")
+	)
+	(wire
+		(pts
+			(xy 220.98 54.61) (xy 210.82 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2040000-0000-4000-8000-000000000022")
+	)
+	(wire
+		(pts
 			(xy 173.99 64.77) (xy 168.91 64.77)
 		)
 		(stroke
@@ -1258,6 +1260,26 @@
 			(justify left bottom)
 		)
 		(uuid "823926e9-fcff-4196-a248-354886e162c0")
+	)
+	(label "CARRIER_3V3"
+		(at 210.82 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5050000-0000-4000-8000-000000000001")
+	)
+	(label "CARRIER_3V3"
+		(at 168.91 57.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e5050000-0000-4000-8000-000000000002")
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
@@ -1610,14 +1632,21 @@
 			(at 168.91 52.07 0)
 			(uuid "a2040000-0000-4000-8000-00000000001d")
 			(effects
-				(font (size 1.27 1.27))
+				(font
+					(size 1.27 1.27)
+				)
 				(justify right)
 			)
 		)
 		(pin "CARRIER_3V3" input
 			(at 168.91 57.15 0)
 			(uuid "e5050000-0000-4000-8000-000000000003")
-			(effects (font (size 1.27 1.27)) (justify right))
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
 		)
 		(pin "MCU_ADC_MISO" output
 			(at 168.91 69.85 0)
