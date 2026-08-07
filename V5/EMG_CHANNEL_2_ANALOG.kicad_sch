@@ -36,7 +36,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+			(property "Footprint" "EMG_V5:INA333_DGK_VSSOP-8_TI"
 				(at 0 -7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -5247,7 +5247,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:VSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "EMG_V5:INA333_DGK_VSSOP-8_TI"
 			(at 210.82 73.66 0)
 			(hide yes)
 			(show_name no)
