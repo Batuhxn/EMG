@@ -1,18 +1,18 @@
 # EMG V5 Final Purchasing BOM
 
-> Source of truth: `V5/EMG_v5.kicad_pcb` and related current schematics/documentation on branch `v5/KiCad`. Price/stock snapshot: **2026-08-10**. The old `BOM_V5_DRAFT.md` was used only as context; the current PCB wins on conflicts.
+> Source of truth: `V5/Altium/EMG_v5_FAB_READY.PcbDoc` and the related Altium schematics on branch `v5/Altium`, cross-checked against the KiCad V5 source. Price/stock snapshot: **2026-08-10**. The old `BOM_V5_DRAFT.md` was used only as context; the current Altium PCB wins on conflicts.
 
 ## Scope and totals
 
 - **49 grouped purchasing lines**, **113 required populated components**, and **2 DNP components**.
 - **C304/C404 are DNP**. Nineteen PCB test pads and four mounting-hole footprints are excluded from purchasing.
-- Prototype component subtotal: **86.03 USD + 363.69 TRY**. Shipping, customs and non-row VAT are excluded; the U501 TRY price includes VAT.
+- Prototype component subtotal: **84.71 USD + 363.69 TRY**. Shipping, customs and non-row VAT are excluded; the U501 TRY price includes VAT.
 - Recommended buy quantities include modest prototype spares. Recheck MOQ, multiples, Turkey-region stock, incoterms and landed cost in the final carts.
 
 | Preferred distributor | Currency | BOM lines | Recommended units | Subtotal |
 |---|:---:|---:|---:|---:|
 | LCSC | USD | 22 | 152 | 1.44 |
-| DigiKey | USD | 23 | 117 | 63.95 |
+| DigiKey | USD | 23 | 117 | 62.63 |
 | Not purchased | USD | 1 | 0 | 0.00 |
 | Mouser | USD | 2 | 4 | 20.64 |
 | Direnc.net | TRY | 1 | 1 | 363.69 |
@@ -23,7 +23,8 @@
 - `PMV48XP,215` had no authorized stock in the checked sources. `FDN304P` is a stocked P-channel SOT-23 candidate; G/S/D mapping, RDS(on), gate charge and inrush behavior must be approved.
 - `TPS22917DBVT` is a verified packaging-only substitute for the out-of-stock `TPS22917DBVR` and is the priced purchase choice.
 - `U501` is verified only as local supplier SKU `DSTK22807`; manufacturer MPN and physical 2x9 board revision/pinout remain `TBD/Verify`.
-- `SW501` procurement MPN `TDA04H0SB1R` matches the electrical/lead-grid class, but the body/courtyard still needs a mechanical overlay against the KiCad footprint.
+- `SW501` is corrected to Omron `A6D-4100`. The prior `TDA04H0SB1R` is a 1.27 mm SMD part and does not fit. Omron's official 8-pin THT drawing matches the Altium 2.54 mm pitch, 7.62 mm row spacing and 12.2 mm body; contact pairs 1-8/2-7/3-6/4-5 match the board nets.
+- Eleven 0.30 mm vias remain in SMD pads. Stencil assembly is released only with filled-and-capped VIPPO, or after those vias are moved and the Altium DRC/output package is regenerated.
 - `J301/J401` use the requested `SJ1-3523N`. `C213` is the verified `GRM32ER71A476KE15L` (47uF, 10V, X7R, 1210).
 
 ## Full purchasing table
@@ -70,7 +71,7 @@ Prices are per unit in the stated currency. `Ext.` uses the recommended buy quan
 | R335,R435 | 2 / 2 / 5 | 1M | YAGEO<br>`RC0805FR-071ML` | 0805 (2012 metric), 1%, 1/8W<br>SMD | No | LCSC<br>0.002043 USD<br>0.01 USD | [buy](https://www.lcsc.com/product-detail/C107700.html)<br>[second source](https://www.digikey.com/en/products/result?keywords=RC0805FR-071ML) | LCSC C107700; 247,404 shown in stock. | `ERJ-6ENF1004V`<br>Same 1M/1%/0805 power class; drop-in. | Verified – value, tolerance/power class and package matched; procurement MPN selected |
 | R336,R338,R436,R438 | 4 / 4 / 10 | 20k | YAGEO<br>`RC0805FR-0720KL` | 0805 (2012 metric), 1%, 1/8W<br>SMD | No | LCSC<br>0.003600 USD<br>0.04 USD | [buy](https://www.lcsc.com/product-detail/C114566.html)<br>[second source](https://www.digikey.com/en/products/result?keywords=RC0805FR-0720KL) | LCSC C114566 showed 23 units; enough for recommended buy of 10, but recheck. | `ERJ-6ENF2002V`<br>Same 20k/1%/0805 power class; drop-in. | Verified – value, tolerance/power class and package matched; procurement MPN selected |
 | SW201 | 1 / 1 / 2 | TS02CQE | C&K<br>`TS02CQE` | TS series miniature slide switch, SPST ON-OFF<br>THT | No | Mouser<br>10.22 USD<br>20.44 USD | [buy](https://www.mouser.com/en/ProductDetail/CK/TS02CQE)<br>[second source](https://fr.farnell.com/en-FR/c-k-partner-stock/ts02cqe/switch-slide-spst-1a-120v/dp/4556613) | Mouser showed 412 in stock, min/multiple 1. Farnell partner stock existed but min/multiple 15. | `TBD/Verify`<br>No mechanically verified alternative approved; actuator and pin geometry are footprint-critical. | Verified – exact MPN and THT SPST function; stock available |
-| SW501 | 1 / 1 / 2 | DEBUG_CFG | C&K<br>`TDA04H0SB1R` | 4-position SPST DIP slide, 7.62mm row spacing, 2.54mm pitch<br>THT | No | DigiKey<br>3.73 USD<br>7.46 USD | [buy](https://www.digikey.com/en/products/detail/c-k/TDA04H0SB1R/1961415)<br>[second source](https://www.mouser.com/c/?q=TDA04H0SB1R) | DigiKey direct-substitute listing showed 12,339 in stock. | `78B04ST`<br>Electrical class and lead grid are plausible; neither candidate's body/courtyard has been overlaid against the custom KiCad footprint. Mechanical verification required. | Verify before order – selected exact procurement MPN, mechanical fit not yet signed off |
+| SW501 | 1 / 1 / 2 | DEBUG_CFG | Omron Electronics<br>`A6D-4100` | 4-position SPST slide DIP; 8-pin THT; 2.54mm pitch; 7.62mm row spacing; 12.2mm body<br>THT | No | DigiKey<br>3.07 USD<br>6.14 USD | [buy](https://www.digikey.com/en/products/detail/omron-electronics-inc-emc-div/A6D-4100/307740)<br>[second source](https://uk.farnell.com/omron/a6d-4100/switch-dil-4way/dp/9901680) | DigiKey showed 519 in stock at 3.07 USD each; Farnell showed 158 in stock. | `A6D-4103`<br>Same 8-pin, 2.54mm pitch, 7.62mm row spacing and 12.2mm body. Opposing contact pairs 1-8/2-7/3-6/4-5 match the Altium nets; -4103 has a raised actuator, so accept the height/user-access difference. | Verified – exact MPN, pin pairing and manufacturer dimensions match the Altium footprint |
 | U201 | 1 / 1 / 2 | MCP3208-CI/P | Microchip Technology<br>`MCP3208-CI/P` | PDIP-16, 0.300in<br>THT | No | DigiKey<br>2.78 USD<br>5.56 USD | [buy](https://www.digikey.com/en/products/detail/microchip-technology/MCP3208-CI-P/305928)<br>[second source](https://www.mouser.com/c/?q=MCP3208-CI%2FP) | DigiKey showed 693 in stock; active. | `MCP3208-BI/P`<br>Same PDIP-16 pinout and function; B grade has tighter accuracy. Drop-in. | Verified – exact MPN/package aligned with PCB and repository review |
 | U202 | 1 / 1 / 2 | MCP6002-I/SN | Microchip Technology<br>`MCP6002-I/SN` | SOIC-8, 3.9mm body<br>SMD | No | DigiKey<br>0.41 USD<br>0.82 USD | [buy](https://www.digikey.com/en/products/detail/microchip-technology/MCP6002-I-SN/500876)<br>[second source](https://www.mouser.com/c/?q=MCP6002-I%2FSN) | DigiKey showed 16,456 in stock; active. | `MCP6002T-I/SN`<br>Packaging-quantity suffix only; same silicon and SOIC-8 package. Drop-in. | Verified – exact MPN/package |
 | U203 | 1 / 1 / 2 | TPS7A2033PDBVR | Texas Instruments<br>`TPS7A2033PDBVR` | SOT-23-5 (DBV)<br>SMD | No | DigiKey<br>0.35 USD<br>0.70 USD | [buy](https://www.digikey.com/en/products/detail/texas-instruments/TPS7A2033PDBVR/13566866)<br>[second source](https://www.mouser.com/c/?q=TPS7A2033PDBVR) | DigiKey showed 23,888 in stock; active. | `TPS7A2033PDBVT`<br>Packaging-quantity code; same DBV package and electrical device. Drop-in. | Verified – exact MPN/package |

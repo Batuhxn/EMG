@@ -8,6 +8,8 @@ This directory contains the Altium source used for the current EMG V5 fabricatio
 - `EMG_v5.SchDoc`, `POWER_REFERENCE_BLOCK.SchDoc`, `EMG_CHANNEL_1_ANALOG.SchDoc`, `EMG_CHANNEL_2_ANALOG.SchDoc`: hierarchical schematics.
 - `EMG_v5.SchLib`: project schematic library.
 - `EMG_v5_FAB_READY.PcbDoc`: routed two-layer fabrication PCB.
+- `Assembly.OutJob`: repeatable metric pick-and-place, assembly drawing and STEP output configuration.
+- `ASSEMBLY_RELEASE_NOTES.md`: DNP, via-in-pad, fiducial and incoming-inspection gates for assembly.
 - `Project Outputs for EMG_v5/`: Gerber X2, Excellon drill, DRC and generation reports, plus the factory ZIP.
 
 ## BOM cross-check
@@ -22,6 +24,7 @@ Binary Altium schematic and PCB component records were compared against `../EMG_
 - `C304` and `C404` are `100pF DNP` and must remain unpopulated.
 - `J301` and `J401` are `SJ1-3523N` with the CUI/Same Sky horizontal jack footprint.
 - `C213` is 47 uF in the Murata GRM32 1210 footprint; the approved purchasing MPN remains `GRM32ER71A476KE15L`.
+- `SW501` is Omron `A6D-4100`. Its 8-pin THT geometry, 2.54 mm pitch, 7.62 mm row spacing, 12.2 mm body and opposing pin pairs match the Altium footprint and nets. The former C&K `TDA04H0SB1R` selection was rejected because it is a 1.27 mm SMD part.
 
 Distributor selection, prices, alternatives and purchasing verification gates remain in `../BOM_V5_FINAL.md`. The Altium conversion does not change those sourcing decisions.
 
@@ -48,4 +51,6 @@ Every file in `EMG_Gerber.zip` was SHA-256 compared with its corresponding raw o
 
 ## Release boundary
 
-This is a complete bare-PCB fabrication package. Solder-paste/stencil layers, centroid/pick-and-place data and an assembly drawing are not present, so contract assembly requires a separate Altium assembly-output pass. A fresh schematic compile/ERC should also be archived before a production release; the checked-in report is PCB DRC only.
+The checked-in raw files remain the validated bare-PCB fabrication package. The project Gerber X2 setup now includes top and bottom paste layers, and `Assembly.OutJob` configures metric centroid/pick-and-place, top/bottom assembly drawing and STEP generation. Run both output jobs from the same saved PCB revision before contract assembly.
+
+Assembly is also conditional on the via-in-pad and fiducial requirements in `ASSEMBLY_RELEASE_NOTES.md`. A fresh schematic compile/ERC should be archived before production release; the checked-in report is PCB DRC only.
