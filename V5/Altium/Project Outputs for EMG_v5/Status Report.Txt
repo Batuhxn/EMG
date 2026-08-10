@@ -1,0 +1,18 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [EMG_v5.PrjPcb]
+   Generated File[EMG_v5_FAB_READY_Copper_Signal_Top.gbr]
+   Generated File[EMG_v5_FAB_READY_Copper_Signal_Bot.gbr]
+   Generated File[EMG_v5_FAB_READY_Legend_Top.gbr]
+   Generated File[EMG_v5_FAB_READY_Legend_Bot.gbr]
+   Generated File[EMG_v5_FAB_READY_Soldermask_Top.gbr]
+   Generated File[EMG_v5_FAB_READY_Soldermask_Bot.gbr]
+   Generated File[EMG_v5_FAB_READY_Profile.gbr]
+   Generated File[EMG_v5_FAB_READY.EXTREP]
+   Generated File[EMG_v5_FAB_READY.REP]
+
+
+Files Generated   : 9
+Documents Printed : 0
+
+Finished Output Generation At 7:54:27 PM On 8/8/2026

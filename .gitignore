@@ -1,2 +1,6 @@
-﻿.history/
+.history/
 **/.history/
+**/History/
+**/*.PcbDoc.LOG
+**/*.SchDoc.LOG
+**/*.SchLib.LOG
