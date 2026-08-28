@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
-PCB File : C:\Users\bkara\Desktop\EMG_V5_Altium\Imported EMG_v5\EMG_v5_FAB_READY.PcbDoc
-Date     : 8/8/2026
-Time     : 8:55:45 PM
+PCB File : C:\Users\Batuhan\Desktop\Altium\EMG_v5_FAB_READY.PcbDoc
+Date     : 8/13/2026
+Time     : 3:24:18 PM
 
 Processing Rule : Clearance Constraint (Gap=0.15mm) (InNetClass('Default') OR InNetClass('POWER')),(All)
 Rule Violations :0
@@ -63,4 +63,4 @@ Rule Violations :0
 
 Violations Detected : 0
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:00
